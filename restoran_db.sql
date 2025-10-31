@@ -1,1 +1,0 @@
-SELECT * FROM restoran_db.siparisler;
