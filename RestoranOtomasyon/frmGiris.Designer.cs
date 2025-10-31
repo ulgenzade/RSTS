@@ -34,7 +34,7 @@
             this.txtSifre = new System.Windows.Forms.TextBox();
             this.txtSecim = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.Garson = new System.Windows.Forms.Button();
+            this.TEST = new System.Windows.Forms.Button();
             this.Admin = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -96,7 +96,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.Garson);
+            this.panel2.Controls.Add(this.TEST);
             this.panel2.Controls.Add(this.Admin);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
@@ -105,16 +105,16 @@
             this.panel2.Visible = false;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // Garson
+            // TEST
             // 
-            this.Garson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Garson.Location = new System.Drawing.Point(101, 89);
-            this.Garson.Name = "Garson";
-            this.Garson.Size = new System.Drawing.Size(149, 41);
-            this.Garson.TabIndex = 1;
-            this.Garson.Text = "Garson";
-            this.Garson.UseVisualStyleBackColor = true;
-            this.Garson.Click += new System.EventHandler(this.button2_Click);
+            this.TEST.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.TEST.Location = new System.Drawing.Point(101, 89);
+            this.TEST.Name = "TEST";
+            this.TEST.Size = new System.Drawing.Size(149, 41);
+            this.TEST.TabIndex = 1;
+            this.TEST.Text = "Garson";
+            this.TEST.UseVisualStyleBackColor = true;
+            this.TEST.Click += new System.EventHandler(this.button2_Click);
             // 
             // Admin
             // 
@@ -150,7 +150,7 @@
         private System.Windows.Forms.Button btnDropdown;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button Admin;
-        private System.Windows.Forms.Button Garson;
+        private System.Windows.Forms.Button TEST;
         private System.Windows.Forms.TextBox txtSifre;
         private System.Windows.Forms.Button btnGiris;
     }
