@@ -42,10 +42,6 @@
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnGiris);
-            this.panel1.Controls.Add(this.btnDropdown);
-            this.panel1.Controls.Add(this.txtSifre);
-            this.panel1.Controls.Add(this.txtSecim);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
@@ -55,7 +51,7 @@
             // btnGiris
             // 
             this.btnGiris.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnGiris.Location = new System.Drawing.Point(101, 263);
+            this.btnGiris.Location = new System.Drawing.Point(101, 257);
             this.btnGiris.Name = "btnGiris";
             this.btnGiris.Size = new System.Drawing.Size(149, 41);
             this.btnGiris.TabIndex = 2;
@@ -66,9 +62,9 @@
             // btnDropdown
             // 
             this.btnDropdown.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnDropdown.Location = new System.Drawing.Point(256, 183);
+            this.btnDropdown.Location = new System.Drawing.Point(256, 177);
             this.btnDropdown.Name = "btnDropdown";
-            this.btnDropdown.Size = new System.Drawing.Size(40, 34);
+            this.btnDropdown.Size = new System.Drawing.Size(33, 34);
             this.btnDropdown.TabIndex = 0;
             this.btnDropdown.Text = "^";
             this.btnDropdown.UseVisualStyleBackColor = true;
@@ -77,7 +73,7 @@
             // txtSifre
             // 
             this.txtSifre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtSifre.Location = new System.Drawing.Point(101, 220);
+            this.txtSifre.Location = new System.Drawing.Point(101, 217);
             this.txtSifre.Name = "txtSifre";
             this.txtSifre.PasswordChar = '*';
             this.txtSifre.Size = new System.Drawing.Size(149, 34);
@@ -86,7 +82,7 @@
             // 
             // txtSecim
             // 
-            this.txtSecim.Location = new System.Drawing.Point(98, 180);
+            this.txtSecim.Location = new System.Drawing.Point(101, 177);
             this.txtSecim.Multiline = true;
             this.txtSecim.Name = "txtSecim";
             this.txtSecim.ReadOnly = true;
@@ -96,8 +92,12 @@
             // 
             // panel2
             // 
+            this.panel2.Controls.Add(this.btnDropdown);
+            this.panel2.Controls.Add(this.btnGiris);
             this.panel2.Controls.Add(this.Garson);
             this.panel2.Controls.Add(this.Admin);
+            this.panel2.Controls.Add(this.txtSifre);
+            this.panel2.Controls.Add(this.txtSecim);
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(358, 429);
@@ -137,8 +137,8 @@
             this.Text = "RST-Giriş";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
