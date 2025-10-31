@@ -128,5 +128,10 @@ namespace RestoranOtomasyon
                 btnGiris.PerformClick();
             }
         }
+
+        private void txtSifre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

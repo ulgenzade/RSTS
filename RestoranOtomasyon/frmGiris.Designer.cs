@@ -79,9 +79,9 @@
             this.txtSifre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.txtSifre.Location = new System.Drawing.Point(101, 217);
             this.txtSifre.Name = "txtSifre";
-            this.txtSifre.PasswordChar = '*';
             this.txtSifre.Size = new System.Drawing.Size(149, 34);
             this.txtSifre.TabIndex = 2;
+            this.txtSifre.TextChanged += new System.EventHandler(this.txtSifre_TextChanged);
             this.txtSifre.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSifre_KeyDown);
             // 
             // txtSecim
