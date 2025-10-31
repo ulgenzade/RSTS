@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.btnDropdown = new System.Windows.Forms.Button();
             this.btnGiris = new System.Windows.Forms.Button();
-            this.Garson = new System.Windows.Forms.Button();
-            this.Admin = new System.Windows.Forms.Button();
             this.txtSifre = new System.Windows.Forms.TextBox();
             this.txtSecim = new System.Windows.Forms.TextBox();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.Garson = new System.Windows.Forms.Button();
+            this.Admin = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -51,17 +51,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(364, 435);
             this.panel1.TabIndex = 0;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.Garson);
-            this.panel2.Controls.Add(this.Admin);
-            this.panel2.Location = new System.Drawing.Point(81, 67);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(182, 110);
-            this.panel2.TabIndex = 2;
-            this.panel2.Visible = false;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // btnDropdown
             // 
@@ -85,28 +74,6 @@
             this.btnGiris.UseVisualStyleBackColor = true;
             this.btnGiris.Click += new System.EventHandler(this.btnGiris_Click);
             // 
-            // Garson
-            // 
-            this.Garson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Garson.Location = new System.Drawing.Point(17, 15);
-            this.Garson.Name = "Garson";
-            this.Garson.Size = new System.Drawing.Size(149, 41);
-            this.Garson.TabIndex = 1;
-            this.Garson.Text = "Garson";
-            this.Garson.UseVisualStyleBackColor = true;
-            this.Garson.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // Admin
-            // 
-            this.Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Admin.Location = new System.Drawing.Point(17, 62);
-            this.Admin.Name = "Admin";
-            this.Admin.Size = new System.Drawing.Size(149, 41);
-            this.Admin.TabIndex = 0;
-            this.Admin.Text = "Admin";
-            this.Admin.UseVisualStyleBackColor = true;
-            this.Admin.Click += new System.EventHandler(this.button1_Click_1);
-            // 
             // txtSifre
             // 
             this.txtSifre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -126,6 +93,39 @@
             this.txtSecim.Size = new System.Drawing.Size(149, 34);
             this.txtSecim.TabIndex = 1;
             this.txtSecim.TextChanged += new System.EventHandler(this.txtSecim_TextChanged);
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.Garson);
+            this.panel2.Controls.Add(this.Admin);
+            this.panel2.Location = new System.Drawing.Point(81, 67);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(182, 110);
+            this.panel2.TabIndex = 2;
+            this.panel2.Visible = false;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
+            // Garson
+            // 
+            this.Garson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.Garson.Location = new System.Drawing.Point(20, 15);
+            this.Garson.Name = "Garson";
+            this.Garson.Size = new System.Drawing.Size(149, 41);
+            this.Garson.TabIndex = 1;
+            this.Garson.Text = "Garson";
+            this.Garson.UseVisualStyleBackColor = true;
+            this.Garson.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // Admin
+            // 
+            this.Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.Admin.Location = new System.Drawing.Point(20, 62);
+            this.Admin.Name = "Admin";
+            this.Admin.Size = new System.Drawing.Size(149, 41);
+            this.Admin.TabIndex = 0;
+            this.Admin.Text = "Admin";
+            this.Admin.UseVisualStyleBackColor = true;
+            this.Admin.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // frmGiris
             // 
