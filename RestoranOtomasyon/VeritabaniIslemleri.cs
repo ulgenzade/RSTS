@@ -518,5 +518,44 @@ namespace RestoranOtomasyonu
         // Bu yüzden bu tablolar için şimdilik Sil metotları eklemiyoruz. Bu daha güvenli bir yaklaşımdır.
 
         #endregion
+
+        #region Giriş Kontrol Metodu
+        public DataRow KullaniciGirisKontrol(string kullaniciAdi, string sifre)
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    // Not: Şifreler normalde asla düz metin olarak saklanmaz, hash'lenerek saklanır. 
+                    // Bu projede basitlik için düz metin kontrolü yapıyoruz.
+                    string sorgu = "SELECT KullaniciID, AdSoyad, Rol FROM Kullanicilar WHERE KullaniciAdi = @kullaniciAdi AND Sifre = @sifre;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
+                        komut.Parameters.AddWithValue("@sifre", sifre); // Gerçek projede buraya şifrenin hash'lenmiş hali gelir.
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(komut))
+                        {
+                            adapter.Fill(dt);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Giriş kontrolü sırasında hata: " + ex.Message);
+                }
+            }
+
+            if (dt.Rows.Count > 0)
+            {
+                return dt.Rows[0]; // Eğer bir satır bulunduysa, o kullanıcı vardır. İlk satırı döndür.
+            }
+            else
+            {
+                return null; // Hiç satır bulunamadıysa, kullanıcı adı veya şifre yanlıştır.
+            }
+        }
+            #endregion
     }
 }

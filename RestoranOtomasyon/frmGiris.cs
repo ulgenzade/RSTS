@@ -19,7 +19,12 @@ namespace RestoranOtomasyon
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-          
+            // Panel, form ilk açıldığında gizli olsun.
+            panel2.Visible = false;
+
+            // Şifre girerken karakterler '*' olarak görünsün.
+            // Bu, şifrenin ekranda görünmesini engeller.
+            txtSifre.PasswordChar = '*';
         }
         private void dataGridViewKategoriler_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -64,38 +69,58 @@ namespace RestoranOtomasyon
 
         private void button2_Click(object sender, EventArgs e)
         {
-            txtSecim.Text = "Garson"; // veya button1.Text de yazabilirsin
+            txtSecim.Text = "ayse"; // veya button1.Text de yazabilirsin
             panel2.Visible = false;
         }
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
-            // Seçilen oturum adını ve girilen şifreyi alalım
-            string secilenOturum = txtSecim.Text;
-            string girilenSifre = txtSifre.Text;
-
-            // --- GERÇEK GİRİŞ KONTROLÜ BURADA BAŞLIYOR ---
-
-            // Örnek: Eğer seçilen oturum "Admin" ve şifre "1234" ise giriş başarılı olsun
-            if (secilenOturum == "Admin" && girilenSifre == "1234")
+            // 1. Alanların boş olup olmadığını kontrol et.
+            if (string.IsNullOrWhiteSpace(txtSecim.Text) || string.IsNullOrWhiteSpace(txtSifre.Text))
             {
-                // Giriş başarılı olduğunda gösterilecek mesaj
-                MessageBox.Show("Giriş yapılmıştır!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // İPUCU: Burada ana menü formunu açan kodu yazabilirsin.
-                // frmAnamenu anamenu = new frmAnamenu();
-                // anamenu.Show();
-                // this.Hide(); // Bu giriş ekranını gizle
+                MessageBox.Show("Lütfen kullanıcı adı ve şifre alanlarını doldurun.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return; // Hata varsa metodun devamını çalıştırma.
             }
-            // Örnek: Eğer seçilen oturum "Garson" ve şifre "garson" ise giriş başarılı olsun
-            else if (secilenOturum == "Garson" && girilenSifre == "garson")
+
+            // 2. Backend'i çağır!
+            VeritabaniIslemleri db = new VeritabaniIslemleri();
+            string kullaniciAdi = txtSecim.Text;
+            string sifre = txtSifre.Text;
+
+            // Veritabanına gidip bu kullanıcı adı ve şifreye sahip biri var mı diye kontrol et.
+            DataRow kullanici = db.KullaniciGirisKontrol(kullaniciAdi, sifre);
+
+            // 3. Gelen sonuca göre karar ver.
+            if (kullanici != null) // EĞER VERİTABANINDA KULLANICI BULUNDUYSA...
             {
-                MessageBox.Show("Giriş yapılmıştır!", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // ...giriş başarılıdır.
+                string rol = kullanici["Rol"].ToString(); // Kullanıcının Rolünü öğren.
+
+                MessageBox.Show($"Giriş başarılı! Hoş geldiniz.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Şimdi role göre doğru formu aç.
+                if (rol == "Admin")
+                {
+                    // BU İSİMLERİ KENDİ PROJENDİKİ FORM İSİMLERİYLE DEĞİŞTİR!
+                    frmAdminControlPanel adminFormu = new frmAdminControlPanel();
+                    adminFormu.Show();
+                    this.Hide(); // Giriş formunu gizle.
+                }
+                else if (rol == "Garson")
+                {
+                    // BU İSİMLERİ KENDİ PROJENDİKİ FORM İSİMLERİYLE DEĞİŞTİR!
+                    frmSiparisEkrani siparisFormu = new frmSiparisEkrani();
+                    siparisFormu.Show();
+                    this.Hide(); // Giriş formunu gizle.
+                }
+                else
+                {
+                    MessageBox.Show("Bu rol için tanımlanmış bir ekran bulunmamaktadır.", "Yetki Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
-            else
+            else // EĞER VERİTABANINDA KULLANICI BULUNAMADIYSA...
             {
-                // Yukarıdaki şartlar tutmuyorsa, giriş başarısızdır
-                MessageBox.Show("Hatalı kullanıcı adı veya şifre!", "Hatalı Giriş", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Kullanıcı adı veya şifre hatalı!", "Giriş Başarısız", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
