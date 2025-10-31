@@ -56,9 +56,9 @@
             // 
             this.panel2.Controls.Add(this.Garson);
             this.panel2.Controls.Add(this.Admin);
-            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Location = new System.Drawing.Point(81, 67);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(358, 429);
+            this.panel2.Size = new System.Drawing.Size(182, 110);
             this.panel2.TabIndex = 2;
             this.panel2.Visible = false;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
@@ -88,7 +88,7 @@
             // Garson
             // 
             this.Garson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Garson.Location = new System.Drawing.Point(101, 89);
+            this.Garson.Location = new System.Drawing.Point(17, 15);
             this.Garson.Name = "Garson";
             this.Garson.Size = new System.Drawing.Size(149, 41);
             this.Garson.TabIndex = 1;
@@ -99,7 +99,7 @@
             // Admin
             // 
             this.Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Admin.Location = new System.Drawing.Point(101, 136);
+            this.Admin.Location = new System.Drawing.Point(17, 62);
             this.Admin.Name = "Admin";
             this.Admin.Size = new System.Drawing.Size(149, 41);
             this.Admin.TabIndex = 0;
