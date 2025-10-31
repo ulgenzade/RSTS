@@ -95,6 +95,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AktifKullanici.cs" />
     <Compile Include="frmAdminControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -58,7 +58,7 @@ namespace RestoranOtomasyon
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            txtSecim.Text = "Admin"; // veya button2.Text de yazabilirsin
+            txtSecim.Text = "Admin";
             panel2.Visible = false;
         }
 
@@ -69,58 +69,53 @@ namespace RestoranOtomasyon
 
         private void button2_Click(object sender, EventArgs e)
         {
-            txtSecim.Text = "ayse"; // veya button1.Text de yazabilirsin
+            txtSecim.Text = "Garson";
             panel2.Visible = false;
         }
 
         private void btnGiris_Click(object sender, EventArgs e)
         {
-            // 1. Alanların boş olup olmadığını kontrol et.
             if (string.IsNullOrWhiteSpace(txtSecim.Text) || string.IsNullOrWhiteSpace(txtSifre.Text))
             {
-                MessageBox.Show("Lütfen kullanıcı adı ve şifre alanlarını doldurun.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Hata varsa metodun devamını çalıştırma.
+                MessageBox.Show("Lütfen rol seçin ve şifrenizi girin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
 
-            // 2. Backend'i çağır!
             VeritabaniIslemleri db = new VeritabaniIslemleri();
-            string kullaniciAdi = txtSecim.Text;
-            string sifre = txtSifre.Text;
+            string secilenRol = txtSecim.Text;
+            string girilenSifre = txtSifre.Text;
 
-            // Veritabanına gidip bu kullanıcı adı ve şifreye sahip biri var mı diye kontrol et.
-            DataRow kullanici = db.KullaniciGirisKontrol(kullaniciAdi, sifre);
+            // Yeni backend metodumuzu çağırıyoruz.
+            DataRow kullanici = db.KullaniciGirisKontrol(secilenRol, girilenSifre);
 
-            // 3. Gelen sonuca göre karar ver.
-            if (kullanici != null) // EĞER VERİTABANINDA KULLANICI BULUNDUYSA...
+            if (kullanici != null)
             {
-                // ...giriş başarılıdır.
-                string rol = kullanici["Rol"].ToString(); // Kullanıcının Rolünü öğren.
+                // KULLANICI BULUNDU! Bilgilerini statik sınıfa kaydedelim.
+                AktifKullanici.BilgileriAta(kullanici);
 
-                MessageBox.Show($"Giriş başarılı! Hoş geldiniz.", "Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Hoş geldiniz, {AktifKullanici.AdSoyad}!", "Giriş Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 // Şimdi role göre doğru formu aç.
-                if (rol == "Admin")
+                if (AktifKullanici.Rol == "Admin")
                 {
-                    // BU İSİMLERİ KENDİ PROJENDİKİ FORM İSİMLERİYLE DEĞİŞTİR!
                     frmAdminControlPanel adminFormu = new frmAdminControlPanel();
                     adminFormu.Show();
-                    this.Hide(); // Giriş formunu gizle.
+                    this.Hide();
                 }
-                else if (rol == "Garson")
+                else if (AktifKullanici.Rol == "Garson")
                 {
-                    // BU İSİMLERİ KENDİ PROJENDİKİ FORM İSİMLERİYLE DEĞİŞTİR!
                     frmSiparisEkrani siparisFormu = new frmSiparisEkrani();
                     siparisFormu.Show();
-                    this.Hide(); // Giriş formunu gizle.
+                    this.Hide();
                 }
                 else
                 {
                     MessageBox.Show("Bu rol için tanımlanmış bir ekran bulunmamaktadır.", "Yetki Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else // EĞER VERİTABANINDA KULLANICI BULUNAMADIYSA...
+            else
             {
-                MessageBox.Show("Kullanıcı adı veya şifre hatalı!", "Giriş Başarısız", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Rol veya şifre hatalı!", "Giriş Başarısız", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

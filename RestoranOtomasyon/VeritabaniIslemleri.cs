@@ -520,7 +520,7 @@ namespace RestoranOtomasyonu
         #endregion
 
         #region Giriş Kontrol Metodu
-        public DataRow KullaniciGirisKontrol(string kullaniciAdi, string sifre)
+        public DataRow KullaniciGirisKontrol(string rol, string sifre)
         {
             DataTable dt = new DataTable();
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
@@ -528,13 +528,12 @@ namespace RestoranOtomasyonu
                 try
                 {
                     baglanti.Open();
-                    // Not: Şifreler normalde asla düz metin olarak saklanmaz, hash'lenerek saklanır. 
-                    // Bu projede basitlik için düz metin kontrolü yapıyoruz.
-                    string sorgu = "SELECT KullaniciID, AdSoyad, Rol FROM Kullanicilar WHERE KullaniciAdi = @kullaniciAdi AND Sifre = @sifre;";
+                    // Sorguyu KullaniciAdi yerine Rol'e göre arama yapacak şekilde değiştirdik.
+                    string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilar WHERE Rol = @rol AND Sifre = @sifre;";
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     {
-                        komut.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
-                        komut.Parameters.AddWithValue("@sifre", sifre); // Gerçek projede buraya şifrenin hash'lenmiş hali gelir.
+                        komut.Parameters.AddWithValue("@rol", rol);
+                        komut.Parameters.AddWithValue("@sifre", sifre);
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(komut))
                         {
                             adapter.Fill(dt);
@@ -549,13 +548,13 @@ namespace RestoranOtomasyonu
 
             if (dt.Rows.Count > 0)
             {
-                return dt.Rows[0]; // Eğer bir satır bulunduysa, o kullanıcı vardır. İlk satırı döndür.
+                return dt.Rows[0]; // Kullanıcı bulundu.
             }
             else
             {
-                return null; // Hiç satır bulunamadıysa, kullanıcı adı veya şifre yanlıştır.
+                return null; // Bu rol ve şifreye sahip kullanıcı yok.
             }
         }
-            #endregion
+        #endregion
     }
 }
