@@ -35,3 +35,4 @@ Proje, üç ana kullanıcı arayüzü üzerine kurulmuştur:
 
 - **ulgenzade** - [GitHub Profili](https://github.com/ulgenzade)
 - **JustKedy** - [GitHub Profili](https://github.com/JustKedy)
+- **yunuskr0** - [GitHub Profili](https://github.com/yunuskr0)
