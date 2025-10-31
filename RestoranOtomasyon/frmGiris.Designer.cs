@@ -112,7 +112,7 @@
             this.Garson.Name = "Garson";
             this.Garson.Size = new System.Drawing.Size(149, 41);
             this.Garson.TabIndex = 1;
-            this.Garson.Text = "garrrson";
+            this.Garson.Text = "Garson";
             this.Garson.UseVisualStyleBackColor = true;
             this.Garson.Click += new System.EventHandler(this.button2_Click);
             // 
