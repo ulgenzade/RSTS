@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.flowMasalar = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnOrnekMasa = new System.Windows.Forms.Button();
             this.panelSiparis = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtArama = new System.Windows.Forms.TextBox();
@@ -38,6 +37,7 @@
             this.btnOnayla = new System.Windows.Forms.Button();
             this.lblGarsonAdi = new System.Windows.Forms.Label();
             this.btnOdeme = new System.Windows.Forms.Button();
+            this.btnOrnekMasa = new System.Windows.Forms.Button();
             this.flowMasalar.SuspendLayout();
             this.panelSiparis.SuspendLayout();
             this.SuspendLayout();
@@ -51,16 +51,7 @@
             this.flowMasalar.Name = "flowMasalar";
             this.flowMasalar.Size = new System.Drawing.Size(200, 577);
             this.flowMasalar.TabIndex = 0;
-            // 
-            // btnOrnekMasa
-            // 
-            this.btnOrnekMasa.Location = new System.Drawing.Point(3, 3);
-            this.btnOrnekMasa.Name = "btnOrnekMasa";
-            this.btnOrnekMasa.Size = new System.Drawing.Size(150, 100);
-            this.btnOrnekMasa.TabIndex = 0;
-            this.btnOrnekMasa.Text = "MASA - 1";
-            this.btnOrnekMasa.UseVisualStyleBackColor = true;
-            this.btnOrnekMasa.Click += new System.EventHandler(this.btnOrnekMasa_Click);
+            this.flowMasalar.Paint += new System.Windows.Forms.PaintEventHandler(this.flowMasalar_Paint);
             // 
             // panelSiparis
             // 
@@ -143,6 +134,15 @@
             this.btnOdeme.UseVisualStyleBackColor = true;
             this.btnOdeme.Click += new System.EventHandler(this.btnOdeme_Click);
             // 
+            // btnOrnekMasa
+            // 
+            this.btnOrnekMasa.Location = new System.Drawing.Point(3, 3);
+            this.btnOrnekMasa.Name = "btnOrnekMasa";
+            this.btnOrnekMasa.Size = new System.Drawing.Size(196, 115);
+            this.btnOrnekMasa.TabIndex = 0;
+            this.btnOrnekMasa.Text = "MASA-1";
+            this.btnOrnekMasa.UseVisualStyleBackColor = true;
+            // 
             // frmSiparisEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -164,7 +164,6 @@
 
         private System.Windows.Forms.FlowLayoutPanel flowMasalar;
         private System.Windows.Forms.Panel panelSiparis;
-        private System.Windows.Forms.Button btnOrnekMasa;
         private System.Windows.Forms.TextBox txtArama;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblGarsonAdi;
@@ -172,5 +171,6 @@
         private System.Windows.Forms.Button btnVazgec;
         private System.Windows.Forms.Panel panelSiparisListesi;
         private System.Windows.Forms.Button btnOdeme;
+        private System.Windows.Forms.Button btnOrnekMasa;
     }
 }

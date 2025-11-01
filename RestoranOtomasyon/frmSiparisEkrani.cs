@@ -35,6 +35,7 @@ namespace RestoranOtomasyon
                 masaButonu.Tag = i;
                 masaButonu.Click += new EventHandler(MasaButonu_Click);
                 flowMasalar.Controls.Add(masaButonu);
+                flowMasalar.Controls.Clear();
             }
         }
 
@@ -93,5 +94,10 @@ namespace RestoranOtomasyon
         private void panelSiparis_Paint(object sender, PaintEventArgs e) { }
         private void btnOrnekMasa_Click(object sender, EventArgs e) { }
         private void lblGarsonAdi_Click(object sender, EventArgs e) { }
+
+        private void flowMasalar_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
