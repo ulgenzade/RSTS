@@ -37,6 +37,7 @@
             this.btnVazgec = new System.Windows.Forms.Button();
             this.btnOnayla = new System.Windows.Forms.Button();
             this.lblGarsonAdi = new System.Windows.Forms.Label();
+            this.btnOdeme = new System.Windows.Forms.Button();
             this.flowMasalar.SuspendLayout();
             this.panelSiparis.SuspendLayout();
             this.SuspendLayout();
@@ -63,6 +64,7 @@
             // 
             // panelSiparis
             // 
+            this.panelSiparis.Controls.Add(this.btnOdeme);
             this.panelSiparis.Controls.Add(this.lblGarsonAdi);
             this.panelSiparis.Controls.Add(this.btnOnayla);
             this.panelSiparis.Controls.Add(this.btnVazgec);
@@ -105,18 +107,18 @@
             // 
             // btnVazgec
             // 
-            this.btnVazgec.Location = new System.Drawing.Point(747, 526);
+            this.btnVazgec.Location = new System.Drawing.Point(666, 488);
             this.btnVazgec.Name = "btnVazgec";
-            this.btnVazgec.Size = new System.Drawing.Size(75, 23);
+            this.btnVazgec.Size = new System.Drawing.Size(124, 23);
             this.btnVazgec.TabIndex = 3;
             this.btnVazgec.Text = "VAZGEÇ";
             this.btnVazgec.UseVisualStyleBackColor = true;
             // 
             // btnOnayla
             // 
-            this.btnOnayla.Location = new System.Drawing.Point(845, 526);
+            this.btnOnayla.Location = new System.Drawing.Point(796, 488);
             this.btnOnayla.Name = "btnOnayla";
-            this.btnOnayla.Size = new System.Drawing.Size(75, 23);
+            this.btnOnayla.Size = new System.Drawing.Size(124, 23);
             this.btnOnayla.TabIndex = 4;
             this.btnOnayla.Text = "ONAYLA";
             this.btnOnayla.UseVisualStyleBackColor = true;
@@ -124,12 +126,22 @@
             // lblGarsonAdi
             // 
             this.lblGarsonAdi.AutoSize = true;
-            this.lblGarsonAdi.Location = new System.Drawing.Point(19, 533);
+            this.lblGarsonAdi.Location = new System.Drawing.Point(663, 552);
             this.lblGarsonAdi.Name = "lblGarsonAdi";
             this.lblGarsonAdi.Size = new System.Drawing.Size(44, 16);
             this.lblGarsonAdi.TabIndex = 5;
             this.lblGarsonAdi.Text = "label2";
             this.lblGarsonAdi.Click += new System.EventHandler(this.lblGarsonAdi_Click);
+            // 
+            // btnOdeme
+            // 
+            this.btnOdeme.Location = new System.Drawing.Point(666, 517);
+            this.btnOdeme.Name = "btnOdeme";
+            this.btnOdeme.Size = new System.Drawing.Size(254, 23);
+            this.btnOdeme.TabIndex = 6;
+            this.btnOdeme.Text = "ÖDE";
+            this.btnOdeme.UseVisualStyleBackColor = true;
+            this.btnOdeme.Click += new System.EventHandler(this.btnOdeme_Click);
             // 
             // frmSiparisEkrani
             // 
@@ -159,5 +171,6 @@
         private System.Windows.Forms.Button btnOnayla;
         private System.Windows.Forms.Button btnVazgec;
         private System.Windows.Forms.Panel panelSiparisListesi;
+        private System.Windows.Forms.Button btnOdeme;
     }
 }
