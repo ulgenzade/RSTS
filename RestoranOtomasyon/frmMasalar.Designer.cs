@@ -47,8 +47,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.flowMasalar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmMasalar";
             this.Text = "frmMasalar";
+            this.Load += new System.EventHandler(this.frmMasalar_Load_1);
             this.ResumeLayout(false);
 
         }

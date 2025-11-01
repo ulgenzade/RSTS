@@ -82,6 +82,7 @@
             this.Controls.Add(this.btnBos);
             this.Controls.Add(this.btnDolu);
             this.Controls.Add(this.lblMasaAdi);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmMasaDurum";
             this.Text = "frmMasaDurum";
             this.Load += new System.EventHandler(this.frmMasaDurum_Load);

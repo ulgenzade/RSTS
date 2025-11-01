@@ -90,5 +90,10 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void frmMasalar_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

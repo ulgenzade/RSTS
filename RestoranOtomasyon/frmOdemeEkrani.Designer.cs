@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.panelMasalar = new System.Windows.Forms.Panel();
-            this.panelOzet = new System.Windows.Forms.Panel();
-            this.panelUrunler = new System.Windows.Forms.Panel();
-            this.panelMenu = new System.Windows.Forms.Panel();
-            this.btnHesapBilgisi = new System.Windows.Forms.Button();
-            this.btnCikisYap = new System.Windows.Forms.Button();
-            this.btnAnaMenu = new System.Windows.Forms.Button();
-            this.btnMasa1 = new System.Windows.Forms.Button();
-            this.btnMasa2 = new System.Windows.Forms.Button();
             this.btnMasa3 = new System.Windows.Forms.Button();
-            this.listOzet = new System.Windows.Forms.ListBox();
-            this.btnVazgecOde = new System.Windows.Forms.Button();
+            this.btnMasa2 = new System.Windows.Forms.Button();
+            this.btnMasa1 = new System.Windows.Forms.Button();
+            this.panelOzet = new System.Windows.Forms.Panel();
             this.btnOde = new System.Windows.Forms.Button();
-            this.flowUrunler = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnHepsiniSec = new System.Windows.Forms.Button();
-            this.btnSec = new System.Windows.Forms.Button();
-            this.btnVazgec = new System.Windows.Forms.Button();
+            this.btnVazgecOde = new System.Windows.Forms.Button();
+            this.listOzet = new System.Windows.Forms.ListBox();
+            this.panelUrunler = new System.Windows.Forms.Panel();
             this.btnSecimiOnayla = new System.Windows.Forms.Button();
+            this.btnVazgec = new System.Windows.Forms.Button();
+            this.btnSec = new System.Windows.Forms.Button();
+            this.btnHepsiniSec = new System.Windows.Forms.Button();
+            this.flowUrunler = new System.Windows.Forms.FlowLayoutPanel();
+            this.panelMenu = new System.Windows.Forms.Panel();
+            this.btnAnaMenu = new System.Windows.Forms.Button();
+            this.btnCikisYap = new System.Windows.Forms.Button();
+            this.btnHesapBilgisi = new System.Windows.Forms.Button();
             this.panelMasalar.SuspendLayout();
             this.panelOzet.SuspendLayout();
             this.panelUrunler.SuspendLayout();
@@ -64,6 +64,34 @@
             this.panelMasalar.TabIndex = 0;
             this.panelMasalar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMasalar_Paint);
             // 
+            // btnMasa3
+            // 
+            this.btnMasa3.Location = new System.Drawing.Point(27, 351);
+            this.btnMasa3.Name = "btnMasa3";
+            this.btnMasa3.Size = new System.Drawing.Size(143, 117);
+            this.btnMasa3.TabIndex = 2;
+            this.btnMasa3.Text = "MASA- 3";
+            this.btnMasa3.UseVisualStyleBackColor = true;
+            // 
+            // btnMasa2
+            // 
+            this.btnMasa2.Location = new System.Drawing.Point(27, 232);
+            this.btnMasa2.Name = "btnMasa2";
+            this.btnMasa2.Size = new System.Drawing.Size(143, 113);
+            this.btnMasa2.TabIndex = 1;
+            this.btnMasa2.Text = "MASA-2";
+            this.btnMasa2.UseVisualStyleBackColor = true;
+            // 
+            // btnMasa1
+            // 
+            this.btnMasa1.Location = new System.Drawing.Point(27, 116);
+            this.btnMasa1.Name = "btnMasa1";
+            this.btnMasa1.Size = new System.Drawing.Size(143, 110);
+            this.btnMasa1.TabIndex = 0;
+            this.btnMasa1.Text = "MASA-1";
+            this.btnMasa1.UseVisualStyleBackColor = true;
+            this.btnMasa1.Click += new System.EventHandler(this.btnMasa1_Click);
+            // 
             // panelOzet
             // 
             this.panelOzet.Controls.Add(this.btnOde);
@@ -74,6 +102,36 @@
             this.panelOzet.Name = "panelOzet";
             this.panelOzet.Size = new System.Drawing.Size(200, 579);
             this.panelOzet.TabIndex = 1;
+            // 
+            // btnOde
+            // 
+            this.btnOde.Location = new System.Drawing.Point(122, 511);
+            this.btnOde.Name = "btnOde";
+            this.btnOde.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnOde.Size = new System.Drawing.Size(75, 23);
+            this.btnOde.TabIndex = 2;
+            this.btnOde.Text = "ÖDE";
+            this.btnOde.UseVisualStyleBackColor = true;
+            this.btnOde.Click += new System.EventHandler(this.btnOde_Click);
+            // 
+            // btnVazgecOde
+            // 
+            this.btnVazgecOde.Location = new System.Drawing.Point(6, 511);
+            this.btnVazgecOde.Name = "btnVazgecOde";
+            this.btnVazgecOde.Size = new System.Drawing.Size(75, 23);
+            this.btnVazgecOde.TabIndex = 1;
+            this.btnVazgecOde.Text = "VAZGEÇ";
+            this.btnVazgecOde.UseVisualStyleBackColor = true;
+            this.btnVazgecOde.Click += new System.EventHandler(this.btnVazgecOde_Click);
+            // 
+            // listOzet
+            // 
+            this.listOzet.FormattingEnabled = true;
+            this.listOzet.ItemHeight = 16;
+            this.listOzet.Location = new System.Drawing.Point(6, 68);
+            this.listOzet.Name = "listOzet";
+            this.listOzet.Size = new System.Drawing.Size(191, 436);
+            this.listOzet.TabIndex = 0;
             // 
             // panelUrunler
             // 
@@ -88,6 +146,49 @@
             this.panelUrunler.TabIndex = 2;
             this.panelUrunler.Paint += new System.Windows.Forms.PaintEventHandler(this.panelUrunler_Paint);
             // 
+            // btnSecimiOnayla
+            // 
+            this.btnSecimiOnayla.Location = new System.Drawing.Point(511, 445);
+            this.btnSecimiOnayla.Name = "btnSecimiOnayla";
+            this.btnSecimiOnayla.Size = new System.Drawing.Size(133, 23);
+            this.btnSecimiOnayla.TabIndex = 3;
+            this.btnSecimiOnayla.Text = "SEÇİMİ ONAYLA";
+            this.btnSecimiOnayla.UseVisualStyleBackColor = true;
+            // 
+            // btnVazgec
+            // 
+            this.btnVazgec.Location = new System.Drawing.Point(430, 445);
+            this.btnVazgec.Name = "btnVazgec";
+            this.btnVazgec.Size = new System.Drawing.Size(75, 23);
+            this.btnVazgec.TabIndex = 2;
+            this.btnVazgec.Text = "VAZGEÇ";
+            this.btnVazgec.UseVisualStyleBackColor = true;
+            // 
+            // btnSec
+            // 
+            this.btnSec.Location = new System.Drawing.Point(349, 445);
+            this.btnSec.Name = "btnSec";
+            this.btnSec.Size = new System.Drawing.Size(75, 23);
+            this.btnSec.TabIndex = 1;
+            this.btnSec.Text = "SEÇ";
+            this.btnSec.UseVisualStyleBackColor = true;
+            // 
+            // btnHepsiniSec
+            // 
+            this.btnHepsiniSec.Location = new System.Drawing.Point(228, 445);
+            this.btnHepsiniSec.Name = "btnHepsiniSec";
+            this.btnHepsiniSec.Size = new System.Drawing.Size(115, 23);
+            this.btnHepsiniSec.TabIndex = 0;
+            this.btnHepsiniSec.Text = "HEPSİNİ SEÇ";
+            this.btnHepsiniSec.UseVisualStyleBackColor = true;
+            // 
+            // flowUrunler
+            // 
+            this.flowUrunler.Location = new System.Drawing.Point(23, 15);
+            this.flowUrunler.Name = "flowUrunler";
+            this.flowUrunler.Size = new System.Drawing.Size(621, 423);
+            this.flowUrunler.TabIndex = 0;
+            // 
             // panelMenu
             // 
             this.panelMenu.Controls.Add(this.btnAnaMenu);
@@ -97,6 +198,24 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(680, 60);
             this.panelMenu.TabIndex = 0;
+            // 
+            // btnAnaMenu
+            // 
+            this.btnAnaMenu.Location = new System.Drawing.Point(517, 8);
+            this.btnAnaMenu.Name = "btnAnaMenu";
+            this.btnAnaMenu.Size = new System.Drawing.Size(157, 40);
+            this.btnAnaMenu.TabIndex = 2;
+            this.btnAnaMenu.Text = "Ana Menü";
+            this.btnAnaMenu.UseVisualStyleBackColor = true;
+            // 
+            // btnCikisYap
+            // 
+            this.btnCikisYap.Location = new System.Drawing.Point(418, 8);
+            this.btnCikisYap.Name = "btnCikisYap";
+            this.btnCikisYap.Size = new System.Drawing.Size(93, 40);
+            this.btnCikisYap.TabIndex = 1;
+            this.btnCikisYap.Text = "Çıkış Yap";
+            this.btnCikisYap.UseVisualStyleBackColor = true;
             // 
             // btnHesapBilgisi
             // 
@@ -108,125 +227,6 @@
             this.btnHesapBilgisi.UseVisualStyleBackColor = true;
             this.btnHesapBilgisi.Click += new System.EventHandler(this.btnHesapBilgisi_Click);
             // 
-            // btnCikisYap
-            // 
-            this.btnCikisYap.Location = new System.Drawing.Point(418, 8);
-            this.btnCikisYap.Name = "btnCikisYap";
-            this.btnCikisYap.Size = new System.Drawing.Size(93, 40);
-            this.btnCikisYap.TabIndex = 1;
-            this.btnCikisYap.Text = "Çıkış Yap";
-            this.btnCikisYap.UseVisualStyleBackColor = true;
-            // 
-            // btnAnaMenu
-            // 
-            this.btnAnaMenu.Location = new System.Drawing.Point(517, 8);
-            this.btnAnaMenu.Name = "btnAnaMenu";
-            this.btnAnaMenu.Size = new System.Drawing.Size(157, 40);
-            this.btnAnaMenu.TabIndex = 2;
-            this.btnAnaMenu.Text = "Ana Menü";
-            this.btnAnaMenu.UseVisualStyleBackColor = true;
-            // 
-            // btnMasa1
-            // 
-            this.btnMasa1.Location = new System.Drawing.Point(27, 116);
-            this.btnMasa1.Name = "btnMasa1";
-            this.btnMasa1.Size = new System.Drawing.Size(143, 110);
-            this.btnMasa1.TabIndex = 0;
-            this.btnMasa1.Text = "MASA-1";
-            this.btnMasa1.UseVisualStyleBackColor = true;
-            this.btnMasa1.Click += new System.EventHandler(this.btnMasa1_Click);
-            // 
-            // btnMasa2
-            // 
-            this.btnMasa2.Location = new System.Drawing.Point(27, 232);
-            this.btnMasa2.Name = "btnMasa2";
-            this.btnMasa2.Size = new System.Drawing.Size(143, 113);
-            this.btnMasa2.TabIndex = 1;
-            this.btnMasa2.Text = "MASA-2";
-            this.btnMasa2.UseVisualStyleBackColor = true;
-            // 
-            // btnMasa3
-            // 
-            this.btnMasa3.Location = new System.Drawing.Point(27, 351);
-            this.btnMasa3.Name = "btnMasa3";
-            this.btnMasa3.Size = new System.Drawing.Size(143, 117);
-            this.btnMasa3.TabIndex = 2;
-            this.btnMasa3.Text = "MASA- 3";
-            this.btnMasa3.UseVisualStyleBackColor = true;
-            // 
-            // listOzet
-            // 
-            this.listOzet.FormattingEnabled = true;
-            this.listOzet.ItemHeight = 16;
-            this.listOzet.Location = new System.Drawing.Point(6, 68);
-            this.listOzet.Name = "listOzet";
-            this.listOzet.Size = new System.Drawing.Size(191, 436);
-            this.listOzet.TabIndex = 0;
-            // 
-            // btnVazgecOde
-            // 
-            this.btnVazgecOde.Location = new System.Drawing.Point(6, 511);
-            this.btnVazgecOde.Name = "btnVazgecOde";
-            this.btnVazgecOde.Size = new System.Drawing.Size(75, 23);
-            this.btnVazgecOde.TabIndex = 1;
-            this.btnVazgecOde.Text = "VAZGEÇ";
-            this.btnVazgecOde.UseVisualStyleBackColor = true;
-            this.btnVazgecOde.Click += new System.EventHandler(this.btnVazgecOde_Click);
-            // 
-            // btnOde
-            // 
-            this.btnOde.Location = new System.Drawing.Point(122, 511);
-            this.btnOde.Name = "btnOde";
-            this.btnOde.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnOde.Size = new System.Drawing.Size(75, 23);
-            this.btnOde.TabIndex = 2;
-            this.btnOde.Text = "ÖDE";
-            this.btnOde.UseVisualStyleBackColor = true;
-            this.btnOde.Click += new System.EventHandler(this.btnOde_Click);
-            // 
-            // flowUrunler
-            // 
-            this.flowUrunler.Location = new System.Drawing.Point(23, 15);
-            this.flowUrunler.Name = "flowUrunler";
-            this.flowUrunler.Size = new System.Drawing.Size(621, 423);
-            this.flowUrunler.TabIndex = 0;
-            // 
-            // btnHepsiniSec
-            // 
-            this.btnHepsiniSec.Location = new System.Drawing.Point(228, 445);
-            this.btnHepsiniSec.Name = "btnHepsiniSec";
-            this.btnHepsiniSec.Size = new System.Drawing.Size(115, 23);
-            this.btnHepsiniSec.TabIndex = 0;
-            this.btnHepsiniSec.Text = "HEPSİNİ SEÇ";
-            this.btnHepsiniSec.UseVisualStyleBackColor = true;
-            // 
-            // btnSec
-            // 
-            this.btnSec.Location = new System.Drawing.Point(349, 445);
-            this.btnSec.Name = "btnSec";
-            this.btnSec.Size = new System.Drawing.Size(75, 23);
-            this.btnSec.TabIndex = 1;
-            this.btnSec.Text = "SEÇ";
-            this.btnSec.UseVisualStyleBackColor = true;
-            // 
-            // btnVazgec
-            // 
-            this.btnVazgec.Location = new System.Drawing.Point(430, 445);
-            this.btnVazgec.Name = "btnVazgec";
-            this.btnVazgec.Size = new System.Drawing.Size(75, 23);
-            this.btnVazgec.TabIndex = 2;
-            this.btnVazgec.Text = "VAZGEÇ";
-            this.btnVazgec.UseVisualStyleBackColor = true;
-            // 
-            // btnSecimiOnayla
-            // 
-            this.btnSecimiOnayla.Location = new System.Drawing.Point(511, 445);
-            this.btnSecimiOnayla.Name = "btnSecimiOnayla";
-            this.btnSecimiOnayla.Size = new System.Drawing.Size(133, 23);
-            this.btnSecimiOnayla.TabIndex = 3;
-            this.btnSecimiOnayla.Text = "SEÇİMİ ONAYLA";
-            this.btnSecimiOnayla.UseVisualStyleBackColor = true;
-            // 
             // frmOdemeEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -236,6 +236,7 @@
             this.Controls.Add(this.panelUrunler);
             this.Controls.Add(this.panelOzet);
             this.Controls.Add(this.panelMasalar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmOdemeEkrani";
             this.Text = "frmOdemeEkrani";
             this.Load += new System.EventHandler(this.frmOdemeEkrani_Load);
