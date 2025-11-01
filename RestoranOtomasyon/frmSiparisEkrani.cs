@@ -104,5 +104,10 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void panelSiparisListesi_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
