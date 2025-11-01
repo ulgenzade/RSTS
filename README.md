@@ -8,17 +8,23 @@ Bu uygulama, bir okul projesi olarak geliştirilmektedir. Amacı, Windows Forms 
 
 ## ✨ Ana Paneller ve Özellikler
 
-Proje, üç ana kullanıcı arayüzü üzerine kurulmuştur:
+Proje, ana kullanıcı arayüzleri üzerine kurulmuştur ve şu anki ilerleme aşağıdaki gibidir:
 
-1.  **Giriş Ekranı:**
+1.  **Giriş Ekranı:** *(Tamamlandı)*
     - Rol tabanlı (Garson/Admin) güvenli kullanıcı girişi.
 
-2.  **Yönetici Paneli:**
+2.  **Ödeme ve Hesap Yönetim Ekranı:** *(Arayüz Tamamlandı)*
+    - Birden fazla masanın hesabını birleştirme veya tek bir masanın hesabını yönetme.
+    - Ürün bazında hesap bölme (Adisyonu parçalara ayırma).
+    - Seçilen ürünlerin ödeme özetini (fiş) anlık olarak görüntüleme.
+    - Ödeme alma (Nakit/Kredi Kartı) ve masanın hesabını kapatma.
+
+3.  **Yönetici Paneli:** *(Tasarım Aşamasında)*
     - Personel hesaplarını (Admin, Çalışan) listeleme, ekleme ve silme.
     - Menüdeki ürünleri, fiyatları ve diğer detayları veritabanından çekerek görüntüleme.
     - Ürün bilgilerini düzenleme, kaydetme, silme ve güncelleme.
 
-3.  **Garson Paneli (Sipariş Ekranı):**
+4.  **Garson Paneli (Sipariş Ekranı):** *(Tasarım Aşamasında)*
     - Restoran masalarını anlık durumlarıyla (dolu/boş) görsel olarak takip etme.
     - Masaya tıklandığında sipariş alma arayüzünü açma.
     - Ürünleri arama, siparişe ekleme/çıkarma ve siparişi onaylama.
@@ -33,6 +39,6 @@ Proje, üç ana kullanıcı arayüzü üzerine kurulmuştur:
 
 ## 🤝 Katkıda Bulunanlar
 
-- **ulgenzade** - [GitHub Profili](https://github.com/ulgenzade)
-- **JustKedy** - [GitHub Profili](https://github.com/JustKedy)
-- **yunuskr0** - [GitHub Profili](https://github.com/yunuskr0)
+- **ulgenzade** - Arayüz Tasarımı - [GitHub Profili](https://github.com/ulgenzade)
+- **JustKedy** - Ortak Geliştirici - [GitHub Profili](https://github.com/JustKedy)
+- **yunuskr0** - Fonksiyonellik ve İşleyiş - [GitHub Profili](https://github.com/yunuskr0)
