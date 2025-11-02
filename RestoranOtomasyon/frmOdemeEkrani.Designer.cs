@@ -118,7 +118,7 @@
             // 
             this.btnVazgecOde.Location = new System.Drawing.Point(6, 511);
             this.btnVazgecOde.Name = "btnVazgecOde";
-            this.btnVazgecOde.Size = new System.Drawing.Size(86, 23);
+            this.btnVazgecOde.Size = new System.Drawing.Size(75, 23);
             this.btnVazgecOde.TabIndex = 1;
             this.btnVazgecOde.Text = "VAZGEÇ";
             this.btnVazgecOde.UseVisualStyleBackColor = true;
@@ -148,36 +148,36 @@
             // 
             // btnSecimiOnayla
             // 
-            this.btnSecimiOnayla.Location = new System.Drawing.Point(502, 445);
+            this.btnSecimiOnayla.Location = new System.Drawing.Point(511, 445);
             this.btnSecimiOnayla.Name = "btnSecimiOnayla";
-            this.btnSecimiOnayla.Size = new System.Drawing.Size(142, 23);
+            this.btnSecimiOnayla.Size = new System.Drawing.Size(133, 23);
             this.btnSecimiOnayla.TabIndex = 3;
             this.btnSecimiOnayla.Text = "SEÇİMİ ONAYLA";
             this.btnSecimiOnayla.UseVisualStyleBackColor = true;
             // 
             // btnVazgec
             // 
-            this.btnVazgec.Location = new System.Drawing.Point(408, 445);
+            this.btnVazgec.Location = new System.Drawing.Point(430, 445);
             this.btnVazgec.Name = "btnVazgec";
-            this.btnVazgec.Size = new System.Drawing.Size(88, 23);
+            this.btnVazgec.Size = new System.Drawing.Size(75, 23);
             this.btnVazgec.TabIndex = 2;
             this.btnVazgec.Text = "VAZGEÇ";
             this.btnVazgec.UseVisualStyleBackColor = true;
             // 
             // btnSec
             // 
-            this.btnSec.Location = new System.Drawing.Point(320, 445);
+            this.btnSec.Location = new System.Drawing.Point(349, 445);
             this.btnSec.Name = "btnSec";
-            this.btnSec.Size = new System.Drawing.Size(82, 23);
+            this.btnSec.Size = new System.Drawing.Size(75, 23);
             this.btnSec.TabIndex = 1;
             this.btnSec.Text = "SEÇ";
             this.btnSec.UseVisualStyleBackColor = true;
             // 
             // btnHepsiniSec
             // 
-            this.btnHepsiniSec.Location = new System.Drawing.Point(184, 445);
+            this.btnHepsiniSec.Location = new System.Drawing.Point(228, 445);
             this.btnHepsiniSec.Name = "btnHepsiniSec";
-            this.btnHepsiniSec.Size = new System.Drawing.Size(130, 23);
+            this.btnHepsiniSec.Size = new System.Drawing.Size(115, 23);
             this.btnHepsiniSec.TabIndex = 0;
             this.btnHepsiniSec.Text = "HEPSİNİ SEÇ";
             this.btnHepsiniSec.UseVisualStyleBackColor = true;
@@ -210,9 +210,9 @@
             // 
             // btnCikisYap
             // 
-            this.btnCikisYap.Location = new System.Drawing.Point(401, 8);
+            this.btnCikisYap.Location = new System.Drawing.Point(418, 8);
             this.btnCikisYap.Name = "btnCikisYap";
-            this.btnCikisYap.Size = new System.Drawing.Size(110, 40);
+            this.btnCikisYap.Size = new System.Drawing.Size(93, 40);
             this.btnCikisYap.TabIndex = 1;
             this.btnCikisYap.Text = "Çıkış Yap";
             this.btnCikisYap.UseVisualStyleBackColor = true;
