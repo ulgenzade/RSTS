@@ -24,6 +24,8 @@ namespace RestoranOtomasyon
         {
             pnlOdemeSecenekleri.Visible = false;
             MasalariYukle();
+            this.btnAnaMenu.Click -= btnAnaMenu_Click;
+            this.btnAnaMenu.Click += btnAnaMenu_Click;
         }
 
         private void MasalariYukle()
