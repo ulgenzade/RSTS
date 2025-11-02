@@ -71,7 +71,7 @@
             this.panelMasalar.Name = "panelMasalar";
             this.panelMasalar.Size = new System.Drawing.Size(200, 579);
             this.panelMasalar.TabIndex = 0;
-            this.panelMasalar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMasalar_Paint);
+            
             // 
             // btnMasa3
             // 
@@ -99,7 +99,7 @@
             this.btnMasa1.TabIndex = 0;
             this.btnMasa1.Text = "MASA-1";
             this.btnMasa1.UseVisualStyleBackColor = true;
-            this.btnMasa1.Click += new System.EventHandler(this.btnMasa1_Click);
+            
             // 
             // panelOzet
             // 
@@ -154,7 +154,6 @@
             this.panelUrunler.Name = "panelUrunler";
             this.panelUrunler.Size = new System.Drawing.Size(668, 501);
             this.panelUrunler.TabIndex = 2;
-            this.panelUrunler.Paint += new System.Windows.Forms.PaintEventHandler(this.panelUrunler_Paint);
             // 
             // btnSecimiOnayla
             // 
@@ -237,7 +236,6 @@
             this.btnHesapBilgisi.TabIndex = 0;
             this.btnHesapBilgisi.Text = "Hesap Bilgiler";
             this.btnHesapBilgisi.UseVisualStyleBackColor = true;
-            this.btnHesapBilgisi.Click += new System.EventHandler(this.btnHesapBilgisi_Click);
             // 
             // pnlOdemeSecenekleri
             // 
