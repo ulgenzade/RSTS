@@ -10,6 +10,7 @@ namespace RestoranOtomasyonu
 {
     public class VeritabaniIslemleri
     {
+        #region Bağlantı Ayarları
         // App.config dosyasından bağlantı bilgilerini (connection string) çekeceğimiz değişken.
         private string connectionString;
 
@@ -19,6 +20,7 @@ namespace RestoranOtomasyonu
             // App.config dosyasındaki "MyConnectionString" isimli connection string'i bul ve al.
             connectionString = ConfigurationManager.ConnectionStrings["MyConnectionString"].ConnectionString;
         }
+        #endregion
 
         #region Bağlantı Test Metodu
         // 1. Veritabanı bağlantısını test etmek için basit bir metot.
