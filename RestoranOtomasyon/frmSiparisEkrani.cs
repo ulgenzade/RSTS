@@ -55,15 +55,15 @@ namespace RestoranOtomasyon
             // ... (Sahte ürün oluşturma kodları aynı kalıyor) ...
             List<string> urunler = new List<string>();
             VeritabaniIslemleri db = new VeritabaniIslemleri();
-
+            /*
             // 1. Metodu çağırarak verileri bir listeye alın
             List<SiparisUrunModel> siparisDetaylari = db.MasaSiparisleriniGetir(seciliMasaNumarasi);
 
             // Sahte ürün listesi ve if/else blokları tamamen SİLİNMELİ:
-            /*
+            
             List<string> urunler = new List<string>();
             if (seciliMasaNumarasi == 1) { ... } else { ... } 
-            */
+            
 
             // 2. Veritabanından gelen her bir ürünü ekranda göstermek için döngüye sokun
             foreach (SiparisUrunModel urun in siparisDetaylari)
@@ -90,6 +90,7 @@ namespace RestoranOtomasyon
                 urunSatiriPaneli.Controls.Add(lblUrunAdi);
                 panelSiparisListesi.Controls.Add(urunSatiriPaneli);
             }
+            */
         }
 
         // --- YENİ EKLENEN BUTONUN OLAYI ---
