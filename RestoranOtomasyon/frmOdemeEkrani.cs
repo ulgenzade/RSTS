@@ -22,7 +22,26 @@ namespace RestoranOtomasyon
         {
             InitializeComponent();
         }
+        private void btnOde_Click(object sender, EventArgs e)
+        {
+            // 1. Sepet (listOzet) dolu mu diye kontrol et
+            if (listOzet.Items.Count > 0)
+            {
+                // 2. Sepet doluysa, NAKİT/KART panelini göster
 
+                // Paneldeki label'ı güncel Tutar ile doldur
+                lblOdemeTutari.Text = "Ödenecek Tutar: " + anlikToplam.ToString("C");
+
+                // Paneli görünür yap
+                pnlOdemeSecenekleri.Visible = true;
+                pnlOdemeSecenekleri.BringToFront(); // Panelin en öne gelmesini sağla
+            }
+            else
+            {
+                // 3. Sepet boşsa, uyarı ver
+                MessageBox.Show("Ödeme yapmak için lütfen önce ürün seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
         private void frmOdemeEkrani_Load(object sender, EventArgs e)
         {
             this.btnAnaMenu.Click -= btnAnaMenu_Click;
@@ -88,19 +107,7 @@ namespace RestoranOtomasyon
         }
 
         // DEĞİŞTİ: ÖDE Butonu artık ödeme panelini açıyor.
-        private void btnOde_Click(object sender, EventArgs e)
-        {
-            if (listOzet.Items.Count > 0)
-            {
-                lblOdemeTutari.Text = "Ödenecek Tutar: " + anlikToplam.ToString("C");
-                pnlOdemeSecenekleri.Visible = true;
-                pnlOdemeSecenekleri.BringToFront();
-            }
-            else
-            {
-                MessageBox.Show("Ödeme yapmak için lütfen önce ürün seçin.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
+        
 
         // DEĞİŞTİ: Vazgeç butonu toplamı da sıfırlıyor.
         private void btnVazgecOde_Click(object sender, EventArgs e)
@@ -173,6 +180,16 @@ namespace RestoranOtomasyon
         private void btnOdemeIptal_Click(object sender, EventArgs e)
         {
             pnlOdemeSecenekleri.Visible = false;
+        }
+
+        private void btnAnaMenu_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pnlOdemeSecenekleri_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
