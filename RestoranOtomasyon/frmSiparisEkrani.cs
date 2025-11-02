@@ -55,7 +55,6 @@ namespace RestoranOtomasyon
             // ... (Sahte ürün oluşturma kodları aynı kalıyor) ...
             List<string> urunler = new List<string>();
             VeritabaniIslemleri db = new VeritabaniIslemleri();
-
             /*
             // 1. Metodu çağırarak verileri bir listeye alın
             List<SiparisUrunModel> siparisDetaylari = db.MasaSiparisleriniGetir(seciliMasaNumarasi);
