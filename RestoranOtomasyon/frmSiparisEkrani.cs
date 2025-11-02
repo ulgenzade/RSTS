@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RestoranOtomasyonu;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,25 +54,37 @@ namespace RestoranOtomasyon
 
             // ... (Sahte ürün oluşturma kodları aynı kalıyor) ...
             List<string> urunler = new List<string>();
-            if (seciliMasaNumarasi == 1)
+            VeritabaniIslemleri db = new VeritabaniIslemleri();
+
+            // 1. Metodu çağırarak verileri bir listeye alın
+            List<SiparisUrunModel> siparisDetaylari = db.MasaSiparisleriniGetir(seciliMasaNumarasi);
+
+            // Sahte ürün listesi ve if/else blokları tamamen SİLİNMELİ:
+            /*
+            List<string> urunler = new List<string>();
+            if (seciliMasaNumarasi == 1) { ... } else { ... } 
+            */
+
+            // 2. Veritabanından gelen her bir ürünü ekranda göstermek için döngüye sokun
+            foreach (SiparisUrunModel urun in siparisDetaylari)
             {
-                urunler.Add("Adana Kebap");
-                urunler.Add("Ayran");
-            }
-            else
-            {
-                urunler.Add("Çorba");
-                urunler.Add("İskender");
+                // Artık ürün adı değil, tüm model nesnesini kullanıyorsunuz.
+                string urunAdi = urun.UrunAdi;
+                int adet = urun.Adet;
+                decimal araToplam = urun.AraToplam; // AraToplam property'si hesaplanmış geliyor
+
+                // ... (Burada, ekrandaki panellere veya listeye (Label, Textbox, vb.) 
+                // urunAdi, adet ve araToplam değerlerini yerleştiren mevcut kodunuz devam edecek)
             }
 
-            foreach (string urunAdi in urunler)
+            foreach (SiparisUrunModel urun in siparisDetaylari) // <-- Artık urun nesnesini kullanıyoruz
             {
                 Panel urunSatiriPaneli = new Panel();
                 urunSatiriPaneli.Size = new Size(panelSiparisListesi.Width - 25, 40);
                 urunSatiriPaneli.BorderStyle = BorderStyle.FixedSingle;
                 urunSatiriPaneli.Dock = DockStyle.Top;
                 Label lblUrunAdi = new Label();
-                lblUrunAdi.Text = urunAdi;
+                lblUrunAdi.Text = $"{urun.Adet} x {urun.UrunAdi} ({urun.AraToplam:C2})";
                 lblUrunAdi.Location = new Point(10, 10);
                 lblUrunAdi.AutoSize = true;
                 urunSatiriPaneli.Controls.Add(lblUrunAdi);
