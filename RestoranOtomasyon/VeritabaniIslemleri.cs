@@ -1,6 +1,8 @@
 ﻿// Gerekli kütüphaneleri projemize dahil ediyoruz.
 using MySql.Data.MySqlClient; // MySQL ile konuşmamızı sağlayan ana kütüphane
+using RestoranOtomasyon;
 using System;
+using System.Collections.Generic;
 using System.Configuration;    // App.config dosyasını okumak için
 using System.Data;             // DataTable gibi veri yapılarını kullanmak için
 
@@ -555,6 +557,107 @@ namespace RestoranOtomasyonu
             else
             {
                 return null; // Bu rol ve şifreye sahip kullanıcı yok.
+            }
+        }
+        #endregion
+
+        #region Aktif Siparis ID Getir Metodu
+        /// <summary>
+        /// Verilen masa ID'sine ait aktif siparişin ana ID'sini bulur.
+        /// </summary>
+        /// <returns>SiparisID'yi veya bulunamazsa -1'i döndürür.</returns>
+        public int AktifSiparisIDGetir(int masaID)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "SELECT SiparisID FROM Siparisler WHERE MasaID = @masaID AND OdemeDurumu = 'Aktif' LIMIT 1;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@masaID", masaID);
+                        object sonuc = komut.ExecuteScalar(); // Sorgudan dönen ilk satırın ilk sütununu alır.
+                        if (sonuc != null && sonuc != DBNull.Value)
+                        {
+                            return Convert.ToInt32(sonuc);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Aktif sipariş ID'si getirilirken hata: " + ex.Message);
+                }
+            }
+            return -1; // Bulunamadı veya hata oluştu.
+        }
+        #endregion
+
+        #region Masa Siparislerini Getir Metodu
+        public List<SiparisUrunModel> MasaSiparisleriniGetir(int masaID)
+        {
+            List<SiparisUrunModel> siparisListesi = new List<SiparisUrunModel>();
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = @"
+                        SELECT u.UrunAdi, sd.Adet, sd.BirimFiyat
+                        FROM Siparisler s
+                        JOIN SiparisDetaylari sd ON s.SiparisID = sd.SiparisID
+                        JOIN Urunler u ON sd.UrunID = u.UrunID
+                        WHERE s.MasaID = @masaID AND s.OdemeDurumu = 'Aktif';";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@masaID", masaID);
+                        using (MySqlDataReader reader = komut.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                SiparisUrunModel urun = new SiparisUrunModel
+                                {
+                                    UrunAdi = reader["UrunAdi"].ToString(),
+                                    Adet = Convert.ToInt32(reader["Adet"]),
+                                    BirimFiyat = Convert.ToDecimal(reader["BirimFiyat"])
+                                };
+                                siparisListesi.Add(urun);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa siparişlerini getirirken hata: " + ex.Message);
+                }
+            }
+            return siparisListesi;
+        }
+        #endregion
+
+        #region Odeme Ekle Metodu
+        public bool OdemeEkle(int siparisID, string odemeTipi, decimal tutar)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "INSERT INTO Odemeler (SiparisID, OdemeTipi, Tutar, OdemeZamani) VALUES (@siparisID, @odemeTipi, @tutar, NOW());";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@siparisID", siparisID);
+                        komut.Parameters.AddWithValue("@odemeTipi", odemeTipi);
+                        komut.Parameters.AddWithValue("@tutar", tutar);
+                        komut.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Ödeme eklerken hata: " + ex.Message);
+                    return false;
+                }
             }
         }
         #endregion

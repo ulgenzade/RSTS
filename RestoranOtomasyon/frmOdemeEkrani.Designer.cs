@@ -33,6 +33,7 @@
             this.btnMasa2 = new System.Windows.Forms.Button();
             this.btnMasa1 = new System.Windows.Forms.Button();
             this.panelOzet = new System.Windows.Forms.Panel();
+            this.lblToplamTutar = new System.Windows.Forms.Label();
             this.btnOde = new System.Windows.Forms.Button();
             this.btnVazgecOde = new System.Windows.Forms.Button();
             this.listOzet = new System.Windows.Forms.ListBox();
@@ -42,23 +43,22 @@
             this.btnSec = new System.Windows.Forms.Button();
             this.btnHepsiniSec = new System.Windows.Forms.Button();
             this.flowUrunler = new System.Windows.Forms.FlowLayoutPanel();
+            this.pnlOdemeSecenekleri = new System.Windows.Forms.Panel();
+            this.btnOdemeIptal = new System.Windows.Forms.Button();
+            this.btnKartOde = new System.Windows.Forms.Button();
+            this.btnNakitOde = new System.Windows.Forms.Button();
+            this.lblOdemeTutari = new System.Windows.Forms.Label();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnAnaMenu = new System.Windows.Forms.Button();
             this.btnCikisYap = new System.Windows.Forms.Button();
             this.btnHesapBilgisi = new System.Windows.Forms.Button();
-            this.pnlOdemeSecenekleri = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblOdemeTutari = new System.Windows.Forms.Label();
-            this.btnNakitOde = new System.Windows.Forms.Button();
-            this.btnKartOde = new System.Windows.Forms.Button();
-            this.btnOdemeIptal = new System.Windows.Forms.Button();
-            this.lblToplamTutar = new System.Windows.Forms.Label();
             this.panelMasalar.SuspendLayout();
             this.panelOzet.SuspendLayout();
             this.panelUrunler.SuspendLayout();
             this.flowUrunler.SuspendLayout();
-            this.panelMenu.SuspendLayout();
             this.pnlOdemeSecenekleri.SuspendLayout();
+            this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMasalar
@@ -71,7 +71,6 @@
             this.panelMasalar.Name = "panelMasalar";
             this.panelMasalar.Size = new System.Drawing.Size(200, 579);
             this.panelMasalar.TabIndex = 0;
-            this.panelMasalar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelMasalar_Paint);
             // 
             // btnMasa3
             // 
@@ -99,7 +98,6 @@
             this.btnMasa1.TabIndex = 0;
             this.btnMasa1.Text = "MASA-1";
             this.btnMasa1.UseVisualStyleBackColor = true;
-            this.btnMasa1.Click += new System.EventHandler(this.btnMasa1_Click);
             // 
             // panelOzet
             // 
@@ -112,6 +110,15 @@
             this.panelOzet.Name = "panelOzet";
             this.panelOzet.Size = new System.Drawing.Size(200, 579);
             this.panelOzet.TabIndex = 1;
+            // 
+            // lblToplamTutar
+            // 
+            this.lblToplamTutar.AutoSize = true;
+            this.lblToplamTutar.Location = new System.Drawing.Point(51, 436);
+            this.lblToplamTutar.Name = "lblToplamTutar";
+            this.lblToplamTutar.Size = new System.Drawing.Size(99, 16);
+            this.lblToplamTutar.TabIndex = 3;
+            this.lblToplamTutar.Text = "lblToplamTutar";
             // 
             // btnOde
             // 
@@ -145,6 +152,7 @@
             // 
             // panelUrunler
             // 
+            this.panelUrunler.Controls.Add(this.pnlOdemeSecenekleri);
             this.panelUrunler.Controls.Add(this.btnSecimiOnayla);
             this.panelUrunler.Controls.Add(this.btnVazgec);
             this.panelUrunler.Controls.Add(this.btnSec);
@@ -154,7 +162,6 @@
             this.panelUrunler.Name = "panelUrunler";
             this.panelUrunler.Size = new System.Drawing.Size(668, 501);
             this.panelUrunler.TabIndex = 2;
-            this.panelUrunler.Paint += new System.Windows.Forms.PaintEventHandler(this.panelUrunler_Paint);
             // 
             // btnSecimiOnayla
             // 
@@ -194,12 +201,69 @@
             // 
             // flowUrunler
             // 
-            this.flowUrunler.Controls.Add(this.pnlOdemeSecenekleri);
             this.flowUrunler.Controls.Add(this.flowLayoutPanel1);
             this.flowUrunler.Location = new System.Drawing.Point(23, 15);
             this.flowUrunler.Name = "flowUrunler";
             this.flowUrunler.Size = new System.Drawing.Size(621, 423);
             this.flowUrunler.TabIndex = 0;
+            // 
+            // pnlOdemeSecenekleri
+            // 
+            this.pnlOdemeSecenekleri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlOdemeSecenekleri.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlOdemeSecenekleri.Controls.Add(this.btnOdemeIptal);
+            this.pnlOdemeSecenekleri.Controls.Add(this.btnKartOde);
+            this.pnlOdemeSecenekleri.Controls.Add(this.btnNakitOde);
+            this.pnlOdemeSecenekleri.Controls.Add(this.lblOdemeTutari);
+            this.pnlOdemeSecenekleri.Location = new System.Drawing.Point(23, 186);
+            this.pnlOdemeSecenekleri.Name = "pnlOdemeSecenekleri";
+            this.pnlOdemeSecenekleri.Size = new System.Drawing.Size(416, 252);
+            this.pnlOdemeSecenekleri.TabIndex = 0;
+            this.pnlOdemeSecenekleri.Visible = false;
+            // 
+            // btnOdemeIptal
+            // 
+            this.btnOdemeIptal.Location = new System.Drawing.Point(112, 173);
+            this.btnOdemeIptal.Name = "btnOdemeIptal";
+            this.btnOdemeIptal.Size = new System.Drawing.Size(104, 23);
+            this.btnOdemeIptal.TabIndex = 3;
+            this.btnOdemeIptal.Text = "btnOdemeIptal";
+            this.btnOdemeIptal.UseVisualStyleBackColor = true;
+            // 
+            // btnKartOde
+            // 
+            this.btnKartOde.Location = new System.Drawing.Point(112, 117);
+            this.btnKartOde.Name = "btnKartOde";
+            this.btnKartOde.Size = new System.Drawing.Size(97, 23);
+            this.btnKartOde.TabIndex = 2;
+            this.btnKartOde.Text = "btnKartOde";
+            this.btnKartOde.UseVisualStyleBackColor = true;
+            // 
+            // btnNakitOde
+            // 
+            this.btnNakitOde.Location = new System.Drawing.Point(112, 67);
+            this.btnNakitOde.Name = "btnNakitOde";
+            this.btnNakitOde.Size = new System.Drawing.Size(97, 23);
+            this.btnNakitOde.TabIndex = 1;
+            this.btnNakitOde.Text = "btnNakitOde";
+            this.btnNakitOde.UseVisualStyleBackColor = true;
+            // 
+            // lblOdemeTutari
+            // 
+            this.lblOdemeTutari.AutoSize = true;
+            this.lblOdemeTutari.Location = new System.Drawing.Point(109, 31);
+            this.lblOdemeTutari.Name = "lblOdemeTutari";
+            this.lblOdemeTutari.Size = new System.Drawing.Size(100, 16);
+            this.lblOdemeTutari.TabIndex = 0;
+            this.lblOdemeTutari.Text = "lblOdemeTutari";
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(26, 12);
+            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // panelMenu
             // 
@@ -237,72 +301,6 @@
             this.btnHesapBilgisi.TabIndex = 0;
             this.btnHesapBilgisi.Text = "Hesap Bilgiler";
             this.btnHesapBilgisi.UseVisualStyleBackColor = true;
-            this.btnHesapBilgisi.Click += new System.EventHandler(this.btnHesapBilgisi_Click);
-            // 
-            // pnlOdemeSecenekleri
-            // 
-            this.pnlOdemeSecenekleri.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOdemeSecenekleri.Controls.Add(this.btnOdemeIptal);
-            this.pnlOdemeSecenekleri.Controls.Add(this.btnKartOde);
-            this.pnlOdemeSecenekleri.Controls.Add(this.btnNakitOde);
-            this.pnlOdemeSecenekleri.Controls.Add(this.lblOdemeTutari);
-            this.pnlOdemeSecenekleri.Location = new System.Drawing.Point(3, 3);
-            this.pnlOdemeSecenekleri.Name = "pnlOdemeSecenekleri";
-            this.pnlOdemeSecenekleri.Size = new System.Drawing.Size(618, 420);
-            this.pnlOdemeSecenekleri.TabIndex = 0;
-            this.pnlOdemeSecenekleri.Visible = false;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 429);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(26, 12);
-            this.flowLayoutPanel1.TabIndex = 1;
-            // 
-            // lblOdemeTutari
-            // 
-            this.lblOdemeTutari.AutoSize = true;
-            this.lblOdemeTutari.Location = new System.Drawing.Point(109, 31);
-            this.lblOdemeTutari.Name = "lblOdemeTutari";
-            this.lblOdemeTutari.Size = new System.Drawing.Size(100, 16);
-            this.lblOdemeTutari.TabIndex = 0;
-            this.lblOdemeTutari.Text = "lblOdemeTutari";
-            // 
-            // btnNakitOde
-            // 
-            this.btnNakitOde.Location = new System.Drawing.Point(112, 67);
-            this.btnNakitOde.Name = "btnNakitOde";
-            this.btnNakitOde.Size = new System.Drawing.Size(97, 23);
-            this.btnNakitOde.TabIndex = 1;
-            this.btnNakitOde.Text = "btnNakitOde";
-            this.btnNakitOde.UseVisualStyleBackColor = true;
-            // 
-            // btnKartOde
-            // 
-            this.btnKartOde.Location = new System.Drawing.Point(112, 117);
-            this.btnKartOde.Name = "btnKartOde";
-            this.btnKartOde.Size = new System.Drawing.Size(97, 23);
-            this.btnKartOde.TabIndex = 2;
-            this.btnKartOde.Text = "btnKartOde";
-            this.btnKartOde.UseVisualStyleBackColor = true;
-            // 
-            // btnOdemeIptal
-            // 
-            this.btnOdemeIptal.Location = new System.Drawing.Point(112, 173);
-            this.btnOdemeIptal.Name = "btnOdemeIptal";
-            this.btnOdemeIptal.Size = new System.Drawing.Size(104, 23);
-            this.btnOdemeIptal.TabIndex = 3;
-            this.btnOdemeIptal.Text = "btnOdemeIptal";
-            this.btnOdemeIptal.UseVisualStyleBackColor = true;
-            // 
-            // lblToplamTutar
-            // 
-            this.lblToplamTutar.AutoSize = true;
-            this.lblToplamTutar.Location = new System.Drawing.Point(51, 436);
-            this.lblToplamTutar.Name = "lblToplamTutar";
-            this.lblToplamTutar.Size = new System.Drawing.Size(99, 16);
-            this.lblToplamTutar.TabIndex = 3;
-            this.lblToplamTutar.Text = "lblToplamTutar";
             // 
             // frmOdemeEkrani
             // 
@@ -322,9 +320,9 @@
             this.panelOzet.PerformLayout();
             this.panelUrunler.ResumeLayout(false);
             this.flowUrunler.ResumeLayout(false);
-            this.panelMenu.ResumeLayout(false);
             this.pnlOdemeSecenekleri.ResumeLayout(false);
             this.pnlOdemeSecenekleri.PerformLayout();
+            this.panelMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
