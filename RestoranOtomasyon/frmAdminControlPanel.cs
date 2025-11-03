@@ -41,5 +41,17 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            // 
+            // frmAdminControlPanel
+            // 
+            this.ClientSize = new System.Drawing.Size(1033, 493);
+            this.Name = "frmAdminControlPanel";
+            this.ResumeLayout(false);
+
+        }
     }
 }

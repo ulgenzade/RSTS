@@ -111,6 +111,7 @@ namespace RestoranOtomasyon
             this.txtSecim.StartIndex = 0;
             this.txtSecim.TabIndex = 4;
             this.txtSecim.SelectedIndexChanged += new System.EventHandler(this.textSecim_SelectedIndexChanged);
+
             // 
             // btnGiris
             // 
