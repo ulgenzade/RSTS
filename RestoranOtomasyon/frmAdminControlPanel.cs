@@ -16,5 +16,20 @@ namespace RestoranOtomasyon
         {
             InitializeComponent();
         }
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void listCalisanlar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
