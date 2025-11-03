@@ -23,7 +23,6 @@ namespace RestoranOtomasyon
             panel2.Visible = false;
 
             // Şifre girerken karakterler '*' olarak görünsün.
-            // Bu, şifrenin ekranda görünmesini engeller.
             txtSifre.PasswordChar = '*';
         }
         private void dataGridViewKategoriler_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -90,7 +89,7 @@ namespace RestoranOtomasyon
 
             if (kullanici != null)
             {
-                // KULLANICI BULUNDU! Bilgilerini statik sınıfa kaydedelim.
+                // KULLANICI BULUNDU == Bilgilerini statik sınıfa kaydet
                 AktifKullanici.BilgileriAta(kullanici);
 
                 MessageBox.Show($"Hoş geldiniz, {AktifKullanici.AdSoyad}!", "Giriş Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
