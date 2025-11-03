@@ -1,5 +1,4 @@
-﻿// Gerekli kütüphaneleri projemize dahil ediyoruz.
-using MySql.Data.MySqlClient; // MySQL ile konuşmamızı sağlayan ana kütüphane
+﻿using MySql.Data.MySqlClient; // MySQL ile konuşmamızı sağlayan ana kütüphane
 using RestoranOtomasyon;
 using System;
 using System.Collections.Generic;
@@ -14,7 +13,6 @@ namespace RestoranOtomasyonu
         // App.config dosyasından bağlantı bilgilerini (connection string) çekeceğimiz değişken.
         private string connectionString;
 
-        // Bu sınıf her oluşturulduğunda (new VeritabaniIslemleri()) otomatik olarak çalışacak olan yapıcı metot.
         public VeritabaniIslemleri()
         {
             // App.config dosyasındaki "MyConnectionString" isimli connection string'i bul ve al.
@@ -23,7 +21,7 @@ namespace RestoranOtomasyonu
         #endregion
 
         #region Bağlantı Test Metodu
-        // 1. Veritabanı bağlantısını test etmek için basit bir metot.
+        // 1. Veritabanı bağlantısını test etmek için bir metot.
         public bool BaglantiyiTestEt()
         {
             // 'using' bloğu, işlem bittiğinde veya hata oluştuğunda bağlantıyı otomatik olarak kapatır. Bu çok önemlidir!
