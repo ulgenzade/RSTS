@@ -49,6 +49,7 @@
             this.Controls.Add(this.flowMasalar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmMasalar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMasalar";
             this.Load += new System.EventHandler(this.frmMasalar_Load_1);
             this.ResumeLayout(false);

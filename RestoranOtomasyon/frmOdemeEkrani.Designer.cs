@@ -43,12 +43,6 @@
             this.btnSec = new System.Windows.Forms.Button();
             this.btnHepsiniSec = new System.Windows.Forms.Button();
             this.flowUrunler = new System.Windows.Forms.FlowLayoutPanel();
-            this.pnlOdemeSecenekleri = new System.Windows.Forms.Panel();
-            this.btnOdemeIptal = new System.Windows.Forms.Button();
-            this.btnKartOde = new System.Windows.Forms.Button();
-            this.btnNakitOde = new System.Windows.Forms.Button();
-            this.lblOdemeTutari = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panelMenu = new System.Windows.Forms.Panel();
             this.btnAnaMenu = new System.Windows.Forms.Button();
             this.btnCikisYap = new System.Windows.Forms.Button();
@@ -56,8 +50,6 @@
             this.panelMasalar.SuspendLayout();
             this.panelOzet.SuspendLayout();
             this.panelUrunler.SuspendLayout();
-            this.flowUrunler.SuspendLayout();
-            this.pnlOdemeSecenekleri.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -152,7 +144,6 @@
             // 
             // panelUrunler
             // 
-            this.panelUrunler.Controls.Add(this.pnlOdemeSecenekleri);
             this.panelUrunler.Controls.Add(this.btnSecimiOnayla);
             this.panelUrunler.Controls.Add(this.btnVazgec);
             this.panelUrunler.Controls.Add(this.btnSec);
@@ -201,69 +192,10 @@
             // 
             // flowUrunler
             // 
-            this.flowUrunler.Controls.Add(this.flowLayoutPanel1);
             this.flowUrunler.Location = new System.Drawing.Point(23, 15);
             this.flowUrunler.Name = "flowUrunler";
             this.flowUrunler.Size = new System.Drawing.Size(621, 423);
             this.flowUrunler.TabIndex = 0;
-            // 
-            // pnlOdemeSecenekleri
-            // 
-            this.pnlOdemeSecenekleri.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlOdemeSecenekleri.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlOdemeSecenekleri.Controls.Add(this.btnOdemeIptal);
-            this.pnlOdemeSecenekleri.Controls.Add(this.btnKartOde);
-            this.pnlOdemeSecenekleri.Controls.Add(this.btnNakitOde);
-            this.pnlOdemeSecenekleri.Controls.Add(this.lblOdemeTutari);
-            this.pnlOdemeSecenekleri.Location = new System.Drawing.Point(23, 186);
-            this.pnlOdemeSecenekleri.Name = "pnlOdemeSecenekleri";
-            this.pnlOdemeSecenekleri.Size = new System.Drawing.Size(416, 252);
-            this.pnlOdemeSecenekleri.TabIndex = 0;
-            this.pnlOdemeSecenekleri.Visible = false;
-            // 
-            // btnOdemeIptal
-            // 
-            this.btnOdemeIptal.Location = new System.Drawing.Point(112, 173);
-            this.btnOdemeIptal.Name = "btnOdemeIptal";
-            this.btnOdemeIptal.Size = new System.Drawing.Size(104, 23);
-            this.btnOdemeIptal.TabIndex = 3;
-            this.btnOdemeIptal.Text = "btnOdemeIptal";
-            this.btnOdemeIptal.UseVisualStyleBackColor = true;
-            // 
-            // btnKartOde
-            // 
-            this.btnKartOde.Location = new System.Drawing.Point(112, 117);
-            this.btnKartOde.Name = "btnKartOde";
-            this.btnKartOde.Size = new System.Drawing.Size(97, 23);
-            this.btnKartOde.TabIndex = 2;
-            this.btnKartOde.Text = "btnKartOde";
-            this.btnKartOde.UseVisualStyleBackColor = true;
-            // 
-            // btnNakitOde
-            // 
-            this.btnNakitOde.Location = new System.Drawing.Point(112, 67);
-            this.btnNakitOde.Name = "btnNakitOde";
-            this.btnNakitOde.Size = new System.Drawing.Size(97, 23);
-            this.btnNakitOde.TabIndex = 1;
-            this.btnNakitOde.Text = "btnNakitOde";
-            this.btnNakitOde.UseVisualStyleBackColor = true;
-            // 
-            // lblOdemeTutari
-            // 
-            this.lblOdemeTutari.AutoSize = true;
-            this.lblOdemeTutari.Location = new System.Drawing.Point(109, 31);
-            this.lblOdemeTutari.Name = "lblOdemeTutari";
-            this.lblOdemeTutari.Size = new System.Drawing.Size(100, 16);
-            this.lblOdemeTutari.TabIndex = 0;
-            this.lblOdemeTutari.Text = "lblOdemeTutari";
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(26, 12);
-            this.flowLayoutPanel1.TabIndex = 1;
             // 
             // panelMenu
             // 
@@ -313,15 +245,13 @@
             this.Controls.Add(this.panelMasalar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmOdemeEkrani";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmOdemeEkrani";
             this.Load += new System.EventHandler(this.frmOdemeEkrani_Load);
             this.panelMasalar.ResumeLayout(false);
             this.panelOzet.ResumeLayout(false);
             this.panelOzet.PerformLayout();
             this.panelUrunler.ResumeLayout(false);
-            this.flowUrunler.ResumeLayout(false);
-            this.pnlOdemeSecenekleri.ResumeLayout(false);
-            this.pnlOdemeSecenekleri.PerformLayout();
             this.panelMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -347,12 +277,6 @@
         private System.Windows.Forms.Button btnSec;
         private System.Windows.Forms.Button btnSecimiOnayla;
         private System.Windows.Forms.Button btnVazgec;
-        private System.Windows.Forms.Panel pnlOdemeSecenekleri;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Button btnOdemeIptal;
-        private System.Windows.Forms.Button btnKartOde;
-        private System.Windows.Forms.Button btnNakitOde;
-        private System.Windows.Forms.Label lblOdemeTutari;
         private System.Windows.Forms.Label lblToplamTutar;
     }
 }

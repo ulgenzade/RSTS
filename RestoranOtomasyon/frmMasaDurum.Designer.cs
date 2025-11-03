@@ -84,6 +84,7 @@
             this.Controls.Add(this.lblMasaAdi);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "frmMasaDurum";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMasaDurum";
             this.Load += new System.EventHandler(this.frmMasaDurum_Load);
             this.ResumeLayout(false);
