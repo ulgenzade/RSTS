@@ -125,7 +125,7 @@ namespace RestoranOtomasyon
             if (e.KeyCode == Keys.Enter)
             {
                 // ...Giriş butonuna tıkla.
-                btnGiris.PerformClick();
+                btnGiris1.PerformClick();
             }
         }
 
