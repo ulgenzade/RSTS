@@ -136,7 +136,7 @@
             this.ClientSize = new System.Drawing.Size(951, 577);
             this.Controls.Add(this.panelSiparis);
             this.Controls.Add(this.flowMasalar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmSiparisEkrani";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSiparisEkrani";
