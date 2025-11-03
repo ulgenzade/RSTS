@@ -1,4 +1,6 @@
-﻿namespace RestoranOtomasyon
+﻿using Org.BouncyCastle.Pqc.Crypto.Lms;
+
+namespace RestoranOtomasyon
 {
     partial class frmGiris
     {
@@ -29,110 +31,104 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnDropdown = new System.Windows.Forms.Button();
-            this.txtSifre = new System.Windows.Forms.TextBox();
-            this.txtSecim = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.Garson = new System.Windows.Forms.Button();
-            this.Admin = new System.Windows.Forms.Button();
+            this.txtSifre = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
+            this.txtSecim = new ReaLTaiizor.Controls.MaterialComboBox();
             this.btnGiris = new ReaLTaiizor.Controls.MaterialButton();
             this.panel1.SuspendLayout();
-            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnGiris);
-            this.panel1.Controls.Add(this.btnDropdown);
             this.panel1.Controls.Add(this.txtSifre);
             this.panel1.Controls.Add(this.txtSecim);
-            this.panel1.Controls.Add(this.panel2);
+            this.panel1.Controls.Add(this.btnGiris);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(364, 435);
             this.panel1.TabIndex = 0;
-            // 
-            // btnDropdown
-            // 
-            this.btnDropdown.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnDropdown.Location = new System.Drawing.Point(256, 177);
-            this.btnDropdown.Name = "btnDropdown";
-            this.btnDropdown.Size = new System.Drawing.Size(33, 34);
-            this.btnDropdown.TabIndex = 0;
-            this.btnDropdown.Text = "^";
-            this.btnDropdown.UseVisualStyleBackColor = true;
-            this.btnDropdown.Click += new System.EventHandler(this.btnDropdown_Click);
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // txtSifre
             // 
-            this.txtSifre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtSifre.Location = new System.Drawing.Point(111, 253);
+            this.txtSifre.AnimateReadOnly = false;
+            this.txtSifre.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.txtSifre.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.txtSifre.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.txtSifre.CausesValidation = false;
+            this.txtSifre.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.txtSifre.Depth = 0;
+            this.txtSifre.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSifre.HideSelection = true;
+            this.txtSifre.LeadingIcon = null;
+            this.txtSifre.Location = new System.Drawing.Point(47, 200);
+            this.txtSifre.MaxLength = 32767;
+            this.txtSifre.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.txtSifre.Name = "txtSifre";
-            this.txtSifre.PasswordChar = '*';
-            this.txtSifre.Size = new System.Drawing.Size(149, 34);
-            this.txtSifre.TabIndex = 2;
-            this.txtSifre.TextChanged += new System.EventHandler(this.txtSifre_TextChanged);
+            this.txtSifre.PasswordChar = '●';
+            this.txtSifre.PrefixSuffixText = null;
+            this.txtSifre.ReadOnly = false;
+            this.txtSifre.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtSifre.SelectedText = "";
+            this.txtSifre.SelectionLength = 0;
+            this.txtSifre.SelectionStart = 0;
+            this.txtSifre.ShortcutsEnabled = true;
+            this.txtSifre.Size = new System.Drawing.Size(270, 48);
+            this.txtSifre.TabIndex = 5;
+            this.txtSifre.TabStop = false;
+            this.txtSifre.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtSifre.TrailingIcon = null;
+            this.txtSifre.UseSystemPasswordChar = true;
+            this.txtSifre.Click += new System.EventHandler(this.materialTextBoxEdit1_Click);
             this.txtSifre.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSifre_KeyDown);
+            this.txtSifre.TextChanged += new System.EventHandler(this.txtSifre_TextChanged);
             // 
             // txtSecim
             // 
-            this.txtSecim.Location = new System.Drawing.Point(111, 213);
-            this.txtSecim.Multiline = true;
+            this.txtSecim.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSecim.AutoResize = false;
+            this.txtSecim.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtSecim.Depth = 0;
+            this.txtSecim.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
+            this.txtSecim.DropDownHeight = 174;
+            this.txtSecim.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtSecim.DropDownWidth = 121;
+            this.txtSecim.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
+            this.txtSecim.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.txtSecim.FormattingEnabled = true;
+            this.txtSecim.IntegralHeight = false;
+            this.txtSecim.ItemHeight = 43;
+            this.txtSecim.Items.AddRange(new object[] {
+            "-KULLANICI SEÇİNİZ-",
+            "Admin",
+            "Garson"});
+            this.txtSecim.Location = new System.Drawing.Point(47, 126);
+            this.txtSecim.MaxDropDownItems = 4;
+            this.txtSecim.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.txtSecim.Name = "txtSecim";
-            this.txtSecim.ReadOnly = true;
-            this.txtSecim.Size = new System.Drawing.Size(149, 34);
-            this.txtSecim.TabIndex = 1;
-            this.txtSecim.TextChanged += new System.EventHandler(this.txtSecim_TextChanged);
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.Garson);
-            this.panel2.Controls.Add(this.Admin);
-            this.panel2.Location = new System.Drawing.Point(91, 103);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(182, 110);
-            this.panel2.TabIndex = 2;
-            this.panel2.Visible = false;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
-            // 
-            // Garson
-            // 
-            this.Garson.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Garson.Location = new System.Drawing.Point(20, 15);
-            this.Garson.Name = "Garson";
-            this.Garson.Size = new System.Drawing.Size(149, 41);
-            this.Garson.TabIndex = 1;
-            this.Garson.Text = "Garson";
-            this.Garson.UseVisualStyleBackColor = true;
-            this.Garson.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // Admin
-            // 
-            this.Admin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.Admin.Location = new System.Drawing.Point(20, 62);
-            this.Admin.Name = "Admin";
-            this.Admin.Size = new System.Drawing.Size(149, 41);
-            this.Admin.TabIndex = 0;
-            this.Admin.Text = "Admin";
-            this.Admin.UseVisualStyleBackColor = true;
-            this.Admin.Click += new System.EventHandler(this.button1_Click_1);
+            this.txtSecim.Size = new System.Drawing.Size(270, 49);
+            this.txtSecim.StartIndex = 0;
+            this.txtSecim.TabIndex = 4;
+            this.txtSecim.SelectedIndexChanged += new System.EventHandler(this.textSecim_SelectedIndexChanged);
             // 
             // btnGiris
             // 
             this.btnGiris.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnGiris.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnGiris.Depth = 0;
+            this.btnGiris.FlatAppearance.BorderSize = 19;
             this.btnGiris.HighEmphasis = true;
             this.btnGiris.Icon = null;
             this.btnGiris.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnGiris.Location = new System.Drawing.Point(106, 296);
+            this.btnGiris.Location = new System.Drawing.Point(150, 273);
             this.btnGiris.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGiris.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnGiris.Name = "btnGiris";
             this.btnGiris.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnGiris.Size = new System.Drawing.Size(158, 36);
+            this.btnGiris.Size = new System.Drawing.Size(64, 36);
             this.btnGiris.TabIndex = 3;
-            this.btnGiris.Text = "materialButton1";
+            this.btnGiris.Text = "GİRİŞ";
             this.btnGiris.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnGiris.UseAccentColor = false;
             this.btnGiris.UseVisualStyleBackColor = true;
@@ -151,7 +147,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -159,13 +154,9 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtSecim;
-        private System.Windows.Forms.Button btnDropdown;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button Admin;
-        private System.Windows.Forms.Button Garson;
-        private System.Windows.Forms.TextBox txtSifre;
         private ReaLTaiizor.Controls.MaterialButton btnGiris;
+        private ReaLTaiizor.Controls.MaterialComboBox txtSecim;
+        private ReaLTaiizor.Controls.MaterialTextBoxEdit txtSifre;
     }
 }
 

@@ -12,9 +12,7 @@ namespace RestoranOtomasyon
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Panel, form ilk açıldığında gizli olsun.
-            panel2.Visible = false;
-
+           
             // Şifre girerken karakterler '*' olarak görünsün.
             txtSifre.PasswordChar = '*';
         }
@@ -48,22 +46,7 @@ namespace RestoranOtomasyon
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            txtSecim.Text = "Admin";
-            panel2.Visible = false;
-        }
-
-        private void btnDropdown_Click(object sender, EventArgs e)
-        {
-            panel2.Visible = !panel2.Visible;
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            txtSecim.Text = "Garson";
-            panel2.Visible = false;
-        }
+        
 
         private void btnGiris_Click_1(object sender, EventArgs e)
         {
@@ -126,6 +109,19 @@ namespace RestoranOtomasyon
 
         }
 
-       
+        private void textSecim_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void materialTextBoxEdit1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
