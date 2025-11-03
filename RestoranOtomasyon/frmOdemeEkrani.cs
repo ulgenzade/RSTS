@@ -22,7 +22,6 @@ namespace RestoranOtomasyon
 
         private void frmOdemeEkrani_Load(object sender, EventArgs e)
         {
-            pnlOdemeSecenekleri.Visible = false;
             MasalariYukle();
             this.btnAnaMenu.Click -= btnAnaMenu_Click;
             this.btnAnaMenu.Click += btnAnaMenu_Click;
@@ -84,9 +83,8 @@ namespace RestoranOtomasyon
         {
             if (listOzet.Items.Count > 0 && aktifSiparisID != -1)
             {
-                lblOdemeTutari.Text = "Ödenecek Tutar: " + anlikToplam.ToString("C");
-                pnlOdemeSecenekleri.Visible = true;
-                pnlOdemeSecenekleri.BringToFront();
+                
+                
             }
             else
             {
@@ -114,7 +112,6 @@ namespace RestoranOtomasyon
                 MessageBox.Show($"Ödeme ({odemeTuru}) başarıyla tamamlandı!\nToplam Tutar: {anlikToplam:C2}");
 
                 btnVazgecOde_Click(null, null);
-                pnlOdemeSecenekleri.Visible = false;
                 MasalariYukle();
             }
             else
@@ -137,7 +134,7 @@ namespace RestoranOtomasyon
 
         private void btnOdemeIptal_Click(object sender, EventArgs e)
         {
-            pnlOdemeSecenekleri.Visible = false;
+            
         }
 
         // Ana menüye dönme veya formu kapatma işlevi
