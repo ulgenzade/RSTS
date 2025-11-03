@@ -1,4 +1,4 @@
-﻿using RestoranOtomasyonu;
+﻿using RestoranOtomasyon;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Configuration;    // App.config dosyasını okumak için
 using System.Data;             // DataTable gibi veri yapılarını kullanmak için
 
-namespace RestoranOtomasyonu
+namespace RestoranOtomasyon
 {
     public class VeritabaniIslemleri
     {
