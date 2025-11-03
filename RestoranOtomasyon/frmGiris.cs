@@ -65,7 +65,7 @@ namespace RestoranOtomasyon
             panel2.Visible = false;
         }
 
-        private void btnGiris_Click(object sender, EventArgs e)
+        private void btnGiris_Click_1(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtSecim.Text) || string.IsNullOrWhiteSpace(txtSifre.Text))
             {
@@ -117,7 +117,7 @@ namespace RestoranOtomasyon
             if (e.KeyCode == Keys.Enter)
             {
                 // ...Giriş butonuna tıkla.
-                btnGiris1.PerformClick();
+                btnGiris.PerformClick();
             }
         }
 
@@ -125,5 +125,7 @@ namespace RestoranOtomasyon
         {
 
         }
+
+       
     }
 }

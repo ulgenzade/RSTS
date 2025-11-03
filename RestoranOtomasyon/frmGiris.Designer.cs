@@ -30,20 +30,20 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnDropdown = new System.Windows.Forms.Button();
-            this.btnGiris1 = new System.Windows.Forms.Button();
             this.txtSifre = new System.Windows.Forms.TextBox();
             this.txtSecim = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.Garson = new System.Windows.Forms.Button();
             this.Admin = new System.Windows.Forms.Button();
+            this.btnGiris = new ReaLTaiizor.Controls.MaterialButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnGiris);
             this.panel1.Controls.Add(this.btnDropdown);
-            this.panel1.Controls.Add(this.btnGiris1);
             this.panel1.Controls.Add(this.txtSifre);
             this.panel1.Controls.Add(this.txtSecim);
             this.panel1.Controls.Add(this.panel2);
@@ -63,21 +63,10 @@
             this.btnDropdown.UseVisualStyleBackColor = true;
             this.btnDropdown.Click += new System.EventHandler(this.btnDropdown_Click);
             // 
-            // btnGiris1
-            // 
-            this.btnGiris1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnGiris1.Location = new System.Drawing.Point(101, 257);
-            this.btnGiris1.Name = "btnGiris1";
-            this.btnGiris1.Size = new System.Drawing.Size(149, 41);
-            this.btnGiris1.TabIndex = 2;
-            this.btnGiris1.Text = "Giriş";
-            this.btnGiris1.UseVisualStyleBackColor = true;
-            this.btnGiris1.Click += new System.EventHandler(this.btnGiris_Click);
-            // 
             // txtSifre
             // 
             this.txtSifre.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.txtSifre.Location = new System.Drawing.Point(101, 217);
+            this.txtSifre.Location = new System.Drawing.Point(111, 253);
             this.txtSifre.Name = "txtSifre";
             this.txtSifre.PasswordChar = '*';
             this.txtSifre.Size = new System.Drawing.Size(149, 34);
@@ -87,7 +76,7 @@
             // 
             // txtSecim
             // 
-            this.txtSecim.Location = new System.Drawing.Point(101, 177);
+            this.txtSecim.Location = new System.Drawing.Point(111, 213);
             this.txtSecim.Multiline = true;
             this.txtSecim.Name = "txtSecim";
             this.txtSecim.ReadOnly = true;
@@ -99,7 +88,7 @@
             // 
             this.panel2.Controls.Add(this.Garson);
             this.panel2.Controls.Add(this.Admin);
-            this.panel2.Location = new System.Drawing.Point(81, 67);
+            this.panel2.Location = new System.Drawing.Point(91, 103);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(182, 110);
             this.panel2.TabIndex = 2;
@@ -128,6 +117,27 @@
             this.Admin.UseVisualStyleBackColor = true;
             this.Admin.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // btnGiris
+            // 
+            this.btnGiris.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGiris.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGiris.Depth = 0;
+            this.btnGiris.HighEmphasis = true;
+            this.btnGiris.Icon = null;
+            this.btnGiris.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnGiris.Location = new System.Drawing.Point(106, 296);
+            this.btnGiris.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGiris.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnGiris.Name = "btnGiris";
+            this.btnGiris.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGiris.Size = new System.Drawing.Size(158, 36);
+            this.btnGiris.TabIndex = 3;
+            this.btnGiris.Text = "materialButton1";
+            this.btnGiris.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGiris.UseAccentColor = false;
+            this.btnGiris.UseVisualStyleBackColor = true;
+            this.btnGiris.Click += new System.EventHandler(this.btnGiris_Click_1);
+            // 
             // frmGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
@@ -155,7 +165,7 @@
         private System.Windows.Forms.Button Admin;
         private System.Windows.Forms.Button Garson;
         private System.Windows.Forms.TextBox txtSifre;
-        private System.Windows.Forms.Button btnGiris1;
+        private ReaLTaiizor.Controls.MaterialButton btnGiris;
     }
 }
 
