@@ -145,5 +145,10 @@ namespace RestoranOtomasyon
         {
             this.Close();
         }
+
+        private void aaa1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

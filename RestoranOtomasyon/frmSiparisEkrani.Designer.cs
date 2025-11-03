@@ -30,12 +30,12 @@
         {
             this.flowMasalar = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSiparis = new System.Windows.Forms.Panel();
+            this.txtArama = new System.Windows.Forms.TextBox();
             this.btnOdeme = new System.Windows.Forms.Button();
             this.lblGarsonAdi = new System.Windows.Forms.Label();
             this.btnOnayla = new System.Windows.Forms.Button();
             this.btnVazgec = new System.Windows.Forms.Button();
             this.panelSiparisListesi = new System.Windows.Forms.Panel();
-            this.txtArama = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelSiparis.SuspendLayout();
             this.SuspendLayout();
@@ -65,6 +65,13 @@
             this.panelSiparis.TabIndex = 1;
             this.panelSiparis.Visible = false;
             this.panelSiparis.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSiparis_Paint);
+            // 
+            // txtArama
+            // 
+            this.txtArama.Location = new System.Drawing.Point(123, 36);
+            this.txtArama.Name = "txtArama";
+            this.txtArama.Size = new System.Drawing.Size(266, 22);
+            this.txtArama.TabIndex = 1;
             // 
             // btnOdeme
             // 
@@ -113,13 +120,6 @@
             this.panelSiparisListesi.TabIndex = 2;
             this.panelSiparisListesi.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSiparisListesi_Paint);
             // 
-            // txtArama
-            // 
-            this.txtArama.Location = new System.Drawing.Point(123, 36);
-            this.txtArama.Name = "txtArama";
-            this.txtArama.Size = new System.Drawing.Size(266, 22);
-            this.txtArama.TabIndex = 1;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -136,8 +136,9 @@
             this.ClientSize = new System.Drawing.Size(951, 577);
             this.Controls.Add(this.panelSiparis);
             this.Controls.Add(this.flowMasalar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmSiparisEkrani";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSiparisEkrani";
             this.Load += new System.EventHandler(this.frmSiparisEkrani_Load);
             this.panelSiparis.ResumeLayout(false);

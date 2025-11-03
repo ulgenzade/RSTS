@@ -31,5 +31,15 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void frmAdminControlPanel_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gbUrunler_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
