@@ -41,5 +41,10 @@
         private ReaLTaiizor.Controls.MaterialButton btnVeriKaydet;
         private ReaLTaiizor.Controls.MaterialButton btnVeriGuncelle;
         private ReaLTaiizor.Controls.MaterialButton btnVeriEkle;
+        private ReaLTaiizor.Controls.CyberGroupBox VeriKategoriButonGroupBox;
+        private ReaLTaiizor.Controls.MaterialButton btnVeriKategoriler;
+        private ReaLTaiizor.Controls.MaterialButton btnVeriUrunler;
+        private ReaLTaiizor.Controls.MaterialButton btnVeriMasalar;
+        private ReaLTaiizor.Controls.MaterialButton btnVeriKullanici;
     }
 }
