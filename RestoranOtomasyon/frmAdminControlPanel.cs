@@ -44,8 +44,8 @@ namespace RestoranOtomasyon
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.BaslikBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
@@ -59,6 +59,11 @@ namespace RestoranOtomasyon
             this.btnHesapKaydet = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHesapGuncelle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHesapEkle = new ReaLTaiizor.Controls.MaterialButton();
+            this.VeriKategoriButonGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
+            this.btnVeriKategoriler = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnVeriUrunler = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnVeriMasalar = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnVeriKullanici = new ReaLTaiizor.Controls.MaterialButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.VeriButonGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.btnVeriIstatistik = new ReaLTaiizor.Controls.MaterialButton();
@@ -67,20 +72,15 @@ namespace RestoranOtomasyon
             this.btnVeriKaydet = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriGuncelle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriEkle = new ReaLTaiizor.Controls.MaterialButton();
-            this.VeriKategoriButonGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
-            this.btnVeriKullanici = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnVeriMasalar = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnVeriUrunler = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnVeriKategoriler = new ReaLTaiizor.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.BaslikBox.SuspendLayout();
             this.HesapButonGroupBox.SuspendLayout();
+            this.VeriKategoriButonGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.VeriButonGroupBox.SuspendLayout();
-            this.VeriKategoriButonGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -151,7 +151,7 @@ namespace RestoranOtomasyon
             // 
             this.HesapLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.HesapLabel.IsDerivedStyle = true;
-            this.HesapLabel.Location = new System.Drawing.Point(14, 9);
+            this.HesapLabel.Location = new System.Drawing.Point(14, 11);
             this.HesapLabel.Name = "HesapLabel";
             this.HesapLabel.Size = new System.Drawing.Size(415, 36);
             this.HesapLabel.Style = ReaLTaiizor.Enum.Metro.Style.Light;
@@ -186,10 +186,10 @@ namespace RestoranOtomasyon
             this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.CalisanTree.Location = new System.Drawing.Point(14, 356);
             this.CalisanTree.Name = "CalisanTree";
-            treeNode3.Name = "CalisanNodes";
-            treeNode3.Text = "Çalışan Hesaplar";
+            treeNode1.Name = "CalisanNodes";
+            treeNode1.Text = "Çalışan Hesaplar";
             this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode1});
             this.CalisanTree.Size = new System.Drawing.Size(411, 212);
             this.CalisanTree.TabIndex = 11;
             // 
@@ -216,10 +216,10 @@ namespace RestoranOtomasyon
             this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.AdminTree.Location = new System.Drawing.Point(14, 104);
             this.AdminTree.Name = "AdminTree";
-            treeNode4.Name = "AdminNodes";
-            treeNode4.Text = "Yetkili Hesaplar";
+            treeNode2.Name = "AdminNodes";
+            treeNode2.Text = "Yetkili Hesaplar";
             this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode2});
             this.AdminTree.Size = new System.Drawing.Size(411, 212);
             this.AdminTree.TabIndex = 10;
             // 
@@ -366,6 +366,127 @@ namespace RestoranOtomasyon
             this.btnHesapEkle.UseAccentColor = false;
             this.btnHesapEkle.UseVisualStyleBackColor = true;
             this.btnHesapEkle.Click += new System.EventHandler(this.btnHesapEkle_Click);
+            // 
+            // VeriKategoriButonGroupBox
+            // 
+            this.VeriKategoriButonGroupBox.Alpha = 20;
+            this.VeriKategoriButonGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.VeriKategoriButonGroupBox.Background = true;
+            this.VeriKategoriButonGroupBox.Background_WidthPen = 3F;
+            this.VeriKategoriButonGroupBox.BackgroundPen = true;
+            this.VeriKategoriButonGroupBox.ColorBackground = System.Drawing.Color.White;
+            this.VeriKategoriButonGroupBox.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.VeriKategoriButonGroupBox.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.VeriKategoriButonGroupBox.ColorBackground_Pen = System.Drawing.Color.Blue;
+            this.VeriKategoriButonGroupBox.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
+            this.VeriKategoriButonGroupBox.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.VeriKategoriButonGroupBox.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriKategoriler);
+            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriUrunler);
+            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriMasalar);
+            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriKullanici);
+            this.VeriKategoriButonGroupBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            this.VeriKategoriButonGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.VeriKategoriButonGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.VeriKategoriButonGroupBox.Lighting = false;
+            this.VeriKategoriButonGroupBox.LinearGradient_Background = false;
+            this.VeriKategoriButonGroupBox.LinearGradientPen = false;
+            this.VeriKategoriButonGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.VeriKategoriButonGroupBox.Name = "VeriKategoriButonGroupBox";
+            this.VeriKategoriButonGroupBox.PenWidth = 15;
+            this.VeriKategoriButonGroupBox.RGB = false;
+            this.VeriKategoriButonGroupBox.Rounding = true;
+            this.VeriKategoriButonGroupBox.RoundingInt = 60;
+            this.VeriKategoriButonGroupBox.Size = new System.Drawing.Size(885, 58);
+            this.VeriKategoriButonGroupBox.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            this.VeriKategoriButonGroupBox.TabIndex = 10;
+            this.VeriKategoriButonGroupBox.Tag = "Cyber";
+            this.VeriKategoriButonGroupBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            this.VeriKategoriButonGroupBox.Timer_RGB = 300;
+            // 
+            // btnVeriKategoriler
+            // 
+            this.btnVeriKategoriler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnVeriKategoriler.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnVeriKategoriler.Depth = 0;
+            this.btnVeriKategoriler.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeriKategoriler.HighEmphasis = true;
+            this.btnVeriKategoriler.Icon = null;
+            this.btnVeriKategoriler.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnVeriKategoriler.Location = new System.Drawing.Point(544, 11);
+            this.btnVeriKategoriler.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnVeriKategoriler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnVeriKategoriler.Name = "btnVeriKategoriler";
+            this.btnVeriKategoriler.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnVeriKategoriler.Size = new System.Drawing.Size(117, 36);
+            this.btnVeriKategoriler.TabIndex = 3;
+            this.btnVeriKategoriler.Text = "KATEGORİLER";
+            this.btnVeriKategoriler.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnVeriKategoriler.UseAccentColor = false;
+            this.btnVeriKategoriler.UseVisualStyleBackColor = true;
+            // 
+            // btnVeriUrunler
+            // 
+            this.btnVeriUrunler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnVeriUrunler.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnVeriUrunler.Depth = 0;
+            this.btnVeriUrunler.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnVeriUrunler.HighEmphasis = true;
+            this.btnVeriUrunler.Icon = null;
+            this.btnVeriUrunler.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnVeriUrunler.Location = new System.Drawing.Point(450, 11);
+            this.btnVeriUrunler.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnVeriUrunler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnVeriUrunler.Name = "btnVeriUrunler";
+            this.btnVeriUrunler.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnVeriUrunler.Size = new System.Drawing.Size(86, 36);
+            this.btnVeriUrunler.TabIndex = 2;
+            this.btnVeriUrunler.Text = "ÜRÜNLER";
+            this.btnVeriUrunler.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnVeriUrunler.UseAccentColor = false;
+            this.btnVeriUrunler.UseVisualStyleBackColor = true;
+            // 
+            // btnVeriMasalar
+            // 
+            this.btnVeriMasalar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnVeriMasalar.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnVeriMasalar.Depth = 0;
+            this.btnVeriMasalar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeriMasalar.HighEmphasis = true;
+            this.btnVeriMasalar.Icon = null;
+            this.btnVeriMasalar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnVeriMasalar.Location = new System.Drawing.Point(353, 11);
+            this.btnVeriMasalar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnVeriMasalar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnVeriMasalar.Name = "btnVeriMasalar";
+            this.btnVeriMasalar.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnVeriMasalar.Size = new System.Drawing.Size(89, 36);
+            this.btnVeriMasalar.TabIndex = 1;
+            this.btnVeriMasalar.Text = "Masalar";
+            this.btnVeriMasalar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnVeriMasalar.UseAccentColor = false;
+            this.btnVeriMasalar.UseVisualStyleBackColor = true;
+            // 
+            // btnVeriKullanici
+            // 
+            this.btnVeriKullanici.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnVeriKullanici.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnVeriKullanici.Depth = 0;
+            this.btnVeriKullanici.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeriKullanici.HighEmphasis = true;
+            this.btnVeriKullanici.Icon = null;
+            this.btnVeriKullanici.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnVeriKullanici.Location = new System.Drawing.Point(224, 11);
+            this.btnVeriKullanici.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnVeriKullanici.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnVeriKullanici.Name = "btnVeriKullanici";
+            this.btnVeriKullanici.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnVeriKullanici.Size = new System.Drawing.Size(121, 36);
+            this.btnVeriKullanici.TabIndex = 0;
+            this.btnVeriKullanici.Text = "Kullanıcılar";
+            this.btnVeriKullanici.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnVeriKullanici.UseAccentColor = false;
+            this.btnVeriKullanici.UseVisualStyleBackColor = true;
             // 
             // dataGridView1
             // 
@@ -546,127 +667,6 @@ namespace RestoranOtomasyon
             this.btnVeriEkle.UseAccentColor = false;
             this.btnVeriEkle.UseVisualStyleBackColor = true;
             // 
-            // VeriKategoriButonGroupBox
-            // 
-            this.VeriKategoriButonGroupBox.Alpha = 20;
-            this.VeriKategoriButonGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.VeriKategoriButonGroupBox.Background = true;
-            this.VeriKategoriButonGroupBox.Background_WidthPen = 3F;
-            this.VeriKategoriButonGroupBox.BackgroundPen = true;
-            this.VeriKategoriButonGroupBox.ColorBackground = System.Drawing.Color.White;
-            this.VeriKategoriButonGroupBox.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.VeriKategoriButonGroupBox.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.VeriKategoriButonGroupBox.ColorBackground_Pen = System.Drawing.Color.Blue;
-            this.VeriKategoriButonGroupBox.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
-            this.VeriKategoriButonGroupBox.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.VeriKategoriButonGroupBox.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriKategoriler);
-            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriUrunler);
-            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriMasalar);
-            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriKullanici);
-            this.VeriKategoriButonGroupBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            this.VeriKategoriButonGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.VeriKategoriButonGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.VeriKategoriButonGroupBox.Lighting = false;
-            this.VeriKategoriButonGroupBox.LinearGradient_Background = false;
-            this.VeriKategoriButonGroupBox.LinearGradientPen = false;
-            this.VeriKategoriButonGroupBox.Location = new System.Drawing.Point(0, 0);
-            this.VeriKategoriButonGroupBox.Name = "VeriKategoriButonGroupBox";
-            this.VeriKategoriButonGroupBox.PenWidth = 15;
-            this.VeriKategoriButonGroupBox.RGB = false;
-            this.VeriKategoriButonGroupBox.Rounding = true;
-            this.VeriKategoriButonGroupBox.RoundingInt = 60;
-            this.VeriKategoriButonGroupBox.Size = new System.Drawing.Size(885, 58);
-            this.VeriKategoriButonGroupBox.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            this.VeriKategoriButonGroupBox.TabIndex = 10;
-            this.VeriKategoriButonGroupBox.Tag = "Cyber";
-            this.VeriKategoriButonGroupBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            this.VeriKategoriButonGroupBox.Timer_RGB = 300;
-            // 
-            // btnVeriKullanici
-            // 
-            this.btnVeriKullanici.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnVeriKullanici.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnVeriKullanici.Depth = 0;
-            this.btnVeriKullanici.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeriKullanici.HighEmphasis = true;
-            this.btnVeriKullanici.Icon = null;
-            this.btnVeriKullanici.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriKullanici.Location = new System.Drawing.Point(224, 11);
-            this.btnVeriKullanici.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnVeriKullanici.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnVeriKullanici.Name = "btnVeriKullanici";
-            this.btnVeriKullanici.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVeriKullanici.Size = new System.Drawing.Size(121, 36);
-            this.btnVeriKullanici.TabIndex = 0;
-            this.btnVeriKullanici.Text = "Kullanıcılar";
-            this.btnVeriKullanici.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnVeriKullanici.UseAccentColor = false;
-            this.btnVeriKullanici.UseVisualStyleBackColor = true;
-            // 
-            // btnVeriMasalar
-            // 
-            this.btnVeriMasalar.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnVeriMasalar.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnVeriMasalar.Depth = 0;
-            this.btnVeriMasalar.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeriMasalar.HighEmphasis = true;
-            this.btnVeriMasalar.Icon = null;
-            this.btnVeriMasalar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriMasalar.Location = new System.Drawing.Point(353, 11);
-            this.btnVeriMasalar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnVeriMasalar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnVeriMasalar.Name = "btnVeriMasalar";
-            this.btnVeriMasalar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVeriMasalar.Size = new System.Drawing.Size(89, 36);
-            this.btnVeriMasalar.TabIndex = 1;
-            this.btnVeriMasalar.Text = "Masalar";
-            this.btnVeriMasalar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnVeriMasalar.UseAccentColor = false;
-            this.btnVeriMasalar.UseVisualStyleBackColor = true;
-            // 
-            // btnVeriUrunler
-            // 
-            this.btnVeriUrunler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnVeriUrunler.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnVeriUrunler.Depth = 0;
-            this.btnVeriUrunler.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnVeriUrunler.HighEmphasis = true;
-            this.btnVeriUrunler.Icon = null;
-            this.btnVeriUrunler.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriUrunler.Location = new System.Drawing.Point(450, 11);
-            this.btnVeriUrunler.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnVeriUrunler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnVeriUrunler.Name = "btnVeriUrunler";
-            this.btnVeriUrunler.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVeriUrunler.Size = new System.Drawing.Size(86, 36);
-            this.btnVeriUrunler.TabIndex = 2;
-            this.btnVeriUrunler.Text = "ÜRÜNLER";
-            this.btnVeriUrunler.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnVeriUrunler.UseAccentColor = false;
-            this.btnVeriUrunler.UseVisualStyleBackColor = true;
-            // 
-            // btnVeriKategoriler
-            // 
-            this.btnVeriKategoriler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnVeriKategoriler.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnVeriKategoriler.Depth = 0;
-            this.btnVeriKategoriler.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeriKategoriler.HighEmphasis = true;
-            this.btnVeriKategoriler.Icon = null;
-            this.btnVeriKategoriler.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriKategoriler.Location = new System.Drawing.Point(544, 11);
-            this.btnVeriKategoriler.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnVeriKategoriler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnVeriKategoriler.Name = "btnVeriKategoriler";
-            this.btnVeriKategoriler.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVeriKategoriler.Size = new System.Drawing.Size(117, 36);
-            this.btnVeriKategoriler.TabIndex = 3;
-            this.btnVeriKategoriler.Text = "KATEGORİLER";
-            this.btnVeriKategoriler.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnVeriKategoriler.UseAccentColor = false;
-            this.btnVeriKategoriler.UseVisualStyleBackColor = true;
-            // 
             // frmAdminControlPanel
             // 
             this.ClientSize = new System.Drawing.Size(1332, 673);
@@ -683,11 +683,11 @@ namespace RestoranOtomasyon
             this.BaslikBox.ResumeLayout(false);
             this.HesapButonGroupBox.ResumeLayout(false);
             this.HesapButonGroupBox.PerformLayout();
+            this.VeriKategoriButonGroupBox.ResumeLayout(false);
+            this.VeriKategoriButonGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.VeriButonGroupBox.ResumeLayout(false);
             this.VeriButonGroupBox.PerformLayout();
-            this.VeriKategoriButonGroupBox.ResumeLayout(false);
-            this.VeriKategoriButonGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
