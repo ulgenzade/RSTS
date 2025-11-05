@@ -32,7 +32,6 @@
         private ReaLTaiizor.Controls.MetroLabel AdminLabel;
         private ReaLTaiizor.Controls.ForeverTreeView CalisanTree;
         private ReaLTaiizor.Controls.ForeverTreeView AdminTree;
-        private ReaLTaiizor.Controls.CyberGroupBox BaslikBox;
         private System.Windows.Forms.DataGridView dataGridView1;
         private ReaLTaiizor.Controls.CyberGroupBox VeriButonGroupBox;
         private ReaLTaiizor.Controls.MaterialButton btnVeriIstatistik;
@@ -46,5 +45,7 @@
         private ReaLTaiizor.Controls.MaterialButton btnVeriUrunler;
         private ReaLTaiizor.Controls.MaterialButton btnVeriMasalar;
         private ReaLTaiizor.Controls.MaterialButton btnVeriKullanici;
+        private ReaLTaiizor.Controls.CyberGroupBox BaslikBox;
+        private ReaLTaiizor.Controls.MetroLabel HesaplarLabel;
     }
 }
