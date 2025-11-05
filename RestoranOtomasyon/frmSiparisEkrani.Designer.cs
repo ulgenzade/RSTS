@@ -139,7 +139,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmSiparisEkrani";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmSiparisEkrani";
+            this.Text = "SİPARİŞ EKRANI";
             this.Load += new System.EventHandler(this.frmSiparisEkrani_Load);
             this.panelSiparis.ResumeLayout(false);
             this.panelSiparis.PerformLayout();

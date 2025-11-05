@@ -111,7 +111,6 @@ namespace RestoranOtomasyon
             this.txtSecim.StartIndex = 0;
             this.txtSecim.TabIndex = 4;
             this.txtSecim.SelectedIndexChanged += new System.EventHandler(this.textSecim_SelectedIndexChanged);
-
             // 
             // btnGiris
             // 
@@ -141,6 +140,7 @@ namespace RestoranOtomasyon
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(388, 459);
             this.Controls.Add(this.panel1);
+            this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmGiris";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

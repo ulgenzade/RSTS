@@ -246,7 +246,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmOdemeEkrani";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmOdemeEkrani";
+            this.Text = "ÖDEME EKRANI";
             this.Load += new System.EventHandler(this.frmOdemeEkrani_Load);
             this.panelMasalar.ResumeLayout(false);
             this.panelOzet.ResumeLayout(false);
