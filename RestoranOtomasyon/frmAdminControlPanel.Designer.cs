@@ -47,5 +47,6 @@
         private ReaLTaiizor.Controls.MaterialButton btnVeriKullanici;
         private ReaLTaiizor.Controls.CyberGroupBox BaslikBox;
         private ReaLTaiizor.Controls.MetroLabel HesaplarLabel;
+        private ReaLTaiizor.Controls.MetroLabel metroLabel1;
     }
 }
