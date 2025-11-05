@@ -14,7 +14,7 @@ namespace RestoranOtomasyon
     {
         public frmAdminControlPanel()
         {
-            
+            InitializeComponent();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -674,6 +674,8 @@ namespace RestoranOtomasyon
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmAdminControlPanel";
+            this.Text = "AdminContorlPanel";
+            this.Load += new System.EventHandler(this.frmAdminControlPanel_Load_1);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -711,6 +713,11 @@ namespace RestoranOtomasyon
         }
 
         private void VeriButonGroupBox_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmAdminControlPanel_Load_1(object sender, EventArgs e)
         {
 
         }
