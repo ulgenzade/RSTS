@@ -40,5 +40,5 @@ Proje, ana kullanıcı arayüzleri üzerine kurulmuştur ve şu anki ilerleme a�
 ## 🤝 Katkıda Bulunanlar
 
 - **ulgenzade** - Arayüz Tasarımı - [GitHub Profili](https://github.com/ulgenzade)
-- **JustKedy** - Ortak Geliştirici - [GitHub Profili](https://github.com/JustKedy)
+- **JustKedy** - Veri Tabanı - [GitHub Profili](https://github.com/JustKedy)
 - **yunuskr0** - Fonksiyonellik ve İşleyiş - [GitHub Profili](https://github.com/yunuskr0)
