@@ -14,7 +14,7 @@ namespace RestoranOtomasyon
     {
         public frmAdminControlPanel()
         {
-            
+            InitializeComponent();
         }
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
@@ -44,37 +44,37 @@ namespace RestoranOtomasyon
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.BaslikBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
-            this.btnHesapEkle = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnHesapKaydet = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnHesapSil = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnHesapGuncelle = new ReaLTaiizor.Controls.MaterialButton();
+            this.CalisanLabel = new ReaLTaiizor.Controls.MetroLabel();
+            this.CalisanTree = new ReaLTaiizor.Controls.ForeverTreeView();
+            this.AdminLabel = new ReaLTaiizor.Controls.MetroLabel();
+            this.AdminTree = new ReaLTaiizor.Controls.ForeverTreeView();
             this.HesapButonGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.btnHesapDuzenle = new ReaLTaiizor.Controls.MaterialButton();
-            this.AdminLabel = new ReaLTaiizor.Controls.MetroLabel();
-            this.CalisanLabel = new ReaLTaiizor.Controls.MetroLabel();
-            this.AdminTree = new ReaLTaiizor.Controls.ForeverTreeView();
-            this.CalisanTree = new ReaLTaiizor.Controls.ForeverTreeView();
-            this.BaslikBox = new ReaLTaiizor.Controls.CyberGroupBox();
+            this.btnHesapSil = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnHesapKaydet = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnHesapGuncelle = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnHesapEkle = new ReaLTaiizor.Controls.MaterialButton();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.VeriButonGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
+            this.btnVeriIstatistik = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriDuzenle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriSil = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriKaydet = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriGuncelle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriEkle = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnVeriIstatistik = new ReaLTaiizor.Controls.MaterialButton();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.HesapButonGroupBox.SuspendLayout();
             this.BaslikBox.SuspendLayout();
-            this.VeriButonGroupBox.SuspendLayout();
+            this.HesapButonGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.VeriButonGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -106,6 +106,40 @@ namespace RestoranOtomasyon
             this.splitContainer1.SplitterDistance = 443;
             this.splitContainer1.TabIndex = 0;
             // 
+            // BaslikBox
+            // 
+            this.BaslikBox.Alpha = 20;
+            this.BaslikBox.BackColor = System.Drawing.Color.Transparent;
+            this.BaslikBox.Background = true;
+            this.BaslikBox.Background_WidthPen = 3F;
+            this.BaslikBox.BackgroundPen = true;
+            this.BaslikBox.ColorBackground = System.Drawing.Color.White;
+            this.BaslikBox.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.BaslikBox.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.BaslikBox.ColorBackground_Pen = System.Drawing.Color.Blue;
+            this.BaslikBox.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.BaslikBox.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.BaslikBox.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.BaslikBox.Controls.Add(this.HesapLabel);
+            this.BaslikBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            this.BaslikBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.BaslikBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.BaslikBox.Lighting = false;
+            this.BaslikBox.LinearGradient_Background = false;
+            this.BaslikBox.LinearGradientPen = false;
+            this.BaslikBox.Location = new System.Drawing.Point(0, 0);
+            this.BaslikBox.Name = "BaslikBox";
+            this.BaslikBox.PenWidth = 15;
+            this.BaslikBox.RGB = false;
+            this.BaslikBox.Rounding = true;
+            this.BaslikBox.RoundingInt = 60;
+            this.BaslikBox.Size = new System.Drawing.Size(443, 58);
+            this.BaslikBox.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            this.BaslikBox.TabIndex = 8;
+            this.BaslikBox.Tag = "Cyber";
+            this.BaslikBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            this.BaslikBox.Timer_RGB = 300;
+            // 
             // HesapLabel
             // 
             this.HesapLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
@@ -122,90 +156,65 @@ namespace RestoranOtomasyon
             this.HesapLabel.ThemeName = "MetroLight";
             this.HesapLabel.Click += new System.EventHandler(this.HesapLabel_Click);
             // 
-            // btnHesapEkle
+            // CalisanLabel
             // 
-            this.btnHesapEkle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHesapEkle.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnHesapEkle.Depth = 0;
-            this.btnHesapEkle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnHesapEkle.HighEmphasis = true;
-            this.btnHesapEkle.Icon = null;
-            this.btnHesapEkle.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHesapEkle.Location = new System.Drawing.Point(86, 24);
-            this.btnHesapEkle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnHesapEkle.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnHesapEkle.Name = "btnHesapEkle";
-            this.btnHesapEkle.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHesapEkle.Size = new System.Drawing.Size(64, 36);
-            this.btnHesapEkle.TabIndex = 1;
-            this.btnHesapEkle.Text = "EKLE";
-            this.btnHesapEkle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnHesapEkle.UseAccentColor = false;
-            this.btnHesapEkle.UseVisualStyleBackColor = true;
-            this.btnHesapEkle.Click += new System.EventHandler(this.btnHesapEkle_Click);
+            this.CalisanLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.CalisanLabel.IsDerivedStyle = true;
+            this.CalisanLabel.Location = new System.Drawing.Point(13, 319);
+            this.CalisanLabel.Name = "CalisanLabel";
+            this.CalisanLabel.Size = new System.Drawing.Size(416, 34);
+            this.CalisanLabel.Style = ReaLTaiizor.Enum.Metro.Style.Light;
+            this.CalisanLabel.StyleManager = null;
+            this.CalisanLabel.TabIndex = 9;
+            this.CalisanLabel.Text = "Çalışan Hesaplar";
+            this.CalisanLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.CalisanLabel.ThemeAuthor = "Taiizor";
+            this.CalisanLabel.ThemeName = "MetroLight";
             // 
-            // btnHesapKaydet
+            // CalisanTree
             // 
-            this.btnHesapKaydet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHesapKaydet.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnHesapKaydet.Depth = 0;
-            this.btnHesapKaydet.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.btnHesapKaydet.HighEmphasis = true;
-            this.btnHesapKaydet.Icon = null;
-            this.btnHesapKaydet.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHesapKaydet.Location = new System.Drawing.Point(353, 24);
-            this.btnHesapKaydet.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnHesapKaydet.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnHesapKaydet.Name = "btnHesapKaydet";
-            this.btnHesapKaydet.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHesapKaydet.Size = new System.Drawing.Size(76, 36);
-            this.btnHesapKaydet.TabIndex = 2;
-            this.btnHesapKaydet.Text = "KAYDET";
-            this.btnHesapKaydet.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnHesapKaydet.UseAccentColor = false;
-            this.btnHesapKaydet.UseVisualStyleBackColor = true;
+            this.CalisanTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.CalisanTree.Font = new System.Drawing.Font("Segoe UI", 8F);
+            this.CalisanTree.ForeColor = System.Drawing.Color.White;
+            this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.CalisanTree.Location = new System.Drawing.Point(14, 356);
+            this.CalisanTree.Name = "CalisanTree";
+            treeNode3.Name = "CalisanNodes";
+            treeNode3.Text = "Çalışan Hesaplar";
+            this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode3});
+            this.CalisanTree.Size = new System.Drawing.Size(411, 212);
+            this.CalisanTree.TabIndex = 11;
             // 
-            // btnHesapSil
+            // AdminLabel
             // 
-            this.btnHesapSil.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHesapSil.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnHesapSil.Depth = 0;
-            this.btnHesapSil.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHesapSil.HighEmphasis = true;
-            this.btnHesapSil.Icon = null;
-            this.btnHesapSil.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHesapSil.Location = new System.Drawing.Point(14, 24);
-            this.btnHesapSil.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnHesapSil.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnHesapSil.Name = "btnHesapSil";
-            this.btnHesapSil.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHesapSil.Size = new System.Drawing.Size(64, 36);
-            this.btnHesapSil.TabIndex = 3;
-            this.btnHesapSil.Text = "SİL";
-            this.btnHesapSil.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnHesapSil.UseAccentColor = false;
-            this.btnHesapSil.UseVisualStyleBackColor = true;
+            this.AdminLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.AdminLabel.IsDerivedStyle = true;
+            this.AdminLabel.Location = new System.Drawing.Point(14, 61);
+            this.AdminLabel.Name = "AdminLabel";
+            this.AdminLabel.Size = new System.Drawing.Size(415, 36);
+            this.AdminLabel.Style = ReaLTaiizor.Enum.Metro.Style.Light;
+            this.AdminLabel.StyleManager = null;
+            this.AdminLabel.TabIndex = 8;
+            this.AdminLabel.Text = "Yetkili Hesaplar";
+            this.AdminLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.AdminLabel.ThemeAuthor = "Taiizor";
+            this.AdminLabel.ThemeName = "MetroLight";
             // 
-            // btnHesapGuncelle
+            // AdminTree
             // 
-            this.btnHesapGuncelle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHesapGuncelle.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnHesapGuncelle.Depth = 0;
-            this.btnHesapGuncelle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHesapGuncelle.HighEmphasis = true;
-            this.btnHesapGuncelle.Icon = null;
-            this.btnHesapGuncelle.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHesapGuncelle.Location = new System.Drawing.Point(158, 24);
-            this.btnHesapGuncelle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnHesapGuncelle.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnHesapGuncelle.Name = "btnHesapGuncelle";
-            this.btnHesapGuncelle.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHesapGuncelle.Size = new System.Drawing.Size(94, 36);
-            this.btnHesapGuncelle.TabIndex = 4;
-            this.btnHesapGuncelle.Text = "GÜNCELLE";
-            this.btnHesapGuncelle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnHesapGuncelle.UseAccentColor = false;
-            this.btnHesapGuncelle.UseVisualStyleBackColor = true;
+            this.AdminTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.AdminTree.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.AdminTree.ForeColor = System.Drawing.Color.White;
+            this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.AdminTree.Location = new System.Drawing.Point(14, 104);
+            this.AdminTree.Name = "AdminTree";
+            treeNode4.Name = "AdminNodes";
+            treeNode4.Text = "Yetkili Hesaplar";
+            this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode4});
+            this.AdminTree.Size = new System.Drawing.Size(411, 212);
+            this.AdminTree.TabIndex = 10;
             // 
             // HesapButonGroupBox
             // 
@@ -266,99 +275,102 @@ namespace RestoranOtomasyon
             this.btnHesapDuzenle.UseAccentColor = false;
             this.btnHesapDuzenle.UseVisualStyleBackColor = true;
             // 
-            // AdminLabel
+            // btnHesapSil
             // 
-            this.AdminLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.AdminLabel.IsDerivedStyle = true;
-            this.AdminLabel.Location = new System.Drawing.Point(14, 61);
-            this.AdminLabel.Name = "AdminLabel";
-            this.AdminLabel.Size = new System.Drawing.Size(415, 36);
-            this.AdminLabel.Style = ReaLTaiizor.Enum.Metro.Style.Light;
-            this.AdminLabel.StyleManager = null;
-            this.AdminLabel.TabIndex = 8;
-            this.AdminLabel.Text = "Yetkili Hesaplar";
-            this.AdminLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.AdminLabel.ThemeAuthor = "Taiizor";
-            this.AdminLabel.ThemeName = "MetroLight";
+            this.btnHesapSil.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnHesapSil.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnHesapSil.Depth = 0;
+            this.btnHesapSil.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHesapSil.HighEmphasis = true;
+            this.btnHesapSil.Icon = null;
+            this.btnHesapSil.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnHesapSil.Location = new System.Drawing.Point(14, 24);
+            this.btnHesapSil.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnHesapSil.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnHesapSil.Name = "btnHesapSil";
+            this.btnHesapSil.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnHesapSil.Size = new System.Drawing.Size(64, 36);
+            this.btnHesapSil.TabIndex = 3;
+            this.btnHesapSil.Text = "SİL";
+            this.btnHesapSil.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnHesapSil.UseAccentColor = false;
+            this.btnHesapSil.UseVisualStyleBackColor = true;
             // 
-            // CalisanLabel
+            // btnHesapKaydet
             // 
-            this.CalisanLabel.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.CalisanLabel.IsDerivedStyle = true;
-            this.CalisanLabel.Location = new System.Drawing.Point(13, 319);
-            this.CalisanLabel.Name = "CalisanLabel";
-            this.CalisanLabel.Size = new System.Drawing.Size(416, 34);
-            this.CalisanLabel.Style = ReaLTaiizor.Enum.Metro.Style.Light;
-            this.CalisanLabel.StyleManager = null;
-            this.CalisanLabel.TabIndex = 9;
-            this.CalisanLabel.Text = "Çalışan Hesaplar";
-            this.CalisanLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.CalisanLabel.ThemeAuthor = "Taiizor";
-            this.CalisanLabel.ThemeName = "MetroLight";
+            this.btnHesapKaydet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnHesapKaydet.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnHesapKaydet.Depth = 0;
+            this.btnHesapKaydet.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnHesapKaydet.HighEmphasis = true;
+            this.btnHesapKaydet.Icon = null;
+            this.btnHesapKaydet.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnHesapKaydet.Location = new System.Drawing.Point(353, 24);
+            this.btnHesapKaydet.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnHesapKaydet.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnHesapKaydet.Name = "btnHesapKaydet";
+            this.btnHesapKaydet.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnHesapKaydet.Size = new System.Drawing.Size(76, 36);
+            this.btnHesapKaydet.TabIndex = 2;
+            this.btnHesapKaydet.Text = "KAYDET";
+            this.btnHesapKaydet.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnHesapKaydet.UseAccentColor = false;
+            this.btnHesapKaydet.UseVisualStyleBackColor = true;
             // 
-            // AdminTree
+            // btnHesapGuncelle
             // 
-            this.AdminTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
-            this.AdminTree.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.AdminTree.ForeColor = System.Drawing.Color.White;
-            this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
-            this.AdminTree.Location = new System.Drawing.Point(14, 104);
-            this.AdminTree.Name = "AdminTree";
-            treeNode6.Name = "AdminNodes";
-            treeNode6.Text = "Yetkili Hesaplar";
-            this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
-            this.AdminTree.Size = new System.Drawing.Size(411, 212);
-            this.AdminTree.TabIndex = 10;
+            this.btnHesapGuncelle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnHesapGuncelle.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnHesapGuncelle.Depth = 0;
+            this.btnHesapGuncelle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHesapGuncelle.HighEmphasis = true;
+            this.btnHesapGuncelle.Icon = null;
+            this.btnHesapGuncelle.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnHesapGuncelle.Location = new System.Drawing.Point(158, 24);
+            this.btnHesapGuncelle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnHesapGuncelle.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnHesapGuncelle.Name = "btnHesapGuncelle";
+            this.btnHesapGuncelle.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnHesapGuncelle.Size = new System.Drawing.Size(94, 36);
+            this.btnHesapGuncelle.TabIndex = 4;
+            this.btnHesapGuncelle.Text = "GÜNCELLE";
+            this.btnHesapGuncelle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnHesapGuncelle.UseAccentColor = false;
+            this.btnHesapGuncelle.UseVisualStyleBackColor = true;
             // 
-            // CalisanTree
+            // btnHesapEkle
             // 
-            this.CalisanTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
-            this.CalisanTree.Font = new System.Drawing.Font("Segoe UI", 8F);
-            this.CalisanTree.ForeColor = System.Drawing.Color.White;
-            this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
-            this.CalisanTree.Location = new System.Drawing.Point(14, 356);
-            this.CalisanTree.Name = "CalisanTree";
-            treeNode5.Name = "CalisanNodes";
-            treeNode5.Text = "Çalışan Hesaplar";
-            this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5});
-            this.CalisanTree.Size = new System.Drawing.Size(411, 212);
-            this.CalisanTree.TabIndex = 11;
+            this.btnHesapEkle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnHesapEkle.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnHesapEkle.Depth = 0;
+            this.btnHesapEkle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.btnHesapEkle.HighEmphasis = true;
+            this.btnHesapEkle.Icon = null;
+            this.btnHesapEkle.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnHesapEkle.Location = new System.Drawing.Point(86, 24);
+            this.btnHesapEkle.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnHesapEkle.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnHesapEkle.Name = "btnHesapEkle";
+            this.btnHesapEkle.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnHesapEkle.Size = new System.Drawing.Size(64, 36);
+            this.btnHesapEkle.TabIndex = 1;
+            this.btnHesapEkle.Text = "EKLE";
+            this.btnHesapEkle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnHesapEkle.UseAccentColor = false;
+            this.btnHesapEkle.UseVisualStyleBackColor = true;
+            this.btnHesapEkle.Click += new System.EventHandler(this.btnHesapEkle_Click);
             // 
-            // BaslikBox
+            // dataGridView1
             // 
-            this.BaslikBox.Alpha = 20;
-            this.BaslikBox.BackColor = System.Drawing.Color.Transparent;
-            this.BaslikBox.Background = true;
-            this.BaslikBox.Background_WidthPen = 3F;
-            this.BaslikBox.BackgroundPen = true;
-            this.BaslikBox.ColorBackground = System.Drawing.Color.White;
-            this.BaslikBox.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.BaslikBox.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.BaslikBox.ColorBackground_Pen = System.Drawing.Color.Blue;
-            this.BaslikBox.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
-            this.BaslikBox.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.BaslikBox.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.BaslikBox.Controls.Add(this.HesapLabel);
-            this.BaslikBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            this.BaslikBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.BaslikBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.BaslikBox.Lighting = false;
-            this.BaslikBox.LinearGradient_Background = false;
-            this.BaslikBox.LinearGradientPen = false;
-            this.BaslikBox.Location = new System.Drawing.Point(0, 0);
-            this.BaslikBox.Name = "BaslikBox";
-            this.BaslikBox.PenWidth = 15;
-            this.BaslikBox.RGB = false;
-            this.BaslikBox.Rounding = true;
-            this.BaslikBox.RoundingInt = 60;
-            this.BaslikBox.Size = new System.Drawing.Size(443, 58);
-            this.BaslikBox.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            this.BaslikBox.TabIndex = 8;
-            this.BaslikBox.Tag = "Cyber";
-            this.BaslikBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            this.BaslikBox.Timer_RGB = 300;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridView1.EnableHeadersVisualStyles = false;
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersWidth = 51;
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(885, 598);
+            this.dataGridView1.TabIndex = 9;
             // 
             // VeriButonGroupBox
             // 
@@ -399,6 +411,27 @@ namespace RestoranOtomasyon
             this.VeriButonGroupBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             this.VeriButonGroupBox.Timer_RGB = 300;
             this.VeriButonGroupBox.Load += new System.EventHandler(this.VeriButonGroupBox_Load);
+            // 
+            // btnVeriIstatistik
+            // 
+            this.btnVeriIstatistik.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnVeriIstatistik.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnVeriIstatistik.Depth = 0;
+            this.btnVeriIstatistik.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVeriIstatistik.HighEmphasis = true;
+            this.btnVeriIstatistik.Icon = null;
+            this.btnVeriIstatistik.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnVeriIstatistik.Location = new System.Drawing.Point(772, 24);
+            this.btnVeriIstatistik.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnVeriIstatistik.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnVeriIstatistik.Name = "btnVeriIstatistik";
+            this.btnVeriIstatistik.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnVeriIstatistik.Size = new System.Drawing.Size(97, 36);
+            this.btnVeriIstatistik.TabIndex = 6;
+            this.btnVeriIstatistik.Text = "İSTATİSTİK";
+            this.btnVeriIstatistik.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnVeriIstatistik.UseAccentColor = false;
+            this.btnVeriIstatistik.UseVisualStyleBackColor = true;
             // 
             // btnVeriDuzenle
             // 
@@ -505,39 +538,6 @@ namespace RestoranOtomasyon
             this.btnVeriEkle.UseAccentColor = false;
             this.btnVeriEkle.UseVisualStyleBackColor = true;
             // 
-            // btnVeriIstatistik
-            // 
-            this.btnVeriIstatistik.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnVeriIstatistik.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnVeriIstatistik.Depth = 0;
-            this.btnVeriIstatistik.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeriIstatistik.HighEmphasis = true;
-            this.btnVeriIstatistik.Icon = null;
-            this.btnVeriIstatistik.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriIstatistik.Location = new System.Drawing.Point(772, 24);
-            this.btnVeriIstatistik.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnVeriIstatistik.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnVeriIstatistik.Name = "btnVeriIstatistik";
-            this.btnVeriIstatistik.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVeriIstatistik.Size = new System.Drawing.Size(97, 36);
-            this.btnVeriIstatistik.TabIndex = 6;
-            this.btnVeriIstatistik.Text = "İSTATİSTİK";
-            this.btnVeriIstatistik.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnVeriIstatistik.UseAccentColor = false;
-            this.btnVeriIstatistik.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(885, 598);
-            this.dataGridView1.TabIndex = 9;
-            // 
             // frmAdminControlPanel
             // 
             this.ClientSize = new System.Drawing.Size(1332, 673);
@@ -545,16 +545,18 @@ namespace RestoranOtomasyon
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmAdminControlPanel";
+            this.Text = "AdminContorlPanel";
+            this.Load += new System.EventHandler(this.frmAdminControlPanel_Load_1);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.BaslikBox.ResumeLayout(false);
             this.HesapButonGroupBox.ResumeLayout(false);
             this.HesapButonGroupBox.PerformLayout();
-            this.BaslikBox.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.VeriButonGroupBox.ResumeLayout(false);
             this.VeriButonGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -580,6 +582,11 @@ namespace RestoranOtomasyon
         }
 
         private void VeriButonGroupBox_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void frmAdminControlPanel_Load_1(object sender, EventArgs e)
         {
 
         }
