@@ -61,7 +61,7 @@
             this.panelMasalar.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMasalar.Location = new System.Drawing.Point(0, 0);
             this.panelMasalar.Name = "panelMasalar";
-            this.panelMasalar.Size = new System.Drawing.Size(200, 579);
+            this.panelMasalar.Size = new System.Drawing.Size(341, 673);
             this.panelMasalar.TabIndex = 0;
             // 
             // btnMasa3
@@ -98,15 +98,15 @@
             this.panelOzet.Controls.Add(this.btnVazgecOde);
             this.panelOzet.Controls.Add(this.listOzet);
             this.panelOzet.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelOzet.Location = new System.Drawing.Point(880, 0);
+            this.panelOzet.Location = new System.Drawing.Point(1062, 0);
             this.panelOzet.Name = "panelOzet";
-            this.panelOzet.Size = new System.Drawing.Size(200, 579);
+            this.panelOzet.Size = new System.Drawing.Size(270, 673);
             this.panelOzet.TabIndex = 1;
             // 
             // lblToplamTutar
             // 
             this.lblToplamTutar.AutoSize = true;
-            this.lblToplamTutar.Location = new System.Drawing.Point(51, 436);
+            this.lblToplamTutar.Location = new System.Drawing.Point(86, 596);
             this.lblToplamTutar.Name = "lblToplamTutar";
             this.lblToplamTutar.Size = new System.Drawing.Size(99, 16);
             this.lblToplamTutar.TabIndex = 3;
@@ -114,7 +114,7 @@
             // 
             // btnOde
             // 
-            this.btnOde.Location = new System.Drawing.Point(122, 511);
+            this.btnOde.Location = new System.Drawing.Point(192, 638);
             this.btnOde.Name = "btnOde";
             this.btnOde.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btnOde.Size = new System.Drawing.Size(75, 23);
@@ -125,7 +125,7 @@
             // 
             // btnVazgecOde
             // 
-            this.btnVazgecOde.Location = new System.Drawing.Point(6, 511);
+            this.btnVazgecOde.Location = new System.Drawing.Point(6, 638);
             this.btnVazgecOde.Name = "btnVazgecOde";
             this.btnVazgecOde.Size = new System.Drawing.Size(75, 23);
             this.btnVazgecOde.TabIndex = 1;
@@ -137,9 +137,9 @@
             // 
             this.listOzet.FormattingEnabled = true;
             this.listOzet.ItemHeight = 16;
-            this.listOzet.Location = new System.Drawing.Point(6, 68);
+            this.listOzet.Location = new System.Drawing.Point(6, 84);
             this.listOzet.Name = "listOzet";
-            this.listOzet.Size = new System.Drawing.Size(191, 436);
+            this.listOzet.Size = new System.Drawing.Size(252, 548);
             this.listOzet.TabIndex = 0;
             // 
             // panelUrunler
@@ -149,14 +149,14 @@
             this.panelUrunler.Controls.Add(this.btnSec);
             this.panelUrunler.Controls.Add(this.btnHepsiniSec);
             this.panelUrunler.Controls.Add(this.flowUrunler);
-            this.panelUrunler.Location = new System.Drawing.Point(206, 66);
+            this.panelUrunler.Location = new System.Drawing.Point(347, 78);
             this.panelUrunler.Name = "panelUrunler";
-            this.panelUrunler.Size = new System.Drawing.Size(668, 501);
+            this.panelUrunler.Size = new System.Drawing.Size(709, 595);
             this.panelUrunler.TabIndex = 2;
             // 
             // btnSecimiOnayla
             // 
-            this.btnSecimiOnayla.Location = new System.Drawing.Point(511, 445);
+            this.btnSecimiOnayla.Location = new System.Drawing.Point(564, 560);
             this.btnSecimiOnayla.Name = "btnSecimiOnayla";
             this.btnSecimiOnayla.Size = new System.Drawing.Size(133, 23);
             this.btnSecimiOnayla.TabIndex = 3;
@@ -165,7 +165,7 @@
             // 
             // btnVazgec
             // 
-            this.btnVazgec.Location = new System.Drawing.Point(430, 445);
+            this.btnVazgec.Location = new System.Drawing.Point(483, 560);
             this.btnVazgec.Name = "btnVazgec";
             this.btnVazgec.Size = new System.Drawing.Size(75, 23);
             this.btnVazgec.TabIndex = 2;
@@ -174,7 +174,7 @@
             // 
             // btnSec
             // 
-            this.btnSec.Location = new System.Drawing.Point(349, 445);
+            this.btnSec.Location = new System.Drawing.Point(402, 560);
             this.btnSec.Name = "btnSec";
             this.btnSec.Size = new System.Drawing.Size(75, 23);
             this.btnSec.TabIndex = 1;
@@ -183,7 +183,7 @@
             // 
             // btnHepsiniSec
             // 
-            this.btnHepsiniSec.Location = new System.Drawing.Point(228, 445);
+            this.btnHepsiniSec.Location = new System.Drawing.Point(281, 560);
             this.btnHepsiniSec.Name = "btnHepsiniSec";
             this.btnHepsiniSec.Size = new System.Drawing.Size(115, 23);
             this.btnHepsiniSec.TabIndex = 0;
@@ -192,24 +192,25 @@
             // 
             // flowUrunler
             // 
-            this.flowUrunler.Location = new System.Drawing.Point(23, 15);
+            this.flowUrunler.Location = new System.Drawing.Point(6, 3);
             this.flowUrunler.Name = "flowUrunler";
-            this.flowUrunler.Size = new System.Drawing.Size(621, 423);
+            this.flowUrunler.Size = new System.Drawing.Size(700, 551);
             this.flowUrunler.TabIndex = 0;
+            this.flowUrunler.Paint += new System.Windows.Forms.PaintEventHandler(this.flowUrunler_Paint);
             // 
             // panelMenu
             // 
             this.panelMenu.Controls.Add(this.btnAnaMenu);
             this.panelMenu.Controls.Add(this.btnCikisYap);
             this.panelMenu.Controls.Add(this.btnHesapBilgisi);
-            this.panelMenu.Location = new System.Drawing.Point(200, 0);
+            this.panelMenu.Location = new System.Drawing.Point(347, 0);
             this.panelMenu.Name = "panelMenu";
-            this.panelMenu.Size = new System.Drawing.Size(680, 60);
+            this.panelMenu.Size = new System.Drawing.Size(709, 60);
             this.panelMenu.TabIndex = 0;
             // 
             // btnAnaMenu
             // 
-            this.btnAnaMenu.Location = new System.Drawing.Point(517, 8);
+            this.btnAnaMenu.Location = new System.Drawing.Point(540, 8);
             this.btnAnaMenu.Name = "btnAnaMenu";
             this.btnAnaMenu.Size = new System.Drawing.Size(157, 40);
             this.btnAnaMenu.TabIndex = 2;
@@ -218,7 +219,7 @@
             // 
             // btnCikisYap
             // 
-            this.btnCikisYap.Location = new System.Drawing.Point(418, 8);
+            this.btnCikisYap.Location = new System.Drawing.Point(441, 8);
             this.btnCikisYap.Name = "btnCikisYap";
             this.btnCikisYap.Size = new System.Drawing.Size(93, 40);
             this.btnCikisYap.TabIndex = 1;
@@ -238,7 +239,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1080, 579);
+            this.ClientSize = new System.Drawing.Size(1332, 673);
             this.Controls.Add(this.panelMenu);
             this.Controls.Add(this.panelUrunler);
             this.Controls.Add(this.panelOzet);

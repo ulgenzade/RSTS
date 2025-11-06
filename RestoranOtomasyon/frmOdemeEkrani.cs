@@ -145,5 +145,10 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void flowUrunler_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
