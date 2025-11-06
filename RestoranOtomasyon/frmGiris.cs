@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ReaLTaiizor.Enum.Metro;
+using System;
 using System.Data;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace RestoranOtomasyon
@@ -111,7 +113,7 @@ namespace RestoranOtomasyon
 
         private void textSecim_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+           
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -121,7 +123,7 @@ namespace RestoranOtomasyon
 
         private void materialTextBoxEdit1_Click(object sender, EventArgs e)
         {
-
+         
         }
     }
 }
