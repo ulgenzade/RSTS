@@ -44,7 +44,6 @@
         private ReaLTaiizor.Controls.MaterialButton btnVeriKategoriler;
         private ReaLTaiizor.Controls.MaterialButton btnVeriUrunler;
         private ReaLTaiizor.Controls.MaterialButton btnVeriMasalar;
-        private ReaLTaiizor.Controls.MaterialButton btnVeriKullanici;
         private ReaLTaiizor.Controls.CyberGroupBox BaslikBox;
         private ReaLTaiizor.Controls.MetroLabel HesaplarLabel;
         private ReaLTaiizor.Controls.MetroLabel metroLabel1;

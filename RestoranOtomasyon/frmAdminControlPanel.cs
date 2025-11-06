@@ -44,8 +44,8 @@ namespace RestoranOtomasyon
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.BaslikBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
@@ -63,7 +63,6 @@ namespace RestoranOtomasyon
             this.btnVeriKategoriler = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriUrunler = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriMasalar = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnVeriKullanici = new ReaLTaiizor.Controls.MaterialButton();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.VeriButonGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.btnVeriIstatistik = new ReaLTaiizor.Controls.MaterialButton();
@@ -186,10 +185,10 @@ namespace RestoranOtomasyon
             this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.CalisanTree.Location = new System.Drawing.Point(14, 356);
             this.CalisanTree.Name = "CalisanTree";
-            treeNode1.Name = "CalisanNodes";
-            treeNode1.Text = "Çalışan Hesaplar";
+            treeNode3.Name = "CalisanNodes";
+            treeNode3.Text = "Çalışan Hesaplar";
             this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode3});
             this.CalisanTree.Size = new System.Drawing.Size(411, 212);
             this.CalisanTree.TabIndex = 11;
             // 
@@ -216,10 +215,10 @@ namespace RestoranOtomasyon
             this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.AdminTree.Location = new System.Drawing.Point(14, 104);
             this.AdminTree.Name = "AdminTree";
-            treeNode2.Name = "AdminNodes";
-            treeNode2.Text = "Yetkili Hesaplar";
+            treeNode4.Name = "AdminNodes";
+            treeNode4.Text = "Yetkili Hesaplar";
             this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode4});
             this.AdminTree.Size = new System.Drawing.Size(411, 212);
             this.AdminTree.TabIndex = 10;
             // 
@@ -384,7 +383,6 @@ namespace RestoranOtomasyon
             this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriKategoriler);
             this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriUrunler);
             this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriMasalar);
-            this.VeriKategoriButonGroupBox.Controls.Add(this.btnVeriKullanici);
             this.VeriKategoriButonGroupBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
             this.VeriKategoriButonGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.VeriKategoriButonGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
@@ -413,7 +411,7 @@ namespace RestoranOtomasyon
             this.btnVeriKategoriler.HighEmphasis = true;
             this.btnVeriKategoriler.Icon = null;
             this.btnVeriKategoriler.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriKategoriler.Location = new System.Drawing.Point(544, 11);
+            this.btnVeriKategoriler.Location = new System.Drawing.Point(479, 11);
             this.btnVeriKategoriler.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnVeriKategoriler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnVeriKategoriler.Name = "btnVeriKategoriler";
@@ -434,7 +432,7 @@ namespace RestoranOtomasyon
             this.btnVeriUrunler.HighEmphasis = true;
             this.btnVeriUrunler.Icon = null;
             this.btnVeriUrunler.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriUrunler.Location = new System.Drawing.Point(450, 11);
+            this.btnVeriUrunler.Location = new System.Drawing.Point(385, 11);
             this.btnVeriUrunler.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnVeriUrunler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnVeriUrunler.Name = "btnVeriUrunler";
@@ -455,7 +453,7 @@ namespace RestoranOtomasyon
             this.btnVeriMasalar.HighEmphasis = true;
             this.btnVeriMasalar.Icon = null;
             this.btnVeriMasalar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriMasalar.Location = new System.Drawing.Point(353, 11);
+            this.btnVeriMasalar.Location = new System.Drawing.Point(288, 11);
             this.btnVeriMasalar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnVeriMasalar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnVeriMasalar.Name = "btnVeriMasalar";
@@ -467,37 +465,16 @@ namespace RestoranOtomasyon
             this.btnVeriMasalar.UseAccentColor = false;
             this.btnVeriMasalar.UseVisualStyleBackColor = true;
             // 
-            // btnVeriKullanici
-            // 
-            this.btnVeriKullanici.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnVeriKullanici.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnVeriKullanici.Depth = 0;
-            this.btnVeriKullanici.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnVeriKullanici.HighEmphasis = true;
-            this.btnVeriKullanici.Icon = null;
-            this.btnVeriKullanici.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVeriKullanici.Location = new System.Drawing.Point(224, 11);
-            this.btnVeriKullanici.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnVeriKullanici.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnVeriKullanici.Name = "btnVeriKullanici";
-            this.btnVeriKullanici.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVeriKullanici.Size = new System.Drawing.Size(121, 36);
-            this.btnVeriKullanici.TabIndex = 0;
-            this.btnVeriKullanici.Text = "Kullanıcılar";
-            this.btnVeriKullanici.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnVeriKullanici.UseAccentColor = false;
-            this.btnVeriKullanici.UseVisualStyleBackColor = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 56);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 61);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(885, 548);
+            this.dataGridView1.Size = new System.Drawing.Size(885, 543);
             this.dataGridView1.TabIndex = 9;
             // 
             // VeriButonGroupBox
@@ -673,6 +650,7 @@ namespace RestoranOtomasyon
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmAdminControlPanel";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YETKİLİ PANELİ";
             this.Load += new System.EventHandler(this.frmAdminControlPanel_Load_1);
             this.splitContainer1.Panel1.ResumeLayout(false);
