@@ -71,6 +71,11 @@ namespace RestoranOtomasyon
             this.btnVeriKaydet = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriGuncelle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriEkle = new ReaLTaiizor.Controls.MaterialButton();
+            this.SeciliKullaniciBilgileriGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
+            this.txtKullaniciAdi = new ReaLTaiizor.Controls.AloneTextBox();
+            this.txtAdSoyad = new ReaLTaiizor.Controls.AloneTextBox();
+            this.txtSifre = new ReaLTaiizor.Controls.AloneTextBox();
+            this.cmbRol = new ReaLTaiizor.Controls.AloneComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -80,6 +85,7 @@ namespace RestoranOtomasyon
             this.VeriKategoriButonGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.VeriButonGroupBox.SuspendLayout();
+            this.SeciliKullaniciBilgileriGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -104,6 +110,7 @@ namespace RestoranOtomasyon
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.SeciliKullaniciBilgileriGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.VeriKategoriButonGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.VeriButonGroupBox);
@@ -643,6 +650,108 @@ namespace RestoranOtomasyon
             this.btnVeriEkle.UseAccentColor = false;
             this.btnVeriEkle.UseVisualStyleBackColor = true;
             // 
+            // SeciliKullaniciBilgileriGroupBox
+            // 
+            this.SeciliKullaniciBilgileriGroupBox.Alpha = 20;
+            this.SeciliKullaniciBilgileriGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.SeciliKullaniciBilgileriGroupBox.Background = true;
+            this.SeciliKullaniciBilgileriGroupBox.Background_WidthPen = 3F;
+            this.SeciliKullaniciBilgileriGroupBox.BackgroundPen = true;
+            this.SeciliKullaniciBilgileriGroupBox.ColorBackground = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullaniciBilgileriGroupBox.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullaniciBilgileriGroupBox.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.SeciliKullaniciBilgileriGroupBox.ColorBackground_Pen = System.Drawing.Color.Blue;
+            this.SeciliKullaniciBilgileriGroupBox.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
+            this.SeciliKullaniciBilgileriGroupBox.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullaniciBilgileriGroupBox.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.txtKullaniciAdi);
+            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.cmbRol);
+            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.txtAdSoyad);
+            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.txtSifre);
+            this.SeciliKullaniciBilgileriGroupBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            this.SeciliKullaniciBilgileriGroupBox.Enabled = false;
+            this.SeciliKullaniciBilgileriGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.SeciliKullaniciBilgileriGroupBox.Lighting = false;
+            this.SeciliKullaniciBilgileriGroupBox.LinearGradient_Background = false;
+            this.SeciliKullaniciBilgileriGroupBox.LinearGradientPen = false;
+            this.SeciliKullaniciBilgileriGroupBox.Location = new System.Drawing.Point(308, 158);
+            this.SeciliKullaniciBilgileriGroupBox.Name = "SeciliKullaniciBilgileriGroupBox";
+            this.SeciliKullaniciBilgileriGroupBox.PenWidth = 15;
+            this.SeciliKullaniciBilgileriGroupBox.RGB = false;
+            this.SeciliKullaniciBilgileriGroupBox.Rounding = true;
+            this.SeciliKullaniciBilgileriGroupBox.RoundingInt = 60;
+            this.SeciliKullaniciBilgileriGroupBox.Size = new System.Drawing.Size(269, 357);
+            this.SeciliKullaniciBilgileriGroupBox.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            this.SeciliKullaniciBilgileriGroupBox.TabIndex = 12;
+            this.SeciliKullaniciBilgileriGroupBox.Tag = "Cyber";
+            this.SeciliKullaniciBilgileriGroupBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            this.SeciliKullaniciBilgileriGroupBox.Timer_RGB = 300;
+            this.SeciliKullaniciBilgileriGroupBox.Load += new System.EventHandler(this.SeciliKullaniciBilgileriGroupBox_Load);
+            // 
+            // txtKullaniciAdi
+            // 
+            this.txtKullaniciAdi.BackColor = System.Drawing.Color.Transparent;
+            this.txtKullaniciAdi.EnabledCalc = true;
+            this.txtKullaniciAdi.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtKullaniciAdi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtKullaniciAdi.Location = new System.Drawing.Point(52, 170);
+            this.txtKullaniciAdi.MaxLength = 32767;
+            this.txtKullaniciAdi.MultiLine = false;
+            this.txtKullaniciAdi.Name = "txtKullaniciAdi";
+            this.txtKullaniciAdi.ReadOnly = false;
+            this.txtKullaniciAdi.Size = new System.Drawing.Size(164, 51);
+            this.txtKullaniciAdi.TabIndex = 14;
+            this.txtKullaniciAdi.Text = "Kullanıcı Adı";
+            this.txtKullaniciAdi.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtKullaniciAdi.UseSystemPasswordChar = false;
+            // 
+            // txtAdSoyad
+            // 
+            this.txtAdSoyad.BackColor = System.Drawing.Color.Transparent;
+            this.txtAdSoyad.EnabledCalc = true;
+            this.txtAdSoyad.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtAdSoyad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtAdSoyad.Location = new System.Drawing.Point(52, 113);
+            this.txtAdSoyad.MaxLength = 32767;
+            this.txtAdSoyad.MultiLine = false;
+            this.txtAdSoyad.Name = "txtAdSoyad";
+            this.txtAdSoyad.ReadOnly = false;
+            this.txtAdSoyad.Size = new System.Drawing.Size(164, 51);
+            this.txtAdSoyad.TabIndex = 15;
+            this.txtAdSoyad.Text = "Ad Soyad";
+            this.txtAdSoyad.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtAdSoyad.UseSystemPasswordChar = false;
+            // 
+            // txtSifre
+            // 
+            this.txtSifre.BackColor = System.Drawing.Color.Transparent;
+            this.txtSifre.EnabledCalc = true;
+            this.txtSifre.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSifre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtSifre.Location = new System.Drawing.Point(52, 225);
+            this.txtSifre.MaxLength = 32767;
+            this.txtSifre.MultiLine = false;
+            this.txtSifre.Name = "txtSifre";
+            this.txtSifre.ReadOnly = false;
+            this.txtSifre.Size = new System.Drawing.Size(164, 51);
+            this.txtSifre.TabIndex = 16;
+            this.txtSifre.Text = "Şifre";
+            this.txtSifre.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtSifre.UseSystemPasswordChar = false;
+            // 
+            // cmbRol
+            // 
+            this.cmbRol.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbRol.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRol.EnabledCalc = true;
+            this.cmbRol.FormattingEnabled = true;
+            this.cmbRol.ItemHeight = 20;
+            this.cmbRol.Location = new System.Drawing.Point(102, 81);
+            this.cmbRol.Name = "cmbRol";
+            this.cmbRol.Size = new System.Drawing.Size(64, 26);
+            this.cmbRol.TabIndex = 17;
+            // 
             // frmAdminControlPanel
             // 
             this.ClientSize = new System.Drawing.Size(1332, 673);
@@ -665,6 +774,7 @@ namespace RestoranOtomasyon
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.VeriButonGroupBox.ResumeLayout(false);
             this.VeriButonGroupBox.PerformLayout();
+            this.SeciliKullaniciBilgileriGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -695,6 +805,16 @@ namespace RestoranOtomasyon
         }
 
         private void frmAdminControlPanel_Load_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtAdSoyad_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SeciliKullaniciBilgileriGroupBox_Load(object sender, EventArgs e)
         {
 
         }

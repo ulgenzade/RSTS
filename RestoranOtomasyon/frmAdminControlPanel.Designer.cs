@@ -47,5 +47,10 @@
         private ReaLTaiizor.Controls.CyberGroupBox BaslikBox;
         private ReaLTaiizor.Controls.MetroLabel HesaplarLabel;
         private ReaLTaiizor.Controls.MetroLabel metroLabel1;
+        private ReaLTaiizor.Controls.CyberGroupBox SeciliKullaniciBilgileriGroupBox;
+        private ReaLTaiizor.Controls.AloneTextBox txtKullaniciAdi;
+        private ReaLTaiizor.Controls.AloneComboBox cmbRol;
+        private ReaLTaiizor.Controls.AloneTextBox txtAdSoyad;
+        private ReaLTaiizor.Controls.AloneTextBox txtSifre;
     }
 }
