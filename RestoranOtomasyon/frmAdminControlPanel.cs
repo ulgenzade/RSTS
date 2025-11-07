@@ -408,6 +408,11 @@ namespace RestoranOtomasyon
             this.btnVeriKaydet = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriGuncelle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriEkle = new ReaLTaiizor.Controls.MaterialButton();
+            this.SeciliKullanıcıBilgileriGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
+            this.txtAdSyd = new ReaLTaiizor.Controls.AloneTextBox();
+            this.txtKullaniciAdi_ = new ReaLTaiizor.Controls.AloneTextBox();
+            this.txtSifree = new ReaLTaiizor.Controls.AloneTextBox();
+            this.cmbRoller = new ReaLTaiizor.Controls.AloneComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -417,6 +422,7 @@ namespace RestoranOtomasyon
             this.VeriKategoriButonGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.VeriButonGroupBox.SuspendLayout();
+            this.SeciliKullanıcıBilgileriGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -441,6 +447,7 @@ namespace RestoranOtomasyon
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.SeciliKullanıcıBilgileriGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.VeriKategoriButonGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.VeriButonGroupBox);
@@ -819,7 +826,7 @@ namespace RestoranOtomasyon
             this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.EnableHeadersVisualStyles = false;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 61);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 65);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
@@ -994,6 +1001,107 @@ namespace RestoranOtomasyon
             this.btnVeriEkle.UseVisualStyleBackColor = true;
             this.btnVeriEkle.Click += new System.EventHandler(this.btnVeriEkle_Click);
             // 
+            // SeciliKullanıcıBilgileriGroupBox
+            // 
+            this.SeciliKullanıcıBilgileriGroupBox.Alpha = 20;
+            this.SeciliKullanıcıBilgileriGroupBox.BackColor = System.Drawing.Color.Transparent;
+            this.SeciliKullanıcıBilgileriGroupBox.Background = true;
+            this.SeciliKullanıcıBilgileriGroupBox.Background_WidthPen = 3F;
+            this.SeciliKullanıcıBilgileriGroupBox.BackgroundPen = true;
+            this.SeciliKullanıcıBilgileriGroupBox.ColorBackground = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullanıcıBilgileriGroupBox.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullanıcıBilgileriGroupBox.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.SeciliKullanıcıBilgileriGroupBox.ColorBackground_Pen = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
+            this.SeciliKullanıcıBilgileriGroupBox.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
+            this.SeciliKullanıcıBilgileriGroupBox.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullanıcıBilgileriGroupBox.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.SeciliKullanıcıBilgileriGroupBox.Controls.Add(this.cmbRoller);
+            this.SeciliKullanıcıBilgileriGroupBox.Controls.Add(this.txtKullaniciAdi_);
+            this.SeciliKullanıcıBilgileriGroupBox.Controls.Add(this.txtSifree);
+            this.SeciliKullanıcıBilgileriGroupBox.Controls.Add(this.txtAdSyd);
+            this.SeciliKullanıcıBilgileriGroupBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
+            this.SeciliKullanıcıBilgileriGroupBox.Enabled = false;
+            this.SeciliKullanıcıBilgileriGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
+            this.SeciliKullanıcıBilgileriGroupBox.Lighting = false;
+            this.SeciliKullanıcıBilgileriGroupBox.LinearGradient_Background = false;
+            this.SeciliKullanıcıBilgileriGroupBox.LinearGradientPen = false;
+            this.SeciliKullanıcıBilgileriGroupBox.Location = new System.Drawing.Point(333, 192);
+            this.SeciliKullanıcıBilgileriGroupBox.Name = "SeciliKullanıcıBilgileriGroupBox";
+            this.SeciliKullanıcıBilgileriGroupBox.PenWidth = 15;
+            this.SeciliKullanıcıBilgileriGroupBox.RGB = false;
+            this.SeciliKullanıcıBilgileriGroupBox.Rounding = true;
+            this.SeciliKullanıcıBilgileriGroupBox.RoundingInt = 60;
+            this.SeciliKullanıcıBilgileriGroupBox.Size = new System.Drawing.Size(218, 288);
+            this.SeciliKullanıcıBilgileriGroupBox.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            this.SeciliKullanıcıBilgileriGroupBox.TabIndex = 11;
+            this.SeciliKullanıcıBilgileriGroupBox.Tag = "Cyber";
+            this.SeciliKullanıcıBilgileriGroupBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            this.SeciliKullanıcıBilgileriGroupBox.Timer_RGB = 300;
+            // 
+            // txtAdSyd
+            // 
+            this.txtAdSyd.BackColor = System.Drawing.Color.Transparent;
+            this.txtAdSyd.EnabledCalc = true;
+            this.txtAdSyd.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtAdSyd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtAdSyd.Location = new System.Drawing.Point(40, 108);
+            this.txtAdSyd.MaxLength = 32767;
+            this.txtAdSyd.MultiLine = false;
+            this.txtAdSyd.Name = "txtAdSyd";
+            this.txtAdSyd.ReadOnly = false;
+            this.txtAdSyd.Size = new System.Drawing.Size(138, 29);
+            this.txtAdSyd.TabIndex = 0;
+            this.txtAdSyd.Text = "Ad Soyad";
+            this.txtAdSyd.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtAdSyd.UseSystemPasswordChar = false;
+            // 
+            // txtKullaniciAdi_
+            // 
+            this.txtKullaniciAdi_.BackColor = System.Drawing.Color.Transparent;
+            this.txtKullaniciAdi_.EnabledCalc = true;
+            this.txtKullaniciAdi_.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtKullaniciAdi_.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtKullaniciAdi_.Location = new System.Drawing.Point(40, 143);
+            this.txtKullaniciAdi_.MaxLength = 32767;
+            this.txtKullaniciAdi_.MultiLine = false;
+            this.txtKullaniciAdi_.Name = "txtKullaniciAdi_";
+            this.txtKullaniciAdi_.ReadOnly = false;
+            this.txtKullaniciAdi_.Size = new System.Drawing.Size(138, 29);
+            this.txtKullaniciAdi_.TabIndex = 12;
+            this.txtKullaniciAdi_.Text = "Kullnıcı Adı";
+            this.txtKullaniciAdi_.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtKullaniciAdi_.UseSystemPasswordChar = false;
+            // 
+            // txtSifree
+            // 
+            this.txtSifree.BackColor = System.Drawing.Color.Transparent;
+            this.txtSifree.EnabledCalc = true;
+            this.txtSifree.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtSifree.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtSifree.Location = new System.Drawing.Point(40, 183);
+            this.txtSifree.MaxLength = 32767;
+            this.txtSifree.MultiLine = false;
+            this.txtSifree.Name = "txtSifree";
+            this.txtSifree.ReadOnly = false;
+            this.txtSifree.Size = new System.Drawing.Size(138, 29);
+            this.txtSifree.TabIndex = 1;
+            this.txtSifree.Text = "Şifre";
+            this.txtSifree.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.txtSifree.UseSystemPasswordChar = false;
+            // 
+            // cmbRoller
+            // 
+            this.cmbRoller.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbRoller.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cmbRoller.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbRoller.EnabledCalc = true;
+            this.cmbRoller.FormattingEnabled = true;
+            this.cmbRoller.ItemHeight = 20;
+            this.cmbRoller.Location = new System.Drawing.Point(40, 76);
+            this.cmbRoller.Name = "cmbRoller";
+            this.cmbRoller.Size = new System.Drawing.Size(138, 26);
+            this.cmbRoller.TabIndex = 13;
+            // 
             // frmAdminControlPanel
             // 
             this.ClientSize = new System.Drawing.Size(1332, 673);
@@ -1016,6 +1124,7 @@ namespace RestoranOtomasyon
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.VeriButonGroupBox.ResumeLayout(false);
             this.VeriButonGroupBox.PerformLayout();
+            this.SeciliKullanıcıBilgileriGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -52,5 +52,10 @@
         private ReaLTaiizor.Controls.AloneComboBox cmbRol;
         private ReaLTaiizor.Controls.AloneTextBox txtAdSoyad;
         private ReaLTaiizor.Controls.AloneTextBox txtSifre;
+        private ReaLTaiizor.Controls.AloneTextBox txtKullaniciAdi_;
+        private ReaLTaiizor.Controls.CyberGroupBox SeciliKullanıcıBilgileriGroupBox;
+        private ReaLTaiizor.Controls.AloneTextBox txtSifree;
+        private ReaLTaiizor.Controls.AloneTextBox txtAdSyd;
+        private ReaLTaiizor.Controls.AloneComboBox cmbRoller;
     }
 }
