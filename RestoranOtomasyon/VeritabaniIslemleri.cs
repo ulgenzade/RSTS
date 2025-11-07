@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;    // App.config dosyasını okumak için
 using System.Data;             // DataTable gibi veri yapılarını kullanmak için
+using System.Threading.Tasks;
 
 namespace RestoranOtomasyon
 {
@@ -120,18 +121,29 @@ namespace RestoranOtomasyon
         }
 
         // 5. Kullanıcılar tablosundaki verileri (şifre hariç) çeker.
-        public DataTable KullanicilariGetir()
+        public async Task<DataTable> KullanicilariGetirAsync()
         {
+            // ADIM 1: 'dt' adındaki boş tablomuzu (malzememizi) en başta hazırlıyoruz.
             DataTable dt = new DataTable();
+
+            // ADIM 2: 'baglanti' nesnesini (malzememizi) 'using' bloğu içinde hazırlıyoruz.
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
             {
                 try
                 {
-                    baglanti.Open();
+                    // Artık 'baglanti' tanınıyor.
+                    await baglanti.OpenAsync();
+
+                    // Doğru SQL sorgusu.
                     string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilar;";
-                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(sorgu, baglanti))
+
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     {
-                        adapter.Fill(dt);
+                        using (var reader = await komut.ExecuteReaderAsync())
+                        {
+                            // Artık 'dt' tanınıyor.
+                            dt.Load(reader);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -139,6 +151,7 @@ namespace RestoranOtomasyon
                     System.Diagnostics.Debug.WriteLine("Kullanıcıları getirirken hata: " + ex.Message);
                 }
             }
+            // Metodun sonunda, doldurduğumuz 'dt' tablosunu geri döndürüyoruz.
             return dt;
         }
 
@@ -200,6 +213,33 @@ namespace RestoranOtomasyon
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine("Sipariş detaylarını getirirken hata: " + ex.Message);
+                }
+            }
+            return dt;
+        }
+
+        public DataTable TekKullaniciGetir(int kullaniciID)
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    // Sorgu, WHERE koşulu ile sadece belirtilen ID'ye sahip kullanıcıyı seçer.
+                    string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilar WHERE KullaniciID = @kullaniciID;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@kullaniciID", kullaniciID);
+                        using (MySqlDataAdapter adapter = new MySqlDataAdapter(komut))
+                        {
+                            adapter.Fill(dt);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Tek kullanıcı getirilirken hata: " + ex.Message);
                 }
             }
             return dt;
@@ -321,6 +361,8 @@ namespace RestoranOtomasyon
             }
         }
 
+
+
         #endregion
 
         #region GÜNCELLEME METOTLARI (UPDATE)
@@ -434,6 +476,117 @@ namespace RestoranOtomasyon
             }
         }
 
+        /// <summary>
+        /// Veritabanına yeni bir kullanıcı ekler. Şifreyi otomatik olarak hash'leyerek kaydeder.
+        public bool KullaniciEkle(string adSoyad, string kullaniciAdi, string sifre, string rol)
+        {
+            // ADIM 1: ARAYÜZDEN GELEN DÜZ ŞİFREYİ (örn: "kadir123") ANINDA HASH'E ÇEVİR.
+            string hashlenmisSifre = SifrelemeYardimcisi.Hashle(sifre);
+
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "INSERT INTO Kullanicilar (AdSoyad, KullaniciAdi, Sifre, Rol) VALUES (@adSoyad, @kullaniciAdi, @sifre, @rol);";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@adSoyad", adSoyad);
+                        komut.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
+
+                        // ADIM 2: VERİTABANINA DÜZ ŞİFREYİ DEĞİL, HASH'LENMİŞ HALİNİ KAYDET.
+                        komut.Parameters.AddWithValue("@sifre", hashlenmisSifre);
+
+                        komut.Parameters.AddWithValue("@rol", rol);
+                        komut.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Kullanıcı eklerken hata: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Mevcut bir kullanıcının bilgilerini günceller.
+        public bool KullaniciGuncelle(int kullaniciID, string yeniAdSoyad, string yeniKullaniciAdi, string yeniSifre, string yeniRol)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+
+                    string sorgu;
+                    // ADIM 1: Admin yeni bir şifre girdi mi diye kontrol et.
+                    if (!string.IsNullOrWhiteSpace(yeniSifre))
+                    {
+                        // EVET, YENİ ŞİFRE GİRİLDİ.
+                        // O zaman SQL sorgusu Sifre sütununu da içersin.
+                        sorgu = "UPDATE Kullanicilar SET AdSoyad = @adSoyad, KullaniciAdi = @kullaniciAdi, Sifre = @sifre, Rol = @rol WHERE KullaniciID = @kullaniciID;";
+                    }
+                    else
+                    {
+                        // HAYIR, ŞİFRE KUTUSU BOŞ BIRAKILDI.
+                        // O zaman SQL sorgusu Sifre sütununu GÜNCELLEMESİN.
+                        sorgu = "UPDATE Kullanicilar SET AdSoyad = @adSoyad, KullaniciAdi = @kullaniciAdi, Rol = @rol WHERE KullaniciID = @kullaniciID;";
+                    }
+
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@adSoyad", yeniAdSoyad);
+                        komut.Parameters.AddWithValue("@kullaniciAdi", yeniKullaniciAdi);
+                        komut.Parameters.AddWithValue("@rol", yeniRol);
+                        komut.Parameters.AddWithValue("@kullaniciID", kullaniciID);
+
+                        // ADIM 2: Eğer yeni bir şifre girildiyse, onu HASH'LEYEREK parametre olarak ekle.
+                        if (!string.IsNullOrWhiteSpace(yeniSifre))
+                        {
+                            string hashlenmisSifre = SifrelemeYardimcisi.Hashle(yeniSifre);
+                            komut.Parameters.AddWithValue("@sifre", hashlenmisSifre);
+                        }
+
+                        return komut.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Kullanıcı güncellerken hata: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// ID'si verilen kullanıcıyı veritabanından siler.
+        public bool KullaniciSil(int kullaniciID)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "DELETE FROM Kullanicilar WHERE KullaniciID = @kullaniciID;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@kullaniciID", kullaniciID);
+                        return komut.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Eğer bu kullanıcıya bağlı siparişler varsa, veritabanı Foreign Key kısıtlaması nedeniyle
+                    // bu silme işlemini engelleyecektir. Bu bir hata değil, veri bütünlüğünün korunmasıdır.
+                    System.Diagnostics.Debug.WriteLine("Kullanıcı silinirken hata (ilişkili siparişler olabilir): " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
         #endregion
 
         #region SİLME METOTLARI (DELETE)
@@ -527,15 +680,22 @@ namespace RestoranOtomasyon
             DataTable dt = new DataTable();
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
             {
+                // ADIM 1: Gelen düz şifreyi, bizim SifrelemeYardimcisi'ni kullanarak "parmak izine" çevir.
+                string hashlenmisSifre = SifrelemeYardimcisi.Hashle(sifre);
+
                 try
                 {
                     baglanti.Open();
-                    // Sorguyu KullaniciAdi yerine Rol'e göre arama yapacak şekilde değiştirdik.
+                    // Sorgu, veritabanındaki hash ile bizim ürettiğimiz hash'i karşılaştıracak.
                     string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilar WHERE Rol = @rol AND Sifre = @sifre;";
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     {
                         komut.Parameters.AddWithValue("@rol", rol);
-                        komut.Parameters.AddWithValue("@sifre", sifre);
+
+                        // ADIM 2: Sorguya parametre olarak DÜZ şifreyi DEĞİL, HASH'LENMİŞ halini gönder.
+                        // === İŞTE DÜZELTİLEN YER BURASI! ===
+                        komut.Parameters.AddWithValue("@sifre", hashlenmisSifre);
+
                         using (MySqlDataAdapter adapter = new MySqlDataAdapter(komut))
                         {
                             adapter.Fill(dt);
@@ -659,5 +819,6 @@ namespace RestoranOtomasyon
             }
         }
         #endregion
+
     }
 }

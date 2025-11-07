@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +13,327 @@ namespace RestoranOtomasyon
 {
     public partial class frmAdminControlPanel : Form
     {
+        private VeritabaniIslemleri db = new VeritabaniIslemleri();
+        private string aktifVeriTablosu = "";
+        // Yeni: Hangi kullanıcının düzenlendiğini takip etmek için. -1 ise Ekleme modundayız demektir.
+        private int seciliHesapID = -1;
+
         public frmAdminControlPanel()
         {
             InitializeComponent();
         }
+
+        private async void frmAdminControlPanel_Load(object sender, EventArgs e)
+        {
+            await KullaniciListeleriniDoldurAsync();
+            dataGridView1.DataSource = null;
+            
+        }
+
+        private async void frmAdminControlPanel_Load_1(object sender, EventArgs e)
+        {
+            await KullaniciListeleriniDoldurAsync();
+            dataGridView1.DataSource = null;
+            
+        }
+
+
+        private async Task KullaniciListeleriniDoldurAsync()
+        {
+            AdminTree.Nodes.Clear();
+            CalisanTree.Nodes.Clear();
+
+            try
+            {
+                // PATRONUN TEK GÖREVİ: Çalışandan (db) veriyi istemek.
+                DataTable kullanicilar = await db.KullanicilariGetirAsync();
+
+                // Gelen veriyi kontrol et.
+                if (kullanicilar == null || kullanicilar.Rows.Count == 0) return;
+
+                // Gelen veriyi ekrana yerleştir.
+                foreach (DataRow row in kullanicilar.Rows)
+                {
+                    string adSoyad = row["AdSoyad"].ToString();
+                    string kullaniciAdi = row["KullaniciAdi"].ToString();
+                    string rol = row["Rol"].ToString();
+                    int kullaniciID = Convert.ToInt32(row["KullaniciID"]);
+                    
+
+                    TreeNode node = new TreeNode($"{adSoyad} ({kullaniciAdi})");
+                    node.Tag = kullaniciID;
+
+                    if (rol == "Admin")
+                    {
+                        AdminTree.Nodes.Add(node);
+                    }
+                    else
+                    {
+                        CalisanTree.Nodes.Add(node);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Kullanıcılar yüklenirken bir hata oluştu:\n" + ex.Message, "Veritabanı Hatası");
+            }
+        }
+
+
+        #region Veri Butonları
+        private void btnVeriMasalar_Click(object sender, EventArgs e)
+        {
+            if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
+            if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
+            dataGridView1.DataSource = db.MasalariGetir();
+            aktifVeriTablosu = "Masalar";
+        }
+
+        private void btnVeriUrunler_Click(object sender, EventArgs e)
+        {
+            if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
+            if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
+            dataGridView1.DataSource = db.UrunleriGetir();
+            aktifVeriTablosu = "Urunler";
+        }
+
+        private void btnVeriKategoriler_Click(object sender, EventArgs e)
+        {
+            if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
+            if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
+            dataGridView1.DataSource = db.KategorileriGetir();
+            aktifVeriTablosu = "Kategoriler";
+        }
+
+        private async void btnVeriSil_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Lütfen silmek için bir satır seçin.", "Uyarı");
+                return;
+            }
+
+            int seciliID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
+            bool sonuc = false;
+            string mesaj = "";
+
+            switch (aktifVeriTablosu)
+            {
+                case "Kullanicilar":
+                    if (db.KullaniciSil(seciliID))
+                    {
+                        mesaj = "Kullanıcı başarıyla silindi.";
+                        // Sol tarafı da asenkron olarak yenile.
+                        await KullaniciListeleriniDoldurAsync();
+                    }
+                    else
+                    {
+                        mesaj = "Kullanıcı silinemedi.";
+                    }
+                    break;
+                case "Urunler":
+                    sonuc = db.UrunSil(seciliID);
+                    mesaj = sonuc ? "Ürün başarıyla silindi." : "Ürün silinemedi.";
+                    break;
+                case "Kategoriler":
+                    sonuc = db.KategoriSil(seciliID);
+                    mesaj = sonuc ? "Kategori başarıyla silindi." : "Bu kategoriye bağlı ürünler olduğu için silinemedi.";
+                    break;
+                case "Masalar":
+                    MessageBox.Show("Masalar bu ekrandan silinemez.", "İşlem Desteklenmiyor");
+                    return;
+            }
+
+            if (!string.IsNullOrEmpty(mesaj)) MessageBox.Show(mesaj);
+            YenileAktifTablo();
+        }
+
+        private void YenileAktifTablo()
+        {
+            switch (aktifVeriTablosu)
+            {
+                case "Masalar": btnVeriMasalar_Click(null, null); break;
+                case "Urunler": btnVeriUrunler_Click(null, null); break;
+                case "Kategoriler": btnVeriKategoriler_Click(null, null); break;
+                    // 'Kullanicilar' durumu, seçim değiştiğinde veya silindiğinde özel olarak yönetiliyor.
+            }
+        }
+        
+
+        private void btnVeriEkle_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Veri ekleme özelliği henüz aktif değil.");
+        }
+        #endregion
+
+        #region Hesap Butonları
+        private void btnHesapEkle_Click(object sender, EventArgs e)
+        {
+            TreeNode newNode = new TreeNode("Yeni Kullanıcı - Düzenlemek için Enter'a basın");
+            newNode.Tag = -1; // Yeni bir kullanıcı olduğunu belirtmek için ID'yi -1 yap.
+            CalisanTree.Nodes.Add(newNode);
+
+            // Yeni eklenen node'u seçili hale getir ve düzenleme modunu başlat.
+            CalisanTree.SelectedNode = newNode;
+            newNode.BeginEdit();
+        }
+
+        private async void btnHesapSil_Click(object sender, EventArgs e)
+        {
+            TreeView aktifTree = AdminTree.SelectedNode != null ? AdminTree : CalisanTree;
+            if (aktifTree.SelectedNode == null || aktifTree.SelectedNode.Tag == null)
+            {
+                MessageBox.Show("Lütfen silmek için bir kullanıcı seçin.", "Uyarı");
+                return;
+            }
+
+            // Eğer yeni oluşturulmuş ama kaydedilmemiş bir satırı silmeye çalışıyorsa
+            if ((int)aktifTree.SelectedNode.Tag == -1)
+            {
+                aktifTree.Nodes.Remove(aktifTree.SelectedNode);
+                return;
+            }
+
+            int kullaniciID = Convert.ToInt32(aktifTree.SelectedNode.Tag);
+            string kullaniciAdi = aktifTree.SelectedNode.Text;
+            DialogResult eminMisin = MessageBox.Show($"'{kullaniciAdi}' adlı kullanıcıyı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (eminMisin == DialogResult.Yes)
+            {
+                if (db.KullaniciSil(kullaniciID))
+                {
+                    MessageBox.Show("Kullanıcı başarıyla silindi.");
+                    await KullaniciListeleriniDoldurAsync();
+                    dataGridView1.DataSource = null;
+                }
+                else
+                {
+                    MessageBox.Show("Kullanıcı silinirken bir hata oluştu.", "Hata");
+                }
+            }
+        }
+
+        private void btnHesapGuncelle_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Kullanıcı güncelleme özelliği henüz aktif değil.");
+        }
+
+        private void btnHesapDuzenle_Click(object sender, EventArgs e)
+        {
+            TreeView aktifTree = AdminTree.SelectedNode != null ? AdminTree : CalisanTree;
+            if (aktifTree.SelectedNode != null)
+            {
+                // Seçili node'un metnini düzenlenebilir hale getir.
+                aktifTree.SelectedNode.BeginEdit();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen düzenlemek için bir kullanıcı seçin.", "Uyarı");
+            }
+        }
+
+        private void btnHesapKaydet_Click(object sender, EventArgs e)
+        {
+        }
+
+        #endregion
+
+        #region Kullanici Listeleri
+        private void KullaniciSecildi(object sender, TreeViewEventArgs e)
+        {
+            // Eğer tıklanan geçerli bir düğüm yoksa, hiçbir şey yapma.
+            if (e.Node == null || e.Node.Tag == null) return;
+
+            // Tıklanan düğümün arkasına sakladığımız kullanıcı ID'sini al.
+            int seciliKullaniciID = Convert.ToInt32(e.Node.Tag);
+
+            // Eğer bu, yeni eklenen ve henüz kaydedilmemiş bir satırsa (-1 ID'li),
+            // DataGridView'i temizle ve işlemi bitir.
+            if (seciliKullaniciID == -1)
+            {
+                dataGridView1.DataSource = null;
+                return;
+            }
+
+            // Backend'den sadece o kullanıcıya ait bilgileri çek.
+            DataTable kullaniciBilgileri = db.TekKullaniciGetir(seciliKullaniciID);
+
+            // Çektiğimiz bu bilgileri sağdaki DataGridView'de göster.
+            dataGridView1.DataSource = kullaniciBilgileri;
+
+            // Silme/Güncelleme işlemleri için hangi tablonun aktif olduğunu belirt.
+            aktifVeriTablosu = "Kullanicilar";
+        }
+        private void AdminTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
+            KullaniciSecildi(sender, e);
+        }
+
+        private void CalisanTree_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
+            KullaniciSecildi(sender, e);
+        }
+
+        private async void TreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            // Eğer kullanıcı düzenlemeyi iptal ettiyse (ESC'ye bastıysa) veya boş bir metin girdiyse
+            if (e.Label == null)
+            {
+                // Eğer bu yeni oluşturulan bir kullanıcıysa ve iptal edildiyse, listeden kaldır.
+                if ((int)e.Node.Tag == -1)
+                {
+                    e.Node.Remove();
+                }
+                return; // Hiçbir şey yapma
+            }
+
+            // Kullanıcının girdiği yeni metni al. Örn: "Yeni İsim (yeni_kullanici_adi)"
+            string yeniMetin = e.Label;
+
+            // Bu metinden AdSoyad ve KullaniciAdi'nı ayırmaya çalışalım (basit bir varsayımla).
+            string yeniAdSoyad = yeniMetin;
+            string yeniKullaniciAdi = ""; // Şimdilik bunu boş bırakalım veya bir varsayılan atayalım.
+
+            int kullaniciID = (int)e.Node.Tag;
+
+            bool sonuc = false;
+            if (kullaniciID == -1) // EKLEME İŞLEMİ
+            {
+                // Yeni kullanıcı için varsayılan bir şifre ve rol atamamız gerekiyor.
+                // Bu bilgiler daha sonra sağdaki panelden güncellenebilir.
+                sonuc = db.KullaniciEkle(yeniAdSoyad, yeniAdSoyad.Replace(" ", "").ToLower(), "12345", "Garson");
+                if (sonuc) MessageBox.Show("Yeni kullanıcı varsayılan şifre (12345) ile eklendi.");
+            }
+            else // GÜNCELLEME İŞLEMİ
+            {
+                // Sadece AdSoyad'ı güncelleyelim. Diğer bilgiler aynı kalsın.
+                // Bunun için TekKullaniciGetir'i kullanabiliriz.
+                DataTable dt = db.TekKullaniciGetir(kullaniciID);
+                if (dt.Rows.Count > 0)
+                {
+                    string mevcutKullaniciAdi = dt.Rows[0]["KullaniciAdi"].ToString();
+                    string mevcutRol = dt.Rows[0]["Rol"].ToString();
+                    // Sadece AdSoyad'ı güncelleyen bir metot çağıralım. Şifre boş gönderildiği için değişmez.
+                    sonuc = db.KullaniciGuncelle(kullaniciID, yeniAdSoyad, mevcutKullaniciAdi, "", mevcutRol);
+                }
+            }
+
+            if (sonuc)
+            {
+                // Her şey başarılıysa listeyi yenile.
+                await KullaniciListeleriniDoldurAsync();
+            }
+            else
+            {
+                MessageBox.Show("İşlem sırasında bir hata oluştu.");
+                e.CancelEdit = true; // Düzenlemeyi iptal et, eski metne geri dön.
+            }
+        }
+        #endregion
+
+      
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
@@ -32,20 +350,39 @@ namespace RestoranOtomasyon
 
         }
 
-        private void frmAdminControlPanel_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void gbUrunler_Click(object sender, EventArgs e)
         {
 
         }
 
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel2_Paint_1(object sender, PaintEventArgs e)
+        {
+
+        }
+
+
+
+        private void HesapLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VeriButonGroupBox_Load(object sender, EventArgs e)
+        {
+
+        }
+
+
+        #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.BaslikBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
@@ -71,11 +408,6 @@ namespace RestoranOtomasyon
             this.btnVeriKaydet = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriGuncelle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriEkle = new ReaLTaiizor.Controls.MaterialButton();
-            this.SeciliKullaniciBilgileriGroupBox = new ReaLTaiizor.Controls.CyberGroupBox();
-            this.txtKullaniciAdi = new ReaLTaiizor.Controls.AloneTextBox();
-            this.txtAdSoyad = new ReaLTaiizor.Controls.AloneTextBox();
-            this.txtSifre = new ReaLTaiizor.Controls.AloneTextBox();
-            this.cmbRol = new ReaLTaiizor.Controls.AloneComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -85,7 +417,6 @@ namespace RestoranOtomasyon
             this.VeriKategoriButonGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.VeriButonGroupBox.SuspendLayout();
-            this.SeciliKullaniciBilgileriGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -110,7 +441,6 @@ namespace RestoranOtomasyon
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.SeciliKullaniciBilgileriGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.VeriKategoriButonGroupBox);
             this.splitContainer1.Panel2.Controls.Add(this.dataGridView1);
             this.splitContainer1.Panel2.Controls.Add(this.VeriButonGroupBox);
@@ -189,15 +519,18 @@ namespace RestoranOtomasyon
             this.CalisanTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
             this.CalisanTree.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.CalisanTree.ForeColor = System.Drawing.Color.White;
+            this.CalisanTree.LabelEdit = true;
             this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.CalisanTree.Location = new System.Drawing.Point(14, 356);
             this.CalisanTree.Name = "CalisanTree";
-            treeNode3.Name = "CalisanNodes";
-            treeNode3.Text = "Çalışan Hesaplar";
+            treeNode1.Name = "CalisanNodes";
+            treeNode1.Text = "Çalışan Hesaplar";
             this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode1});
             this.CalisanTree.Size = new System.Drawing.Size(411, 212);
             this.CalisanTree.TabIndex = 11;
+            this.CalisanTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
+            this.CalisanTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CalisanTree_AfterSelect);
             // 
             // AdminLabel
             // 
@@ -222,12 +555,14 @@ namespace RestoranOtomasyon
             this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.AdminTree.Location = new System.Drawing.Point(14, 104);
             this.AdminTree.Name = "AdminTree";
-            treeNode4.Name = "AdminNodes";
-            treeNode4.Text = "Yetkili Hesaplar";
+            treeNode2.Name = "AdminNodes";
+            treeNode2.Text = "Yetkili Hesaplar";
             this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode2});
             this.AdminTree.Size = new System.Drawing.Size(411, 212);
             this.AdminTree.TabIndex = 10;
+            this.AdminTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
+            this.AdminTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.AdminTree_AfterSelect);
             // 
             // HesapButonGroupBox
             // 
@@ -287,6 +622,7 @@ namespace RestoranOtomasyon
             this.btnHesapDuzenle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHesapDuzenle.UseAccentColor = false;
             this.btnHesapDuzenle.UseVisualStyleBackColor = true;
+            this.btnHesapDuzenle.Click += new System.EventHandler(this.btnHesapDuzenle_Click);
             // 
             // btnHesapSil
             // 
@@ -308,6 +644,7 @@ namespace RestoranOtomasyon
             this.btnHesapSil.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHesapSil.UseAccentColor = false;
             this.btnHesapSil.UseVisualStyleBackColor = true;
+            this.btnHesapSil.Click += new System.EventHandler(this.btnHesapSil_Click);
             // 
             // btnHesapKaydet
             // 
@@ -329,6 +666,7 @@ namespace RestoranOtomasyon
             this.btnHesapKaydet.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHesapKaydet.UseAccentColor = false;
             this.btnHesapKaydet.UseVisualStyleBackColor = true;
+            this.btnHesapKaydet.Click += new System.EventHandler(this.btnHesapKaydet_Click);
             // 
             // btnHesapGuncelle
             // 
@@ -350,6 +688,7 @@ namespace RestoranOtomasyon
             this.btnHesapGuncelle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHesapGuncelle.UseAccentColor = false;
             this.btnHesapGuncelle.UseVisualStyleBackColor = true;
+            this.btnHesapGuncelle.Click += new System.EventHandler(this.btnHesapGuncelle_Click);
             // 
             // btnHesapEkle
             // 
@@ -429,6 +768,7 @@ namespace RestoranOtomasyon
             this.btnVeriKategoriler.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnVeriKategoriler.UseAccentColor = false;
             this.btnVeriKategoriler.UseVisualStyleBackColor = true;
+            this.btnVeriKategoriler.Click += new System.EventHandler(this.btnVeriKategoriler_Click);
             // 
             // btnVeriUrunler
             // 
@@ -450,6 +790,7 @@ namespace RestoranOtomasyon
             this.btnVeriUrunler.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnVeriUrunler.UseAccentColor = false;
             this.btnVeriUrunler.UseVisualStyleBackColor = true;
+            this.btnVeriUrunler.Click += new System.EventHandler(this.btnVeriUrunler_Click);
             // 
             // btnVeriMasalar
             // 
@@ -471,6 +812,7 @@ namespace RestoranOtomasyon
             this.btnVeriMasalar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnVeriMasalar.UseAccentColor = false;
             this.btnVeriMasalar.UseVisualStyleBackColor = true;
+            this.btnVeriMasalar.Click += new System.EventHandler(this.btnVeriMasalar_Click);
             // 
             // dataGridView1
             // 
@@ -586,6 +928,7 @@ namespace RestoranOtomasyon
             this.btnVeriSil.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnVeriSil.UseAccentColor = false;
             this.btnVeriSil.UseVisualStyleBackColor = true;
+            this.btnVeriSil.Click += new System.EventHandler(this.btnVeriSil_Click);
             // 
             // btnVeriKaydet
             // 
@@ -649,108 +992,7 @@ namespace RestoranOtomasyon
             this.btnVeriEkle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnVeriEkle.UseAccentColor = false;
             this.btnVeriEkle.UseVisualStyleBackColor = true;
-            // 
-            // SeciliKullaniciBilgileriGroupBox
-            // 
-            this.SeciliKullaniciBilgileriGroupBox.Alpha = 20;
-            this.SeciliKullaniciBilgileriGroupBox.BackColor = System.Drawing.Color.Transparent;
-            this.SeciliKullaniciBilgileriGroupBox.Background = true;
-            this.SeciliKullaniciBilgileriGroupBox.Background_WidthPen = 3F;
-            this.SeciliKullaniciBilgileriGroupBox.BackgroundPen = true;
-            this.SeciliKullaniciBilgileriGroupBox.ColorBackground = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.SeciliKullaniciBilgileriGroupBox.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.SeciliKullaniciBilgileriGroupBox.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.SeciliKullaniciBilgileriGroupBox.ColorBackground_Pen = System.Drawing.Color.Blue;
-            this.SeciliKullaniciBilgileriGroupBox.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
-            this.SeciliKullaniciBilgileriGroupBox.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.SeciliKullaniciBilgileriGroupBox.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.txtKullaniciAdi);
-            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.cmbRol);
-            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.txtAdSoyad);
-            this.SeciliKullaniciBilgileriGroupBox.Controls.Add(this.txtSifre);
-            this.SeciliKullaniciBilgileriGroupBox.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            this.SeciliKullaniciBilgileriGroupBox.Enabled = false;
-            this.SeciliKullaniciBilgileriGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.SeciliKullaniciBilgileriGroupBox.Lighting = false;
-            this.SeciliKullaniciBilgileriGroupBox.LinearGradient_Background = false;
-            this.SeciliKullaniciBilgileriGroupBox.LinearGradientPen = false;
-            this.SeciliKullaniciBilgileriGroupBox.Location = new System.Drawing.Point(308, 158);
-            this.SeciliKullaniciBilgileriGroupBox.Name = "SeciliKullaniciBilgileriGroupBox";
-            this.SeciliKullaniciBilgileriGroupBox.PenWidth = 15;
-            this.SeciliKullaniciBilgileriGroupBox.RGB = false;
-            this.SeciliKullaniciBilgileriGroupBox.Rounding = true;
-            this.SeciliKullaniciBilgileriGroupBox.RoundingInt = 60;
-            this.SeciliKullaniciBilgileriGroupBox.Size = new System.Drawing.Size(269, 357);
-            this.SeciliKullaniciBilgileriGroupBox.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            this.SeciliKullaniciBilgileriGroupBox.TabIndex = 12;
-            this.SeciliKullaniciBilgileriGroupBox.Tag = "Cyber";
-            this.SeciliKullaniciBilgileriGroupBox.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
-            this.SeciliKullaniciBilgileriGroupBox.Timer_RGB = 300;
-            this.SeciliKullaniciBilgileriGroupBox.Load += new System.EventHandler(this.SeciliKullaniciBilgileriGroupBox_Load);
-            // 
-            // txtKullaniciAdi
-            // 
-            this.txtKullaniciAdi.BackColor = System.Drawing.Color.Transparent;
-            this.txtKullaniciAdi.EnabledCalc = true;
-            this.txtKullaniciAdi.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtKullaniciAdi.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
-            this.txtKullaniciAdi.Location = new System.Drawing.Point(52, 170);
-            this.txtKullaniciAdi.MaxLength = 32767;
-            this.txtKullaniciAdi.MultiLine = false;
-            this.txtKullaniciAdi.Name = "txtKullaniciAdi";
-            this.txtKullaniciAdi.ReadOnly = false;
-            this.txtKullaniciAdi.Size = new System.Drawing.Size(164, 51);
-            this.txtKullaniciAdi.TabIndex = 14;
-            this.txtKullaniciAdi.Text = "Kullanıcı Adı";
-            this.txtKullaniciAdi.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtKullaniciAdi.UseSystemPasswordChar = false;
-            // 
-            // txtAdSoyad
-            // 
-            this.txtAdSoyad.BackColor = System.Drawing.Color.Transparent;
-            this.txtAdSoyad.EnabledCalc = true;
-            this.txtAdSoyad.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtAdSoyad.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
-            this.txtAdSoyad.Location = new System.Drawing.Point(52, 113);
-            this.txtAdSoyad.MaxLength = 32767;
-            this.txtAdSoyad.MultiLine = false;
-            this.txtAdSoyad.Name = "txtAdSoyad";
-            this.txtAdSoyad.ReadOnly = false;
-            this.txtAdSoyad.Size = new System.Drawing.Size(164, 51);
-            this.txtAdSoyad.TabIndex = 15;
-            this.txtAdSoyad.Text = "Ad Soyad";
-            this.txtAdSoyad.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtAdSoyad.UseSystemPasswordChar = false;
-            // 
-            // txtSifre
-            // 
-            this.txtSifre.BackColor = System.Drawing.Color.Transparent;
-            this.txtSifre.EnabledCalc = true;
-            this.txtSifre.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSifre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
-            this.txtSifre.Location = new System.Drawing.Point(52, 225);
-            this.txtSifre.MaxLength = 32767;
-            this.txtSifre.MultiLine = false;
-            this.txtSifre.Name = "txtSifre";
-            this.txtSifre.ReadOnly = false;
-            this.txtSifre.Size = new System.Drawing.Size(164, 51);
-            this.txtSifre.TabIndex = 16;
-            this.txtSifre.Text = "Şifre";
-            this.txtSifre.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.txtSifre.UseSystemPasswordChar = false;
-            // 
-            // cmbRol
-            // 
-            this.cmbRol.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbRol.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbRol.EnabledCalc = true;
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.ItemHeight = 20;
-            this.cmbRol.Location = new System.Drawing.Point(102, 81);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(64, 26);
-            this.cmbRol.TabIndex = 17;
+            this.btnVeriEkle.Click += new System.EventHandler(this.btnVeriEkle_Click);
             // 
             // frmAdminControlPanel
             // 
@@ -774,49 +1016,11 @@ namespace RestoranOtomasyon
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.VeriButonGroupBox.ResumeLayout(false);
             this.VeriButonGroupBox.PerformLayout();
-            this.SeciliKullaniciBilgileriGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
+        #endregion
 
-        }
-
-        private void splitContainer1_Panel2_Paint_1(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btnHesapEkle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void HesapLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void VeriButonGroupBox_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void frmAdminControlPanel_Load_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtAdSoyad_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void SeciliKullaniciBilgileriGroupBox_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
