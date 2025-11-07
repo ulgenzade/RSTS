@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/RestoranOtomasyon/frmAdminControlPanel.cs
+/RestoranOtomasyon/frmAdminControlPanel.Designer.cs
+/RestoranOtomasyon/frmAdminControlPanel.resx
