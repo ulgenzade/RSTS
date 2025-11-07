@@ -123,22 +123,25 @@ namespace RestoranOtomasyon
         // 5. Kullanıcılar tablosundaki verileri (şifre hariç) çeker.
         public async Task<DataTable> KullanicilariGetirAsync()
         {
+            // ADIM 1: 'dt' adındaki boş tablomuzu (malzememizi) en başta hazırlıyoruz.
             DataTable dt = new DataTable();
-            // Bağlantıyı 'using' dışında oluşturuyoruz çünkü asenkron açacağız.
+
+            // ADIM 2: 'baglanti' nesnesini (malzememizi) 'using' bloğu içinde hazırlıyoruz.
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
             {
                 try
                 {
-                    // Asenkron olarak bağlantıyı aç.
+                    // Artık 'baglanti' tanınıyor.
                     await baglanti.OpenAsync();
 
-                    string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilari;"; // Hatalı tablo adı
+                    // Doğru SQL sorgusu.
+                    string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilar;";
 
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     {
                         using (var reader = await komut.ExecuteReaderAsync())
                         {
-                            // Dönen veriyi DataTable'a yükle.
+                            // Artık 'dt' tanınıyor.
                             dt.Load(reader);
                         }
                     }
@@ -148,6 +151,7 @@ namespace RestoranOtomasyon
                     System.Diagnostics.Debug.WriteLine("Kullanıcıları getirirken hata: " + ex.Message);
                 }
             }
+            // Metodun sonunda, doldurduğumuz 'dt' tablosunu geri döndürüyoruz.
             return dt;
         }
 

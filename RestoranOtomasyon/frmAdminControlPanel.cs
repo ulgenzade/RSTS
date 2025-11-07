@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,22 +15,26 @@ namespace RestoranOtomasyon
     {
         private VeritabaniIslemleri db = new VeritabaniIslemleri();
         private string aktifVeriTablosu = "";
+        // Yeni: Hangi kullanıcının düzenlendiğini takip etmek için. -1 ise Ekleme modundayız demektir.
+        private int seciliHesapID = -1;
 
         public frmAdminControlPanel()
         {
             InitializeComponent();
         }
 
-        private void frmAdminControlPanel_Load(object sender, EventArgs e)
+        private async void frmAdminControlPanel_Load(object sender, EventArgs e)
         {
-           
+            await KullaniciListeleriniDoldurAsync();
+            dataGridView1.DataSource = null;
+            
         }
 
         private async void frmAdminControlPanel_Load_1(object sender, EventArgs e)
         {
             await KullaniciListeleriniDoldurAsync();
             dataGridView1.DataSource = null;
-            aktifVeriTablosu = "";
+            
         }
 
 
@@ -40,15 +45,20 @@ namespace RestoranOtomasyon
 
             try
             {
+                // PATRONUN TEK GÖREVİ: Çalışandan (db) veriyi istemek.
                 DataTable kullanicilar = await db.KullanicilariGetirAsync();
+
+                // Gelen veriyi kontrol et.
                 if (kullanicilar == null || kullanicilar.Rows.Count == 0) return;
 
+                // Gelen veriyi ekrana yerleştir.
                 foreach (DataRow row in kullanicilar.Rows)
                 {
                     string adSoyad = row["AdSoyad"].ToString();
                     string kullaniciAdi = row["KullaniciAdi"].ToString();
                     string rol = row["Rol"].ToString();
                     int kullaniciID = Convert.ToInt32(row["KullaniciID"]);
+                    
 
                     TreeNode node = new TreeNode($"{adSoyad} ({kullaniciAdi})");
                     node.Tag = kullaniciID;
@@ -159,7 +169,13 @@ namespace RestoranOtomasyon
         #region Hesap Butonları
         private void btnHesapEkle_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Yeni kullanıcı ekleme özelliği henüz aktif değil.");
+            TreeNode newNode = new TreeNode("Yeni Kullanıcı - Düzenlemek için Enter'a basın");
+            newNode.Tag = -1; // Yeni bir kullanıcı olduğunu belirtmek için ID'yi -1 yap.
+            CalisanTree.Nodes.Add(newNode);
+
+            // Yeni eklenen node'u seçili hale getir ve düzenleme modunu başlat.
+            CalisanTree.SelectedNode = newNode;
+            newNode.BeginEdit();
         }
 
         private async void btnHesapSil_Click(object sender, EventArgs e)
@@ -168,6 +184,13 @@ namespace RestoranOtomasyon
             if (aktifTree.SelectedNode == null || aktifTree.SelectedNode.Tag == null)
             {
                 MessageBox.Show("Lütfen silmek için bir kullanıcı seçin.", "Uyarı");
+                return;
+            }
+
+            // Eğer yeni oluşturulmuş ama kaydedilmemiş bir satırı silmeye çalışıyorsa
+            if ((int)aktifTree.SelectedNode.Tag == -1)
+            {
+                aktifTree.Nodes.Remove(aktifTree.SelectedNode);
                 return;
             }
 
@@ -180,13 +203,12 @@ namespace RestoranOtomasyon
                 if (db.KullaniciSil(kullaniciID))
                 {
                     MessageBox.Show("Kullanıcı başarıyla silindi.");
-                    // Doğru metot adı 'KullaniciListeleriniDoldurAsync' ve 'await' ile çağrılıyor.
                     await KullaniciListeleriniDoldurAsync();
                     dataGridView1.DataSource = null;
                 }
                 else
                 {
-                    MessageBox.Show("Kullanıcı silinirken bir hata oluştu (Bu kullanıcıya ait siparişler olabilir).", "Hata");
+                    MessageBox.Show("Kullanıcı silinirken bir hata oluştu.", "Hata");
                 }
             }
         }
@@ -196,15 +218,50 @@ namespace RestoranOtomasyon
             MessageBox.Show("Kullanıcı güncelleme özelliği henüz aktif değil.");
         }
 
-        
+        private void btnHesapDuzenle_Click(object sender, EventArgs e)
+        {
+            TreeView aktifTree = AdminTree.SelectedNode != null ? AdminTree : CalisanTree;
+            if (aktifTree.SelectedNode != null)
+            {
+                // Seçili node'un metnini düzenlenebilir hale getir.
+                aktifTree.SelectedNode.BeginEdit();
+            }
+            else
+            {
+                MessageBox.Show("Lütfen düzenlemek için bir kullanıcı seçin.", "Uyarı");
+            }
+        }
+
+        private void btnHesapKaydet_Click(object sender, EventArgs e)
+        {
+        }
+
         #endregion
 
         #region Kullanici Listeleri
         private void KullaniciSecildi(object sender, TreeViewEventArgs e)
         {
+            // Eğer tıklanan geçerli bir düğüm yoksa, hiçbir şey yapma.
             if (e.Node == null || e.Node.Tag == null) return;
+
+            // Tıklanan düğümün arkasına sakladığımız kullanıcı ID'sini al.
             int seciliKullaniciID = Convert.ToInt32(e.Node.Tag);
-            dataGridView1.DataSource = db.TekKullaniciGetir(seciliKullaniciID);
+
+            // Eğer bu, yeni eklenen ve henüz kaydedilmemiş bir satırsa (-1 ID'li),
+            // DataGridView'i temizle ve işlemi bitir.
+            if (seciliKullaniciID == -1)
+            {
+                dataGridView1.DataSource = null;
+                return;
+            }
+
+            // Backend'den sadece o kullanıcıya ait bilgileri çek.
+            DataTable kullaniciBilgileri = db.TekKullaniciGetir(seciliKullaniciID);
+
+            // Çektiğimiz bu bilgileri sağdaki DataGridView'de göster.
+            dataGridView1.DataSource = kullaniciBilgileri;
+
+            // Silme/Güncelleme işlemleri için hangi tablonun aktif olduğunu belirt.
             aktifVeriTablosu = "Kullanicilar";
         }
         private void AdminTree_AfterSelect(object sender, TreeViewEventArgs e)
@@ -218,7 +275,65 @@ namespace RestoranOtomasyon
             if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
             KullaniciSecildi(sender, e);
         }
+
+        private async void TreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        {
+            // Eğer kullanıcı düzenlemeyi iptal ettiyse (ESC'ye bastıysa) veya boş bir metin girdiyse
+            if (e.Label == null)
+            {
+                // Eğer bu yeni oluşturulan bir kullanıcıysa ve iptal edildiyse, listeden kaldır.
+                if ((int)e.Node.Tag == -1)
+                {
+                    e.Node.Remove();
+                }
+                return; // Hiçbir şey yapma
+            }
+
+            // Kullanıcının girdiği yeni metni al. Örn: "Yeni İsim (yeni_kullanici_adi)"
+            string yeniMetin = e.Label;
+
+            // Bu metinden AdSoyad ve KullaniciAdi'nı ayırmaya çalışalım (basit bir varsayımla).
+            string yeniAdSoyad = yeniMetin;
+            string yeniKullaniciAdi = ""; // Şimdilik bunu boş bırakalım veya bir varsayılan atayalım.
+
+            int kullaniciID = (int)e.Node.Tag;
+
+            bool sonuc = false;
+            if (kullaniciID == -1) // EKLEME İŞLEMİ
+            {
+                // Yeni kullanıcı için varsayılan bir şifre ve rol atamamız gerekiyor.
+                // Bu bilgiler daha sonra sağdaki panelden güncellenebilir.
+                sonuc = db.KullaniciEkle(yeniAdSoyad, yeniAdSoyad.Replace(" ", "").ToLower(), "12345", "Garson");
+                if (sonuc) MessageBox.Show("Yeni kullanıcı varsayılan şifre (12345) ile eklendi.");
+            }
+            else // GÜNCELLEME İŞLEMİ
+            {
+                // Sadece AdSoyad'ı güncelleyelim. Diğer bilgiler aynı kalsın.
+                // Bunun için TekKullaniciGetir'i kullanabiliriz.
+                DataTable dt = db.TekKullaniciGetir(kullaniciID);
+                if (dt.Rows.Count > 0)
+                {
+                    string mevcutKullaniciAdi = dt.Rows[0]["KullaniciAdi"].ToString();
+                    string mevcutRol = dt.Rows[0]["Rol"].ToString();
+                    // Sadece AdSoyad'ı güncelleyen bir metot çağıralım. Şifre boş gönderildiği için değişmez.
+                    sonuc = db.KullaniciGuncelle(kullaniciID, yeniAdSoyad, mevcutKullaniciAdi, "", mevcutRol);
+                }
+            }
+
+            if (sonuc)
+            {
+                // Her şey başarılıysa listeyi yenile.
+                await KullaniciListeleriniDoldurAsync();
+            }
+            else
+            {
+                MessageBox.Show("İşlem sırasında bir hata oluştu.");
+                e.CancelEdit = true; // Düzenlemeyi iptal et, eski metne geri dön.
+            }
+        }
         #endregion
+
+      
 
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
@@ -404,6 +519,7 @@ namespace RestoranOtomasyon
             this.CalisanTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
             this.CalisanTree.Font = new System.Drawing.Font("Segoe UI", 8F);
             this.CalisanTree.ForeColor = System.Drawing.Color.White;
+            this.CalisanTree.LabelEdit = true;
             this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.CalisanTree.Location = new System.Drawing.Point(14, 356);
             this.CalisanTree.Name = "CalisanTree";
@@ -413,6 +529,7 @@ namespace RestoranOtomasyon
             treeNode1});
             this.CalisanTree.Size = new System.Drawing.Size(411, 212);
             this.CalisanTree.TabIndex = 11;
+            this.CalisanTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
             this.CalisanTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CalisanTree_AfterSelect);
             // 
             // AdminLabel
@@ -444,6 +561,7 @@ namespace RestoranOtomasyon
             treeNode2});
             this.AdminTree.Size = new System.Drawing.Size(411, 212);
             this.AdminTree.TabIndex = 10;
+            this.AdminTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
             this.AdminTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.AdminTree_AfterSelect);
             // 
             // HesapButonGroupBox
@@ -504,6 +622,7 @@ namespace RestoranOtomasyon
             this.btnHesapDuzenle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHesapDuzenle.UseAccentColor = false;
             this.btnHesapDuzenle.UseVisualStyleBackColor = true;
+            this.btnHesapDuzenle.Click += new System.EventHandler(this.btnHesapDuzenle_Click);
             // 
             // btnHesapSil
             // 
@@ -547,6 +666,7 @@ namespace RestoranOtomasyon
             this.btnHesapKaydet.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHesapKaydet.UseAccentColor = false;
             this.btnHesapKaydet.UseVisualStyleBackColor = true;
+            this.btnHesapKaydet.Click += new System.EventHandler(this.btnHesapKaydet_Click);
             // 
             // btnHesapGuncelle
             // 
@@ -899,7 +1019,8 @@ namespace RestoranOtomasyon
             this.ResumeLayout(false);
 
         }
-#endregion
-       
+
+        #endregion
+
     }
 }
