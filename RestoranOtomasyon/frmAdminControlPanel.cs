@@ -130,37 +130,7 @@ namespace RestoranOtomasyon
 
         private async void btnVeriSil_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count == 0)
-            {
-                MessageBox.Show("Lütfen silmek için bir satır seçin.", "Uyarı");
-                return;
-            }
-
-            int seciliID = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
-            bool sonuc = false;
-            string mesaj = "";
-
-            switch (aktifVeriTablosu)
-            {
-                case "Kullanicilar":
-                    // BU BUTON ARTIK KULLANICILARI SİLEMEZ.
-                    MessageBox.Show("Kullanıcıları silmek için lütfen sol taraftaki 'Hesaplar' panelini kullanın.", "İşlem Yönlendirme");
-                    return;
-                case "Urunler":
-                    sonuc = db.UrunSil(seciliID);
-                    mesaj = sonuc ? "Ürün başarıyla silindi." : "Ürün silinemedi.";
-                    break;
-                case "Kategoriler":
-                    sonuc = db.KategoriSil(seciliID);
-                    mesaj = sonuc ? "Kategori başarıyla silindi." : "Bu kategoriye bağlı ürünler olduğu için silinemedi.";
-                    break;
-                case "Masalar":
-                    MessageBox.Show("Masalar bu ekrandan silinemez.", "İşlem Desteklenmiyor");
-                    return;
-            }
-
-            if (!string.IsNullOrEmpty(mesaj)) MessageBox.Show(mesaj);
-            YenileAktifTablo();
+            MessageBox.Show("Veri Silme özelliği henüz aktif değil.");
         }
 
         private void btnVeriEkle_Click(object sender, EventArgs e)
@@ -175,45 +145,12 @@ namespace RestoranOtomasyon
 
         private void btnVeriDuzenle_Click(object sender, EventArgs e)
         {
-            // `dataGridView1.SelectedRows.Count > 0` yerine `seciliHesapID != -1` daha güvenilir olabilir.
-            if (aktifVeriTablosu == "Kullanicilar" && seciliHesapID != -1)
-            {
-                BilgiKutularininKilidiniAc();
-            }
-            else
-            {
-                MessageBox.Show("Lütfen önce soldaki listeden düzenlemek için bir kullanıcı seçin.", "Uyarı");
-            }
+            MessageBox.Show("Veri Düzenleme özelliği henüz aktif değil.");
         }
 
         private async void btnVeriKaydet_Click(object sender, EventArgs e)
         {
-            // Düzenleme modunda olup olmadığımızı GroupBox'ın durumundan anla.
-            if (!SeciliKullaniciBilgileriGroupBox.Enabled)
-            {
-                return; // Düzenleme modu aktif değilse bir şey yapma.
-            }
-
-            // Backend'deki KullaniciGuncelle metodunu, doğru kontrol isimleriyle çağır.
-            bool sonuc = db.KullaniciGuncelle(
-                seciliHesapID,
-                txtAdSyd.Text,
-                txtKullaniciAdi1.Text,
-                txtSifre1.Text,
-                cmbRoller.SelectedItem.ToString()
-            );
-
-            if (sonuc)
-            {
-                MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.");
-                BilgiKutulariniKilitle();
-                await KullaniciListeleriniDoldurAsync();
-                dataGridView1.DataSource = db.TekKullaniciGetir(seciliHesapID);
-            }
-            else
-            {
-                MessageBox.Show("Güncelleme sırasında bir hata oluştu.", "Hata");
-            }
+            MessageBox.Show("Veri Kaydetme özelliği henüz aktif değil.");
         }
 
         #endregion
