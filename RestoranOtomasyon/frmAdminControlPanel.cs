@@ -153,6 +153,11 @@ namespace RestoranOtomasyon
             MessageBox.Show("Veri Kaydetme özelliği henüz aktif değil.");
         }
 
+        private void btnVeriIstatistik_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("İstatistik özelliği henüz aktif değil.");
+        }
+
         #endregion
 
         #region Hesap Butonları
@@ -493,8 +498,8 @@ namespace RestoranOtomasyon
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.BaslikBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
@@ -640,10 +645,10 @@ namespace RestoranOtomasyon
             this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.CalisanTree.Location = new System.Drawing.Point(14, 356);
             this.CalisanTree.Name = "CalisanTree";
-            treeNode5.Name = "CalisanNodes";
-            treeNode5.Text = "Çalışan Hesaplar";
+            treeNode1.Name = "CalisanNodes";
+            treeNode1.Text = "Çalışan Hesaplar";
             this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode5});
+            treeNode1});
             this.CalisanTree.Size = new System.Drawing.Size(411, 212);
             this.CalisanTree.TabIndex = 11;
             this.CalisanTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
@@ -672,10 +677,10 @@ namespace RestoranOtomasyon
             this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.AdminTree.Location = new System.Drawing.Point(14, 104);
             this.AdminTree.Name = "AdminTree";
-            treeNode6.Name = "AdminNodes";
-            treeNode6.Text = "Yetkili Hesaplar";
+            treeNode2.Name = "AdminNodes";
+            treeNode2.Text = "Yetkili Hesaplar";
             this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode6});
+            treeNode2});
             this.AdminTree.Size = new System.Drawing.Size(411, 212);
             this.AdminTree.TabIndex = 10;
             this.AdminTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
@@ -1081,6 +1086,7 @@ namespace RestoranOtomasyon
             this.btnVeriIstatistik.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnVeriIstatistik.UseAccentColor = false;
             this.btnVeriIstatistik.UseVisualStyleBackColor = true;
+            this.btnVeriIstatistik.Click += new System.EventHandler(this.btnVeriIstatistik_Click);
             // 
             // btnVeriDuzenle
             // 
@@ -1199,8 +1205,9 @@ namespace RestoranOtomasyon
 
 
 
+
         #endregion
 
-       
+        
     }
 }
