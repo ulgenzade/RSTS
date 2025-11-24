@@ -125,13 +125,13 @@
             this.lvMasaSiparisleri.Depth = 0;
             this.lvMasaSiparisleri.FullRowSelect = true;
             this.lvMasaSiparisleri.HideSelection = false;
-            this.lvMasaSiparisleri.Location = new System.Drawing.Point(4, 3);
+            this.lvMasaSiparisleri.Location = new System.Drawing.Point(4, 6);
             this.lvMasaSiparisleri.MinimumSize = new System.Drawing.Size(200, 100);
             this.lvMasaSiparisleri.MouseLocation = new System.Drawing.Point(-1, -1);
             this.lvMasaSiparisleri.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.lvMasaSiparisleri.Name = "lvMasaSiparisleri";
             this.lvMasaSiparisleri.OwnerDraw = true;
-            this.lvMasaSiparisleri.Size = new System.Drawing.Size(488, 551);
+            this.lvMasaSiparisleri.Size = new System.Drawing.Size(488, 545);
             this.lvMasaSiparisleri.TabIndex = 4;
             this.lvMasaSiparisleri.UseCompatibleStateImageBehavior = false;
             this.lvMasaSiparisleri.View = System.Windows.Forms.View.Details;
@@ -192,6 +192,7 @@
             this.btnSolaAktar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSolaAktar.UseAccentColor = false;
             this.btnSolaAktar.UseVisualStyleBackColor = true;
+            this.btnSolaAktar.Click += new System.EventHandler(this.btnSolaAktar_Click);
             // 
             // btnSagaAktar
             // 
@@ -212,6 +213,7 @@
             this.btnSagaAktar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnSagaAktar.UseAccentColor = false;
             this.btnSagaAktar.UseVisualStyleBackColor = true;
+            this.btnSagaAktar.Click += new System.EventHandler(this.btnSagaAktar_Click);
             // 
             // btnHepsiniEkle
             // 
@@ -232,6 +234,7 @@
             this.btnHepsiniEkle.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHepsiniEkle.UseAccentColor = false;
             this.btnHepsiniEkle.UseVisualStyleBackColor = true;
+            this.btnHepsiniEkle.Click += new System.EventHandler(this.btnHepsiniEkle_Click);
             // 
             // btnHepsiniCikar
             // 
@@ -252,6 +255,7 @@
             this.btnHepsiniCikar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnHepsiniCikar.UseAccentColor = false;
             this.btnHepsiniCikar.UseVisualStyleBackColor = true;
+            this.btnHepsiniCikar.Click += new System.EventHandler(this.btnHepsiniCikar_Click);
             // 
             // PanelAktarma
             // 
