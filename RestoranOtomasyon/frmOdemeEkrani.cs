@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -147,26 +147,6 @@ namespace RestoranOtomasyon
         }
 
         private void flowUrunler_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void btnHepsiniEkle_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSagaAktar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnSolaAktar_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnHepsiniCikar_Click(object sender, EventArgs e)
         {
 
         }
