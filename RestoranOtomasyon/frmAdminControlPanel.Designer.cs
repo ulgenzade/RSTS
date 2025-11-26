@@ -43,20 +43,11 @@
         private ReaLTaiizor.Controls.MaterialButton btnVeriUrunler;
         private ReaLTaiizor.Controls.MaterialButton btnVeriMasalar;
         private ReaLTaiizor.Controls.CyberGroupBox BaslikBox;
-        private ReaLTaiizor.Controls.MetroLabel HesaplarLabel;
-        private ReaLTaiizor.Controls.MetroLabel metroLabel1;
-        private ReaLTaiizor.Controls.CyberGroupBox SeciliKullaniciBilgileriGroupBox;
-        private ReaLTaiizor.Controls.AloneTextBox txtKullaniciAdi;
-        private ReaLTaiizor.Controls.AloneComboBox cmbRol;
-        private ReaLTaiizor.Controls.AloneTextBox txtAdSoyad;
-        private ReaLTaiizor.Controls.AloneTextBox txtSifre;
         private ReaLTaiizor.Controls.AloneTextBox txtKullaniciAdi1;
         private ReaLTaiizor.Controls.CyberGroupBox SeciliKullaniciBilgileriGroupBox1;
         private ReaLTaiizor.Controls.AloneTextBox txtSifre1;
         private ReaLTaiizor.Controls.AloneTextBox txtAdSyd;
         private ReaLTaiizor.Controls.AloneComboBox cmbRoller;
-        private ReaLTaiizor.Controls.MaterialButton btnVeriGuncelle;
-        private ReaLTaiizor.Controls.MaterialButton btnHesapGuncelle;
         private ReaLTaiizor.Controls.MaterialButton btnCikis;
     }
 }

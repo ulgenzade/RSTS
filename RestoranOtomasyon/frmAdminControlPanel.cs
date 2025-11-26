@@ -48,6 +48,18 @@ namespace RestoranOtomasyon
 
             BilgiKutulariniTemizleVeKilitle();
 
+            txtAdSyd.Text = "Ad Soyad";
+            txtAdSyd.ForeColor = Color.Gray;
+
+            txtKullaniciAdi1.Text = "Kullanıcı Adı";
+            txtKullaniciAdi1.ForeColor = Color.Gray;
+
+            txtSifre1.Text = "Şifre";
+            txtSifre1.ForeColor = Color.Gray;
+            txtSifre1.UseSystemPasswordChar = false;
+
+            this.ActiveControl = null;
+
         }
 
 
@@ -103,6 +115,8 @@ namespace RestoranOtomasyon
 
             dataGridView1.DataSource = db.MasalariGetir();
             aktifVeriTablosu = "Masalar";
+
+
         }
 
         private void btnVeriUrunler_Click(object sender, EventArgs e)
@@ -164,8 +178,29 @@ namespace RestoranOtomasyon
         private void btnHesapEkle_Click(object sender, EventArgs e)
         {
             seciliHesapID = -1;
+
+            // 1. Önce paneli temizle ve görünür yap
             BilgiKutulariniTemizleVeAc();
-            txtAdSyd.Focus();
+            SeciliKullaniciBilgileriGroupBox1.Visible = true;
+
+            // 2. KUTULARI ZORLA SIFIRLA (If kontrolüne gerek yok, taze açıyoruz)
+            // Ad Soyad Ayarı
+            txtAdSyd.Text = "Ad Soyad";
+            txtAdSyd.ForeColor = Color.Gray;
+
+            // Kullanıcı Adı Ayarı
+            txtKullaniciAdi1.Text = "Kullanıcı Adı";
+            txtKullaniciAdi1.ForeColor = Color.Gray;
+
+            // Şifre Ayarı
+            txtSifre1.Text = "Şifre";
+            txtSifre1.ForeColor = Color.Gray;
+            txtSifre1.UseSystemPasswordChar = false; // Yıldız olmasın
+
+            // 3. EN ÖNEMLİ HAMLE:
+            // Focus() komutunu sildim. Onun yerine odağı kaldırıyoruz.
+            // Böylece sen tıklayana kadar "Ad Soyad" yazısı silinmez.
+            this.ActiveControl = null;
         }
 
         private async void btnHesapSil_Click(object sender, EventArgs e)
@@ -204,17 +239,29 @@ namespace RestoranOtomasyon
                 return;
             }
 
-            // --- YENİ EKLENEN AÇ-KAPA MANTIĞI ---
+            // --- AÇ-KAPA MANTIĞI ---
             // GroupBox'ın o anki durumunu kontrol et.
             if (SeciliKullaniciBilgileriGroupBox1.Enabled == false)
             {
                 // Eğer GroupBox kilitliyse (kapalıysa), kilidini AÇ.
                 BilgiKutularininKilidiniAc();
+
+                // [KRİTİK HAMLE] Kilit açılınca içindeki yazılar net görünsün diye rengi SİYAH yapıyoruz.
+                // Çünkü kutunun arka planı açık renk, beyaz yaparsak okunmaz.
+                txtAdSyd.ForeColor = Color.Black;
+                txtKullaniciAdi1.ForeColor = Color.Black;
+                txtSifre1.ForeColor = Color.Black;
             }
             else
             {
                 // Eğer GroupBox'ın kilidi açıksa, kilitle ve temizle.
                 BilgiKutulariniTemizleVeKilitle();
+            }
+
+            // Şifre kutusunda "Şifre" (Hint) yazmıyorsa, içindeki gerçek şifreyi yıldızla (****)
+            if (txtSifre1.Text != "Şifre")
+            {
+                txtSifre1.UseSystemPasswordChar = true;
             }
         }
 
@@ -336,7 +383,6 @@ namespace RestoranOtomasyon
 
             // Bu metinden AdSoyad ve KullaniciAdi'nı ayırmaya çalışalım (basit bir varsayımla).
             string yeniAdSoyad = yeniMetin;
-            string yeniKullaniciAdi = ""; // Şimdilik bunu boş bırakalım veya bir varsayılan atayalım.
 
             int kullaniciID = (int)e.Node.Tag;
 
@@ -453,7 +499,7 @@ namespace RestoranOtomasyon
 
         #endregion
 
-
+        #region Diğer Olaylar
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
         {
 
@@ -493,6 +539,7 @@ namespace RestoranOtomasyon
         {
 
         }
+        #endregion
 
 
         #region Windows Form Designer generated code
@@ -841,13 +888,13 @@ namespace RestoranOtomasyon
             this.SeciliKullaniciBilgileriGroupBox1.Background = true;
             this.SeciliKullaniciBilgileriGroupBox1.Background_WidthPen = 3F;
             this.SeciliKullaniciBilgileriGroupBox1.BackgroundPen = true;
-            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground_Pen = System.Drawing.Color.White;
+            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
+            this.SeciliKullaniciBilgileriGroupBox1.ColorBackground_Pen = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
             this.SeciliKullaniciBilgileriGroupBox1.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
-            this.SeciliKullaniciBilgileriGroupBox1.ColorPen_1 = System.Drawing.Color.White;
-            this.SeciliKullaniciBilgileriGroupBox1.ColorPen_2 = System.Drawing.Color.White;
+            this.SeciliKullaniciBilgileriGroupBox1.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
+            this.SeciliKullaniciBilgileriGroupBox1.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
             this.SeciliKullaniciBilgileriGroupBox1.Controls.Add(this.cmbRoller);
             this.SeciliKullaniciBilgileriGroupBox1.Controls.Add(this.txtKullaniciAdi1);
             this.SeciliKullaniciBilgileriGroupBox1.Controls.Add(this.txtSifre1);
@@ -874,22 +921,23 @@ namespace RestoranOtomasyon
             // cmbRoller
             // 
             this.cmbRoller.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.cmbRoller.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbRoller.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRoller.EnabledCalc = true;
+            this.cmbRoller.ForeColor = System.Drawing.Color.Black;
             this.cmbRoller.FormattingEnabled = true;
             this.cmbRoller.ItemHeight = 20;
             this.cmbRoller.Location = new System.Drawing.Point(65, 22);
             this.cmbRoller.Name = "cmbRoller";
-            this.cmbRoller.Size = new System.Drawing.Size(203, 26);
+            this.cmbRoller.Size = new System.Drawing.Size(203, 28);
             this.cmbRoller.TabIndex = 13;
+            this.cmbRoller.SelectedIndexChanged += new System.EventHandler(this.cmbRoller_SelectedIndexChanged);
             // 
             // txtKullaniciAdi1
             // 
             this.txtKullaniciAdi1.BackColor = System.Drawing.Color.Transparent;
             this.txtKullaniciAdi1.EnabledCalc = true;
             this.txtKullaniciAdi1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtKullaniciAdi1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtKullaniciAdi1.ForeColor = System.Drawing.Color.Black;
             this.txtKullaniciAdi1.Location = new System.Drawing.Point(65, 91);
             this.txtKullaniciAdi1.MaxLength = 32767;
             this.txtKullaniciAdi1.MultiLine = false;
@@ -897,16 +945,18 @@ namespace RestoranOtomasyon
             this.txtKullaniciAdi1.ReadOnly = false;
             this.txtKullaniciAdi1.Size = new System.Drawing.Size(203, 29);
             this.txtKullaniciAdi1.TabIndex = 12;
-            this.txtKullaniciAdi1.Text = "Kullnıcı Adı";
+            this.txtKullaniciAdi1.Text = "Kullanıcı Adı";
             this.txtKullaniciAdi1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtKullaniciAdi1.UseSystemPasswordChar = false;
+            this.txtKullaniciAdi1.Enter += new System.EventHandler(this.txtKullaniciAdi1_Enter);
+            this.txtKullaniciAdi1.Leave += new System.EventHandler(this.txtKullaniciAdi1_Leave);
             // 
             // txtSifre1
             // 
             this.txtSifre1.BackColor = System.Drawing.Color.Transparent;
             this.txtSifre1.EnabledCalc = true;
             this.txtSifre1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtSifre1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtSifre1.ForeColor = System.Drawing.Color.Black;
             this.txtSifre1.Location = new System.Drawing.Point(65, 127);
             this.txtSifre1.MaxLength = 32767;
             this.txtSifre1.MultiLine = false;
@@ -917,15 +967,16 @@ namespace RestoranOtomasyon
             this.txtSifre1.Text = "Şifre";
             this.txtSifre1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtSifre1.UseSystemPasswordChar = false;
+            this.txtSifre1.Enter += new System.EventHandler(this.txtSifre1_Enter);
+            this.txtSifre1.Leave += new System.EventHandler(this.txtSifre1_Leave);
             // 
             // txtAdSyd
             // 
             this.txtAdSyd.AccessibleName = "";
             this.txtAdSyd.BackColor = System.Drawing.Color.Transparent;
-            this.txtAdSyd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtAdSyd.EnabledCalc = true;
             this.txtAdSyd.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtAdSyd.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(124)))), ((int)(((byte)(133)))), ((int)(((byte)(142)))));
+            this.txtAdSyd.ForeColor = System.Drawing.Color.Black;
             this.txtAdSyd.Location = new System.Drawing.Point(65, 55);
             this.txtAdSyd.MaxLength = 32767;
             this.txtAdSyd.MultiLine = false;
@@ -937,6 +988,8 @@ namespace RestoranOtomasyon
             this.txtAdSyd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtAdSyd.UseSystemPasswordChar = false;
             this.txtAdSyd.TextChanged += new System.EventHandler(this.txtAdSyd_TextChanged);
+            this.txtAdSyd.Enter += new System.EventHandler(this.txtAdSyd_Enter);
+            this.txtAdSyd.Leave += new System.EventHandler(this.txtAdSyd_Leave);
             // 
             // VeriKategoriButonGroupBox
             // 
@@ -1220,6 +1273,7 @@ namespace RestoranOtomasyon
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YETKİLİ PANELİ";
             this.Load += new System.EventHandler(this.frmAdminControlPanel_Load_1);
+            this.Shown += new System.EventHandler(this.frmAdminControlPanel_Shown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -1241,9 +1295,83 @@ namespace RestoranOtomasyon
 
         #endregion
 
+        #region Watermark Textbox Events
+
         private void txtAdSyd_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void txtAdSyd_Enter(object sender, EventArgs e)
+        {
+            // Trim() sayesinde boşluk hatası olmaz, kesin siler.
+            if (txtAdSyd.Text.Trim() == "Ad Soyad")
+            {
+                txtAdSyd.Text = "";
+                txtAdSyd.ForeColor = Color.Black; // YAZARKEN SİYAH OLSUN
+            }
+        }
+
+        private void txtAdSyd_Leave(object sender, EventArgs e)
+        {
+            // Kutudan çıkıldığında: Eğer boş bırakıldıysa "Ad Soyad" yaz ve rengi GRİ yap
+            if (string.IsNullOrWhiteSpace(txtAdSyd.Text))
+            {
+                txtAdSyd.Text = "Ad Soyad";
+                txtAdSyd.ForeColor = Color.Gray; // Hint olduğu belli olsun diye Gri
+            }
+        }
+
+        private void txtKullaniciAdi1_Enter(object sender, EventArgs e)
+        {
+            if (txtKullaniciAdi1.Text.Trim() == "Kullanıcı Adı")
+            {
+                txtKullaniciAdi1.Text = "";
+                txtKullaniciAdi1.ForeColor = Color.Black; // YAZARKEN SİYAH OLSUN
+            }
+        }
+
+        private void txtKullaniciAdi1_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtKullaniciAdi1.Text))
+            {
+                txtKullaniciAdi1.Text = "Kullanıcı Adı";
+                txtKullaniciAdi1.ForeColor = Color.Gray; // Hint iken Gri
+            }
+        }
+
+        private void txtSifre1_Enter(object sender, EventArgs e)
+        {
+            if (txtSifre1.Text.Trim() == "Şifre")
+            {
+                txtSifre1.Text = "";
+                txtSifre1.ForeColor = Color.Black; // YAZARKEN SİYAH OLSUN
+                txtSifre1.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void txtSifre1_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtSifre1.Text))
+            {
+                txtSifre1.Text = "Şifre";
+                txtSifre1.ForeColor = Color.Gray; // Hint iken Gri
+                txtSifre1.UseSystemPasswordChar = false; // "Şifre" yazısı okunsun
+            }
+        }
+        #endregion
+
+        private void frmAdminControlPanel_Shown(object sender, EventArgs e)
+        {
+            // Form tamamen görünür olduktan sonra odağı boşa düşürür.
+            // Böylece ilk kutuya otomatik tıklamaz ve yazımız silinmez.
+            this.ActiveControl = null;
+        }
+
+        private void cmbRoller_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
