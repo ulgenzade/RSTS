@@ -117,5 +117,25 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVazgec_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnOnayla_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
