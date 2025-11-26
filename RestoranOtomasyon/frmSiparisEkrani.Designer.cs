@@ -147,12 +147,12 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(678, 642);
+            this.materialLabel1.Location = new System.Drawing.Point(661, 642);
             this.materialLabel1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(107, 19);
             this.materialLabel1.TabIndex = 7;
-            this.materialLabel1.Text = "materialLabel1";
+            this.materialLabel1.Text = "HESAP BİLGİSİ";
             // 
             // btnOdeme
             // 
