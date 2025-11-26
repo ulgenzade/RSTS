@@ -114,7 +114,7 @@
             this.btnGeriDon.NoAccentTextColor = System.Drawing.Color.Empty;
             this.btnGeriDon.Size = new System.Drawing.Size(94, 40);
             this.btnGeriDon.TabIndex = 5;
-            this.btnGeriDon.Text = "GERİ DÖN";
+            this.btnGeriDon.Text = "ÇIKIŞ YAP";
             this.btnGeriDon.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnGeriDon.UseAccentColor = false;
             this.btnGeriDon.UseVisualStyleBackColor = true;
