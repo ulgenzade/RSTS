@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.panelMasalar = new System.Windows.Forms.Panel();
-            this.btnMasa3 = new System.Windows.Forms.Button();
-            this.btnMasa2 = new System.Windows.Forms.Button();
-            this.btnMasa1 = new System.Windows.Forms.Button();
             this.panelOzet = new System.Windows.Forms.Panel();
             this.lblToplamTutar = new System.Windows.Forms.Label();
             this.btnOde = new System.Windows.Forms.Button();
@@ -47,7 +44,6 @@
             this.btnAnaMenu = new System.Windows.Forms.Button();
             this.btnCikisYap = new System.Windows.Forms.Button();
             this.btnHesapBilgisi = new System.Windows.Forms.Button();
-            this.panelMasalar.SuspendLayout();
             this.panelOzet.SuspendLayout();
             this.panelUrunler.SuspendLayout();
             this.panelMenu.SuspendLayout();
@@ -55,41 +51,11 @@
             // 
             // panelMasalar
             // 
-            this.panelMasalar.Controls.Add(this.btnMasa3);
-            this.panelMasalar.Controls.Add(this.btnMasa2);
-            this.panelMasalar.Controls.Add(this.btnMasa1);
             this.panelMasalar.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelMasalar.Location = new System.Drawing.Point(0, 0);
             this.panelMasalar.Name = "panelMasalar";
-            this.panelMasalar.Size = new System.Drawing.Size(341, 673);
+            this.panelMasalar.Size = new System.Drawing.Size(326, 673);
             this.panelMasalar.TabIndex = 0;
-            // 
-            // btnMasa3
-            // 
-            this.btnMasa3.Location = new System.Drawing.Point(27, 351);
-            this.btnMasa3.Name = "btnMasa3";
-            this.btnMasa3.Size = new System.Drawing.Size(143, 117);
-            this.btnMasa3.TabIndex = 2;
-            this.btnMasa3.Text = "MASA- 3";
-            this.btnMasa3.UseVisualStyleBackColor = true;
-            // 
-            // btnMasa2
-            // 
-            this.btnMasa2.Location = new System.Drawing.Point(27, 232);
-            this.btnMasa2.Name = "btnMasa2";
-            this.btnMasa2.Size = new System.Drawing.Size(143, 113);
-            this.btnMasa2.TabIndex = 1;
-            this.btnMasa2.Text = "MASA-2";
-            this.btnMasa2.UseVisualStyleBackColor = true;
-            // 
-            // btnMasa1
-            // 
-            this.btnMasa1.Location = new System.Drawing.Point(27, 116);
-            this.btnMasa1.Name = "btnMasa1";
-            this.btnMasa1.Size = new System.Drawing.Size(143, 110);
-            this.btnMasa1.TabIndex = 0;
-            this.btnMasa1.Text = "MASA-1";
-            this.btnMasa1.UseVisualStyleBackColor = true;
             // 
             // panelOzet
             // 
@@ -249,7 +215,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ÖDEME EKRANI";
             this.Load += new System.EventHandler(this.frmOdemeEkrani_Load);
-            this.panelMasalar.ResumeLayout(false);
             this.panelOzet.ResumeLayout(false);
             this.panelOzet.PerformLayout();
             this.panelUrunler.ResumeLayout(false);
@@ -267,9 +232,6 @@
         private System.Windows.Forms.Button btnAnaMenu;
         private System.Windows.Forms.Button btnCikisYap;
         private System.Windows.Forms.Button btnHesapBilgisi;
-        private System.Windows.Forms.Button btnMasa3;
-        private System.Windows.Forms.Button btnMasa2;
-        private System.Windows.Forms.Button btnMasa1;
         private System.Windows.Forms.Button btnOde;
         private System.Windows.Forms.Button btnVazgecOde;
         private System.Windows.Forms.ListBox listOzet;
