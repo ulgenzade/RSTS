@@ -57,5 +57,6 @@
         private ReaLTaiizor.Controls.AloneComboBox cmbRoller;
         private ReaLTaiizor.Controls.MaterialButton btnVeriGuncelle;
         private ReaLTaiizor.Controls.MaterialButton btnHesapGuncelle;
+        private ReaLTaiizor.Controls.MaterialButton btnCikis;
     }
 }

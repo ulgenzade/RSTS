@@ -108,12 +108,14 @@ namespace RestoranOtomasyon
             this.txtSecim.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.txtSecim.Name = "txtSecim";
             this.txtSecim.Size = new System.Drawing.Size(270, 49);
+            this.txtSecim.Sorted = true;
             this.txtSecim.StartIndex = 0;
             this.txtSecim.TabIndex = 4;
             this.txtSecim.SelectedIndexChanged += new System.EventHandler(this.textSecim_SelectedIndexChanged);
             // 
             // btnGiris
             // 
+            this.btnGiris.AutoSize = false;
             this.btnGiris.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnGiris.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnGiris.Depth = 0;
@@ -121,12 +123,12 @@ namespace RestoranOtomasyon
             this.btnGiris.HighEmphasis = true;
             this.btnGiris.Icon = null;
             this.btnGiris.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnGiris.Location = new System.Drawing.Point(150, 273);
+            this.btnGiris.Location = new System.Drawing.Point(128, 273);
             this.btnGiris.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGiris.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnGiris.Name = "btnGiris";
             this.btnGiris.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnGiris.Size = new System.Drawing.Size(64, 36);
+            this.btnGiris.Size = new System.Drawing.Size(112, 45);
             this.btnGiris.TabIndex = 3;
             this.btnGiris.Text = "GİRİŞ";
             this.btnGiris.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -148,7 +150,6 @@ namespace RestoranOtomasyon
             this.Text = "RST-Giriş";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -35,9 +35,14 @@
             this.panelSol = new System.Windows.Forms.Panel();
             this.flowTumSiparisler = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSolAlt = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelHesapBilgi = new ReaLTaiizor.Controls.MaterialLabel();
+            this.labelToplamTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelToplam = new ReaLTaiizor.Controls.MaterialLabel();
             this.panelSag = new System.Windows.Forms.Panel();
+            this.panelOdenecekler = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSagAlt = new System.Windows.Forms.Panel();
+            this.labelToplamOdenecek = new ReaLTaiizor.Controls.MaterialLabel();
             this.btnBitir = new ReaLTaiizor.Controls.MaterialButton();
             this.btnKart = new ReaLTaiizor.Controls.MaterialButton();
             this.btnNakit = new ReaLTaiizor.Controls.MaterialButton();
@@ -48,18 +53,13 @@
             this.btnSecilenleriGeriAl = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHepsiniAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenAktar = new ReaLTaiizor.Controls.MaterialButton();
-            this.labelToplamTutar = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelToplamOdenecek = new ReaLTaiizor.Controls.MaterialLabel();
-            this.panelOdenecekler = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelHesapBilgi = new ReaLTaiizor.Controls.MaterialLabel();
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.panelSag.SuspendLayout();
             this.panelSagAlt.SuspendLayout();
             this.panelOrta.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUst
@@ -91,7 +91,7 @@
             // 
             this.labelMasaBilgi.AutoSize = true;
             this.labelMasaBilgi.Depth = 0;
-            this.labelMasaBilgi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelMasaBilgi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelMasaBilgi.Location = new System.Drawing.Point(553, 22);
             this.labelMasaBilgi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelMasaBilgi.Name = "labelMasaBilgi";
@@ -150,6 +150,39 @@
             this.panelSolAlt.Size = new System.Drawing.Size(538, 95);
             this.panelSolAlt.TabIndex = 0;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.labelHesapBilgi);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel1.Location = new System.Drawing.Point(0, 49);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(538, 46);
+            this.panel1.TabIndex = 2;
+            // 
+            // labelHesapBilgi
+            // 
+            this.labelHesapBilgi.AutoSize = true;
+            this.labelHesapBilgi.Depth = 0;
+            this.labelHesapBilgi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelHesapBilgi.Location = new System.Drawing.Point(12, 17);
+            this.labelHesapBilgi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelHesapBilgi.Name = "labelHesapBilgi";
+            this.labelHesapBilgi.Size = new System.Drawing.Size(107, 19);
+            this.labelHesapBilgi.TabIndex = 0;
+            this.labelHesapBilgi.Text = "HESAP BİLGİSİ";
+            // 
+            // labelToplamTutar
+            // 
+            this.labelToplamTutar.AutoSize = true;
+            this.labelToplamTutar.Depth = 0;
+            this.labelToplamTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelToplamTutar.Location = new System.Drawing.Point(110, 18);
+            this.labelToplamTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelToplamTutar.Name = "labelToplamTutar";
+            this.labelToplamTutar.Size = new System.Drawing.Size(44, 19);
+            this.labelToplamTutar.TabIndex = 1;
+            this.labelToplamTutar.Text = "0,00 ₺";
+            // 
             // labelToplam
             // 
             this.labelToplam.AutoSize = true;
@@ -173,6 +206,14 @@
             this.panelSag.Size = new System.Drawing.Size(487, 611);
             this.panelSag.TabIndex = 3;
             // 
+            // panelOdenecekler
+            // 
+            this.panelOdenecekler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelOdenecekler.Location = new System.Drawing.Point(0, 0);
+            this.panelOdenecekler.Name = "panelOdenecekler";
+            this.panelOdenecekler.Size = new System.Drawing.Size(487, 445);
+            this.panelOdenecekler.TabIndex = 1;
+            // 
             // panelSagAlt
             // 
             this.panelSagAlt.Controls.Add(this.labelToplamOdenecek);
@@ -187,6 +228,18 @@
             this.panelSagAlt.Size = new System.Drawing.Size(487, 166);
             this.panelSagAlt.TabIndex = 0;
             // 
+            // labelToplamOdenecek
+            // 
+            this.labelToplamOdenecek.AutoSize = true;
+            this.labelToplamOdenecek.Depth = 0;
+            this.labelToplamOdenecek.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelToplamOdenecek.Location = new System.Drawing.Point(206, 26);
+            this.labelToplamOdenecek.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelToplamOdenecek.Name = "labelToplamOdenecek";
+            this.labelToplamOdenecek.Size = new System.Drawing.Size(44, 19);
+            this.labelToplamOdenecek.TabIndex = 5;
+            this.labelToplamOdenecek.Text = "0,00 ₺";
+            // 
             // btnBitir
             // 
             this.btnBitir.AutoSize = false;
@@ -196,12 +249,12 @@
             this.btnBitir.HighEmphasis = true;
             this.btnBitir.Icon = null;
             this.btnBitir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnBitir.Location = new System.Drawing.Point(307, 120);
+            this.btnBitir.Location = new System.Drawing.Point(307, 108);
             this.btnBitir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBitir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnBitir.Name = "btnBitir";
             this.btnBitir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBitir.Size = new System.Drawing.Size(158, 36);
+            this.btnBitir.Size = new System.Drawing.Size(158, 52);
             this.btnBitir.TabIndex = 4;
             this.btnBitir.Text = "ÖDE VE BİTİR";
             this.btnBitir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -217,12 +270,12 @@
             this.btnKart.HighEmphasis = true;
             this.btnKart.Icon = null;
             this.btnKart.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnKart.Location = new System.Drawing.Point(164, 120);
+            this.btnKart.Location = new System.Drawing.Point(164, 108);
             this.btnKart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnKart.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnKart.Name = "btnKart";
             this.btnKart.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnKart.Size = new System.Drawing.Size(108, 36);
+            this.btnKart.Size = new System.Drawing.Size(108, 52);
             this.btnKart.TabIndex = 3;
             this.btnKart.Text = "KART";
             this.btnKart.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -238,12 +291,12 @@
             this.btnNakit.HighEmphasis = true;
             this.btnNakit.Icon = null;
             this.btnNakit.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnNakit.Location = new System.Drawing.Point(21, 120);
+            this.btnNakit.Location = new System.Drawing.Point(21, 108);
             this.btnNakit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnNakit.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnNakit.Name = "btnNakit";
             this.btnNakit.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnNakit.Size = new System.Drawing.Size(108, 36);
+            this.btnNakit.Size = new System.Drawing.Size(108, 52);
             this.btnNakit.TabIndex = 2;
             this.btnNakit.Text = "NAKİT";
             this.btnNakit.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -376,59 +429,6 @@
             this.btnSecilenAktar.UseVisualStyleBackColor = true;
             this.btnSecilenAktar.Click += new System.EventHandler(this.btnSecilenAktar_Click);
             // 
-            // labelToplamTutar
-            // 
-            this.labelToplamTutar.AutoSize = true;
-            this.labelToplamTutar.Depth = 0;
-            this.labelToplamTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamTutar.Location = new System.Drawing.Point(110, 18);
-            this.labelToplamTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelToplamTutar.Name = "labelToplamTutar";
-            this.labelToplamTutar.Size = new System.Drawing.Size(44, 19);
-            this.labelToplamTutar.TabIndex = 1;
-            this.labelToplamTutar.Text = "0,00 ₺";
-            // 
-            // labelToplamOdenecek
-            // 
-            this.labelToplamOdenecek.AutoSize = true;
-            this.labelToplamOdenecek.Depth = 0;
-            this.labelToplamOdenecek.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamOdenecek.Location = new System.Drawing.Point(206, 26);
-            this.labelToplamOdenecek.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelToplamOdenecek.Name = "labelToplamOdenecek";
-            this.labelToplamOdenecek.Size = new System.Drawing.Size(44, 19);
-            this.labelToplamOdenecek.TabIndex = 5;
-            this.labelToplamOdenecek.Text = "0,00 ₺";
-            // 
-            // panelOdenecekler
-            // 
-            this.panelOdenecekler.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelOdenecekler.Location = new System.Drawing.Point(0, 0);
-            this.panelOdenecekler.Name = "panelOdenecekler";
-            this.panelOdenecekler.Size = new System.Drawing.Size(487, 445);
-            this.panelOdenecekler.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.labelHesapBilgi);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(538, 46);
-            this.panel1.TabIndex = 2;
-            // 
-            // labelHesapBilgi
-            // 
-            this.labelHesapBilgi.AutoSize = true;
-            this.labelHesapBilgi.Depth = 0;
-            this.labelHesapBilgi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelHesapBilgi.Location = new System.Drawing.Point(12, 17);
-            this.labelHesapBilgi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelHesapBilgi.Name = "labelHesapBilgi";
-            this.labelHesapBilgi.Size = new System.Drawing.Size(107, 19);
-            this.labelHesapBilgi.TabIndex = 0;
-            this.labelHesapBilgi.Text = "HESAP BİLGİSİ";
-            // 
             // frmOdemeEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -447,12 +447,12 @@
             this.panelSol.ResumeLayout(false);
             this.panelSolAlt.ResumeLayout(false);
             this.panelSolAlt.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.panelSag.ResumeLayout(false);
             this.panelSagAlt.ResumeLayout(false);
             this.panelSagAlt.PerformLayout();
             this.panelOrta.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
