@@ -91,6 +91,7 @@
             this.btnOnayla.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnOnayla.UseAccentColor = false;
             this.btnOnayla.UseVisualStyleBackColor = true;
+            this.btnOnayla.Click += new System.EventHandler(this.btnOnayla_Click);
             // 
             // btnGeriDon
             // 
@@ -111,6 +112,7 @@
             this.btnGeriDon.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnGeriDon.UseAccentColor = false;
             this.btnGeriDon.UseVisualStyleBackColor = true;
+            this.btnGeriDon.Click += new System.EventHandler(this.btnGeriDon_Click);
             // 
             // btnVazgec
             // 
@@ -131,6 +133,7 @@
             this.btnVazgec.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnVazgec.UseAccentColor = false;
             this.btnVazgec.UseVisualStyleBackColor = true;
+            this.btnVazgec.Click += new System.EventHandler(this.btnVazgec_Click);
             // 
             // materialLabel1
             // 
@@ -163,6 +166,7 @@
             this.btnOdeme.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnOdeme.UseAccentColor = false;
             this.btnOdeme.UseVisualStyleBackColor = true;
+            this.btnOdeme.Click += new System.EventHandler(this.btnOdeme_Click);
             // 
             // txtArama
             // 
@@ -172,7 +176,7 @@
             this.txtArama.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.txtArama.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
             this.txtArama.Depth = 0;
-            this.txtArama.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.txtArama.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.txtArama.HideSelection = true;
             this.txtArama.Hint = "ÜRÜN ARA";
             this.txtArama.LeadingIcon = null;
@@ -212,6 +216,7 @@
             this.Controls.Add(this.flowMasalar);
             this.Name = "frmSiparisEkrani";
             this.Text = "frmSiparisEkrani";
+            this.Load += new System.EventHandler(this.frmSiparisEkrani_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgMevcutUrunler)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -751,7 +751,7 @@ namespace RestoranOtomasyon
         }
         #endregion
 
-        #region Masa Siparislerini Getir Metodu
+        #region Masa Siparisleri
         public List<SiparisUrunModel> MasaSiparisleriniGetir(int masaID)
         {
             List<SiparisUrunModel> siparisListesi = new List<SiparisUrunModel>();
@@ -791,6 +791,145 @@ namespace RestoranOtomasyon
             }
             return siparisListesi;
         }
+
+        public bool SiparisOlusturVeOnayla(int masaID, int kullaniciID, System.Collections.Generic.List<SepetUrunDto> sepetUrunleri)
+        {
+            if (sepetUrunleri == null || sepetUrunleri.Count == 0) return false;
+
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                baglanti.Open();
+                using (MySqlTransaction transaction = baglanti.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Ana Sipariş Kaydını Oluştur
+                        string siparisEkleSorgu = "INSERT INTO Siparisler (MasaID, KullaniciID, AcilisZamani) VALUES (@masaID, @kullaniciID, NOW()); SELECT LAST_INSERT_ID();";
+                        long yeniSiparisID;
+
+                        using (MySqlCommand siparisEkleKomut = new MySqlCommand(siparisEkleSorgu, baglanti))
+                        {
+                            siparisEkleKomut.Transaction = transaction;
+                            siparisEkleKomut.Parameters.AddWithValue("@masaID", masaID);
+                            siparisEkleKomut.Parameters.AddWithValue("@kullaniciID", kullaniciID);
+                            yeniSiparisID = Convert.ToInt64(siparisEkleKomut.ExecuteScalar());
+                        }
+
+                        // 2. Sepetteki Ürünleri Ekle ve Toplamı Hesapla
+                        decimal toplamTutar = 0;
+                        string detayEkleSorgu = "INSERT INTO SiparisDetaylari (SiparisID, UrunID, Adet, BirimFiyat) VALUES (@siparisID, @urunID, @adet, @birimFiyat);";
+
+                        foreach (var urun in sepetUrunleri)
+                        {
+                            using (MySqlCommand detayKomut = new MySqlCommand(detayEkleSorgu, baglanti))
+                            {
+                                detayKomut.Transaction = transaction;
+                                detayKomut.Parameters.AddWithValue("@siparisID", yeniSiparisID);
+                                detayKomut.Parameters.AddWithValue("@urunID", urun.UrunID);
+                                detayKomut.Parameters.AddWithValue("@adet", urun.Adet);
+                                detayKomut.Parameters.AddWithValue("@birimFiyat", urun.BirimFiyat);
+                                detayKomut.ExecuteNonQuery();
+                            }
+                            toplamTutar += urun.Adet * urun.BirimFiyat;
+                        }
+
+                        // 3. Toplam Tutarı Güncelle
+                        string tutarGuncelleSorgu = "UPDATE Siparisler SET ToplamTutar = @toplamTutar WHERE SiparisID = @siparisID;";
+                        using (MySqlCommand tutarGuncelleKomut = new MySqlCommand(tutarGuncelleSorgu, baglanti))
+                        {
+                            tutarGuncelleKomut.Transaction = transaction;
+                            tutarGuncelleKomut.Parameters.AddWithValue("@toplamTutar", toplamTutar);
+                            tutarGuncelleKomut.Parameters.AddWithValue("@siparisID", yeniSiparisID);
+                            tutarGuncelleKomut.ExecuteNonQuery();
+                        }
+
+                        // 4. Masayı 'Dolu' Yap
+                        string masaGuncelleSorgu = "UPDATE Masalar SET Durum = 'Dolu' WHERE MasaID = @masaID;";
+                        using (MySqlCommand masaGuncelleKomut = new MySqlCommand(masaGuncelleSorgu, baglanti))
+                        {
+                            masaGuncelleKomut.Transaction = transaction;
+                            masaGuncelleKomut.Parameters.AddWithValue("@masaID", masaID);
+                            masaGuncelleKomut.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        System.Diagnostics.Debug.WriteLine("Sipariş oluşturma hatası: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public bool EkSiparisEkle(int masaID, System.Collections.Generic.List<SepetUrunDto> yeniUrunler)
+        {
+            if (yeniUrunler == null || yeniUrunler.Count == 0) return false;
+
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                baglanti.Open();
+                using (MySqlTransaction transaction = baglanti.BeginTransaction())
+                {
+                    try
+                    {
+                        // 1. Aktif Sipariş ID'sini Bul
+                        int aktifSiparisID = -1;
+                        string idBulSorgu = "SELECT SiparisID FROM Siparisler WHERE MasaID = @masaID AND OdemeDurumu = 'Aktif' LIMIT 1;";
+
+                        using (MySqlCommand idKomut = new MySqlCommand(idBulSorgu, baglanti))
+                        {
+                            idKomut.Transaction = transaction;
+                            idKomut.Parameters.AddWithValue("@masaID", masaID);
+                            object sonuc = idKomut.ExecuteScalar();
+                            if (sonuc == null) return false;
+                            aktifSiparisID = Convert.ToInt32(sonuc);
+                        }
+
+                        // 2. Yeni Ürünleri Ekle
+                        decimal eklenecekTutar = 0;
+                        string detayEkleSorgu = "INSERT INTO SiparisDetaylari (SiparisID, UrunID, Adet, BirimFiyat) VALUES (@siparisID, @urunID, @adet, @birimFiyat);";
+
+                        foreach (var urun in yeniUrunler)
+                        {
+                            using (MySqlCommand detayKomut = new MySqlCommand(detayEkleSorgu, baglanti))
+                            {
+                                detayKomut.Transaction = transaction;
+                                detayKomut.Parameters.AddWithValue("@siparisID", aktifSiparisID);
+                                detayKomut.Parameters.AddWithValue("@urunID", urun.UrunID);
+                                detayKomut.Parameters.AddWithValue("@adet", urun.Adet);
+                                detayKomut.Parameters.AddWithValue("@birimFiyat", urun.BirimFiyat);
+                                detayKomut.ExecuteNonQuery();
+                            }
+                            eklenecekTutar += urun.Adet * urun.BirimFiyat;
+                        }
+
+                        // 3. Toplam Tutarı Artır (Mevcut Tutar + Yeni Tutar)
+                        string tutarGuncelleSorgu = "UPDATE Siparisler SET ToplamTutar = ToplamTutar + @eklenenTutar WHERE SiparisID = @siparisID;";
+                        using (MySqlCommand tutarKomut = new MySqlCommand(tutarGuncelleSorgu, baglanti))
+                        {
+                            tutarKomut.Transaction = transaction;
+                            tutarKomut.Parameters.AddWithValue("@eklenenTutar", eklenecekTutar);
+                            tutarKomut.Parameters.AddWithValue("@siparisID", aktifSiparisID);
+                            tutarKomut.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        System.Diagnostics.Debug.WriteLine("Ek sipariş hatası: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
         #endregion
 
         #region Odeme Ekle Metodu
@@ -819,6 +958,7 @@ namespace RestoranOtomasyon
             }
         }
         #endregion
+
 
     }
 }
