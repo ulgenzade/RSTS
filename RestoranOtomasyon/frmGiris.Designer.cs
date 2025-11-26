@@ -97,10 +97,10 @@ namespace RestoranOtomasyon
             this.txtSecim.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Pixel);
             this.txtSecim.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.txtSecim.FormattingEnabled = true;
+            this.txtSecim.Hint = "KULLANICI SEÇİNİZ";
             this.txtSecim.IntegralHeight = false;
             this.txtSecim.ItemHeight = 43;
             this.txtSecim.Items.AddRange(new object[] {
-            "-KULLANICI SEÇİNİZ-",
             "Admin",
             "Garson"});
             this.txtSecim.Location = new System.Drawing.Point(47, 126);
