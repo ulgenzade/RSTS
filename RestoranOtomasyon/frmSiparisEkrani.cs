@@ -353,7 +353,7 @@ namespace RestoranOtomasyon
             _yeniSiparisListesi.Clear();
             _seciliMasaID = -1;
         }
-
+        //EHEHEHE
         private void btnGeriDon_Click(object sender, EventArgs e)
         {
             frmGiris giris = new frmGiris();
