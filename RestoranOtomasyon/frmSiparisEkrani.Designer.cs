@@ -37,6 +37,7 @@
             this.btnVazgec = new ReaLTaiizor.Controls.MaterialButton();
             this.materialLabel1 = new ReaLTaiizor.Controls.MaterialLabel();
             this.btnOdeme = new ReaLTaiizor.Controls.MaterialButton();
+            this.materialTextBoxEdit1 = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             ((System.ComponentModel.ISupportInitialize)(this.dgMevcutUrunler)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,16 +60,16 @@
             // 
             // flowKategoriler
             // 
-            this.flowKategoriler.Location = new System.Drawing.Point(578, 13);
+            this.flowKategoriler.Location = new System.Drawing.Point(578, 67);
             this.flowKategoriler.Name = "flowKategoriler";
-            this.flowKategoriler.Size = new System.Drawing.Size(672, 219);
+            this.flowKategoriler.Size = new System.Drawing.Size(672, 166);
             this.flowKategoriler.TabIndex = 2;
             // 
             // flowUrunler
             // 
-            this.flowUrunler.Location = new System.Drawing.Point(578, 238);
+            this.flowUrunler.Location = new System.Drawing.Point(578, 239);
             this.flowUrunler.Name = "flowUrunler";
-            this.flowUrunler.Size = new System.Drawing.Size(672, 330);
+            this.flowUrunler.Size = new System.Drawing.Size(672, 329);
             this.flowUrunler.TabIndex = 3;
             // 
             // btnOnayla
@@ -163,11 +164,43 @@
             this.btnOdeme.UseAccentColor = false;
             this.btnOdeme.UseVisualStyleBackColor = true;
             // 
+            // materialTextBoxEdit1
+            // 
+            this.materialTextBoxEdit1.AnimateReadOnly = false;
+            this.materialTextBoxEdit1.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.materialTextBoxEdit1.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.None;
+            this.materialTextBoxEdit1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.materialTextBoxEdit1.CharacterCasing = System.Windows.Forms.CharacterCasing.Normal;
+            this.materialTextBoxEdit1.Depth = 0;
+            this.materialTextBoxEdit1.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialTextBoxEdit1.HideSelection = true;
+            this.materialTextBoxEdit1.Hint = "ARA";
+            this.materialTextBoxEdit1.LeadingIcon = null;
+            this.materialTextBoxEdit1.Location = new System.Drawing.Point(578, 13);
+            this.materialTextBoxEdit1.MaxLength = 32767;
+            this.materialTextBoxEdit1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
+            this.materialTextBoxEdit1.Name = "materialTextBoxEdit1";
+            this.materialTextBoxEdit1.PasswordChar = '\0';
+            this.materialTextBoxEdit1.PrefixSuffixText = null;
+            this.materialTextBoxEdit1.ReadOnly = false;
+            this.materialTextBoxEdit1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.materialTextBoxEdit1.SelectedText = "";
+            this.materialTextBoxEdit1.SelectionLength = 0;
+            this.materialTextBoxEdit1.SelectionStart = 0;
+            this.materialTextBoxEdit1.ShortcutsEnabled = true;
+            this.materialTextBoxEdit1.Size = new System.Drawing.Size(672, 48);
+            this.materialTextBoxEdit1.TabIndex = 9;
+            this.materialTextBoxEdit1.TabStop = false;
+            this.materialTextBoxEdit1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.materialTextBoxEdit1.TrailingIcon = null;
+            this.materialTextBoxEdit1.UseSystemPasswordChar = false;
+            // 
             // frmSiparisEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.materialTextBoxEdit1);
             this.Controls.Add(this.btnOdeme);
             this.Controls.Add(this.materialLabel1);
             this.Controls.Add(this.btnVazgec);
@@ -196,5 +229,6 @@
         private ReaLTaiizor.Controls.MaterialButton btnVazgec;
         private ReaLTaiizor.Controls.MaterialLabel materialLabel1;
         private ReaLTaiizor.Controls.MaterialButton btnOdeme;
+        private ReaLTaiizor.Controls.MaterialTextBoxEdit materialTextBoxEdit1;
     }
 }

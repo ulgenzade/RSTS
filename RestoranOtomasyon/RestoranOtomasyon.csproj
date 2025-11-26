@@ -162,12 +162,6 @@
     <Compile Include="frmMasaDurum.Designer.cs">
       <DependentUpon>frmMasaDurum.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmMasalar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMasalar.Designer.cs">
-      <DependentUpon>frmMasalar.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmOdemeEkrani.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -193,9 +187,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMasaDurum.resx">
       <DependentUpon>frmMasaDurum.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMasalar.resx">
-      <DependentUpon>frmMasalar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOdemeEkrani.resx">
       <DependentUpon>frmOdemeEkrani.cs</DependentUpon>
