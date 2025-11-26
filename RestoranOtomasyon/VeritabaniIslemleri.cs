@@ -75,11 +75,13 @@ namespace RestoranOtomasyon
                 try
                 {
                     baglanti.Open();
+                    // DÜZELTME: 'U.KategoriID'yi sorguya ekledik. Filtreleme için bu şart!
                     string sorgu = @"
                         SELECT 
                             U.UrunID, 
                             U.UrunAdi, 
                             K.KategoriAdi, 
+                            U.KategoriID, 
                             U.Fiyat, 
                             U.StokDurumu 
                         FROM Urunler AS U
