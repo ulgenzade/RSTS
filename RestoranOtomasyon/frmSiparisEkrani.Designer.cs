@@ -45,7 +45,7 @@
             // 
             this.flowMasalar.Location = new System.Drawing.Point(13, 13);
             this.flowMasalar.Name = "flowMasalar";
-            this.flowMasalar.Size = new System.Drawing.Size(524, 423);
+            this.flowMasalar.Size = new System.Drawing.Size(609, 423);
             this.flowMasalar.TabIndex = 0;
             // 
             // dgMevcutUrunler
@@ -55,37 +55,38 @@
             this.dgMevcutUrunler.Name = "dgMevcutUrunler";
             this.dgMevcutUrunler.RowHeadersWidth = 51;
             this.dgMevcutUrunler.RowTemplate.Height = 24;
-            this.dgMevcutUrunler.Size = new System.Drawing.Size(524, 219);
+            this.dgMevcutUrunler.Size = new System.Drawing.Size(609, 219);
             this.dgMevcutUrunler.TabIndex = 1;
             // 
             // flowKategoriler
             // 
-            this.flowKategoriler.Location = new System.Drawing.Point(578, 67);
+            this.flowKategoriler.Location = new System.Drawing.Point(664, 90);
             this.flowKategoriler.Name = "flowKategoriler";
-            this.flowKategoriler.Size = new System.Drawing.Size(672, 166);
+            this.flowKategoriler.Size = new System.Drawing.Size(672, 141);
             this.flowKategoriler.TabIndex = 2;
             // 
             // flowUrunler
             // 
-            this.flowUrunler.Location = new System.Drawing.Point(578, 239);
+            this.flowUrunler.Location = new System.Drawing.Point(664, 261);
             this.flowUrunler.Name = "flowUrunler";
-            this.flowUrunler.Size = new System.Drawing.Size(672, 329);
+            this.flowUrunler.Size = new System.Drawing.Size(672, 311);
             this.flowUrunler.TabIndex = 3;
             // 
             // btnOnayla
             // 
+            this.btnOnayla.AutoSize = false;
             this.btnOnayla.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOnayla.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnOnayla.Depth = 0;
             this.btnOnayla.HighEmphasis = true;
             this.btnOnayla.Icon = null;
             this.btnOnayla.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnOnayla.Location = new System.Drawing.Point(664, 577);
+            this.btnOnayla.Location = new System.Drawing.Point(800, 581);
             this.btnOnayla.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnOnayla.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnOnayla.Name = "btnOnayla";
             this.btnOnayla.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnOnayla.Size = new System.Drawing.Size(78, 36);
+            this.btnOnayla.Size = new System.Drawing.Size(87, 36);
             this.btnOnayla.TabIndex = 4;
             this.btnOnayla.Text = "ONAYLA";
             this.btnOnayla.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -101,7 +102,7 @@
             this.btnGeriDon.HighEmphasis = true;
             this.btnGeriDon.Icon = null;
             this.btnGeriDon.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnGeriDon.Location = new System.Drawing.Point(578, 625);
+            this.btnGeriDon.Location = new System.Drawing.Point(664, 625);
             this.btnGeriDon.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGeriDon.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnGeriDon.Name = "btnGeriDon";
@@ -116,18 +117,19 @@
             // 
             // btnVazgec
             // 
+            this.btnVazgec.AutoSize = false;
             this.btnVazgec.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnVazgec.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnVazgec.Depth = 0;
             this.btnVazgec.HighEmphasis = true;
             this.btnVazgec.Icon = null;
             this.btnVazgec.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVazgec.Location = new System.Drawing.Point(578, 577);
+            this.btnVazgec.Location = new System.Drawing.Point(664, 581);
             this.btnVazgec.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnVazgec.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnVazgec.Name = "btnVazgec";
             this.btnVazgec.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnVazgec.Size = new System.Drawing.Size(78, 36);
+            this.btnVazgec.Size = new System.Drawing.Size(87, 36);
             this.btnVazgec.TabIndex = 6;
             this.btnVazgec.Text = "VAZGEÇ";
             this.btnVazgec.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -140,7 +142,7 @@
             this.materialLabel1.AutoSize = true;
             this.materialLabel1.Depth = 0;
             this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.materialLabel1.Location = new System.Drawing.Point(672, 642);
+            this.materialLabel1.Location = new System.Drawing.Point(897, 642);
             this.materialLabel1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.materialLabel1.Name = "materialLabel1";
             this.materialLabel1.Size = new System.Drawing.Size(107, 19);
@@ -149,18 +151,19 @@
             // 
             // btnOdeme
             // 
+            this.btnOdeme.AutoSize = false;
             this.btnOdeme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnOdeme.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
             this.btnOdeme.Depth = 0;
             this.btnOdeme.HighEmphasis = true;
             this.btnOdeme.Icon = null;
             this.btnOdeme.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnOdeme.Location = new System.Drawing.Point(1186, 625);
+            this.btnOdeme.Location = new System.Drawing.Point(1249, 622);
             this.btnOdeme.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnOdeme.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnOdeme.Name = "btnOdeme";
             this.btnOdeme.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnOdeme.Size = new System.Drawing.Size(64, 36);
+            this.btnOdeme.Size = new System.Drawing.Size(87, 36);
             this.btnOdeme.TabIndex = 8;
             this.btnOdeme.Text = "ÖDE";
             this.btnOdeme.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -180,7 +183,7 @@
             this.txtArama.HideSelection = true;
             this.txtArama.Hint = "ÜRÜN ARA";
             this.txtArama.LeadingIcon = null;
-            this.txtArama.Location = new System.Drawing.Point(578, 13);
+            this.txtArama.Location = new System.Drawing.Point(664, 12);
             this.txtArama.MaxLength = 32767;
             this.txtArama.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;
             this.txtArama.Name = "txtArama";
@@ -203,7 +206,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.ClientSize = new System.Drawing.Size(1362, 673);
             this.Controls.Add(this.txtArama);
             this.Controls.Add(this.btnOdeme);
             this.Controls.Add(this.materialLabel1);
@@ -214,7 +217,9 @@
             this.Controls.Add(this.flowKategoriler);
             this.Controls.Add(this.dgMevcutUrunler);
             this.Controls.Add(this.flowMasalar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmSiparisEkrani";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSiparisEkrani";
             this.Load += new System.EventHandler(this.frmSiparisEkrani_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgMevcutUrunler)).EndInit();
