@@ -29,162 +29,172 @@
         private void InitializeComponent()
         {
             this.flowMasalar = new System.Windows.Forms.FlowLayoutPanel();
-            this.panelSiparis = new System.Windows.Forms.Panel();
-            this.txtArama = new System.Windows.Forms.TextBox();
-            this.btnOdeme = new System.Windows.Forms.Button();
-            this.lblGarsonAdi = new System.Windows.Forms.Label();
-            this.btnOnayla = new System.Windows.Forms.Button();
-            this.btnVazgec = new System.Windows.Forms.Button();
-            this.panelSiparisListesi = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnGeriDon = new System.Windows.Forms.Button();
-            this.panelKategoriler = new System.Windows.Forms.Panel();
-            this.panelSiparis.SuspendLayout();
+            this.dgMevcutUrunler = new System.Windows.Forms.DataGridView();
+            this.flowKategoriler = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowUrunler = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnOnayla = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnGeriDon = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnVazgec = new ReaLTaiizor.Controls.MaterialButton();
+            this.materialLabel1 = new ReaLTaiizor.Controls.MaterialLabel();
+            this.btnOdeme = new ReaLTaiizor.Controls.MaterialButton();
+            ((System.ComponentModel.ISupportInitialize)(this.dgMevcutUrunler)).BeginInit();
             this.SuspendLayout();
             // 
             // flowMasalar
             // 
-            this.flowMasalar.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowMasalar.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowMasalar.Location = new System.Drawing.Point(0, 0);
+            this.flowMasalar.Location = new System.Drawing.Point(13, 13);
             this.flowMasalar.Name = "flowMasalar";
-            this.flowMasalar.Size = new System.Drawing.Size(462, 577);
+            this.flowMasalar.Size = new System.Drawing.Size(524, 423);
             this.flowMasalar.TabIndex = 0;
-            this.flowMasalar.Paint += new System.Windows.Forms.PaintEventHandler(this.flowMasalar_Paint);
             // 
-            // panelSiparis
+            // dgMevcutUrunler
             // 
-            this.panelSiparis.Controls.Add(this.btnGeriDon);
-            this.panelSiparis.Controls.Add(this.txtArama);
-            this.panelSiparis.Controls.Add(this.btnOdeme);
-            this.panelSiparis.Controls.Add(this.lblGarsonAdi);
-            this.panelSiparis.Controls.Add(this.btnOnayla);
-            this.panelSiparis.Controls.Add(this.btnVazgec);
-            this.panelSiparis.Controls.Add(this.panelKategoriler);
-            this.panelSiparis.Controls.Add(this.panelSiparisListesi);
-            this.panelSiparis.Controls.Add(this.label1);
-            this.panelSiparis.Location = new System.Drawing.Point(468, 0);
-            this.panelSiparis.Name = "panelSiparis";
-            this.panelSiparis.Size = new System.Drawing.Size(475, 577);
-            this.panelSiparis.TabIndex = 1;
-            this.panelSiparis.Visible = false;
-            this.panelSiparis.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSiparis_Paint);
+            this.dgMevcutUrunler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgMevcutUrunler.Location = new System.Drawing.Point(13, 442);
+            this.dgMevcutUrunler.Name = "dgMevcutUrunler";
+            this.dgMevcutUrunler.RowHeadersWidth = 51;
+            this.dgMevcutUrunler.RowTemplate.Height = 24;
+            this.dgMevcutUrunler.Size = new System.Drawing.Size(524, 219);
+            this.dgMevcutUrunler.TabIndex = 1;
             // 
-            // txtArama
+            // flowKategoriler
             // 
-            this.txtArama.Location = new System.Drawing.Point(36, 28);
-            this.txtArama.Name = "txtArama";
-            this.txtArama.Size = new System.Drawing.Size(403, 22);
-            this.txtArama.TabIndex = 1;
+            this.flowKategoriler.Location = new System.Drawing.Point(578, 13);
+            this.flowKategoriler.Name = "flowKategoriler";
+            this.flowKategoriler.Size = new System.Drawing.Size(672, 219);
+            this.flowKategoriler.TabIndex = 2;
             // 
-            // btnOdeme
+            // flowUrunler
             // 
-            this.btnOdeme.Location = new System.Drawing.Point(276, 542);
-            this.btnOdeme.Name = "btnOdeme";
-            this.btnOdeme.Size = new System.Drawing.Size(195, 23);
-            this.btnOdeme.TabIndex = 6;
-            this.btnOdeme.Text = "ÖDE";
-            this.btnOdeme.UseVisualStyleBackColor = true;
-            this.btnOdeme.Click += new System.EventHandler(this.btnOdeme_Click);
-            // 
-            // lblGarsonAdi
-            // 
-            this.lblGarsonAdi.AutoSize = true;
-            this.lblGarsonAdi.Location = new System.Drawing.Point(3, 515);
-            this.lblGarsonAdi.Name = "lblGarsonAdi";
-            this.lblGarsonAdi.Size = new System.Drawing.Size(44, 16);
-            this.lblGarsonAdi.TabIndex = 5;
-            this.lblGarsonAdi.Text = "label2";
-            this.lblGarsonAdi.Click += new System.EventHandler(this.lblGarsonAdi_Click);
+            this.flowUrunler.Location = new System.Drawing.Point(578, 238);
+            this.flowUrunler.Name = "flowUrunler";
+            this.flowUrunler.Size = new System.Drawing.Size(672, 330);
+            this.flowUrunler.TabIndex = 3;
             // 
             // btnOnayla
             // 
-            this.btnOnayla.Location = new System.Drawing.Point(379, 495);
+            this.btnOnayla.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnOnayla.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnOnayla.Depth = 0;
+            this.btnOnayla.HighEmphasis = true;
+            this.btnOnayla.Icon = null;
+            this.btnOnayla.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnOnayla.Location = new System.Drawing.Point(664, 577);
+            this.btnOnayla.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnOnayla.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnOnayla.Name = "btnOnayla";
-            this.btnOnayla.Size = new System.Drawing.Size(93, 36);
+            this.btnOnayla.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnOnayla.Size = new System.Drawing.Size(78, 36);
             this.btnOnayla.TabIndex = 4;
             this.btnOnayla.Text = "ONAYLA";
+            this.btnOnayla.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnOnayla.UseAccentColor = false;
             this.btnOnayla.UseVisualStyleBackColor = true;
-            this.btnOnayla.Click += new System.EventHandler(this.btnOnayla_Click);
-            // 
-            // btnVazgec
-            // 
-            this.btnVazgec.Location = new System.Drawing.Point(276, 495);
-            this.btnVazgec.Name = "btnVazgec";
-            this.btnVazgec.Size = new System.Drawing.Size(93, 36);
-            this.btnVazgec.TabIndex = 3;
-            this.btnVazgec.Text = "VAZGEÇ";
-            this.btnVazgec.UseVisualStyleBackColor = true;
-            this.btnVazgec.Click += new System.EventHandler(this.btnVazgec_Click);
-            // 
-            // panelSiparisListesi
-            // 
-            this.panelSiparisListesi.AutoScroll = true;
-            this.panelSiparisListesi.Location = new System.Drawing.Point(3, 170);
-            this.panelSiparisListesi.Name = "panelSiparisListesi";
-            this.panelSiparisListesi.Size = new System.Drawing.Size(468, 319);
-            this.panelSiparisListesi.TabIndex = 2;
-            this.panelSiparisListesi.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSiparisListesi_Paint);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(195, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 16);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "SİPARİŞLER";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnGeriDon
             // 
-            this.btnGeriDon.Location = new System.Drawing.Point(3, 542);
+            this.btnGeriDon.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnGeriDon.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnGeriDon.Depth = 0;
+            this.btnGeriDon.HighEmphasis = true;
+            this.btnGeriDon.Icon = null;
+            this.btnGeriDon.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnGeriDon.Location = new System.Drawing.Point(578, 625);
+            this.btnGeriDon.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnGeriDon.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnGeriDon.Name = "btnGeriDon";
-            this.btnGeriDon.Size = new System.Drawing.Size(195, 23);
-            this.btnGeriDon.TabIndex = 7;
+            this.btnGeriDon.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnGeriDon.Size = new System.Drawing.Size(87, 36);
+            this.btnGeriDon.TabIndex = 5;
             this.btnGeriDon.Text = "GERİ DÖN";
+            this.btnGeriDon.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnGeriDon.UseAccentColor = false;
             this.btnGeriDon.UseVisualStyleBackColor = true;
-            this.btnGeriDon.Click += new System.EventHandler(this.button1_Click);
             // 
-            // panelKategoriler
+            // btnVazgec
             // 
-            this.panelKategoriler.AutoScroll = true;
-            this.panelKategoriler.Location = new System.Drawing.Point(3, 56);
-            this.panelKategoriler.Name = "panelKategoriler";
-            this.panelKategoriler.Size = new System.Drawing.Size(468, 108);
-            this.panelKategoriler.TabIndex = 3;
-            this.panelKategoriler.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.btnVazgec.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnVazgec.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnVazgec.Depth = 0;
+            this.btnVazgec.HighEmphasis = true;
+            this.btnVazgec.Icon = null;
+            this.btnVazgec.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnVazgec.Location = new System.Drawing.Point(578, 577);
+            this.btnVazgec.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnVazgec.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnVazgec.Name = "btnVazgec";
+            this.btnVazgec.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnVazgec.Size = new System.Drawing.Size(78, 36);
+            this.btnVazgec.TabIndex = 6;
+            this.btnVazgec.Text = "VAZGEÇ";
+            this.btnVazgec.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnVazgec.UseAccentColor = false;
+            this.btnVazgec.UseVisualStyleBackColor = true;
+            // 
+            // materialLabel1
+            // 
+            this.materialLabel1.AutoSize = true;
+            this.materialLabel1.Depth = 0;
+            this.materialLabel1.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.materialLabel1.Location = new System.Drawing.Point(672, 642);
+            this.materialLabel1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.materialLabel1.Name = "materialLabel1";
+            this.materialLabel1.Size = new System.Drawing.Size(107, 19);
+            this.materialLabel1.TabIndex = 7;
+            this.materialLabel1.Text = "materialLabel1";
+            // 
+            // btnOdeme
+            // 
+            this.btnOdeme.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnOdeme.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnOdeme.Depth = 0;
+            this.btnOdeme.HighEmphasis = true;
+            this.btnOdeme.Icon = null;
+            this.btnOdeme.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnOdeme.Location = new System.Drawing.Point(1186, 625);
+            this.btnOdeme.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnOdeme.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnOdeme.Name = "btnOdeme";
+            this.btnOdeme.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnOdeme.Size = new System.Drawing.Size(64, 36);
+            this.btnOdeme.TabIndex = 8;
+            this.btnOdeme.Text = "ÖDE";
+            this.btnOdeme.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnOdeme.UseAccentColor = false;
+            this.btnOdeme.UseVisualStyleBackColor = true;
             // 
             // frmSiparisEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(951, 577);
-            this.Controls.Add(this.panelSiparis);
+            this.ClientSize = new System.Drawing.Size(1262, 673);
+            this.Controls.Add(this.btnOdeme);
+            this.Controls.Add(this.materialLabel1);
+            this.Controls.Add(this.btnVazgec);
+            this.Controls.Add(this.btnGeriDon);
+            this.Controls.Add(this.btnOnayla);
+            this.Controls.Add(this.flowUrunler);
+            this.Controls.Add(this.flowKategoriler);
+            this.Controls.Add(this.dgMevcutUrunler);
             this.Controls.Add(this.flowMasalar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmSiparisEkrani";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "SİPARİŞ EKRANI";
-            this.Load += new System.EventHandler(this.frmSiparisEkrani_Load);
-            this.panelSiparis.ResumeLayout(false);
-            this.panelSiparis.PerformLayout();
+            this.Text = "frmSiparisEkrani";
+            ((System.ComponentModel.ISupportInitialize)(this.dgMevcutUrunler)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
         private System.Windows.Forms.FlowLayoutPanel flowMasalar;
-        private System.Windows.Forms.Panel panelSiparis;
-        private System.Windows.Forms.TextBox txtArama;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblGarsonAdi;
-        private System.Windows.Forms.Button btnOnayla;
-        private System.Windows.Forms.Button btnVazgec;
-        private System.Windows.Forms.Panel panelSiparisListesi;
-        private System.Windows.Forms.Button btnOdeme;
-        private System.Windows.Forms.Button btnGeriDon;
-        private System.Windows.Forms.Panel panelKategoriler;
+        private System.Windows.Forms.DataGridView dgMevcutUrunler;
+        private System.Windows.Forms.FlowLayoutPanel flowKategoriler;
+        private System.Windows.Forms.FlowLayoutPanel flowUrunler;
+        private ReaLTaiizor.Controls.MaterialButton btnOnayla;
+        private ReaLTaiizor.Controls.MaterialButton btnGeriDon;
+        private ReaLTaiizor.Controls.MaterialButton btnVazgec;
+        private ReaLTaiizor.Controls.MaterialLabel materialLabel1;
+        private ReaLTaiizor.Controls.MaterialButton btnOdeme;
     }
 }
