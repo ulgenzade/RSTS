@@ -224,5 +224,10 @@ namespace RestoranOtomasyon
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
         private void labelOdemeYontemi_Click(object sender, EventArgs e) { }
         private void labelToplam_Click(object sender, EventArgs e) { }
+
+        private void btnBitir_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
