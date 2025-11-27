@@ -86,7 +86,7 @@
             this.btnOnayla.HighEmphasis = true;
             this.btnOnayla.Icon = null;
             this.btnOnayla.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnOnayla.Location = new System.Drawing.Point(144, 586);
+            this.btnOnayla.Location = new System.Drawing.Point(270, 586);
             this.btnOnayla.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnOnayla.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnOnayla.Name = "btnOnayla";
@@ -111,7 +111,7 @@
             this.btnGeriDon.HighEmphasis = true;
             this.btnGeriDon.Icon = null;
             this.btnGeriDon.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnGeriDon.Location = new System.Drawing.Point(270, 586);
+            this.btnGeriDon.Location = new System.Drawing.Point(22, 586);
             this.btnGeriDon.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGeriDon.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnGeriDon.Name = "btnGeriDon";
@@ -133,7 +133,7 @@
             this.btnVazgec.HighEmphasis = true;
             this.btnVazgec.Icon = null;
             this.btnVazgec.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVazgec.Location = new System.Drawing.Point(396, 586);
+            this.btnVazgec.Location = new System.Drawing.Point(394, 586);
             this.btnVazgec.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnVazgec.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnVazgec.Name = "btnVazgec";
@@ -168,7 +168,7 @@
             this.btnOdeme.HighEmphasis = true;
             this.btnOdeme.Icon = null;
             this.btnOdeme.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnOdeme.Location = new System.Drawing.Point(522, 586);
+            this.btnOdeme.Location = new System.Drawing.Point(518, 586);
             this.btnOdeme.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnOdeme.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnOdeme.Name = "btnOdeme";
@@ -221,7 +221,7 @@
             this.btnRezerve.HighEmphasis = true;
             this.btnRezerve.Icon = null;
             this.btnRezerve.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnRezerve.Location = new System.Drawing.Point(18, 586);
+            this.btnRezerve.Location = new System.Drawing.Point(146, 586);
             this.btnRezerve.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnRezerve.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnRezerve.Name = "btnRezerve";
