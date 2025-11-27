@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelUst = new System.Windows.Forms.Panel();
             this.labelSaatBilgi = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelMasaBilgi = new ReaLTaiizor.Controls.MaterialLabel();
@@ -54,6 +55,7 @@
             this.btnSecilenleriGeriAl = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHepsiniAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenAktar = new ReaLTaiizor.Controls.MaterialButton();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
@@ -457,6 +459,10 @@
             this.btnSecilenAktar.UseVisualStyleBackColor = true;
             this.btnSecilenAktar.Click += new System.EventHandler(this.btnSecilenAktar_Click);
             // 
+            // timer1
+            // 
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmOdemeEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -513,5 +519,6 @@
         private System.Windows.Forms.Panel panel1;
         private ReaLTaiizor.Controls.MaterialLabel labelHesapBilgi;
         private ReaLTaiizor.Controls.MaterialButton btnBitir;
+        private System.Windows.Forms.Timer timer1;
     }
 }
