@@ -368,7 +368,6 @@
             this.btnBitir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnBitir.UseAccentColor = false;
             this.btnBitir.UseVisualStyleBackColor = true;
-            this.btnBitir.Click += new System.EventHandler(this.btnBitir_Click);
             // 
             // btnHepsiniGeriAl
             // 
