@@ -60,6 +60,8 @@ namespace RestoranOtomasyon
 
             this.ActiveControl = null;
 
+            cmbRoller.DrawMode = DrawMode.OwnerDrawFixed;
+            cmbRoller.DrawItem += cmbRoller_DrawItem;
         }
 
 
@@ -545,8 +547,8 @@ namespace RestoranOtomasyon
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.BaslikBox = new ReaLTaiizor.Controls.CyberGroupBox();
             this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
@@ -692,10 +694,10 @@ namespace RestoranOtomasyon
             this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.CalisanTree.Location = new System.Drawing.Point(14, 356);
             this.CalisanTree.Name = "CalisanTree";
-            treeNode3.Name = "CalisanNodes";
-            treeNode3.Text = "Çalışan Hesaplar";
+            treeNode1.Name = "CalisanNodes";
+            treeNode1.Text = "Çalışan Hesaplar";
             this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode3});
+            treeNode1});
             this.CalisanTree.Size = new System.Drawing.Size(411, 212);
             this.CalisanTree.TabIndex = 11;
             this.CalisanTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
@@ -724,10 +726,10 @@ namespace RestoranOtomasyon
             this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.AdminTree.Location = new System.Drawing.Point(14, 104);
             this.AdminTree.Name = "AdminTree";
-            treeNode4.Name = "AdminNodes";
-            treeNode4.Text = "Yetkili Hesaplar";
+            treeNode2.Name = "AdminNodes";
+            treeNode2.Text = "Yetkili Hesaplar";
             this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode4});
+            treeNode2});
             this.AdminTree.Size = new System.Drawing.Size(411, 212);
             this.AdminTree.TabIndex = 10;
             this.AdminTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
@@ -921,6 +923,7 @@ namespace RestoranOtomasyon
             // cmbRoller
             // 
             this.cmbRoller.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cmbRoller.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbRoller.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRoller.EnabledCalc = true;
             this.cmbRoller.ForeColor = System.Drawing.Color.Black;
@@ -928,8 +931,9 @@ namespace RestoranOtomasyon
             this.cmbRoller.ItemHeight = 20;
             this.cmbRoller.Location = new System.Drawing.Point(65, 22);
             this.cmbRoller.Name = "cmbRoller";
-            this.cmbRoller.Size = new System.Drawing.Size(203, 28);
+            this.cmbRoller.Size = new System.Drawing.Size(203, 26);
             this.cmbRoller.TabIndex = 13;
+            this.cmbRoller.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cmbRoller_DrawItem);
             this.cmbRoller.SelectedIndexChanged += new System.EventHandler(this.cmbRoller_SelectedIndexChanged);
             // 
             // txtKullaniciAdi1
@@ -1373,5 +1377,17 @@ namespace RestoranOtomasyon
 
         }
 
+        private void cmbRoller_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+            ComboBox kutu = (ComboBox)sender; // Hangi combobox olduğu fark etmez
+            e.DrawBackground();
+
+            Brush yaziRengi = Brushes.Black; // SİYAH Rengi çaktık
+            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected) yaziRengi = Brushes.White;
+
+            e.Graphics.DrawString(kutu.Items[e.Index].ToString(), e.Font, yaziRengi, e.Bounds, StringFormat.GenericDefault);
+            e.DrawFocusRectangle();
+        }
     }
 }

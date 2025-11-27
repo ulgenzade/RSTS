@@ -51,5 +51,25 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void panelOdenecekler_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void btnOde_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnKart_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnNakit_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
