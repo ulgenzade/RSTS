@@ -278,7 +278,27 @@ namespace RestoranOtomasyon
             this.Close();
         }
 
-        private void txtArama_TextChanged(object sender, EventArgs e) { UrunleriFiltreleVeGoster(); }
-        private void btnRezerve_Click_1(object sender, EventArgs e) { }
+        private void txtArama_TextChanged(object sender, EventArgs e) 
+        {
+            UrunleriFiltreleVeGoster(); 
+        }
+        private void btnRezerve_Click_1(object sender, EventArgs e) 
+        {
+            if (_seciliMasaID == -1) { MessageBox.Show("Masa seçiniz."); return; }
+            if (_seciliMasaDurumu == "Dolu") { MessageBox.Show("Dolu masa rezerve edilemez."); return; }
+
+            string yeniDurum = (_seciliMasaDurumu == "Boş") ? "Rezerve" : "Boş";
+            if (db.MasaDurumGuncelle(_seciliMasaID, yeniDurum))
+            {
+                MasalariYukle();
+                _seciliMasaDurumu = yeniDurum;
+                MessageBox.Show(yeniDurum == "Rezerve" ? "Masa rezerve edildi." : "Rezervasyon kaldırıldı.");
+            }
+        }
+
+        private void materialLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
