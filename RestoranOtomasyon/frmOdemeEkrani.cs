@@ -42,11 +42,10 @@ namespace RestoranOtomasyon
                 timer1.Start();
             }
 
-            // 2. SAATİ BİRAZ SOLA KAYDIRMA (Makyaj)
+            // 2. SAATİ BİRAZ SOLA KAYDIRMA
             Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
             if (lblSaat.Length > 0)
             {
-                // Mevcut konumundan 40 piksel sola alıyoruz
                 lblSaat[0].Left = lblSaat[0].Left - 40;
             }
 
@@ -63,7 +62,6 @@ namespace RestoranOtomasyon
             }
         }
 
-        // --- SAAT GÜNCELLEME ---
         private void timer1_Tick(object sender, EventArgs e)
         {
             Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
@@ -88,7 +86,7 @@ namespace RestoranOtomasyon
 
         private void EkranlariCiz()
         {
-            // --- SOL TARAFI ÇİZ ---
+            // SOL TARAFI ÇİZ
             flowTumSiparisler.Controls.Clear();
             toplamMasaTutari = 0;
 
@@ -100,11 +98,10 @@ namespace RestoranOtomasyon
                 flowTumSiparisler.Controls.Add(btn);
             }
 
-            // Sol Toplam (labelToplamTutar)
             Control[] lblSol = Controls.Find("labelToplamTutar", true);
-            if (lblSol.Length > 0) lblSol[0].Text = $"{toplamMasaTutari:C2}";
+            if (lblSol.Length > 0) lblSol[0].Text = $"TOPLAM: {toplamMasaTutari:C2}";
 
-            // --- SAĞ TARAFI ÇİZ ---
+            // SAĞ TARAFI ÇİZ
             panelOdenecekler.Controls.Clear();
             decimal odenecekTutar = 0;
 
@@ -116,10 +113,9 @@ namespace RestoranOtomasyon
                 panelOdenecekler.Controls.Add(btn);
             }
 
-            // Sağ Toplam (labelToplamOdenecek)
-            Control[] lblSag = Controls.Find("labelToplamOdenecek", true);
+            Control[] lblSag = Controls.Find("labelOdenecekTutar", true);
             if (lblSag.Length > 0)
-                lblSag[0].Text = $" {odenecekTutar:C2}";
+                lblSag[0].Text = $"{odenecekTutar:C2}";
         }
 
         private Button KartOlustur(SiparisUrunModel urun, EventHandler tiklamaOlayi)
@@ -151,10 +147,81 @@ namespace RestoranOtomasyon
             else { sagSecilenler.Add(urun); btn.BackColor = Color.DarkOrange; }
         }
 
-        // TRANSFERLER
+        // --- YENİ EKLENEN KISIM: ADET SORAN PENCERE ---
+        private int MiktarSor(string urunAdi, int maxAdet)
+        {
+            Form prompt = new Form()
+            {
+                Width = 300,
+                Height = 180,
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                Text = "Adet Seçimi",
+                StartPosition = FormStartPosition.CenterScreen,
+                MinimizeBox = false,
+                MaximizeBox = false
+            };
+
+            Label textLabel = new Label() { Left = 20, Top = 20, Text = $"{urunAdi}\nKaç adet ödenecek? (Max: {maxAdet})", AutoSize = true, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
+            TextBox inputBox = new TextBox() { Left = 20, Top = 70, Width = 240, Text = "1" };
+            Button confirmation = new Button() { Text = "Tamam", Left = 160, Width = 100, Top = 100, DialogResult = DialogResult.OK };
+
+            prompt.Controls.Add(textLabel);
+            prompt.Controls.Add(inputBox);
+            prompt.Controls.Add(confirmation);
+            prompt.AcceptButton = confirmation;
+
+            return prompt.ShowDialog() == DialogResult.OK && int.TryParse(inputBox.Text, out int result) && result > 0 && result <= maxAdet ? result : -1;
+        }
+
+        // --- GÜNCELLENEN AKTARMA BUTONU ---
         private void btnSecilenAktar_Click(object sender, EventArgs e)
         {
-            foreach (var item in solSecilenler) { sagListeVerileri.Add(item); solListeVerileri.Remove(item); }
+            if (solSecilenler.Count == 0) return;
+
+            // Listeyi kopyalayıp döngüye sokuyoruz ki işlem sırasında hata vermesin
+            var islenecekUrunler = new List<SiparisUrunModel>(solSecilenler);
+
+            foreach (var item in islenecekUrunler)
+            {
+                int aktarilacakAdet = 1;
+
+                // Eğer ürün 1 taneden fazlaysa SOR
+                if (item.Adet > 1)
+                {
+                    int girilenAdet = MiktarSor(item.UrunAdi, item.Adet);
+                    if (girilenAdet == -1) continue; // İptal ederse atla
+                    aktarilacakAdet = girilenAdet;
+                }
+                else
+                {
+                    aktarilacakAdet = 1; // Zaten 1 tane varsa direkt al
+                }
+
+                // Mantık: Hepsini mi alıyoruz, bir kısmını mı?
+                if (aktarilacakAdet == item.Adet)
+                {
+                    sagListeVerileri.Add(item);
+                    solListeVerileri.Remove(item);
+                }
+                else
+                {
+                    // Parçalama işlemi
+                    item.Adet -= aktarilacakAdet;
+                    item.AraToplam = item.Adet * item.BirimFiyat; // Sol tarafın fiyatını güncelle
+
+                    // Sağ tarafa yeni parça oluştur
+                    SiparisUrunModel yeniParca = new SiparisUrunModel
+                    {
+                        UrunID = item.UrunID,
+                        UrunAdi = item.UrunAdi,
+                        BirimFiyat = item.BirimFiyat,
+                        Adet = aktarilacakAdet,
+                        AraToplam = aktarilacakAdet * item.BirimFiyat
+                    };
+                    sagListeVerileri.Add(yeniParca);
+                }
+            }
+
             solSecilenler.Clear();
             EkranlariCiz();
         }
@@ -182,9 +249,7 @@ namespace RestoranOtomasyon
             EkranlariCiz();
         }
 
-        // =========================================================
-        // HIZLI ÖDEME (Soru Sormaz, Direkt İşler)
-        // =========================================================
+        // HIZLI ÖDEME
         private void HizliOdemeYap(string odemeTuru)
         {
             decimal odenecekTutar = 0;
@@ -210,7 +275,6 @@ namespace RestoranOtomasyon
             }
         }
 
-        // BUTON YÖNLENDİRMELERİ
         private void btnNakit_Click(object sender, EventArgs e) { HizliOdemeYap("Nakit"); }
         private void btnKart_Click(object sender, EventArgs e) { HizliOdemeYap("Kart"); }
 
@@ -231,30 +295,11 @@ namespace RestoranOtomasyon
 
         private void btnGeriDon_Click(object sender, EventArgs e) { this.Close(); }
 
-        // BOŞ EVENTLER (Tasarımcı Hatası Olmasın Diye)
+        // BOŞ EVENTLER
         private void btnOde_Click(object sender, EventArgs e) { MessageBox.Show("Lütfen aşağıdaki NAKİT veya KART butonlarını kullanınız."); }
         private void panelOdenecekler_Paint(object sender, PaintEventArgs e) { }
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
         private void labelOdemeYontemi_Click(object sender, EventArgs e) { }
         private void labelToplam_Click(object sender, EventArgs e) { }
-
-        private void btnBitir_Click_1(object sender, EventArgs e)
-        {
-            // 1. Borç Kontrolü: Sol tarafta veya sağ tarafta hala ürün var mı?
-            if (solListeVerileri.Count > 0 || sagListeVerileri.Count > 0)
-            {
-                MessageBox.Show("Masada hala ödenmemiş ürünler var!\nLütfen önce borcu sıfırlayın.",
-                                "Hesap Kapanmadı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            // 2. Borç bitmiş, masayı kapatıyoruz
-            db.SiparisHesapKapat(aktifSiparisID, 0, "Kapandı"); // Siparişi kapat
-            db.MasaDurumGuncelle(seciliMasaID, "Boş"); // Masayı boşa çıkar
-
-            MessageBox.Show("Masa başarıyla kapatıldı.", "İşlem Tamam", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            this.Close(); // Ekranı kapat ve sipariş ekranına dön
-        }
     }
 }

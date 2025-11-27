@@ -8,13 +8,14 @@ namespace RestoranOtomasyon
 {
     public class SiparisUrunModel
     {
+        // Hata veren eksik kısım burasıydı:
+        public int UrunID { get; set; }
+
         public string UrunAdi { get; set; }
         public int Adet { get; set; }
         public decimal BirimFiyat { get; set; }
 
-        public decimal AraToplam
-        {
-            get { return Adet * BirimFiyat; }
-        }
+        // Hata veren "Atama yapılamaz" kısmı için buraya 'set' ekledik:
+        public decimal AraToplam { get; set; }
     }
 }
