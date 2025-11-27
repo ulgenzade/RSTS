@@ -12,10 +12,12 @@ namespace RestoranOtomasyon
     {
         VeritabaniIslemleri db = new VeritabaniIslemleri();
 
+        // DEĞİŞKENLER
         int seciliMasaID = -1;
         int aktifSiparisID = -1;
         decimal toplamMasaTutari = 0;
 
+        // LİSTELER
         List<SiparisUrunModel> solListeVerileri = new List<SiparisUrunModel>();
         List<SiparisUrunModel> sagListeVerileri = new List<SiparisUrunModel>();
 
@@ -32,11 +34,42 @@ namespace RestoranOtomasyon
 
         private void frmOdemeEkrani_Load(object sender, EventArgs e)
         {
+            // 1. SAAT AYARI
+            if (timer1 != null)
+            {
+                timer1.Interval = 1000;
+                timer1.Tick += timer1_Tick;
+                timer1.Start();
+            }
+
+            // 2. SAATİ BİRAZ SOLA KAYDIRMA (Makyaj)
+            Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
+            if (lblSaat.Length > 0)
+            {
+                // Mevcut konumundan 40 piksel sola alıyoruz
+                lblSaat[0].Left = lblSaat[0].Left - 40;
+            }
+
+            // 3. GARSON ADI
+            Control[] lblGarson = Controls.Find("labelHesapBilgi", true);
+            if (lblGarson.Length > 0)
+                lblGarson[0].Text = "Garson: " + AktifKullanici.AdSoyad;
+
             if (seciliMasaID != -1)
             {
                 Control[] labels = Controls.Find("labelMasaBilgi", true);
                 if (labels.Length > 0) labels[0].Text = "MASA " + seciliMasaID;
                 HesabiGetir();
+            }
+        }
+
+        // --- SAAT GÜNCELLEME ---
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
+            if (lblSaat.Length > 0)
+            {
+                lblSaat[0].Text = DateTime.Now.ToString("HH:mm:ss");
             }
         }
 
@@ -55,7 +88,7 @@ namespace RestoranOtomasyon
 
         private void EkranlariCiz()
         {
-            // SOL TARAF
+            // --- SOL TARAFI ÇİZ ---
             flowTumSiparisler.Controls.Clear();
             toplamMasaTutari = 0;
 
@@ -67,10 +100,11 @@ namespace RestoranOtomasyon
                 flowTumSiparisler.Controls.Add(btn);
             }
 
+            // Sol Toplam (labelToplamTutar)
             Control[] lblSol = Controls.Find("labelToplamTutar", true);
             if (lblSol.Length > 0) lblSol[0].Text = $"{toplamMasaTutari:C2}";
 
-            // SAĞ TARAF
+            // --- SAĞ TARAFI ÇİZ ---
             panelOdenecekler.Controls.Clear();
             decimal odenecekTutar = 0;
 
@@ -82,8 +116,10 @@ namespace RestoranOtomasyon
                 panelOdenecekler.Controls.Add(btn);
             }
 
-            Control[] lblSag = Controls.Find("labelOdenecekTutar", true);
-            if (lblSag.Length > 0) lblSag[0].Text = $"{odenecekTutar:C2}";
+            // Sağ Toplam (labelToplamOdenecek)
+            Control[] lblSag = Controls.Find("labelToplamOdenecek", true);
+            if (lblSag.Length > 0)
+                lblSag[0].Text = $" {odenecekTutar:C2}";
         }
 
         private Button KartOlustur(SiparisUrunModel urun, EventHandler tiklamaOlayi)
@@ -147,7 +183,7 @@ namespace RestoranOtomasyon
         }
 
         // =========================================================
-        // ORTAK ÖDEME METODU (Soru Sormaz, Direkt İşler)
+        // HIZLI ÖDEME (Soru Sormaz, Direkt İşler)
         // =========================================================
         private void HizliOdemeYap(string odemeTuru)
         {
@@ -156,11 +192,10 @@ namespace RestoranOtomasyon
 
             if (odenecekTutar <= 0)
             {
-                MessageBox.Show("Lütfen önce sağ tarafa ürün aktarın, sonra Nakit veya Kart butonuna basın.", "Uyarı");
+                MessageBox.Show("Lütfen önce sağ tarafa ürün aktarın.", "Uyarı");
                 return;
             }
 
-            // DİREKT KAYIT (Soru sormuyoruz)
             bool sonuc = db.OdemeEkle(aktifSiparisID, odemeTuru, odenecekTutar);
 
             if (sonuc)
@@ -175,64 +210,32 @@ namespace RestoranOtomasyon
             }
         }
 
-        // NAKİT BUTONU
-        private void btnNakit_Click(object sender, EventArgs e)
-        {
-            HizliOdemeYap("Nakit");
-        }
+        // BUTON YÖNLENDİRMELERİ
+        private void btnNakit_Click(object sender, EventArgs e) { HizliOdemeYap("Nakit"); }
+        private void btnKart_Click(object sender, EventArgs e) { HizliOdemeYap("Kart"); }
 
-        // KART BUTONU
-        private void btnKart_Click(object sender, EventArgs e)
-        {
-            HizliOdemeYap("Kart");
-        }
-
-        // =========================================================
-        // BİTİR BUTONU (Masayı Kapatır)
-        // =========================================================
+        // BİTİR BUTONU
         private void btnBitir_Click(object sender, EventArgs e)
         {
             if (solListeVerileri.Count > 0 || sagListeVerileri.Count > 0)
             {
-                MessageBox.Show("Masada hala ödenmemiş ürünler var!\nBorcu sıfırlamadan masayı kapatamazsınız.",
-                                "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Masada hala ödenmemiş ürünler var! Borcu sıfırlamadan masayı kapatamazsınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             db.SiparisHesapKapat(aktifSiparisID, 0, "Kapandı");
             db.MasaDurumGuncelle(seciliMasaID, "Boş");
-
             MessageBox.Show("Hesap kapatıldı, masa boşaltıldı.", "Tamamlandı", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
 
-        // --- GERİ DÖN BUTONU ---
-        // Bu kodun çalışması için Tasarım ekranından Şimşek ikonuna basıp
-        // Click olayına "btnGeriDon_Click" seçeneğini bağlamalısın.
-        private void btnGeriDon_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+        private void btnGeriDon_Click(object sender, EventArgs e) { this.Close(); }
 
-        // Tasarımcı hatası olmasın diye boş eventler
-        private void btnOde_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("Lütfen aşağıdaki NAKİT veya KART butonlarını kullanınız.");
-        }
-
+        // BOŞ EVENTLER (Tasarımcı Hatası Olmasın Diye)
+        private void btnOde_Click(object sender, EventArgs e) { MessageBox.Show("Lütfen aşağıdaki NAKİT veya KART butonlarını kullanınız."); }
         private void panelOdenecekler_Paint(object sender, PaintEventArgs e) { }
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
         private void labelOdemeYontemi_Click(object sender, EventArgs e) { }
         private void labelToplam_Click(object sender, EventArgs e) { }
-
-        private void btnBitir_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-
-        }
     }
 }
