@@ -17,6 +17,7 @@ namespace RestoranOtomasyon
         private int _seciliKategoriID = 0; // 0 = Tümü
 
         private DataTable _tumUrunlerCache = new DataTable();
+        // Sepet listesi
         private List<SepetUrunDto> _yeniSiparisListesi = new List<SepetUrunDto>();
 
         public frmSiparisEkrani()
@@ -26,49 +27,27 @@ namespace RestoranOtomasyon
 
         private void frmSiparisEkrani_Load(object sender, EventArgs e)
         {
-            // Garson adı
+            // Garson adı varsa yazdır
             if (Controls.Find("materialLabel1", true).Length > 0)
                 Controls.Find("materialLabel1", true)[0].Text = "Garson: " + AktifKullanici.AdSoyad;
 
-            // 1. Arayüz Düzeni (Üst üste binmeyi engellemek için)
             ArayuzAyarlariniYap();
-            
-            // 2. Olayları Bağla
-            OlaylariBagla();
-
-            // 3. Grid Ayarları
             GridAyarlariniYap();
-
-            // 4. Verileri Yükle
             MasalariYukle();
             KategorileriYukle();
 
-            // 5. Ürünleri Hafızaya Al ve Göster
             _tumUrunlerCache = db.UrunleriGetir();
             UrunleriFiltreleVeGoster();
         }
 
         private void ArayuzAyarlariniYap()
         {
-            // --- KATEGORİ PANELİ DÜZENİ ---
             flowKategoriler.AutoScroll = true;
-            flowKategoriler.WrapContents = true; // Sığmazsa alt satıra geçsin
-            flowKategoriler.Padding = new Padding(5); // İç boşluk
+            flowKategoriler.WrapContents = true;
             flowKategoriler.FlowDirection = FlowDirection.LeftToRight;
-            
-            // --- ÜRÜN PANELİ DÜZENİ ---
-            flowUrunler.AutoScroll = true;
-            flowUrunler.WrapContents = true; 
-            flowUrunler.Padding = new Padding(5);
-        }
 
-        private void OlaylariBagla()
-        {
-            Control[] txtMatches = this.Controls.Find("txtArama", true);
-            if (txtMatches.Length > 0)
-            {
-                try { ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).TextChanged += txtArama_TextChanged; } catch { }
-            }
+            flowUrunler.AutoScroll = true;
+            flowUrunler.WrapContents = true;
         }
 
         private void GridAyarlariniYap()
@@ -76,17 +55,16 @@ namespace RestoranOtomasyon
             dgMevcutUrunler.Rows.Clear();
             dgMevcutUrunler.Columns.Clear();
             dgMevcutUrunler.ColumnCount = 4;
-            dgMevcutUrunler.Columns[0].Name = "UrunAdi"; dgMevcutUrunler.Columns[0].HeaderText = "Ürün Adı"; dgMevcutUrunler.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            dgMevcutUrunler.Columns[1].Name = "Adet"; dgMevcutUrunler.Columns[1].HeaderText = "Adet"; dgMevcutUrunler.Columns[1].Width = 50;
-            dgMevcutUrunler.Columns[2].Name = "Fiyat"; dgMevcutUrunler.Columns[2].HeaderText = "Fiyat"; dgMevcutUrunler.Columns[2].Width = 70;
-            dgMevcutUrunler.Columns[3].Name = "Durum"; dgMevcutUrunler.Columns[3].HeaderText = "Durum"; dgMevcutUrunler.Columns[3].Width = 80;
+            dgMevcutUrunler.Columns[0].Name = "UrunAdi"; dgMevcutUrunler.Columns[0].HeaderText = "Ürün Adı";
+            dgMevcutUrunler.Columns[1].Name = "Adet"; dgMevcutUrunler.Columns[1].HeaderText = "Adet";
+            dgMevcutUrunler.Columns[2].Name = "Fiyat"; dgMevcutUrunler.Columns[2].HeaderText = "Fiyat";
+            dgMevcutUrunler.Columns[3].Name = "Durum"; dgMevcutUrunler.Columns[3].HeaderText = "Durum";
             dgMevcutUrunler.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgMevcutUrunler.AllowUserToAddRows = false;
             dgMevcutUrunler.ReadOnly = true;
             dgMevcutUrunler.RowHeadersVisible = false;
         }
 
-        // --- MASALAR ---
         private void MasalariYukle()
         {
             flowMasalar.Controls.Clear();
@@ -101,7 +79,7 @@ namespace RestoranOtomasyon
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                 btn.ForeColor = Color.White;
-                btn.Margin = new Padding(5); // Butonlar birbirine yapışmasın
+                btn.Margin = new Padding(5);
 
                 string durum = row["Durum"].ToString();
                 if (durum == "Dolu") btn.BackColor = Color.Crimson;
@@ -123,20 +101,18 @@ namespace RestoranOtomasyon
             SepetiVeGridiGuncelle();
         }
 
-        // --- KATEGORİLER (DÜZELTİLDİ) ---
         private void KategorileriYukle()
         {
             flowKategoriler.Controls.Clear();
 
-            // "TÜMÜ" Butonu
+            // Tümü Butonu
             Button btnTumu = new Button();
             btnTumu.Text = "TÜMÜ";
             btnTumu.Tag = 0;
-            btnTumu.Size = new Size(120, 50); // Biraz daha geniş
-            btnTumu.BackColor = Color.FromArgb(64, 64, 64);
+            btnTumu.Size = new Size(120, 50);
+            btnTumu.BackColor = Color.DarkOrange;
             btnTumu.ForeColor = Color.White;
             btnTumu.FlatStyle = FlatStyle.Flat;
-            btnTumu.Margin = new Padding(3); // Boşluk bırak
             btnTumu.Click += Kategori_Click;
             flowKategoriler.Controls.Add(btnTumu);
 
@@ -150,7 +126,6 @@ namespace RestoranOtomasyon
                 btn.BackColor = Color.Teal;
                 btn.ForeColor = Color.White;
                 btn.FlatStyle = FlatStyle.Flat;
-                btn.Margin = new Padding(3); // Boşluk bırak
                 btn.Click += Kategori_Click;
                 flowKategoriler.Controls.Add(btn);
             }
@@ -161,96 +136,65 @@ namespace RestoranOtomasyon
             Button btn = (Button)sender;
             _seciliKategoriID = (int)btn.Tag;
 
-            // Kategori butonlarının renklerini güncelle (Seçili olanı belli et)
             foreach (Control c in flowKategoriler.Controls)
             {
-                if (c is Button b) 
+                if (c is Button b)
                     b.BackColor = ((int)b.Tag == _seciliKategoriID) ? Color.DarkOrange : Color.Teal;
             }
-            // "Tümü" butonu rengi özel
-            if (_seciliKategoriID == 0) ((Button)flowKategoriler.Controls[0]).BackColor = Color.DarkOrange;
-            else ((Button)flowKategoriler.Controls[0]).BackColor = Color.FromArgb(64, 64, 64);
-
-
-            // Arama kutusunu temizle
-            Control[] txtMatches = this.Controls.Find("txtArama", true);
-            if (txtMatches.Length > 0)
-            {
-                try { ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).Text = ""; } catch { }
-            }
-
-            UrunleriFiltreleVeGoster();
-        }
-
-        // --- ÜRÜNLER VE FİLTRELEME (DÜZELTİLDİ) ---
-        private void txtArama_TextChanged(object sender, EventArgs e)
-        {
             UrunleriFiltreleVeGoster();
         }
 
         private void UrunleriFiltreleVeGoster()
         {
             flowUrunler.Controls.Clear();
-            // Performans için görünürlüğü kapatıp açabiliriz ama şimdilik basit tutalım.
-            
-            string arananKelime = "";
-            Control[] matches = this.Controls.Find("txtArama", true);
-            if (matches.Length > 0)
-            {
-                try { arananKelime = ((ReaLTaiizor.Controls.MaterialTextBoxEdit)matches[0]).Text.ToLower(); } catch { }
-            }
+
+            string aranan = "";
+            if (Controls.Find("txtArama", true).Length > 0)
+                aranan = Controls.Find("txtArama", true)[0].Text.ToLower();
 
             foreach (DataRow row in _tumUrunlerCache.Rows)
             {
-                // 1. Kategori Filtresi
-                bool kategoriUygun = false;
-                if (_seciliKategoriID == 0) 
+                bool kategoriUygun = (_seciliKategoriID == 0);
+                if (!kategoriUygun && row.Table.Columns.Contains("KategoriID") && row["KategoriID"] != DBNull.Value)
                 {
-                    kategoriUygun = true; // Tümü seçiliyse hepsi uygun
-                }
-                else if (row.Table.Columns.Contains("KategoriID") && row["KategoriID"] != DBNull.Value)
-                {
-                    // ADIM 1'deki VeritabaniIslemleri değişikliği sayesinde bu sütun artık var!
-                    if (Convert.ToInt32(row["KategoriID"]) == _seciliKategoriID) 
-                        kategoriUygun = true;
+                    if (Convert.ToInt32(row["KategoriID"]) == _seciliKategoriID) kategoriUygun = true;
                 }
 
-                // 2. Arama Metni Filtresi
                 string urunAdi = row["UrunAdi"].ToString().ToLower();
-                bool aramaUygun = urunAdi.Contains(arananKelime);
+                if (!urunAdi.Contains(aranan)) continue;
 
-                if (kategoriUygun && aramaUygun)
+                if (kategoriUygun)
                 {
                     Button btn = new Button();
                     btn.Text = $"{row["UrunAdi"]}\n{row["Fiyat"]} ₺";
                     btn.Size = new Size(110, 80);
                     btn.BackColor = Color.WhiteSmoke;
-                    btn.ForeColor = Color.Black;
                     btn.FlatStyle = FlatStyle.Flat;
-                    btn.Margin = new Padding(5); // Butonlar birbirine girmesin
-
+                    btn.Margin = new Padding(5);
                     btn.Tag = new SepetUrunDto
                     {
                         UrunID = Convert.ToInt32(row["UrunID"]),
                         BirimFiyat = Convert.ToDecimal(row["Fiyat"]),
                         Adet = 1
                     };
-                    
                     btn.Click += Urun_Click;
                     flowUrunler.Controls.Add(btn);
                 }
             }
         }
 
-        // --- SEPET ---
+        private void txtArama_TextChanged(object sender, EventArgs e)
+        {
+            UrunleriFiltreleVeGoster();
+        }
+
         private void Urun_Click(object sender, EventArgs e)
         {
             if (_seciliMasaID == -1)
             {
-                MessageBox.Show("Lütfen önce sol taraftan bir masa seçin!", "Uyarı");
+                MessageBox.Show("Lütfen önce sol taraftan bir masa seçin!");
                 return;
             }
-
             Button btn = (Button)sender;
             SepetUrunDto secilenUrun = (SepetUrunDto)btn.Tag;
 
@@ -264,7 +208,6 @@ namespace RestoranOtomasyon
         private void SepetiVeGridiGuncelle()
         {
             dgMevcutUrunler.Rows.Clear();
-
             if (_seciliMasaDurumu == "Dolu")
             {
                 List<SiparisUrunModel> eskiler = db.MasaSiparisleriniGetir(_seciliMasaID);
@@ -274,7 +217,6 @@ namespace RestoranOtomasyon
                     dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
                 }
             }
-
             foreach (var urun in _yeniSiparisListesi)
             {
                 string ad = "Ürün";
@@ -286,7 +228,6 @@ namespace RestoranOtomasyon
             dgMevcutUrunler.ClearSelection();
         }
 
-        // --- BUTONLAR ---
         private void btnOnayla_Click(object sender, EventArgs e)
         {
             if (_seciliMasaID == -1 || _yeniSiparisListesi.Count == 0) return;
@@ -300,12 +241,31 @@ namespace RestoranOtomasyon
 
             if (sonuc)
             {
-                MessageBox.Show("Sipariş gönderildi.");
+                MessageBox.Show("Sipariş mutfağa gönderildi.");
                 _yeniSiparisListesi.Clear();
                 MasalariYukle();
                 _seciliMasaDurumu = "Dolu";
                 SepetiVeGridiGuncelle();
             }
+        }
+
+        private void btnOdeme_Click(object sender, EventArgs e)
+        {
+            if (_seciliMasaID == -1)
+            {
+                MessageBox.Show("Lütfen ödeme almak için dolu bir masa seçin.");
+                return;
+            }
+
+            // ID'yi Gönderiyoruz
+            frmOdemeEkrani odeme = new frmOdemeEkrani(_seciliMasaID);
+            odeme.ShowDialog();
+
+            // Dönüşte ekranı yenile
+            MasalariYukle();
+            _yeniSiparisListesi.Clear();
+            _seciliMasaID = -1;
+            dgMevcutUrunler.Rows.Clear();
         }
 
         private void btnVazgec_Click(object sender, EventArgs e)
@@ -314,39 +274,13 @@ namespace RestoranOtomasyon
             SepetiVeGridiGuncelle();
         }
 
-        private void btnOdeme_Click(object sender, EventArgs e)
-        {
-            if (_seciliMasaID == -1) return;
-            frmOdemeEkrani odeme = new frmOdemeEkrani();
-            odeme.ShowDialog();
-            MasalariYukle();
-            dgMevcutUrunler.Rows.Clear();
-            _yeniSiparisListesi.Clear();
-            _seciliMasaID = -1;
-        }
-
         private void btnGeriDon_Click(object sender, EventArgs e)
         {
-            frmGiris giris = new frmGiris();
-            giris.Show();
             this.Close();
         }
 
-        // TASARIMDA BUTONA ÇİFT TIKLAYIP BAĞLA
         private void btnRezerve_Click_1(object sender, EventArgs e)
         {
-            if (_seciliMasaID == -1) { MessageBox.Show("Masa seçiniz."); return; }
-            if (_seciliMasaDurumu == "Dolu") { MessageBox.Show("Dolu masa rezerve edilemez."); return; }
-
-            string yeniDurum = (_seciliMasaDurumu == "Boş") ? "Rezerve" : "Boş";
-            if (db.MasaDurumGuncelle(_seciliMasaID, yeniDurum))
-            {
-                MasalariYukle();
-                _seciliMasaDurumu = yeniDurum;
-                MessageBox.Show(yeniDurum == "Rezerve" ? "Masa rezerve edildi." : "Rezervasyon kaldırıldı.");
-            }
         }
-        
-        // Eğer tasarımda çift tıkla oluşturulmuş fazladan bir click eventi varsa (btnRezerve_Click_1 gibi), onu silebilirsin.
     }
 }

@@ -138,6 +138,7 @@
             this.flowTumSiparisler.Name = "flowTumSiparisler";
             this.flowTumSiparisler.Size = new System.Drawing.Size(538, 516);
             this.flowTumSiparisler.TabIndex = 1;
+            this.flowTumSiparisler.Paint += new System.Windows.Forms.PaintEventHandler(this.flowTumSiparisler_Paint);
             // 
             // panelSolAlt
             // 
@@ -213,6 +214,7 @@
             this.panelOdenecekler.Name = "panelOdenecekler";
             this.panelOdenecekler.Size = new System.Drawing.Size(487, 445);
             this.panelOdenecekler.TabIndex = 1;
+            this.panelOdenecekler.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOdenecekler_Paint);
             // 
             // panelSagAlt
             // 
@@ -260,6 +262,7 @@
             this.btnBitir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnBitir.UseAccentColor = false;
             this.btnBitir.UseVisualStyleBackColor = true;
+            this.btnBitir.Click += new System.EventHandler(this.btnBitir_Click);
             // 
             // btnKart
             // 
@@ -442,6 +445,7 @@
             this.Name = "frmOdemeEkrani";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ÖDEME EKRANI";
+            this.Load += new System.EventHandler(this.frmOdemeEkrani_Load);
             this.panelUst.ResumeLayout(false);
             this.panelUst.PerformLayout();
             this.panelSol.ResumeLayout(false);

@@ -317,7 +317,7 @@ namespace RestoranOtomasyon
                 {
                     baglanti.Open();
                     // AcilisZamani'nı veritabanı sunucusunun kendi saatiyle (NOW()) oluşturmak daha sağlıklıdır.
-                    string sorgu = "INSERT INTO Siparisler (MasaID, KullaniciID, AcilisZamani) VALUES (@masaID, @kullaniciID, NOW()); SELECT LAST_INSERT_ID();";
+                    string sorgu = "INSERT INTO Siparisler (MasaID, KullaniciID, AcilisZamani, OdemeDurumu) VALUES (@masaID, @kullaniciID, NOW(), 'Aktif'); SELECT LAST_INSERT_ID();";
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     {
                         komut.Parameters.AddWithValue("@masaID", masaID);
@@ -806,10 +806,10 @@ namespace RestoranOtomasyon
                     try
                     {
                         // 1. Ana Sipariş Kaydını Oluştur
-                        string siparisEkleSorgu = "INSERT INTO Siparisler (MasaID, KullaniciID, AcilisZamani) VALUES (@masaID, @kullaniciID, NOW()); SELECT LAST_INSERT_ID();";
+                        string sorgu = "INSERT INTO Siparisler (MasaID, KullaniciID, AcilisZamani, OdemeDurumu) VALUES (@masaID, @kullaniciID, NOW(), 'Aktif'); SELECT LAST_INSERT_ID();";
                         long yeniSiparisID;
 
-                        using (MySqlCommand siparisEkleKomut = new MySqlCommand(siparisEkleSorgu, baglanti))
+                        using (MySqlCommand siparisEkleKomut = new MySqlCommand(sorgu, baglanti))
                         {
                             siparisEkleKomut.Transaction = transaction;
                             siparisEkleKomut.Parameters.AddWithValue("@masaID", masaID);
