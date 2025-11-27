@@ -36,7 +36,6 @@
             this.panelSol = new System.Windows.Forms.Panel();
             this.flowTumSiparisler = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSolAlt = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.labelHesapBilgi = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelToplamTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelToplam = new ReaLTaiizor.Controls.MaterialLabel();
@@ -59,7 +58,6 @@
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.panelSag.SuspendLayout();
             this.panelSagAlt.SuspendLayout();
             this.panelOrta.SuspendLayout();
@@ -67,6 +65,7 @@
             // 
             // panelUst
             // 
+            this.panelUst.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.panelUst.Controls.Add(this.labelSaatBilgi);
             this.panelUst.Controls.Add(this.labelMasaBilgi);
             this.panelUst.Controls.Add(this.btnGeriDon);
@@ -94,7 +93,7 @@
             // 
             this.labelMasaBilgi.AutoSize = true;
             this.labelMasaBilgi.Depth = 0;
-            this.labelMasaBilgi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelMasaBilgi.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelMasaBilgi.Location = new System.Drawing.Point(553, 22);
             this.labelMasaBilgi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelMasaBilgi.Name = "labelMasaBilgi";
@@ -132,7 +131,7 @@
             this.panelSol.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelSol.Location = new System.Drawing.Point(0, 62);
             this.panelSol.Name = "panelSol";
-            this.panelSol.Size = new System.Drawing.Size(538, 611);
+            this.panelSol.Size = new System.Drawing.Size(514, 611);
             this.panelSol.TabIndex = 2;
             // 
             // flowTumSiparisler
@@ -140,35 +139,27 @@
             this.flowTumSiparisler.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowTumSiparisler.Location = new System.Drawing.Point(0, 0);
             this.flowTumSiparisler.Name = "flowTumSiparisler";
-            this.flowTumSiparisler.Size = new System.Drawing.Size(538, 516);
+            this.flowTumSiparisler.Size = new System.Drawing.Size(514, 445);
             this.flowTumSiparisler.TabIndex = 1;
             // 
             // panelSolAlt
             // 
-            this.panelSolAlt.Controls.Add(this.panel1);
+            this.panelSolAlt.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panelSolAlt.Controls.Add(this.labelHesapBilgi);
             this.panelSolAlt.Controls.Add(this.labelToplamTutar);
             this.panelSolAlt.Controls.Add(this.labelToplam);
             this.panelSolAlt.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelSolAlt.Location = new System.Drawing.Point(0, 516);
+            this.panelSolAlt.Location = new System.Drawing.Point(0, 445);
             this.panelSolAlt.Name = "panelSolAlt";
-            this.panelSolAlt.Size = new System.Drawing.Size(538, 95);
+            this.panelSolAlt.Size = new System.Drawing.Size(514, 166);
             this.panelSolAlt.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.labelHesapBilgi);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel1.Location = new System.Drawing.Point(0, 49);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(538, 46);
-            this.panel1.TabIndex = 2;
             // 
             // labelHesapBilgi
             // 
             this.labelHesapBilgi.AutoSize = true;
             this.labelHesapBilgi.Depth = 0;
             this.labelHesapBilgi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelHesapBilgi.Location = new System.Drawing.Point(12, 17);
+            this.labelHesapBilgi.Location = new System.Drawing.Point(29, 71);
             this.labelHesapBilgi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelHesapBilgi.Name = "labelHesapBilgi";
             this.labelHesapBilgi.Size = new System.Drawing.Size(107, 19);
@@ -179,8 +170,8 @@
             // 
             this.labelToplamTutar.AutoSize = true;
             this.labelToplamTutar.Depth = 0;
-            this.labelToplamTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamTutar.Location = new System.Drawing.Point(110, 18);
+            this.labelToplamTutar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelToplamTutar.Location = new System.Drawing.Point(128, 26);
             this.labelToplamTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelToplamTutar.Name = "labelToplamTutar";
             this.labelToplamTutar.Size = new System.Drawing.Size(44, 19);
@@ -192,7 +183,7 @@
             this.labelToplam.AutoSize = true;
             this.labelToplam.Depth = 0;
             this.labelToplam.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplam.Location = new System.Drawing.Point(11, 18);
+            this.labelToplam.Location = new System.Drawing.Point(29, 26);
             this.labelToplam.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelToplam.Name = "labelToplam";
             this.labelToplam.Size = new System.Drawing.Size(81, 19);
@@ -205,9 +196,9 @@
             this.panelSag.Controls.Add(this.panelOdenecekler);
             this.panelSag.Controls.Add(this.panelSagAlt);
             this.panelSag.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelSag.Location = new System.Drawing.Point(775, 62);
+            this.panelSag.Location = new System.Drawing.Point(746, 62);
             this.panelSag.Name = "panelSag";
-            this.panelSag.Size = new System.Drawing.Size(487, 611);
+            this.panelSag.Size = new System.Drawing.Size(516, 611);
             this.panelSag.TabIndex = 3;
             // 
             // panelOdenecekler
@@ -215,12 +206,13 @@
             this.panelOdenecekler.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelOdenecekler.Location = new System.Drawing.Point(0, 0);
             this.panelOdenecekler.Name = "panelOdenecekler";
-            this.panelOdenecekler.Size = new System.Drawing.Size(487, 445);
+            this.panelOdenecekler.Size = new System.Drawing.Size(516, 445);
             this.panelOdenecekler.TabIndex = 1;
             this.panelOdenecekler.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOdenecekler_Paint);
             // 
             // panelSagAlt
             // 
+            this.panelSagAlt.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.panelSagAlt.Controls.Add(this.labelToplamOdenecek);
             this.panelSagAlt.Controls.Add(this.btnOde);
             this.panelSagAlt.Controls.Add(this.btnKart);
@@ -230,7 +222,7 @@
             this.panelSagAlt.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelSagAlt.Location = new System.Drawing.Point(0, 445);
             this.panelSagAlt.Name = "panelSagAlt";
-            this.panelSagAlt.Size = new System.Drawing.Size(487, 166);
+            this.panelSagAlt.Size = new System.Drawing.Size(516, 166);
             this.panelSagAlt.TabIndex = 0;
             // 
             // labelToplamOdenecek
@@ -238,7 +230,7 @@
             this.labelToplamOdenecek.AutoSize = true;
             this.labelToplamOdenecek.Depth = 0;
             this.labelToplamOdenecek.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamOdenecek.Location = new System.Drawing.Point(206, 26);
+            this.labelToplamOdenecek.Location = new System.Drawing.Point(218, 26);
             this.labelToplamOdenecek.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelToplamOdenecek.Name = "labelToplamOdenecek";
             this.labelToplamOdenecek.Size = new System.Drawing.Size(44, 19);
@@ -316,7 +308,7 @@
             this.labelOdemeYontemi.AutoSize = true;
             this.labelOdemeYontemi.Depth = 0;
             this.labelOdemeYontemi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelOdemeYontemi.Location = new System.Drawing.Point(18, 71);
+            this.labelOdemeYontemi.Location = new System.Drawing.Point(30, 71);
             this.labelOdemeYontemi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelOdemeYontemi.Name = "labelOdemeYontemi";
             this.labelOdemeYontemi.Size = new System.Drawing.Size(132, 19);
@@ -329,7 +321,7 @@
             this.labelOdenecekTutar.AutoSize = true;
             this.labelOdenecekTutar.Depth = 0;
             this.labelOdenecekTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelOdenecekTutar.Location = new System.Drawing.Point(18, 26);
+            this.labelOdenecekTutar.Location = new System.Drawing.Point(30, 26);
             this.labelOdenecekTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelOdenecekTutar.Name = "labelOdenecekTutar";
             this.labelOdenecekTutar.Size = new System.Drawing.Size(159, 19);
@@ -338,15 +330,16 @@
             // 
             // panelOrta
             // 
+            this.panelOrta.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.panelOrta.Controls.Add(this.btnBitir);
             this.panelOrta.Controls.Add(this.btnHepsiniGeriAl);
             this.panelOrta.Controls.Add(this.btnSecilenleriGeriAl);
             this.panelOrta.Controls.Add(this.btnHepsiniAktar);
             this.panelOrta.Controls.Add(this.btnSecilenAktar);
             this.panelOrta.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelOrta.Location = new System.Drawing.Point(538, 62);
+            this.panelOrta.Location = new System.Drawing.Point(514, 62);
             this.panelOrta.Name = "panelOrta";
-            this.panelOrta.Size = new System.Drawing.Size(237, 611);
+            this.panelOrta.Size = new System.Drawing.Size(232, 611);
             this.panelOrta.TabIndex = 4;
             this.panelOrta.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrta_Paint);
             // 
@@ -359,7 +352,7 @@
             this.btnBitir.HighEmphasis = true;
             this.btnBitir.Icon = null;
             this.btnBitir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnBitir.Location = new System.Drawing.Point(64, 553);
+            this.btnBitir.Location = new System.Drawing.Point(62, 553);
             this.btnBitir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBitir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnBitir.Name = "btnBitir";
@@ -381,12 +374,12 @@
             this.btnHepsiniGeriAl.HighEmphasis = true;
             this.btnHepsiniGeriAl.Icon = null;
             this.btnHepsiniGeriAl.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHepsiniGeriAl.Location = new System.Drawing.Point(4, 395);
+            this.btnHepsiniGeriAl.Location = new System.Drawing.Point(7, 366);
             this.btnHepsiniGeriAl.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnHepsiniGeriAl.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnHepsiniGeriAl.Name = "btnHepsiniGeriAl";
             this.btnHepsiniGeriAl.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHepsiniGeriAl.Size = new System.Drawing.Size(229, 52);
+            this.btnHepsiniGeriAl.Size = new System.Drawing.Size(218, 52);
             this.btnHepsiniGeriAl.TabIndex = 3;
             this.btnHepsiniGeriAl.Text = "<--  HEPSİNİ GERİ AL";
             this.btnHepsiniGeriAl.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -403,12 +396,12 @@
             this.btnSecilenleriGeriAl.HighEmphasis = true;
             this.btnSecilenleriGeriAl.Icon = null;
             this.btnSecilenleriGeriAl.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnSecilenleriGeriAl.Location = new System.Drawing.Point(4, 318);
+            this.btnSecilenleriGeriAl.Location = new System.Drawing.Point(7, 289);
             this.btnSecilenleriGeriAl.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSecilenleriGeriAl.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnSecilenleriGeriAl.Name = "btnSecilenleriGeriAl";
             this.btnSecilenleriGeriAl.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSecilenleriGeriAl.Size = new System.Drawing.Size(229, 52);
+            this.btnSecilenleriGeriAl.Size = new System.Drawing.Size(218, 52);
             this.btnSecilenleriGeriAl.TabIndex = 2;
             this.btnSecilenleriGeriAl.Text = "<--  SEÇİLENLERİ GERİ AL";
             this.btnSecilenleriGeriAl.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -425,12 +418,12 @@
             this.btnHepsiniAktar.HighEmphasis = true;
             this.btnHepsiniAktar.Icon = null;
             this.btnHepsiniAktar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHepsiniAktar.Location = new System.Drawing.Point(4, 241);
+            this.btnHepsiniAktar.Location = new System.Drawing.Point(7, 147);
             this.btnHepsiniAktar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnHepsiniAktar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnHepsiniAktar.Name = "btnHepsiniAktar";
             this.btnHepsiniAktar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHepsiniAktar.Size = new System.Drawing.Size(229, 52);
+            this.btnHepsiniAktar.Size = new System.Drawing.Size(218, 52);
             this.btnHepsiniAktar.TabIndex = 1;
             this.btnHepsiniAktar.Text = "HEPSİNİ AKTAR   -->";
             this.btnHepsiniAktar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -447,12 +440,12 @@
             this.btnSecilenAktar.HighEmphasis = true;
             this.btnSecilenAktar.Icon = null;
             this.btnSecilenAktar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnSecilenAktar.Location = new System.Drawing.Point(4, 164);
+            this.btnSecilenAktar.Location = new System.Drawing.Point(7, 70);
             this.btnSecilenAktar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSecilenAktar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnSecilenAktar.Name = "btnSecilenAktar";
             this.btnSecilenAktar.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnSecilenAktar.Size = new System.Drawing.Size(229, 52);
+            this.btnSecilenAktar.Size = new System.Drawing.Size(218, 52);
             this.btnSecilenAktar.TabIndex = 0;
             this.btnSecilenAktar.Text = "SEÇİLENLERİ AKTAR   -->";
             this.btnSecilenAktar.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -483,8 +476,6 @@
             this.panelSol.ResumeLayout(false);
             this.panelSolAlt.ResumeLayout(false);
             this.panelSolAlt.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.panelSag.ResumeLayout(false);
             this.panelSagAlt.ResumeLayout(false);
             this.panelSagAlt.PerformLayout();
@@ -517,7 +508,6 @@
         private ReaLTaiizor.Controls.MaterialLabel labelToplamTutar;
         private ReaLTaiizor.Controls.MaterialLabel labelToplamOdenecek;
         private System.Windows.Forms.FlowLayoutPanel panelOdenecekler;
-        private System.Windows.Forms.Panel panel1;
         private ReaLTaiizor.Controls.MaterialLabel labelHesapBilgi;
         private ReaLTaiizor.Controls.MaterialButton btnBitir;
         private System.Windows.Forms.Timer timer1;
