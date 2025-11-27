@@ -43,7 +43,7 @@
             this.panelOdenecekler = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSagAlt = new System.Windows.Forms.Panel();
             this.labelToplamOdenecek = new ReaLTaiizor.Controls.MaterialLabel();
-            this.btnBitir = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnOde = new ReaLTaiizor.Controls.MaterialButton();
             this.btnKart = new ReaLTaiizor.Controls.MaterialButton();
             this.btnNakit = new ReaLTaiizor.Controls.MaterialButton();
             this.labelOdemeYontemi = new ReaLTaiizor.Controls.MaterialLabel();
@@ -53,6 +53,7 @@
             this.btnSecilenleriGeriAl = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHepsiniAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenAktar = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnBitir = new ReaLTaiizor.Controls.MaterialButton();
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
@@ -138,7 +139,6 @@
             this.flowTumSiparisler.Name = "flowTumSiparisler";
             this.flowTumSiparisler.Size = new System.Drawing.Size(538, 516);
             this.flowTumSiparisler.TabIndex = 1;
-            this.flowTumSiparisler.Paint += new System.Windows.Forms.PaintEventHandler(this.flowTumSiparisler_Paint);
             // 
             // panelSolAlt
             // 
@@ -219,7 +219,7 @@
             // panelSagAlt
             // 
             this.panelSagAlt.Controls.Add(this.labelToplamOdenecek);
-            this.panelSagAlt.Controls.Add(this.btnBitir);
+            this.panelSagAlt.Controls.Add(this.btnOde);
             this.panelSagAlt.Controls.Add(this.btnKart);
             this.panelSagAlt.Controls.Add(this.btnNakit);
             this.panelSagAlt.Controls.Add(this.labelOdemeYontemi);
@@ -242,27 +242,27 @@
             this.labelToplamOdenecek.TabIndex = 5;
             this.labelToplamOdenecek.Text = "0,00 ₺";
             // 
-            // btnBitir
+            // btnOde
             // 
-            this.btnBitir.AutoSize = false;
-            this.btnBitir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnBitir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnBitir.Depth = 0;
-            this.btnBitir.HighEmphasis = true;
-            this.btnBitir.Icon = null;
-            this.btnBitir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnBitir.Location = new System.Drawing.Point(307, 108);
-            this.btnBitir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnBitir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnBitir.Name = "btnBitir";
-            this.btnBitir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBitir.Size = new System.Drawing.Size(158, 52);
-            this.btnBitir.TabIndex = 4;
-            this.btnBitir.Text = "ÖDE VE BİTİR";
-            this.btnBitir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnBitir.UseAccentColor = false;
-            this.btnBitir.UseVisualStyleBackColor = true;
-            this.btnBitir.Click += new System.EventHandler(this.btnBitir_Click);
+            this.btnOde.AutoSize = false;
+            this.btnOde.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnOde.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnOde.Depth = 0;
+            this.btnOde.HighEmphasis = true;
+            this.btnOde.Icon = null;
+            this.btnOde.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnOde.Location = new System.Drawing.Point(353, 108);
+            this.btnOde.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnOde.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnOde.Name = "btnOde";
+            this.btnOde.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnOde.Size = new System.Drawing.Size(108, 52);
+            this.btnOde.TabIndex = 4;
+            this.btnOde.Text = "ÖDE";
+            this.btnOde.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnOde.UseAccentColor = false;
+            this.btnOde.UseVisualStyleBackColor = true;
+            this.btnOde.Click += new System.EventHandler(this.btnOde_Click);
             // 
             // btnKart
             // 
@@ -273,7 +273,7 @@
             this.btnKart.HighEmphasis = true;
             this.btnKart.Icon = null;
             this.btnKart.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnKart.Location = new System.Drawing.Point(164, 108);
+            this.btnKart.Location = new System.Drawing.Point(193, 108);
             this.btnKart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnKart.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnKart.Name = "btnKart";
@@ -284,6 +284,7 @@
             this.btnKart.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnKart.UseAccentColor = false;
             this.btnKart.UseVisualStyleBackColor = true;
+            this.btnKart.Click += new System.EventHandler(this.btnKart_Click);
             // 
             // btnNakit
             // 
@@ -294,7 +295,7 @@
             this.btnNakit.HighEmphasis = true;
             this.btnNakit.Icon = null;
             this.btnNakit.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnNakit.Location = new System.Drawing.Point(21, 108);
+            this.btnNakit.Location = new System.Drawing.Point(33, 108);
             this.btnNakit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnNakit.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnNakit.Name = "btnNakit";
@@ -305,6 +306,7 @@
             this.btnNakit.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnNakit.UseAccentColor = false;
             this.btnNakit.UseVisualStyleBackColor = true;
+            this.btnNakit.Click += new System.EventHandler(this.btnNakit_Click);
             // 
             // labelOdemeYontemi
             // 
@@ -333,6 +335,7 @@
             // 
             // panelOrta
             // 
+            this.panelOrta.Controls.Add(this.btnBitir);
             this.panelOrta.Controls.Add(this.btnHepsiniGeriAl);
             this.panelOrta.Controls.Add(this.btnSecilenleriGeriAl);
             this.panelOrta.Controls.Add(this.btnHepsiniAktar);
@@ -432,6 +435,27 @@
             this.btnSecilenAktar.UseVisualStyleBackColor = true;
             this.btnSecilenAktar.Click += new System.EventHandler(this.btnSecilenAktar_Click);
             // 
+            // btnBitir
+            // 
+            this.btnBitir.AutoSize = false;
+            this.btnBitir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnBitir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnBitir.Depth = 0;
+            this.btnBitir.HighEmphasis = true;
+            this.btnBitir.Icon = null;
+            this.btnBitir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnBitir.Location = new System.Drawing.Point(64, 553);
+            this.btnBitir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnBitir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnBitir.Name = "btnBitir";
+            this.btnBitir.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnBitir.Size = new System.Drawing.Size(108, 52);
+            this.btnBitir.TabIndex = 6;
+            this.btnBitir.Text = "BİTİR";
+            this.btnBitir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnBitir.UseAccentColor = false;
+            this.btnBitir.UseVisualStyleBackColor = true;
+            // 
             // frmOdemeEkrani
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -445,7 +469,6 @@
             this.Name = "frmOdemeEkrani";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ÖDEME EKRANI";
-            this.Load += new System.EventHandler(this.frmOdemeEkrani_Load);
             this.panelUst.ResumeLayout(false);
             this.panelUst.PerformLayout();
             this.panelSol.ResumeLayout(false);
@@ -478,7 +501,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowTumSiparisler;
         private ReaLTaiizor.Controls.MaterialLabel labelToplam;
         private ReaLTaiizor.Controls.MaterialLabel labelOdenecekTutar;
-        private ReaLTaiizor.Controls.MaterialButton btnBitir;
+        private ReaLTaiizor.Controls.MaterialButton btnOde;
         private ReaLTaiizor.Controls.MaterialButton btnKart;
         private ReaLTaiizor.Controls.MaterialButton btnNakit;
         private ReaLTaiizor.Controls.MaterialLabel labelOdemeYontemi;
@@ -487,5 +510,6 @@
         private System.Windows.Forms.FlowLayoutPanel panelOdenecekler;
         private System.Windows.Forms.Panel panel1;
         private ReaLTaiizor.Controls.MaterialLabel labelHesapBilgi;
+        private ReaLTaiizor.Controls.MaterialButton btnBitir;
     }
 }
