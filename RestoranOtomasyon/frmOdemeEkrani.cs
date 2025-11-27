@@ -237,5 +237,24 @@ namespace RestoranOtomasyon
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
         private void labelOdemeYontemi_Click(object sender, EventArgs e) { }
         private void labelToplam_Click(object sender, EventArgs e) { }
+
+        private void btnBitir_Click_1(object sender, EventArgs e)
+        {
+            // 1. Borç Kontrolü: Sol tarafta veya sağ tarafta hala ürün var mı?
+            if (solListeVerileri.Count > 0 || sagListeVerileri.Count > 0)
+            {
+                MessageBox.Show("Masada hala ödenmemiş ürünler var!\nLütfen önce borcu sıfırlayın.",
+                                "Hesap Kapanmadı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. Borç bitmiş, masayı kapatıyoruz
+            db.SiparisHesapKapat(aktifSiparisID, 0, "Kapandı"); // Siparişi kapat
+            db.MasaDurumGuncelle(seciliMasaID, "Boş"); // Masayı boşa çıkar
+
+            MessageBox.Show("Masa başarıyla kapatıldı.", "İşlem Tamam", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            this.Close(); // Ekranı kapat ve sipariş ekranına dön
+        }
     }
 }
