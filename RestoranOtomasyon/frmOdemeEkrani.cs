@@ -71,5 +71,10 @@ namespace RestoranOtomasyon
         {
 
         }
+
+        private void btnBitir_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
