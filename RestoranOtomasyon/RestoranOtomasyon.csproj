@@ -162,6 +162,12 @@
     <Compile Include="frmMasaDurum.Designer.cs">
       <DependentUpon>frmMasaDurum.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmMasaTasi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMasaTasi.Designer.cs">
+      <DependentUpon>frmMasaTasi.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmOdemeEkrani.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMasaDurum.resx">
       <DependentUpon>frmMasaDurum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMasaTasi.resx">
+      <DependentUpon>frmMasaTasi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmOdemeEkrani.resx">
       <DependentUpon>frmOdemeEkrani.cs</DependentUpon>
