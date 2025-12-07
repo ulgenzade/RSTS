@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Printing; // Yazdırma kütüphanesi
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,13 +12,13 @@ namespace RestoranOtomasyon
     public partial class frmOdemeEkrani : Form
     {
         VeritabaniIslemleri db = new VeritabaniIslemleri();
+        PrintDocument pd = new PrintDocument();
 
         // DEĞİŞKENLER
         int seciliMasaID = -1;
         int aktifSiparisID = -1;
         decimal toplamMasaTutari = 0;
 
-        // LİSTELER
         List<SiparisUrunModel> solListeVerileri = new List<SiparisUrunModel>();
         List<SiparisUrunModel> sagListeVerileri = new List<SiparisUrunModel>();
 
@@ -28,13 +29,14 @@ namespace RestoranOtomasyon
         {
             InitializeComponent();
             this.seciliMasaID = masaID;
+            // Yazdırma olayını bağlıyoruz
+            pd.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
         }
 
         public frmOdemeEkrani() { InitializeComponent(); }
 
         private void frmOdemeEkrani_Load(object sender, EventArgs e)
         {
-            // 1. SAAT AYARI
             if (timer1 != null)
             {
                 timer1.Interval = 1000;
@@ -42,17 +44,11 @@ namespace RestoranOtomasyon
                 timer1.Start();
             }
 
-            // 2. SAATİ BİRAZ SOLA KAYDIRMA
             Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
-            if (lblSaat.Length > 0)
-            {
-                lblSaat[0].Left = lblSaat[0].Left - 40;
-            }
+            if (lblSaat.Length > 0) lblSaat[0].Left = lblSaat[0].Left - 40;
 
-            // 3. GARSON ADI
             Control[] lblGarson = Controls.Find("labelHesapBilgi", true);
-            if (lblGarson.Length > 0)
-                lblGarson[0].Text = "Garson: " + AktifKullanici.AdSoyad;
+            if (lblGarson.Length > 0) lblGarson[0].Text = "Garson: " + AktifKullanici.AdSoyad;
 
             if (seciliMasaID != -1)
             {
@@ -65,10 +61,7 @@ namespace RestoranOtomasyon
         private void timer1_Tick(object sender, EventArgs e)
         {
             Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
-            if (lblSaat.Length > 0)
-            {
-                lblSaat[0].Text = DateTime.Now.ToString("HH:mm:ss");
-            }
+            if (lblSaat.Length > 0) lblSaat[0].Text = DateTime.Now.ToString("HH:mm:ss");
         }
 
         private void HesabiGetir()
@@ -86,13 +79,11 @@ namespace RestoranOtomasyon
 
         private void EkranlariCiz()
         {
-            // --- SOL TARAFI ÇİZ ---
             flowTumSiparisler.Controls.Clear();
             toplamMasaTutari = 0;
 
             foreach (var urun in solListeVerileri)
             {
-                // 0 TL sorununu çözen satır burası:
                 urun.AraToplam = urun.Adet * urun.BirimFiyat;
                 toplamMasaTutari += urun.AraToplam;
 
@@ -101,11 +92,9 @@ namespace RestoranOtomasyon
                 flowTumSiparisler.Controls.Add(btn);
             }
 
-            // Sol Toplam
             Control[] lblSol = Controls.Find("labelToplamTutar", true);
             if (lblSol.Length > 0) lblSol[0].Text = $"TOPLAM: {toplamMasaTutari:C2}";
 
-            // --- SAĞ TARAFI ÇİZ ---
             panelOdenecekler.Controls.Clear();
             decimal odenecekTutar = 0;
 
@@ -119,16 +108,14 @@ namespace RestoranOtomasyon
                 panelOdenecekler.Controls.Add(btn);
             }
 
-            // Sağ Toplam
             Control[] lblSag = Controls.Find("labelOdenecekTutar", true);
-            if (lblSag.Length > 0)
-                lblSag[0].Text = $"{odenecekTutar:C2}";
+            if (lblSag.Length > 0) lblSag[0].Text = $"{odenecekTutar:C2}";
         }
 
         private Button KartOlustur(SiparisUrunModel urun, EventHandler tiklamaOlayi)
         {
             Button btn = new Button();
-            btn.Text = $"{urun.Adet}x {urun.UrunAdi}\n{urun.AraToplam:C2}";
+            btn.Text = $"{urun.Adet}x {urun.UrunAdi}\n{(urun.Adet * urun.BirimFiyat):C2}";
             btn.Size = new Size(130, 70);
             btn.FlatStyle = FlatStyle.Flat;
             btn.BackColor = Color.WhiteSmoke;
@@ -137,7 +124,6 @@ namespace RestoranOtomasyon
             return btn;
         }
 
-        // TIKLAMA OLAYLARI
         private void SolUrun_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
@@ -154,7 +140,6 @@ namespace RestoranOtomasyon
             else { sagSecilenler.Add(urun); btn.BackColor = Color.DarkOrange; }
         }
 
-        // --- ADET SORAN PENCERE (InputBox) ---
         private int MiktarSor(string urunAdi, int maxAdet)
         {
             Form prompt = new Form()
@@ -167,42 +152,29 @@ namespace RestoranOtomasyon
                 MinimizeBox = false,
                 MaximizeBox = false
             };
-
             Label textLabel = new Label() { Left = 20, Top = 20, Text = $"{urunAdi}\nKaç adet ödenecek? (Max: {maxAdet})", AutoSize = true, Font = new Font("Segoe UI", 10, FontStyle.Bold) };
             TextBox inputBox = new TextBox() { Left = 20, Top = 70, Width = 240, Text = "1" };
             Button confirmation = new Button() { Text = "Tamam", Left = 160, Width = 100, Top = 100, DialogResult = DialogResult.OK };
-
-            prompt.Controls.Add(textLabel);
-            prompt.Controls.Add(inputBox);
-            prompt.Controls.Add(confirmation);
+            prompt.Controls.Add(textLabel); prompt.Controls.Add(inputBox); prompt.Controls.Add(confirmation);
             prompt.AcceptButton = confirmation;
-
             return prompt.ShowDialog() == DialogResult.OK && int.TryParse(inputBox.Text, out int result) && result > 0 && result <= maxAdet ? result : -1;
         }
 
-        // --- GÜNCELLENEN AKTARMA BUTONU ---
         private void btnSecilenAktar_Click(object sender, EventArgs e)
         {
             if (solSecilenler.Count == 0) return;
-
-            // Listeyi kopyalayıp döngüye sokuyoruz ki işlem sırasında hata vermesin
             var islenecekUrunler = new List<SiparisUrunModel>(solSecilenler);
 
             foreach (var item in islenecekUrunler)
             {
                 int aktarilacakAdet = 1;
-
-                // Eğer ürün 1 taneden fazlaysa SOR
                 if (item.Adet > 1)
                 {
                     int girilenAdet = MiktarSor(item.UrunAdi, item.Adet);
-                    if (girilenAdet == -1) continue; // İptal ederse atla
+                    if (girilenAdet == -1) continue;
                     aktarilacakAdet = girilenAdet;
                 }
-                else
-                {
-                    aktarilacakAdet = 1; // Zaten 1 tane varsa direkt al
-                }
+                else aktarilacakAdet = 1;
 
                 if (aktarilacakAdet == item.Adet)
                 {
@@ -211,11 +183,8 @@ namespace RestoranOtomasyon
                 }
                 else
                 {
-                    // Parçalama işlemi
                     item.Adet -= aktarilacakAdet;
                     item.AraToplam = item.Adet * item.BirimFiyat;
-
-                    // Sağ tarafa yeni parça oluştur
                     SiparisUrunModel yeniParca = new SiparisUrunModel
                     {
                         UrunID = item.UrunID,
@@ -227,7 +196,6 @@ namespace RestoranOtomasyon
                     sagListeVerileri.Add(yeniParca);
                 }
             }
-
             solSecilenler.Clear();
             EkranlariCiz();
         }
@@ -255,54 +223,134 @@ namespace RestoranOtomasyon
             EkranlariCiz();
         }
 
-        // HIZLI ÖDEME
         private void HizliOdemeYap(string odemeTuru)
         {
             decimal odenecekTutar = 0;
-            foreach (var item in sagListeVerileri) odenecekTutar += item.AraToplam;
+            foreach (var item in sagListeVerileri) odenecekTutar += (item.Adet * item.BirimFiyat);
 
             if (odenecekTutar <= 0)
             {
-                MessageBox.Show("Lütfen önce sağ tarafa ürün aktarın.", "Uyarı");
+                MessageBox.Show("Ödenecek tutar 0 TL görünüyor.", "Uyarı");
                 return;
             }
 
             bool sonuc = db.OdemeEkle(aktifSiparisID, odemeTuru, odenecekTutar);
-
             if (sonuc)
             {
                 MessageBox.Show($"{odenecekTutar:C2} tutarındaki ödeme {odemeTuru.ToUpper()} olarak alındı.", "İşlem Başarılı");
                 sagListeVerileri.Clear();
                 EkranlariCiz();
             }
-            else
-            {
-                MessageBox.Show("Hata oluştu!", "Hata");
-            }
+            else MessageBox.Show("Hata oluştu!", "Hata");
         }
 
         private void btnNakit_Click(object sender, EventArgs e) { HizliOdemeYap("Nakit"); }
         private void btnKart_Click(object sender, EventArgs e) { HizliOdemeYap("Kart"); }
 
-        // BİTİR BUTONU
         private void btnBitir_Click(object sender, EventArgs e)
         {
             if (solListeVerileri.Count > 0 || sagListeVerileri.Count > 0)
             {
-                MessageBox.Show("Masada hala ödenmemiş ürünler var! Borcu sıfırlamadan masayı kapatamazsınız.", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Masada hala ödenmemiş ürünler var!", "Uyarı", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             db.SiparisHesapKapat(aktifSiparisID, 0, "Kapandı");
             db.MasaDurumGuncelle(seciliMasaID, "Boş");
             MessageBox.Show("Hesap kapatıldı, masa boşaltıldı.", "Tamamlandı", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();
         }
 
+        // =================================================================
+        // 🔥 GÜNCEL: FİŞ BOYUTUNDA (80mm) ADİSYON YAZDIRMA 🔥
+        // =================================================================
+        private void btnAdisyonYazdir_Click(object sender, EventArgs e)
+        {
+            // 1. KAĞIT BOYUTU AYARLAMA (285 = Yaklaşık 80mm fiş genişliği)
+            // Yüksekliği (600) ürün sayısına göre uzatabiliriz ama şimdilik sabit yeterli.
+            PaperSize fisKagidi = new PaperSize("Fis", 285, 600);
+            pd.DefaultPageSettings.PaperSize = fisKagidi;
+
+            PrintPreviewDialog onizleme = new PrintPreviewDialog();
+            onizleme.Document = pd;
+            onizleme.Text = "ADİSYON ÖNİZLEME";
+            onizleme.WindowState = FormWindowState.Maximized;
+            onizleme.ShowDialog();
+        }
+
+        private void pd_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            // Yazı Tipleri (Biraz küçülttüm ki fişe sığsın)
+            Font baslikFont = new Font("Arial", 12, FontStyle.Bold);
+            Font altBaslikFont = new Font("Arial", 9, FontStyle.Bold);
+            Font icerikFont = new Font("Courier New", 8, FontStyle.Bold);
+            SolidBrush firca = new SolidBrush(Color.Black);
+
+            int y = 10;
+            int xStart = 5;
+            int xAdet = 150;
+            int xTutar = 200;
+
+            // Başlıkları Ortala
+            StringFormat centerFormat = new StringFormat();
+            centerFormat.Alignment = StringAlignment.Center;
+
+            // Fiş Genişliği (Yaklaşık 280)
+            RectangleF rectBaslik = new RectangleF(0, y, 280, 25);
+            e.Graphics.DrawString("RESTORAN ADI", baslikFont, firca, rectBaslik, centerFormat);
+            y += 30;
+
+            e.Graphics.DrawString("-----------------------------------------------", icerikFont, firca, new Point(xStart, y));
+            y += 15;
+            e.Graphics.DrawString($"Masa: {seciliMasaID}", altBaslikFont, firca, new Point(xStart, y));
+            y += 15;
+            e.Graphics.DrawString($"Tarih: {DateTime.Now:dd.MM.yy HH:mm}", icerikFont, firca, new Point(xStart, y));
+            y += 15;
+            e.Graphics.DrawString($"Garson: {AktifKullanici.AdSoyad}", icerikFont, firca, new Point(xStart, y));
+            y += 15;
+            e.Graphics.DrawString("-----------------------------------------------", icerikFont, firca, new Point(xStart, y));
+            y += 15;
+
+            // Başlıklar
+            e.Graphics.DrawString("Ürün", altBaslikFont, firca, new Point(xStart, y));
+            e.Graphics.DrawString("Adet", altBaslikFont, firca, new Point(xAdet, y));
+            e.Graphics.DrawString("Tutar", altBaslikFont, firca, new Point(xTutar, y));
+            y += 20;
+
+            decimal genelToplam = 0;
+            List<SiparisUrunModel> tumListe = new List<SiparisUrunModel>();
+            tumListe.AddRange(solListeVerileri);
+            tumListe.AddRange(sagListeVerileri);
+
+            foreach (var item in tumListe)
+            {
+                // Uzun isimleri kes
+                string kisaAd = item.UrunAdi.Length > 16 ? item.UrunAdi.Substring(0, 16) + "." : item.UrunAdi;
+                decimal satirTutar = item.Adet * item.BirimFiyat;
+
+                e.Graphics.DrawString(kisaAd, icerikFont, firca, new Point(xStart, y));
+                e.Graphics.DrawString(item.Adet.ToString(), icerikFont, firca, new Point(xAdet + 5, y));
+                e.Graphics.DrawString(satirTutar.ToString("C2"), icerikFont, firca, new Point(xTutar, y));
+
+                y += 15;
+                genelToplam += satirTutar;
+            }
+
+            y += 10;
+            e.Graphics.DrawString("-----------------------------------------------", icerikFont, firca, new Point(xStart, y));
+            y += 15;
+
+            // Genel Toplam
+            e.Graphics.DrawString($"TOPLAM: {genelToplam:C2}", baslikFont, firca, new Point(xStart + 80, y));
+            y += 30;
+
+            RectangleF rectAlt = new RectangleF(0, y, 280, 20);
+            e.Graphics.DrawString("AFİYET OLSUN...", icerikFont, firca, rectAlt, centerFormat);
+        }
+
         private void btnGeriDon_Click(object sender, EventArgs e) { this.Close(); }
 
-        // BOŞ EVENTLER (Tasarım hatası almamak için)
-        private void btnOde_Click(object sender, EventArgs e) { MessageBox.Show("Lütfen aşağıdaki NAKİT veya KART butonlarını kullanınız."); }
+        // BOŞ EVENTLER
+        private void btnOde_Click(object sender, EventArgs e) { }
         private void panelOdenecekler_Paint(object sender, PaintEventArgs e) { }
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
         private void labelOdemeYontemi_Click(object sender, EventArgs e) { }
