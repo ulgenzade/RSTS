@@ -34,9 +34,9 @@
             this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.lblTutar_Yeni = new ReaLTaiizor.Controls.MaterialLabel();
-            this.lstSiparisler = new ReaLTaiizor.Controls.MaterialListBox();
-            this.lblMasaBaslik_Yeni = new System.Windows.Forms.Label();
+            this.lblBaslikFinal = new System.Windows.Forms.Label();
+            this.lstListeFinal = new System.Windows.Forms.ListBox();
+            this.lblTutarFinal = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -123,52 +123,42 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.lblTutar_Yeni);
-            this.panel2.Controls.Add(this.lstSiparisler);
-            this.panel2.Controls.Add(this.lblMasaBaslik_Yeni);
+            this.panel2.Controls.Add(this.lblTutarFinal);
+            this.panel2.Controls.Add(this.lstListeFinal);
+            this.panel2.Controls.Add(this.lblBaslikFinal);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 3);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(334, 444);
             this.panel2.TabIndex = 4;
             // 
-            // lblTutar_Yeni
+            // lblBaslikFinal
             // 
-            this.lblTutar_Yeni.AutoSize = true;
-            this.lblTutar_Yeni.Depth = 0;
-            this.lblTutar_Yeni.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lblTutar_Yeni.ForeColor = System.Drawing.Color.Gold;
-            this.lblTutar_Yeni.Location = new System.Drawing.Point(103, 407);
-            this.lblTutar_Yeni.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.lblTutar_Yeni.Name = "lblTutar_Yeni";
-            this.lblTutar_Yeni.Size = new System.Drawing.Size(45, 19);
-            this.lblTutar_Yeni.TabIndex = 7;
-            this.lblTutar_Yeni.Text = "0.00 ₺";
+            this.lblBaslikFinal.AutoSize = true;
+            this.lblBaslikFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblBaslikFinal.Location = new System.Drawing.Point(117, 6);
+            this.lblBaslikFinal.Name = "lblBaslikFinal";
+            this.lblBaslikFinal.Size = new System.Drawing.Size(98, 32);
+            this.lblBaslikFinal.TabIndex = 0;
+            this.lblBaslikFinal.Text = "MASA";
             // 
-            // lstSiparisler
+            // lstListeFinal
             // 
-            this.lstSiparisler.BackColor = System.Drawing.Color.White;
-            this.lstSiparisler.BorderColor = System.Drawing.Color.LightGray;
-            this.lstSiparisler.Depth = 0;
-            this.lstSiparisler.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.lstSiparisler.Location = new System.Drawing.Point(9, 130);
-            this.lstSiparisler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.lstSiparisler.Name = "lstSiparisler";
-            this.lstSiparisler.SelectedIndex = -1;
-            this.lstSiparisler.SelectedItem = null;
-            this.lstSiparisler.Size = new System.Drawing.Size(314, 263);
-            this.lstSiparisler.TabIndex = 6;
+            this.lstListeFinal.FormattingEnabled = true;
+            this.lstListeFinal.ItemHeight = 16;
+            this.lstListeFinal.Location = new System.Drawing.Point(3, 145);
+            this.lstListeFinal.Name = "lstListeFinal";
+            this.lstListeFinal.Size = new System.Drawing.Size(328, 196);
+            this.lstListeFinal.TabIndex = 1;
             // 
-            // lblMasaBaslik_Yeni
+            // lblTutarFinal
             // 
-            this.lblMasaBaslik_Yeni.AutoSize = true;
-            this.lblMasaBaslik_Yeni.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.lblMasaBaslik_Yeni.ForeColor = System.Drawing.Color.Black;
-            this.lblMasaBaslik_Yeni.Location = new System.Drawing.Point(100, 20);
-            this.lblMasaBaslik_Yeni.Name = "lblMasaBaslik_Yeni";
-            this.lblMasaBaslik_Yeni.Size = new System.Drawing.Size(94, 32);
-            this.lblMasaBaslik_Yeni.TabIndex = 5;
-            this.lblMasaBaslik_Yeni.Text = "MASA";
+            this.lblTutarFinal.AutoSize = true;
+            this.lblTutarFinal.Location = new System.Drawing.Point(120, 422);
+            this.lblTutarFinal.Name = "lblTutarFinal";
+            this.lblTutarFinal.Size = new System.Drawing.Size(54, 16);
+            this.lblTutarFinal.TabIndex = 2;
+            this.lblTutarFinal.Text = "TUTAR";
             // 
             // frmMasaTasi
             // 
@@ -195,8 +185,8 @@
         private ReaLTaiizor.Controls.MaterialButton btnTasiBirlestir;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel2;
-        private ReaLTaiizor.Controls.MaterialLabel lblTutar_Yeni;
-        private ReaLTaiizor.Controls.MaterialListBox lstSiparisler;
-        private System.Windows.Forms.Label lblMasaBaslik_Yeni;
+        private System.Windows.Forms.Label lblTutarFinal;
+        private System.Windows.Forms.ListBox lstListeFinal;
+        private System.Windows.Forms.Label lblBaslikFinal;
     }
 }

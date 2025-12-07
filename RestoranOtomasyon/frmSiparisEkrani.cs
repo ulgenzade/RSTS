@@ -367,20 +367,23 @@ namespace RestoranOtomasyon
 
         private void btnTasiBirlestir_Click(object sender, EventArgs e)
         {
-            // 1. Masa Taşıma Formunu Oluştur
             frmMasaTasi frm = new frmMasaTasi();
+            frm.kaynakMasaId = this._seciliMasaID; // Değişken adın _seciliMasaID ise
 
-            // 2. ÇOK ÖNEMLİ: Şu an açık olan masanın ID'sini diğer forma gönder.
-            // Senin sipariş ekranında masa ID'si hangi değişkendeyse onu yaz.
-            // Genelde: '_masaId', 'seciliMasaID' veya 'masaID' olur.
-            frm.kaynakMasaId = this._seciliMasaID; // <-- Buradaki _masaId senin değişkenin olmalı!
+            DialogResult sonuc = frm.ShowDialog();
 
-            // 3. Formu Aç
-            frm.ShowDialog();
+            // EĞER İŞLEM BAŞARILIYSA
+            if (sonuc == DialogResult.OK)
+            {
+                // 1. Bu ekranı kapat
+                this.Close();
 
-            // 4. İşlem bitip o form kapandığında, sipariş ekranını da kapat
-            // (Çünkü masa taşındı, artık bu ekranın açık kalmasına gerek yok)
-            this.Close();
+                // 2. Yeni bir Sipariş Ekranı aç (Böylece sipariş ekranına dönmüş olursun)
+                // Eğer direkt yeni masayı açmak istersen parametre göndermen gerekir
+                // Ama en temizi yeniden açmaktır.
+                frmSiparisEkrani yeni = new frmSiparisEkrani();
+                yeni.Show();
+            }
         }
     }
 }

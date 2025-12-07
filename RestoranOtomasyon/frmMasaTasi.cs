@@ -1,6 +1,4 @@
-﻿
-using ReaLTaiizor.Child.Material;
-using System;
+﻿using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -13,6 +11,8 @@ namespace RestoranOtomasyon
     {
         public int kaynakMasaId = 0;
         public int hedefMasaId = 0;
+        public bool islemBasarili = false; // Diğer forma haber vermek için
+
         VeritabaniIslemleri db = new VeritabaniIslemleri();
 
         public frmMasaTasi()
@@ -22,17 +22,16 @@ namespace RestoranOtomasyon
 
         private async void frmMasaTasi_Load(object sender, EventArgs e)
         {
-            // --- GÖRÜNÜM AYARLARI ---
+            // --- 1. GÖRÜNÜM AYARLARI ---
 
-            // Sol Paneli Bul (Adı ne olursa olsun)
+            // Sol Paneli Bul
             Panel solPanel = this.Controls.OfType<Panel>().FirstOrDefault(p => p.Name == "pnlSol")
                              ?? this.Controls.OfType<Panel>().FirstOrDefault();
 
-            if (solPanel != null) solPanel.BackColor = Color.WhiteSmoke;
+            if (solPanel != null) solPanel.BackColor = Color.White; // Arka plan BEYAZ
 
-            // Sağ Paneli Bul (FlowLayoutPanel)
+            // Sağ Paneli Bul
             FlowLayoutPanel sagPanel = this.Controls.OfType<FlowLayoutPanel>().FirstOrDefault();
-
             if (sagPanel == null)
             {
                 Control[] bulunanlar = this.Controls.Find("flowLayoutPanel1", true);
@@ -42,13 +41,13 @@ namespace RestoranOtomasyon
             if (sagPanel != null)
             {
                 sagPanel.AutoScroll = true;
-                sagPanel.FlowDirection = FlowDirection.LeftToRight;
+                sagPanel.FlowDirection = FlowDirection.TopDown; // Listeyi aşağı doğru diz
                 sagPanel.WrapContents = true;
-                sagPanel.BackColor = Color.White;
+                sagPanel.BackColor = Color.WhiteSmoke;
                 sagPanel.Padding = new Padding(10);
             }
 
-            // --- VERİLERİ DOLDUR ---
+            // --- 2. VERİLERİ DOLDUR ---
             if (kaynakMasaId != 0) await SolTarafiDoldur();
             if (sagPanel != null) SagTarafiDoldur(sagPanel);
         }
@@ -57,7 +56,7 @@ namespace RestoranOtomasyon
         {
             try
             {
-                // 1. Masa Adını Getir
+                // Masa Adı
                 DataTable dt = db.MasalariGetir();
                 string masaAdi = "Masa ?";
                 foreach (DataRow row in dt.Rows)
@@ -69,42 +68,41 @@ namespace RestoranOtomasyon
                     }
                 }
 
-                // YENİ İSİM VERDİĞİMİZ LABEL
-                if (lblMasaBaslik_Yeni != null)
+                // --- BURADA YENİ İSİMLERİ KULLANIYORUZ ---
+
+                // 1. BAŞLIK
+                if (lblBaslikFinal != null)
                 {
-                    lblMasaBaslik_Yeni.Text = masaAdi;
+                    lblBaslikFinal.Text = masaAdi;
+                    lblBaslikFinal.ForeColor = Color.Black; // SİYAH YAZI (Görünmesi için)
                 }
 
-                // 2. SİPARİŞLERİ DOLDUR (MaterialListBox Uyumlu)
-                if (lstSiparisler != null) lstSiparisler.Items.Clear();
-
-                var siparisler = await db.MasaSiparisleriniGetirAsync(kaynakMasaId);
-                decimal toplam = 0;
-
-                foreach (var s in siparisler)
+                // 2. LİSTE KUTUSU
+                if (lstListeFinal != null)
                 {
-                    // --- BURASI DÜZELTİLDİ ---
-                    // MaterialListBox düz string kabul etmez, Item nesnesi oluşturuyoruz.
-                    MaterialListBoxItem yeniSatir = new MaterialListBoxItem();
-                    yeniSatir.Text = $"{s.UrunAdi} x {s.Adet} = {(s.Adet * s.BirimFiyat):C2}";
+                    lstListeFinal.Items.Clear();
+                    lstListeFinal.ForeColor = Color.Black; // SİYAH YAZI
+                    lstListeFinal.Font = new Font("Segoe UI", 11, FontStyle.Regular);
 
-                    // Listeye ekle
-                    if (lstSiparisler != null)
-                        lstSiparisler.Items.Add(yeniSatir);
+                    var siparisler = await db.MasaSiparisleriniGetirAsync(kaynakMasaId);
+                    decimal toplam = 0;
 
-                    toplam += (s.Adet * s.BirimFiyat);
-                }
+                    foreach (var s in siparisler)
+                    {
+                        string satir = $"{s.UrunAdi} x {s.Adet} = {(s.Adet * s.BirimFiyat):C2}";
+                        lstListeFinal.Items.Add(satir);
+                        toplam += (s.Adet * s.BirimFiyat);
+                    }
 
-                // 3. TUTAR (YENİ İSİMLİ LABEL)
-                if (lblTutar_Yeni != null)
-                {
-                    lblTutar_Yeni.Text = "TOPLAM: " + toplam.ToString("C2");
+                    // 3. TUTAR
+                    if (lblTutarFinal != null)
+                    {
+                        lblTutarFinal.Text = "TOPLAM: " + toplam.ToString("C2");
+                        lblTutarFinal.ForeColor = Color.Red; // KIRMIZI YAZI
+                    }
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Hata: " + ex.Message);
-            }
+            catch { }
         }
 
         private void SagTarafiDoldur(FlowLayoutPanel panel)
@@ -127,19 +125,10 @@ namespace RestoranOtomasyon
                 btn.Tag = id;
 
                 string durum = row["Durum"].ToString();
-                if (durum == "Dolu" || durum == "1")
-                {
-                    btn.BackColor = Color.Crimson;
-                    btn.Text += "\n(DOLU)";
-                }
-                else
-                {
-                    btn.BackColor = Color.SeaGreen;
-                    btn.Text += "\n(BOŞ)";
-                }
+                if (durum == "Dolu" || durum == "1") { btn.BackColor = Color.Crimson; btn.Text += "\n(DOLU)"; }
+                else { btn.BackColor = Color.SeaGreen; btn.Text += "\n(BOŞ)"; }
 
                 btn.Click += HedefMasa_Sec;
-                btn.DoubleClick += HedefMasa_HizliTasi;
                 panel.Controls.Add(btn);
             }
         }
@@ -148,39 +137,25 @@ namespace RestoranOtomasyon
         {
             Button secilen = (Button)sender;
             hedefMasaId = Convert.ToInt32(secilen.Tag);
-
             foreach (Control c in secilen.Parent.Controls)
             {
-                if (c is Button b)
-                    b.BackColor = b.Text.Contains("DOLU") ? Color.Crimson : Color.SeaGreen;
+                if (c is Button b) b.BackColor = b.Text.Contains("DOLU") ? Color.Crimson : Color.SeaGreen;
             }
             secilen.BackColor = Color.Orange;
         }
 
-        private void HedefMasa_HizliTasi(object sender, EventArgs e)
-        {
-            Button secilen = (Button)sender;
-            hedefMasaId = Convert.ToInt32(secilen.Tag);
-            DialogResult cevap = MessageBox.Show(secilen.Text.Replace("\n", " ") + " masasına taşımak istiyor musunuz?", "Onay", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (cevap == DialogResult.Yes) IslemiYapVeKapat();
-        }
-
         private void btnTasiBirlestir_Click(object sender, EventArgs e)
         {
-            if (hedefMasaId == 0)
-            {
-                MessageBox.Show("Lütfen sağdan bir masa seçin.");
-                return;
-            }
-            IslemiYapVeKapat();
-        }
+            if (hedefMasaId == 0) { MessageBox.Show("Lütfen sağdan bir masa seçin."); return; }
 
-        private void IslemiYapVeKapat()
-        {
             bool sonuc = db.MasaTasi(kaynakMasaId, hedefMasaId);
             if (sonuc)
             {
                 MessageBox.Show("İşlem Başarılı!", "Tamam", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // BU KISIM DİĞER EKRANIN ANLAMASINI SAĞLAR
+                this.islemBasarili = true;
+                this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else

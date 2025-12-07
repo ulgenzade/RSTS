@@ -359,11 +359,20 @@ namespace RestoranOtomasyon
         private void btnTasiBirlestir_Click(object sender, EventArgs e)
         {
             frmMasaTasi frm = new frmMasaTasi();
+            frm.kaynakMasaId = this.seciliMasaID; // Değişken adın bu ise
 
-            frm.kaynakMasaId = this.seciliMasaID;
+            DialogResult sonuc = frm.ShowDialog();
 
-            frm.ShowDialog();
-            this.Close();
+            if (sonuc == DialogResult.OK)
+            {
+                this.Close(); // Ödeme ekranını kapat
+
+                // Yeni bir ödeme ekranı açmak istersen:
+                // (Hedef masa doluysa onun ödeme ekranı açılır)
+                // int yeniMasa = frm.hedefMasaId;
+                // frmOdemeEkrani yeni = new frmOdemeEkrani(yeniMasa);
+                // yeni.Show();
+            }
         }
     }
 }
