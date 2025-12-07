@@ -101,8 +101,8 @@ namespace RestoranOtomasyon
             this.txtSecim.IntegralHeight = false;
             this.txtSecim.ItemHeight = 43;
             this.txtSecim.Items.AddRange(new object[] {
-            "Admin",
-            "Garson"});
+            "Garson",
+            "Yetkili"});
             this.txtSecim.Location = new System.Drawing.Point(47, 126);
             this.txtSecim.MaxDropDownItems = 4;
             this.txtSecim.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.OUT;

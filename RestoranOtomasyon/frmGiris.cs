@@ -59,20 +59,31 @@ namespace RestoranOtomasyon
             }
 
             VeritabaniIslemleri db = new VeritabaniIslemleri();
-            string secilenRol = txtSecim.Text;
+
+            // Ekranda yazan rolü alıyoruz
+            string ekrandakiRol = txtSecim.Text;
+            string veritabaniRolu = ekrandakiRol; // Varsayılan olarak aynısı olsun
+
+            // --- MANTIK DEĞİŞİMİ BURADA ---
+            // Eğer ekranda "Yetkili" yazıyorsa, veritabanına "Admin" diye soracağız.
+            if (ekrandakiRol == "Yetkili" || ekrandakiRol == "yetkili")
+            {
+                veritabaniRolu = "Admin";
+            }
+            // Garson için bir değişiklik yok, olduğu gibi gidecek.
+            // -----------------------------
+
             string girilenSifre = txtSifre.Text;
 
-            // Yeni backend metodumuzu çağırıyoruz.
-            DataRow kullanici = db.KullaniciGirisKontrol(secilenRol, girilenSifre);
+            // Backend metoduna artık 'ekrandakiRol'ü değil, çevirdiğimiz 'veritabaniRolu'nu gönderiyoruz.
+            DataRow kullanici = db.KullaniciGirisKontrol(veritabaniRolu, girilenSifre);
 
             if (kullanici != null)
             {
-                // KULLANICI BULUNDU == Bilgilerini statik sınıfa kaydet
                 AktifKullanici.BilgileriAta(kullanici);
 
                 MessageBox.Show($"Hoş geldiniz, {AktifKullanici.AdSoyad}!", "Giriş Başarılı", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // Şimdi role göre doğru formu aç.
                 if (AktifKullanici.Rol == "Admin")
                 {
                     frmAdminControlPanel adminFormu = new frmAdminControlPanel();
@@ -87,7 +98,7 @@ namespace RestoranOtomasyon
                 }
                 else
                 {
-                    MessageBox.Show("Bu rol için tanımlanmış bir ekran bulunmamaktadır.", "Yetki Hatası", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Bu rol için tanımlanmış bir ekran bulunmamaktadır.", "Yetki Hatası");
                 }
             }
             else
