@@ -86,33 +86,40 @@ namespace RestoranOtomasyon
 
         private void EkranlariCiz()
         {
-            // SOL TARAFI ÇİZ
+            // --- SOL TARAFI ÇİZ ---
             flowTumSiparisler.Controls.Clear();
             toplamMasaTutari = 0;
 
             foreach (var urun in solListeVerileri)
             {
+                // 0 TL sorununu çözen satır burası:
+                urun.AraToplam = urun.Adet * urun.BirimFiyat;
                 toplamMasaTutari += urun.AraToplam;
+
                 Button btn = KartOlustur(urun, SolUrun_Click);
                 if (solSecilenler.Contains(urun)) btn.BackColor = Color.DarkOrange;
                 flowTumSiparisler.Controls.Add(btn);
             }
 
+            // Sol Toplam
             Control[] lblSol = Controls.Find("labelToplamTutar", true);
             if (lblSol.Length > 0) lblSol[0].Text = $"TOPLAM: {toplamMasaTutari:C2}";
 
-            // SAĞ TARAFI ÇİZ
+            // --- SAĞ TARAFI ÇİZ ---
             panelOdenecekler.Controls.Clear();
             decimal odenecekTutar = 0;
 
             foreach (var urun in sagListeVerileri)
             {
+                urun.AraToplam = urun.Adet * urun.BirimFiyat;
                 odenecekTutar += urun.AraToplam;
+
                 Button btn = KartOlustur(urun, SagUrun_Click);
                 if (sagSecilenler.Contains(urun)) btn.BackColor = Color.DarkOrange;
                 panelOdenecekler.Controls.Add(btn);
             }
 
+            // Sağ Toplam
             Control[] lblSag = Controls.Find("labelOdenecekTutar", true);
             if (lblSag.Length > 0)
                 lblSag[0].Text = $"{odenecekTutar:C2}";
@@ -147,7 +154,7 @@ namespace RestoranOtomasyon
             else { sagSecilenler.Add(urun); btn.BackColor = Color.DarkOrange; }
         }
 
-        // --- YENİ EKLENEN KISIM: ADET SORAN PENCERE ---
+        // --- ADET SORAN PENCERE (InputBox) ---
         private int MiktarSor(string urunAdi, int maxAdet)
         {
             Form prompt = new Form()
@@ -197,7 +204,6 @@ namespace RestoranOtomasyon
                     aktarilacakAdet = 1; // Zaten 1 tane varsa direkt al
                 }
 
-                // Mantık: Hepsini mi alıyoruz, bir kısmını mı?
                 if (aktarilacakAdet == item.Adet)
                 {
                     sagListeVerileri.Add(item);
@@ -207,7 +213,7 @@ namespace RestoranOtomasyon
                 {
                     // Parçalama işlemi
                     item.Adet -= aktarilacakAdet;
-                    item.AraToplam = item.Adet * item.BirimFiyat; // Sol tarafın fiyatını güncelle
+                    item.AraToplam = item.Adet * item.BirimFiyat;
 
                     // Sağ tarafa yeni parça oluştur
                     SiparisUrunModel yeniParca = new SiparisUrunModel
@@ -295,7 +301,7 @@ namespace RestoranOtomasyon
 
         private void btnGeriDon_Click(object sender, EventArgs e) { this.Close(); }
 
-        // BOŞ EVENTLER
+        // BOŞ EVENTLER (Tasarım hatası almamak için)
         private void btnOde_Click(object sender, EventArgs e) { MessageBox.Show("Lütfen aşağıdaki NAKİT veya KART butonlarını kullanınız."); }
         private void panelOdenecekler_Paint(object sender, PaintEventArgs e) { }
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
