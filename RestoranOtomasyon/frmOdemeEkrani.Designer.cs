@@ -54,7 +54,12 @@
             this.btnHepsiniAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnAdisyonYazdir = new ReaLTaiizor.Controls.Button();
+            this.btnAdisyonYazdir = new ReaLTaiizor.Controls.MaterialButton();
+            this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
+            this.labelVergi = new ReaLTaiizor.Controls.MaterialLabel();
+            this.labelVergiTutar = new ReaLTaiizor.Controls.MaterialLabel();
+            this.labelÜrünTutar = new ReaLTaiizor.Controls.MaterialLabel();
+            this.labelSafTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
@@ -213,6 +218,10 @@
             // panelSagAlt
             // 
             this.panelSagAlt.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panelSagAlt.Controls.Add(this.labelSafTutar);
+            this.panelSagAlt.Controls.Add(this.labelÜrünTutar);
+            this.panelSagAlt.Controls.Add(this.labelVergiTutar);
+            this.panelSagAlt.Controls.Add(this.labelVergi);
             this.panelSagAlt.Controls.Add(this.btnAdisyonYazdir);
             this.panelSagAlt.Controls.Add(this.labelToplamOdenecek);
             this.panelSagAlt.Controls.Add(this.btnKart);
@@ -230,7 +239,7 @@
             this.labelToplamOdenecek.AutoSize = true;
             this.labelToplamOdenecek.Depth = 0;
             this.labelToplamOdenecek.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamOdenecek.Location = new System.Drawing.Point(218, 26);
+            this.labelToplamOdenecek.Location = new System.Drawing.Point(432, 17);
             this.labelToplamOdenecek.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelToplamOdenecek.Name = "labelToplamOdenecek";
             this.labelToplamOdenecek.Size = new System.Drawing.Size(44, 19);
@@ -246,7 +255,7 @@
             this.btnKart.HighEmphasis = true;
             this.btnKart.Icon = null;
             this.btnKart.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnKart.Location = new System.Drawing.Point(193, 108);
+            this.btnKart.Location = new System.Drawing.Point(40, 108);
             this.btnKart.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnKart.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnKart.Name = "btnKart";
@@ -268,7 +277,7 @@
             this.btnNakit.HighEmphasis = true;
             this.btnNakit.Icon = null;
             this.btnNakit.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnNakit.Location = new System.Drawing.Point(33, 108);
+            this.btnNakit.Location = new System.Drawing.Point(204, 108);
             this.btnNakit.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnNakit.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnNakit.Name = "btnNakit";
@@ -286,7 +295,7 @@
             this.labelOdemeYontemi.AutoSize = true;
             this.labelOdemeYontemi.Depth = 0;
             this.labelOdemeYontemi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelOdemeYontemi.Location = new System.Drawing.Point(30, 71);
+            this.labelOdemeYontemi.Location = new System.Drawing.Point(18, 83);
             this.labelOdemeYontemi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelOdemeYontemi.Name = "labelOdemeYontemi";
             this.labelOdemeYontemi.Size = new System.Drawing.Size(132, 19);
@@ -299,7 +308,7 @@
             this.labelOdenecekTutar.AutoSize = true;
             this.labelOdenecekTutar.Depth = 0;
             this.labelOdenecekTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelOdenecekTutar.Location = new System.Drawing.Point(30, 26);
+            this.labelOdenecekTutar.Location = new System.Drawing.Point(18, 47);
             this.labelOdenecekTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelOdenecekTutar.Name = "labelOdenecekTutar";
             this.labelOdenecekTutar.Size = new System.Drawing.Size(159, 19);
@@ -309,6 +318,7 @@
             // panelOrta
             // 
             this.panelOrta.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panelOrta.Controls.Add(this.btnTasiBirlestir);
             this.panelOrta.Controls.Add(this.btnBitir);
             this.panelOrta.Controls.Add(this.btnHepsiniGeriAl);
             this.panelOrta.Controls.Add(this.btnSecilenleriGeriAl);
@@ -437,24 +447,94 @@
             // 
             // btnAdisyonYazdir
             // 
-            this.btnAdisyonYazdir.BackColor = System.Drawing.Color.Transparent;
-            this.btnAdisyonYazdir.BorderColor = System.Drawing.Color.Blue;
-            this.btnAdisyonYazdir.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdisyonYazdir.EnteredBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.btnAdisyonYazdir.EnteredColor = System.Drawing.Color.Blue;
-            this.btnAdisyonYazdir.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.btnAdisyonYazdir.Image = null;
-            this.btnAdisyonYazdir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAdisyonYazdir.InactiveColor = System.Drawing.Color.FromArgb(((int)(((byte)(32)))), ((int)(((byte)(34)))), ((int)(((byte)(37)))));
-            this.btnAdisyonYazdir.Location = new System.Drawing.Point(344, 108);
+            this.btnAdisyonYazdir.AutoSize = false;
+            this.btnAdisyonYazdir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAdisyonYazdir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnAdisyonYazdir.Depth = 0;
+            this.btnAdisyonYazdir.HighEmphasis = true;
+            this.btnAdisyonYazdir.Icon = null;
+            this.btnAdisyonYazdir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnAdisyonYazdir.Location = new System.Drawing.Point(368, 108);
+            this.btnAdisyonYazdir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAdisyonYazdir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnAdisyonYazdir.Name = "btnAdisyonYazdir";
-            this.btnAdisyonYazdir.PressedBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.btnAdisyonYazdir.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.btnAdisyonYazdir.Size = new System.Drawing.Size(120, 46);
-            this.btnAdisyonYazdir.TabIndex = 3;
+            this.btnAdisyonYazdir.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnAdisyonYazdir.Size = new System.Drawing.Size(108, 52);
+            this.btnAdisyonYazdir.TabIndex = 6;
             this.btnAdisyonYazdir.Text = "ADİSYON YAZDIR";
-            this.btnAdisyonYazdir.TextAlignment = System.Drawing.StringAlignment.Center;
+            this.btnAdisyonYazdir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnAdisyonYazdir.UseAccentColor = false;
+            this.btnAdisyonYazdir.UseVisualStyleBackColor = true;
             this.btnAdisyonYazdir.Click += new System.EventHandler(this.btnAdisyonYazdir_Click);
+            // 
+            // btnTasiBirlestir
+            // 
+            this.btnTasiBirlestir.AutoSize = false;
+            this.btnTasiBirlestir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTasiBirlestir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnTasiBirlestir.Depth = 0;
+            this.btnTasiBirlestir.HighEmphasis = true;
+            this.btnTasiBirlestir.Icon = null;
+            this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnTasiBirlestir.Location = new System.Drawing.Point(7, 483);
+            this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnTasiBirlestir.Name = "btnTasiBirlestir";
+            this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnTasiBirlestir.Size = new System.Drawing.Size(218, 52);
+            this.btnTasiBirlestir.TabIndex = 7;
+            this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR";
+            this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnTasiBirlestir.UseAccentColor = false;
+            this.btnTasiBirlestir.UseVisualStyleBackColor = true;
+            // 
+            // labelVergi
+            // 
+            this.labelVergi.AutoSize = true;
+            this.labelVergi.Depth = 0;
+            this.labelVergi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelVergi.Location = new System.Drawing.Point(319, 18);
+            this.labelVergi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelVergi.Name = "labelVergi";
+            this.labelVergi.Size = new System.Drawing.Size(97, 19);
+            this.labelVergi.TabIndex = 7;
+            this.labelVergi.Text = "VERGİ:            ";
+            // 
+            // labelVergiTutar
+            // 
+            this.labelVergiTutar.AutoSize = true;
+            this.labelVergiTutar.Depth = 0;
+            this.labelVergiTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelVergiTutar.Location = new System.Drawing.Point(201, 47);
+            this.labelVergiTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelVergiTutar.Name = "labelVergiTutar";
+            this.labelVergiTutar.Size = new System.Drawing.Size(44, 19);
+            this.labelVergiTutar.TabIndex = 8;
+            this.labelVergiTutar.Text = "0,00 ₺";
+            // 
+            // labelÜrünTutar
+            // 
+            this.labelÜrünTutar.AutoSize = true;
+            this.labelÜrünTutar.Depth = 0;
+            this.labelÜrünTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelÜrünTutar.Location = new System.Drawing.Point(18, 18);
+            this.labelÜrünTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelÜrünTutar.Name = "labelÜrünTutar";
+            this.labelÜrünTutar.Size = new System.Drawing.Size(156, 19);
+            this.labelÜrünTutar.TabIndex = 9;
+            this.labelÜrünTutar.Text = "ÜRÜN TUTAR:              ";
+            // 
+            // labelSafTutar
+            // 
+            this.labelSafTutar.AutoSize = true;
+            this.labelSafTutar.Depth = 0;
+            this.labelSafTutar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelSafTutar.Location = new System.Drawing.Point(201, 17);
+            this.labelSafTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelSafTutar.Name = "labelSafTutar";
+            this.labelSafTutar.Size = new System.Drawing.Size(44, 19);
+            this.labelSafTutar.TabIndex = 10;
+            this.labelSafTutar.Text = "0,00 ₺";
             // 
             // frmOdemeEkrani
             // 
@@ -509,6 +589,11 @@
         private ReaLTaiizor.Controls.MaterialLabel labelHesapBilgi;
         private ReaLTaiizor.Controls.MaterialButton btnBitir;
         private System.Windows.Forms.Timer timer1;
-        private ReaLTaiizor.Controls.Button btnAdisyonYazdir;
+        private ReaLTaiizor.Controls.MaterialButton btnAdisyonYazdir;
+        private ReaLTaiizor.Controls.MaterialButton btnTasiBirlestir;
+        private ReaLTaiizor.Controls.MaterialLabel labelÜrünTutar;
+        private ReaLTaiizor.Controls.MaterialLabel labelVergiTutar;
+        private ReaLTaiizor.Controls.MaterialLabel labelVergi;
+        private ReaLTaiizor.Controls.MaterialLabel labelSafTutar;
     }
 }

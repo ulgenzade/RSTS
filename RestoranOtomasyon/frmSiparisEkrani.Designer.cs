@@ -41,6 +41,7 @@
             this.btnRezerve = new ReaLTaiizor.Controls.MaterialButton();
             this.panelSol = new System.Windows.Forms.Panel();
             this.panelSag = new System.Windows.Forms.Panel();
+            this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgMevcutUrunler)).BeginInit();
             this.panelSol.SuspendLayout();
             this.panelSag.SuspendLayout();
@@ -86,7 +87,7 @@
             this.btnOnayla.HighEmphasis = true;
             this.btnOnayla.Icon = null;
             this.btnOnayla.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnOnayla.Location = new System.Drawing.Point(270, 586);
+            this.btnOnayla.Location = new System.Drawing.Point(322, 586);
             this.btnOnayla.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnOnayla.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnOnayla.Name = "btnOnayla";
@@ -111,7 +112,7 @@
             this.btnGeriDon.HighEmphasis = true;
             this.btnGeriDon.Icon = null;
             this.btnGeriDon.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnGeriDon.Location = new System.Drawing.Point(22, 586);
+            this.btnGeriDon.Location = new System.Drawing.Point(530, 586);
             this.btnGeriDon.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnGeriDon.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnGeriDon.Name = "btnGeriDon";
@@ -133,7 +134,7 @@
             this.btnVazgec.HighEmphasis = true;
             this.btnVazgec.Icon = null;
             this.btnVazgec.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnVazgec.Location = new System.Drawing.Point(394, 586);
+            this.btnVazgec.Location = new System.Drawing.Point(426, 586);
             this.btnVazgec.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnVazgec.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnVazgec.Name = "btnVazgec";
@@ -168,7 +169,7 @@
             this.btnOdeme.HighEmphasis = true;
             this.btnOdeme.Icon = null;
             this.btnOdeme.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnOdeme.Location = new System.Drawing.Point(518, 586);
+            this.btnOdeme.Location = new System.Drawing.Point(10, 586);
             this.btnOdeme.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnOdeme.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnOdeme.Name = "btnOdeme";
@@ -222,7 +223,7 @@
             this.btnRezerve.HighEmphasis = true;
             this.btnRezerve.Icon = null;
             this.btnRezerve.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnRezerve.Location = new System.Drawing.Point(146, 586);
+            this.btnRezerve.Location = new System.Drawing.Point(114, 586);
             this.btnRezerve.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnRezerve.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnRezerve.Name = "btnRezerve";
@@ -247,6 +248,7 @@
             // 
             // panelSag
             // 
+            this.panelSag.Controls.Add(this.btnTasiBirlestir);
             this.panelSag.Controls.Add(this.btnOnayla);
             this.panelSag.Controls.Add(this.btnGeriDon);
             this.panelSag.Controls.Add(this.flowKategoriler);
@@ -261,6 +263,27 @@
             this.panelSag.Name = "panelSag";
             this.panelSag.Size = new System.Drawing.Size(634, 673);
             this.panelSag.TabIndex = 12;
+            // 
+            // btnTasiBirlestir
+            // 
+            this.btnTasiBirlestir.AutoSize = false;
+            this.btnTasiBirlestir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTasiBirlestir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnTasiBirlestir.Depth = 0;
+            this.btnTasiBirlestir.HighEmphasis = true;
+            this.btnTasiBirlestir.Icon = null;
+            this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnTasiBirlestir.Location = new System.Drawing.Point(218, 586);
+            this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnTasiBirlestir.Name = "btnTasiBirlestir";
+            this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnTasiBirlestir.Size = new System.Drawing.Size(94, 40);
+            this.btnTasiBirlestir.TabIndex = 11;
+            this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR";
+            this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnTasiBirlestir.UseAccentColor = false;
+            this.btnTasiBirlestir.UseVisualStyleBackColor = true;
             // 
             // frmSiparisEkrani
             // 
@@ -297,5 +320,6 @@
         private ReaLTaiizor.Controls.MaterialButton btnRezerve;
         private System.Windows.Forms.Panel panelSol;
         private System.Windows.Forms.Panel panelSag;
+        private ReaLTaiizor.Controls.MaterialButton btnTasiBirlestir;
     }
 }
