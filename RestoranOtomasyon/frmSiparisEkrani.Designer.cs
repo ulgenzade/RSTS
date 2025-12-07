@@ -284,6 +284,7 @@
             this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnTasiBirlestir.UseAccentColor = false;
             this.btnTasiBirlestir.UseVisualStyleBackColor = true;
+            this.btnTasiBirlestir.Click += new System.EventHandler(this.btnTasiBirlestir_Click);
             // 
             // frmSiparisEkrani
             // 

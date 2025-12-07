@@ -355,5 +355,15 @@ namespace RestoranOtomasyon
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
         private void labelOdemeYontemi_Click(object sender, EventArgs e) { }
         private void labelToplam_Click(object sender, EventArgs e) { }
+
+        private void btnTasiBirlestir_Click(object sender, EventArgs e)
+        {
+            frmMasaTasi frm = new frmMasaTasi();
+
+            frm.kaynakMasaId = this.seciliMasaID;
+
+            frm.ShowDialog();
+            this.Close();
+        }
     }
 }

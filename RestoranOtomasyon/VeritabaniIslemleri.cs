@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;    // App.config dosyasını okumak için
 using System.Data;             // DataTable gibi veri yapılarını kullanmak için
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace RestoranOtomasyon
@@ -998,6 +999,53 @@ namespace RestoranOtomasyon
         }
         #endregion
 
+        #region MASA TAŞIMA 
+        public bool MasaTasi(int eskiMasaID, int yeniMasaID)
+        {
+            // DÜZELTME: Bu metot artık MySQL yapısına ve sınıfın genel yapısına uygun.
+            // SqlCommand yerine MySqlCommand kullanıldı.
+            // BaglantiAc/Kapat yerine using bloğu kullanıldı.
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
 
+                    // 1. ESKİ MASADAKİ SİPARİŞLERİ YENİ MASAYA AKTAR
+                    // DÜZELTME: Siparisler tablosunda 'Durum' sütunu yok, 'OdemeDurumu' var.
+                    string sqlTasi = "UPDATE Siparisler SET MasaID = @YeniID WHERE MasaID = @EskiID AND OdemeDurumu = 'Aktif';";
+                    using (MySqlCommand cmdTasi = new MySqlCommand(sqlTasi, baglanti))
+                    {
+                        cmdTasi.Parameters.AddWithValue("@YeniID", yeniMasaID);
+                        cmdTasi.Parameters.AddWithValue("@EskiID", eskiMasaID);
+                        cmdTasi.ExecuteNonQuery();
+                    }
+
+                    // 2. YENİ MASAYI 'DOLU' YAP
+                    string sqlYeniMasa = "UPDATE Masalar SET Durum = 'Dolu' WHERE MasaID = @YeniID;";
+                    using (MySqlCommand cmdYeni = new MySqlCommand(sqlYeniMasa, baglanti))
+                    {
+                        cmdYeni.Parameters.AddWithValue("@YeniID", yeniMasaID);
+                        cmdYeni.ExecuteNonQuery();
+                    }
+
+                    // 3. ESKİ MASAYI 'BOŞ' YAP
+                    string sqlEskiMasa = "UPDATE Masalar SET Durum = 'Boş' WHERE MasaID = @EskiID;";
+                    using (MySqlCommand cmdEski = new MySqlCommand(sqlEskiMasa, baglanti))
+                    {
+                        cmdEski.Parameters.AddWithValue("@EskiID", eskiMasaID);
+                        cmdEski.ExecuteNonQuery();
+                    }
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa taşıma hatası: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+        #endregion
     }
 }

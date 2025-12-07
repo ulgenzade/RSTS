@@ -28,162 +28,36 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.gbMevcutMasa = new ReaLTaiizor.Controls.CyberGroupBox();
-            this.materialLabel1 = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnCikis = new ReaLTaiizor.Controls.MaterialButton();
             this.btnİptal = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnBitir = new ReaLTaiizor.Controls.MaterialButton();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.gbMevcutMasa.SuspendLayout();
+            this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.lblTutar_Yeni = new ReaLTaiizor.Controls.MaterialLabel();
+            this.lstSiparisler = new ReaLTaiizor.Controls.MaterialListBox();
+            this.lblMasaBaslik_Yeni = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.23529F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.76471F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 327F));
-            this.tableLayoutPanel1.Controls.Add(this.gbMevcutMasa, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 490F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
-            this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
-            // 
-            // gbMevcutMasa
-            // 
-            this.gbMevcutMasa.Alpha = 20;
-            this.gbMevcutMasa.BackColor = System.Drawing.Color.Transparent;
-            this.gbMevcutMasa.Background = true;
-            this.gbMevcutMasa.Background_WidthPen = 3F;
-            this.gbMevcutMasa.BackgroundPen = true;
-            this.gbMevcutMasa.ColorBackground = System.Drawing.Color.DimGray;
-            this.gbMevcutMasa.ColorBackground_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.gbMevcutMasa.ColorBackground_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.gbMevcutMasa.ColorBackground_Pen = System.Drawing.Color.White;
-            this.gbMevcutMasa.ColorLighting = System.Drawing.Color.FromArgb(((int)(((byte)(29)))), ((int)(((byte)(200)))), ((int)(((byte)(238)))));
-            this.gbMevcutMasa.ColorPen_1 = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(52)))), ((int)(((byte)(68)))));
-            this.gbMevcutMasa.ColorPen_2 = System.Drawing.Color.FromArgb(((int)(((byte)(41)))), ((int)(((byte)(63)))), ((int)(((byte)(86)))));
-            this.gbMevcutMasa.Controls.Add(this.labelTutar);
-            this.gbMevcutMasa.Controls.Add(this.materialLabel1);
-            this.gbMevcutMasa.CyberGroupBoxStyle = ReaLTaiizor.Enum.Cyber.StateStyle.Custom;
-            this.gbMevcutMasa.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gbMevcutMasa.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(245)))), ((int)(((byte)(245)))), ((int)(((byte)(245)))));
-            this.gbMevcutMasa.Lighting = false;
-            this.gbMevcutMasa.LinearGradient_Background = false;
-            this.gbMevcutMasa.LinearGradientPen = false;
-            this.gbMevcutMasa.Location = new System.Drawing.Point(3, 3);
-            this.gbMevcutMasa.Name = "gbMevcutMasa";
-            this.gbMevcutMasa.PenWidth = 15;
-            this.gbMevcutMasa.RGB = false;
-            this.gbMevcutMasa.Rounding = true;
-            this.gbMevcutMasa.RoundingInt = 0;
-            this.gbMevcutMasa.Size = new System.Drawing.Size(335, 444);
-            this.gbMevcutMasa.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            this.gbMevcutMasa.TabIndex = 0;
-            this.gbMevcutMasa.Tag = "MEVCUT MASA";
-            this.gbMevcutMasa.TextRenderingHint = System.Drawing.Text.TextRenderingHint.SystemDefault;
-            this.gbMevcutMasa.Timer_RGB = 300;
-            // 
-            // materialLabel1
-            // 
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.materialLabel1.Location = new System.Drawing.Point(92, 31);
-            this.materialLabel1.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(161, 23);
-            this.materialLabel1.TabIndex = 0;
-            this.materialLabel1.Text = "labelMasaAd";
-            this.materialLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // labelTutar
-            // 
-            this.labelTutar.AutoSize = true;
-            this.labelTutar.Depth = 0;
-            this.labelTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelTutar.Location = new System.Drawing.Point(123, 155);
-            this.labelTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelTutar.Name = "labelTutar";
-            this.labelTutar.Size = new System.Drawing.Size(99, 19);
-            this.labelTutar.TabIndex = 1;
-            this.labelTutar.Text = "MASA TUTAR";
-            this.labelTutar.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(475, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(474, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(322, 444);
-            this.flowLayoutPanel1.TabIndex = 1;
+            this.flowLayoutPanel1.TabIndex = 3;
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.btnBitir);
             this.panel1.Controls.Add(this.btnİptal);
-            this.panel1.Controls.Add(this.btnCikis);
             this.panel1.Controls.Add(this.btnTasiBirlestir);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(344, 3);
+            this.panel1.Location = new System.Drawing.Point(343, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(125, 444);
             this.panel1.TabIndex = 2;
-            // 
-            // btnTasiBirlestir
-            // 
-            this.btnTasiBirlestir.AutoSize = false;
-            this.btnTasiBirlestir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTasiBirlestir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnTasiBirlestir.Depth = 0;
-            this.btnTasiBirlestir.HighEmphasis = true;
-            this.btnTasiBirlestir.Icon = null;
-            this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnTasiBirlestir.Location = new System.Drawing.Point(0, 117);
-            this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnTasiBirlestir.Name = "btnTasiBirlestir";
-            this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnTasiBirlestir.Size = new System.Drawing.Size(124, 36);
-            this.btnTasiBirlestir.TabIndex = 3;
-            this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR  >>";
-            this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnTasiBirlestir.UseAccentColor = false;
-            this.btnTasiBirlestir.UseVisualStyleBackColor = true;
-            // 
-            // btnCikis
-            // 
-            this.btnCikis.AutoSize = false;
-            this.btnCikis.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCikis.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnCikis.Depth = 0;
-            this.btnCikis.HighEmphasis = true;
-            this.btnCikis.Icon = null;
-            this.btnCikis.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnCikis.Location = new System.Drawing.Point(0, 265);
-            this.btnCikis.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnCikis.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnCikis.Name = "btnCikis";
-            this.btnCikis.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnCikis.Size = new System.Drawing.Size(124, 36);
-            this.btnCikis.TabIndex = 4;
-            this.btnCikis.Text = "ÇIKIŞ";
-            this.btnCikis.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnCikis.UseAccentColor = false;
-            this.btnCikis.UseVisualStyleBackColor = true;
             // 
             // btnİptal
             // 
@@ -194,38 +68,107 @@
             this.btnİptal.HighEmphasis = true;
             this.btnİptal.Icon = null;
             this.btnİptal.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnİptal.Location = new System.Drawing.Point(0, 165);
+            this.btnİptal.Location = new System.Drawing.Point(1, 290);
             this.btnİptal.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnİptal.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnİptal.Name = "btnİptal";
             this.btnİptal.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnİptal.Size = new System.Drawing.Size(124, 36);
+            this.btnİptal.Size = new System.Drawing.Size(124, 51);
             this.btnİptal.TabIndex = 5;
             this.btnİptal.Text = "İPTAL";
             this.btnİptal.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
             this.btnİptal.UseAccentColor = false;
             this.btnİptal.UseVisualStyleBackColor = true;
+            this.btnİptal.Click += new System.EventHandler(this.btnIptal_Click);
             // 
-            // btnBitir
+            // btnTasiBirlestir
             // 
-            this.btnBitir.AutoSize = false;
-            this.btnBitir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnBitir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnBitir.Depth = 0;
-            this.btnBitir.HighEmphasis = true;
-            this.btnBitir.Icon = null;
-            this.btnBitir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnBitir.Location = new System.Drawing.Point(0, 313);
-            this.btnBitir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnBitir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnBitir.Name = "btnBitir";
-            this.btnBitir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnBitir.Size = new System.Drawing.Size(124, 36);
-            this.btnBitir.TabIndex = 6;
-            this.btnBitir.Text = "BİTİR";
-            this.btnBitir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnBitir.UseAccentColor = false;
-            this.btnBitir.UseVisualStyleBackColor = true;
+            this.btnTasiBirlestir.AutoSize = false;
+            this.btnTasiBirlestir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTasiBirlestir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnTasiBirlestir.Depth = 0;
+            this.btnTasiBirlestir.HighEmphasis = true;
+            this.btnTasiBirlestir.Icon = null;
+            this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnTasiBirlestir.Location = new System.Drawing.Point(0, 173);
+            this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnTasiBirlestir.Name = "btnTasiBirlestir";
+            this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnTasiBirlestir.Size = new System.Drawing.Size(124, 49);
+            this.btnTasiBirlestir.TabIndex = 3;
+            this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR  ";
+            this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnTasiBirlestir.UseAccentColor = false;
+            this.btnTasiBirlestir.UseVisualStyleBackColor = true;
+            this.btnTasiBirlestir.Click += new System.EventHandler(this.btnTasiBirlestir_Click);
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.23529F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.76471F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 328F));
+            this.tableLayoutPanel1.Controls.Add(this.panel1, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 450F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.lblTutar_Yeni);
+            this.panel2.Controls.Add(this.lstSiparisler);
+            this.panel2.Controls.Add(this.lblMasaBaslik_Yeni);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(3, 3);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(334, 444);
+            this.panel2.TabIndex = 4;
+            // 
+            // lblTutar_Yeni
+            // 
+            this.lblTutar_Yeni.AutoSize = true;
+            this.lblTutar_Yeni.Depth = 0;
+            this.lblTutar_Yeni.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lblTutar_Yeni.ForeColor = System.Drawing.Color.Gold;
+            this.lblTutar_Yeni.Location = new System.Drawing.Point(103, 407);
+            this.lblTutar_Yeni.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.lblTutar_Yeni.Name = "lblTutar_Yeni";
+            this.lblTutar_Yeni.Size = new System.Drawing.Size(45, 19);
+            this.lblTutar_Yeni.TabIndex = 7;
+            this.lblTutar_Yeni.Text = "0.00 ₺";
+            // 
+            // lstSiparisler
+            // 
+            this.lstSiparisler.BackColor = System.Drawing.Color.White;
+            this.lstSiparisler.BorderColor = System.Drawing.Color.LightGray;
+            this.lstSiparisler.Depth = 0;
+            this.lstSiparisler.Font = new System.Drawing.Font("Roboto", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.lstSiparisler.Location = new System.Drawing.Point(9, 130);
+            this.lstSiparisler.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.lstSiparisler.Name = "lstSiparisler";
+            this.lstSiparisler.SelectedIndex = -1;
+            this.lstSiparisler.SelectedItem = null;
+            this.lstSiparisler.Size = new System.Drawing.Size(314, 263);
+            this.lstSiparisler.TabIndex = 6;
+            // 
+            // lblMasaBaslik_Yeni
+            // 
+            this.lblMasaBaslik_Yeni.AutoSize = true;
+            this.lblMasaBaslik_Yeni.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.lblMasaBaslik_Yeni.ForeColor = System.Drawing.Color.Black;
+            this.lblMasaBaslik_Yeni.Location = new System.Drawing.Point(100, 20);
+            this.lblMasaBaslik_Yeni.Name = "lblMasaBaslik_Yeni";
+            this.lblMasaBaslik_Yeni.Size = new System.Drawing.Size(94, 32);
+            this.lblMasaBaslik_Yeni.TabIndex = 5;
+            this.lblMasaBaslik_Yeni.Text = "MASA";
             // 
             // frmMasaTasi
             // 
@@ -236,25 +179,24 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmMasaTasi";
             this.Text = "MASA TAŞI";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.gbMevcutMasa.ResumeLayout(false);
-            this.gbMevcutMasa.PerformLayout();
+            this.Load += new System.EventHandler(this.frmMasaTasi_Load);
             this.panel1.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private ReaLTaiizor.Controls.CyberGroupBox gbMevcutMasa;
-        private ReaLTaiizor.Controls.MaterialLabel labelTutar;
-        private ReaLTaiizor.Controls.MaterialLabel materialLabel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private ReaLTaiizor.Controls.MaterialButton btnBitir;
         private ReaLTaiizor.Controls.MaterialButton btnİptal;
-        private ReaLTaiizor.Controls.MaterialButton btnCikis;
         private ReaLTaiizor.Controls.MaterialButton btnTasiBirlestir;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Panel panel2;
+        private ReaLTaiizor.Controls.MaterialLabel lblTutar_Yeni;
+        private ReaLTaiizor.Controls.MaterialListBox lstSiparisler;
+        private System.Windows.Forms.Label lblMasaBaslik_Yeni;
     }
 }

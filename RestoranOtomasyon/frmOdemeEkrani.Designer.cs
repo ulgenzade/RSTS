@@ -42,24 +42,24 @@
             this.panelSag = new System.Windows.Forms.Panel();
             this.panelOdenecekler = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSagAlt = new System.Windows.Forms.Panel();
+            this.labelSafTutar = new ReaLTaiizor.Controls.MaterialLabel();
+            this.labelÜrünTutar = new ReaLTaiizor.Controls.MaterialLabel();
+            this.labelVergiTutar = new ReaLTaiizor.Controls.MaterialLabel();
+            this.labelVergi = new ReaLTaiizor.Controls.MaterialLabel();
+            this.btnAdisyonYazdir = new ReaLTaiizor.Controls.MaterialButton();
             this.labelToplamOdenecek = new ReaLTaiizor.Controls.MaterialLabel();
             this.btnKart = new ReaLTaiizor.Controls.MaterialButton();
             this.btnNakit = new ReaLTaiizor.Controls.MaterialButton();
             this.labelOdemeYontemi = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelOdenecekTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.panelOrta = new System.Windows.Forms.Panel();
+            this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
             this.btnBitir = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHepsiniGeriAl = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenleriGeriAl = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHepsiniAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnAdisyonYazdir = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
-            this.labelVergi = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelVergiTutar = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelÜrünTutar = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelSafTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
@@ -234,6 +234,76 @@
             this.panelSagAlt.Size = new System.Drawing.Size(516, 166);
             this.panelSagAlt.TabIndex = 0;
             // 
+            // labelSafTutar
+            // 
+            this.labelSafTutar.AutoSize = true;
+            this.labelSafTutar.Depth = 0;
+            this.labelSafTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelSafTutar.Location = new System.Drawing.Point(201, 17);
+            this.labelSafTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelSafTutar.Name = "labelSafTutar";
+            this.labelSafTutar.Size = new System.Drawing.Size(44, 19);
+            this.labelSafTutar.TabIndex = 10;
+            this.labelSafTutar.Text = "0,00 ₺";
+            // 
+            // labelÜrünTutar
+            // 
+            this.labelÜrünTutar.AutoSize = true;
+            this.labelÜrünTutar.Depth = 0;
+            this.labelÜrünTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelÜrünTutar.Location = new System.Drawing.Point(18, 18);
+            this.labelÜrünTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelÜrünTutar.Name = "labelÜrünTutar";
+            this.labelÜrünTutar.Size = new System.Drawing.Size(156, 19);
+            this.labelÜrünTutar.TabIndex = 9;
+            this.labelÜrünTutar.Text = "ÜRÜN TUTAR:              ";
+            // 
+            // labelVergiTutar
+            // 
+            this.labelVergiTutar.AutoSize = true;
+            this.labelVergiTutar.Depth = 0;
+            this.labelVergiTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelVergiTutar.Location = new System.Drawing.Point(201, 47);
+            this.labelVergiTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelVergiTutar.Name = "labelVergiTutar";
+            this.labelVergiTutar.Size = new System.Drawing.Size(44, 19);
+            this.labelVergiTutar.TabIndex = 8;
+            this.labelVergiTutar.Text = "0,00 ₺";
+            // 
+            // labelVergi
+            // 
+            this.labelVergi.AutoSize = true;
+            this.labelVergi.Depth = 0;
+            this.labelVergi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.labelVergi.Location = new System.Drawing.Point(319, 18);
+            this.labelVergi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.labelVergi.Name = "labelVergi";
+            this.labelVergi.Size = new System.Drawing.Size(97, 19);
+            this.labelVergi.TabIndex = 7;
+            this.labelVergi.Text = "VERGİ:            ";
+            // 
+            // btnAdisyonYazdir
+            // 
+            this.btnAdisyonYazdir.AutoSize = false;
+            this.btnAdisyonYazdir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnAdisyonYazdir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnAdisyonYazdir.Depth = 0;
+            this.btnAdisyonYazdir.HighEmphasis = true;
+            this.btnAdisyonYazdir.Icon = null;
+            this.btnAdisyonYazdir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnAdisyonYazdir.Location = new System.Drawing.Point(368, 108);
+            this.btnAdisyonYazdir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnAdisyonYazdir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnAdisyonYazdir.Name = "btnAdisyonYazdir";
+            this.btnAdisyonYazdir.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnAdisyonYazdir.Size = new System.Drawing.Size(108, 52);
+            this.btnAdisyonYazdir.TabIndex = 6;
+            this.btnAdisyonYazdir.Text = "ADİSYON YAZDIR";
+            this.btnAdisyonYazdir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnAdisyonYazdir.UseAccentColor = false;
+            this.btnAdisyonYazdir.UseVisualStyleBackColor = true;
+            this.btnAdisyonYazdir.Click += new System.EventHandler(this.btnAdisyonYazdir_Click);
+            // 
             // labelToplamOdenecek
             // 
             this.labelToplamOdenecek.AutoSize = true;
@@ -330,6 +400,28 @@
             this.panelOrta.Size = new System.Drawing.Size(232, 611);
             this.panelOrta.TabIndex = 4;
             this.panelOrta.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrta_Paint);
+            // 
+            // btnTasiBirlestir
+            // 
+            this.btnTasiBirlestir.AutoSize = false;
+            this.btnTasiBirlestir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnTasiBirlestir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnTasiBirlestir.Depth = 0;
+            this.btnTasiBirlestir.HighEmphasis = true;
+            this.btnTasiBirlestir.Icon = null;
+            this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnTasiBirlestir.Location = new System.Drawing.Point(7, 483);
+            this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnTasiBirlestir.Name = "btnTasiBirlestir";
+            this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnTasiBirlestir.Size = new System.Drawing.Size(218, 52);
+            this.btnTasiBirlestir.TabIndex = 7;
+            this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR";
+            this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnTasiBirlestir.UseAccentColor = false;
+            this.btnTasiBirlestir.UseVisualStyleBackColor = true;
+            this.btnTasiBirlestir.Click += new System.EventHandler(this.btnTasiBirlestir_Click);
             // 
             // btnBitir
             // 
@@ -444,97 +536,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnAdisyonYazdir
-            // 
-            this.btnAdisyonYazdir.AutoSize = false;
-            this.btnAdisyonYazdir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnAdisyonYazdir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnAdisyonYazdir.Depth = 0;
-            this.btnAdisyonYazdir.HighEmphasis = true;
-            this.btnAdisyonYazdir.Icon = null;
-            this.btnAdisyonYazdir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnAdisyonYazdir.Location = new System.Drawing.Point(368, 108);
-            this.btnAdisyonYazdir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnAdisyonYazdir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnAdisyonYazdir.Name = "btnAdisyonYazdir";
-            this.btnAdisyonYazdir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnAdisyonYazdir.Size = new System.Drawing.Size(108, 52);
-            this.btnAdisyonYazdir.TabIndex = 6;
-            this.btnAdisyonYazdir.Text = "ADİSYON YAZDIR";
-            this.btnAdisyonYazdir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnAdisyonYazdir.UseAccentColor = false;
-            this.btnAdisyonYazdir.UseVisualStyleBackColor = true;
-            this.btnAdisyonYazdir.Click += new System.EventHandler(this.btnAdisyonYazdir_Click);
-            // 
-            // btnTasiBirlestir
-            // 
-            this.btnTasiBirlestir.AutoSize = false;
-            this.btnTasiBirlestir.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnTasiBirlestir.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnTasiBirlestir.Depth = 0;
-            this.btnTasiBirlestir.HighEmphasis = true;
-            this.btnTasiBirlestir.Icon = null;
-            this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnTasiBirlestir.Location = new System.Drawing.Point(7, 483);
-            this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnTasiBirlestir.Name = "btnTasiBirlestir";
-            this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnTasiBirlestir.Size = new System.Drawing.Size(218, 52);
-            this.btnTasiBirlestir.TabIndex = 7;
-            this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR";
-            this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnTasiBirlestir.UseAccentColor = false;
-            this.btnTasiBirlestir.UseVisualStyleBackColor = true;
-            // 
-            // labelVergi
-            // 
-            this.labelVergi.AutoSize = true;
-            this.labelVergi.Depth = 0;
-            this.labelVergi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelVergi.Location = new System.Drawing.Point(319, 18);
-            this.labelVergi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelVergi.Name = "labelVergi";
-            this.labelVergi.Size = new System.Drawing.Size(97, 19);
-            this.labelVergi.TabIndex = 7;
-            this.labelVergi.Text = "VERGİ:            ";
-            // 
-            // labelVergiTutar
-            // 
-            this.labelVergiTutar.AutoSize = true;
-            this.labelVergiTutar.Depth = 0;
-            this.labelVergiTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelVergiTutar.Location = new System.Drawing.Point(201, 47);
-            this.labelVergiTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelVergiTutar.Name = "labelVergiTutar";
-            this.labelVergiTutar.Size = new System.Drawing.Size(44, 19);
-            this.labelVergiTutar.TabIndex = 8;
-            this.labelVergiTutar.Text = "0,00 ₺";
-            // 
-            // labelÜrünTutar
-            // 
-            this.labelÜrünTutar.AutoSize = true;
-            this.labelÜrünTutar.Depth = 0;
-            this.labelÜrünTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelÜrünTutar.Location = new System.Drawing.Point(18, 18);
-            this.labelÜrünTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelÜrünTutar.Name = "labelÜrünTutar";
-            this.labelÜrünTutar.Size = new System.Drawing.Size(156, 19);
-            this.labelÜrünTutar.TabIndex = 9;
-            this.labelÜrünTutar.Text = "ÜRÜN TUTAR:              ";
-            // 
-            // labelSafTutar
-            // 
-            this.labelSafTutar.AutoSize = true;
-            this.labelSafTutar.Depth = 0;
-            this.labelSafTutar.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelSafTutar.Location = new System.Drawing.Point(201, 17);
-            this.labelSafTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelSafTutar.Name = "labelSafTutar";
-            this.labelSafTutar.Size = new System.Drawing.Size(44, 19);
-            this.labelSafTutar.TabIndex = 10;
-            this.labelSafTutar.Text = "0,00 ₺";
             // 
             // frmOdemeEkrani
             // 
