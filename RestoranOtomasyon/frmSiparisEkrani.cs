@@ -317,6 +317,7 @@ namespace RestoranOtomasyon
         {
             UrunleriFiltreleVeGoster();
         }
+
         private void btnRezerve_Click_1(object sender, EventArgs e) 
         {
             if (_seciliMasaID == -1) { MessageBox.Show("Masa seçiniz."); return; }
