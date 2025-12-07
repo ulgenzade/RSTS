@@ -211,6 +211,7 @@
             this.txtArama.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtArama.TrailingIcon = null;
             this.txtArama.UseSystemPasswordChar = false;
+            this.txtArama.Click += new System.EventHandler(this.txtArama_Click);
             // 
             // btnRezerve
             // 

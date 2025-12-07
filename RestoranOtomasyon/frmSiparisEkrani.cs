@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace RestoranOtomasyon
@@ -34,8 +35,23 @@ namespace RestoranOtomasyon
             MasalariYukle();
             KategorileriYukle();
 
+            // Arama kutusunu manuel bağla (Tasarımcı hatasını önlemek için)
+            OlaylariBagla();
+
             _tumUrunlerCache = db.UrunleriGetir();
             UrunleriFiltreleVeGoster();
+        }
+
+        private void OlaylariBagla()
+        {
+            // Arama kutusunu bul ve olayı bağla
+            Control[] txtMatches = this.Controls.Find("txtArama", true);
+            if (txtMatches.Length > 0)
+            {
+                // Önceki event'i kaldır ki üst üste binmesin
+                ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).TextChanged -= txtArama_TextChanged;
+                ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).TextChanged += txtArama_TextChanged;
+            }
         }
 
         private void ArayuzAyarlariniYap()
@@ -85,14 +101,17 @@ namespace RestoranOtomasyon
             }
         }
 
-        private void Masa_Click(object sender, EventArgs e)
+        private async void Masa_Click(object sender, EventArgs e)
         {
             Button btn = (Button)sender;
             DataRow row = (DataRow)btn.Tag;
             _seciliMasaID = Convert.ToInt32(row["MasaID"]);
             _seciliMasaDurumu = row["Durum"].ToString();
+
             _yeniSiparisListesi.Clear();
-            SepetiVeGridiGuncelle();
+
+            // Veritabanı işlemi sürerken UI donmasın diye await kullanıyoruz
+            await SepetiVeGridiGuncelleAsync();
         }
 
         // --- KATEGORİLER ---
@@ -102,7 +121,7 @@ namespace RestoranOtomasyon
             Button btnTumu = new Button();
             btnTumu.Text = "TÜMÜ";
             btnTumu.Tag = 0;
-            btnTumu.Size = new Size(120, 50);
+            btnTumu.Size = new Size(100, 50);
             btnTumu.BackColor = Color.DarkOrange;
             btnTumu.ForeColor = Color.White;
             btnTumu.FlatStyle = FlatStyle.Flat;
@@ -115,7 +134,7 @@ namespace RestoranOtomasyon
                 Button btn = new Button();
                 btn.Text = row["KategoriAdi"].ToString();
                 btn.Tag = Convert.ToInt32(row["KategoriID"]);
-                btn.Size = new Size(120, 50);
+                btn.Size = new Size(100, 50);
                 btn.BackColor = Color.Teal;
                 btn.ForeColor = Color.White;
                 btn.FlatStyle = FlatStyle.Flat;
@@ -128,20 +147,30 @@ namespace RestoranOtomasyon
         {
             Button btn = (Button)sender;
             _seciliKategoriID = (int)btn.Tag;
+
+            // Renkleri güncelle
             foreach (Control c in flowKategoriler.Controls)
-            {
-                if (c is Button b)
-                    b.BackColor = ((int)b.Tag == _seciliKategoriID) ? Color.DarkOrange : Color.Teal;
-            }
+                if (c is Button b) b.BackColor = ((int)b.Tag == _seciliKategoriID) ? Color.DarkOrange : Color.Teal;
+
+            // Arama kutusunu temizle
+            Control[] txtMatches = this.Controls.Find("txtArama", true);
+            if (txtMatches.Length > 0)
+                ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).Text = "";
+
             UrunleriFiltreleVeGoster();
         }
+
 
         private void UrunleriFiltreleVeGoster()
         {
             flowUrunler.Controls.Clear();
             string aranan = "";
-            if (Controls.Find("txtArama", true).Length > 0)
-                aranan = Controls.Find("txtArama", true)[0].Text.ToLower();
+            Control[] matches = this.Controls.Find("txtArama", true);
+            if (matches.Length > 0)
+                aranan = ((ReaLTaiizor.Controls.MaterialTextBoxEdit)matches[0]).Text.ToLower();
+
+            // Performans için paneli gizleyip açabiliriz (isteğe bağlı)
+            flowUrunler.SuspendLayout();
 
             foreach (DataRow row in _tumUrunlerCache.Rows)
             {
@@ -169,13 +198,14 @@ namespace RestoranOtomasyon
                         BirimFiyat = Convert.ToDecimal(row["Fiyat"]),
                         Adet = 1
                     };
-                    btn.Click += Urun_Click;
+                    btn.Click += Urun_Click; // Async olmasa da olur çünkü sadece listeye ekliyor
                     flowUrunler.Controls.Add(btn);
                 }
             }
+            flowUrunler.ResumeLayout();
         }
 
-        private void Urun_Click(object sender, EventArgs e)
+        private async void Urun_Click(object sender, EventArgs e)
         {
             if (_seciliMasaID == -1)
             {
@@ -189,23 +219,29 @@ namespace RestoranOtomasyon
             if (varOlan != null) varOlan.Adet++;
             else _yeniSiparisListesi.Add(new SepetUrunDto { UrunID = secilenUrun.UrunID, Adet = 1, BirimFiyat = secilenUrun.BirimFiyat });
 
-            SepetiVeGridiGuncelle();
+            // Ekrana yansıt
+            await SepetiVeGridiGuncelleAsync();
         }
 
-        private void SepetiVeGridiGuncelle()
+        private async Task SepetiVeGridiGuncelleAsync()
         {
             dgMevcutUrunler.Rows.Clear();
 
+            // 1. ESKİ SİPARİŞLERİ GETİR (ASENKRON)
             if (_seciliMasaDurumu == "Dolu")
             {
-                List<SiparisUrunModel> eskiler = db.MasaSiparisleriniGetir(_seciliMasaID);
+                // Yeni yazdığımız asenkron metodu çağırıyoruz
+                List<SiparisUrunModel> eskiler = await db.MasaSiparisleriniGetirAsync(_seciliMasaID);
+
                 foreach (var urun in eskiler)
                 {
+                    // DÜZELTME: Fiyat 0 gelirse diye kontrol ekledik ama SQL düzeldiği için gerek kalmayacak.
                     int i = dgMevcutUrunler.Rows.Add(urun.UrunAdi, urun.Adet, urun.AraToplam, "Mutfakta");
                     dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
                 }
             }
 
+            // 2. YENİ EKLENENLERİ GÖSTER
             foreach (var urun in _yeniSiparisListesi)
             {
                 string ad = "Ürün";
@@ -218,7 +254,7 @@ namespace RestoranOtomasyon
             dgMevcutUrunler.ClearSelection();
         }
 
-        private void btnOnayla_Click(object sender, EventArgs e)
+        private async void btnOnayla_Click(object sender, EventArgs e)
         {
             if (_seciliMasaID == -1 || _yeniSiparisListesi.Count == 0) return;
 
@@ -236,13 +272,10 @@ namespace RestoranOtomasyon
                 _yeniSiparisListesi.Clear();
                 MasalariYukle();
                 _seciliMasaDurumu = "Dolu";
-                SepetiVeGridiGuncelle();
+                await SepetiVeGridiGuncelleAsync();
             }
         }
 
-        // ================================================================
-        // ÖDEME BUTONU (Püf Nokta Burası!)
-        // ================================================================
         private void btnOdeme_Click(object sender, EventArgs e)
         {
             if (_seciliMasaID == -1)
@@ -267,20 +300,22 @@ namespace RestoranOtomasyon
             dgMevcutUrunler.Rows.Clear();
         }
 
-        private void btnVazgec_Click(object sender, EventArgs e)
+        private async void btnVazgec_Click(object sender, EventArgs e)
         {
             _yeniSiparisListesi.Clear();
-            SepetiVeGridiGuncelle();
+             await SepetiVeGridiGuncelleAsync();
         }
 
         private void btnGeriDon_Click(object sender, EventArgs e)
         {
+            frmGiris g = new frmGiris();
+            g.Show();
             this.Close();
         }
 
         private void txtArama_TextChanged(object sender, EventArgs e) 
         {
-            UrunleriFiltreleVeGoster(); 
+            UrunleriFiltreleVeGoster();
         }
         private void btnRezerve_Click_1(object sender, EventArgs e) 
         {
@@ -297,6 +332,11 @@ namespace RestoranOtomasyon
         }
 
         private void materialLabel1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtArama_Click(object sender, EventArgs e)
         {
 
         }

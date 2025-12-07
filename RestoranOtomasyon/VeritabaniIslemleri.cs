@@ -123,38 +123,45 @@ namespace RestoranOtomasyon
         }
 
         // 5. Kullanıcılar tablosundaki verileri (şifre hariç) çeker.
-        public async Task<DataTable> KullanicilariGetirAsync()
+        public async Task<List<SiparisUrunModel>> MasaSiparisleriniGetirAsync(int masaID)
         {
-            // ADIM 1: 'dt' adındaki boş tablomuzu (malzememizi) en başta hazırlıyoruz.
-            DataTable dt = new DataTable();
-
-            // ADIM 2: 'baglanti' nesnesini (malzememizi) 'using' bloğu içinde hazırlıyoruz.
+            List<SiparisUrunModel> siparisListesi = new List<SiparisUrunModel>();
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
             {
                 try
                 {
-                    // Artık 'baglanti' tanınıyor.
                     await baglanti.OpenAsync();
-
-                    // Doğru SQL sorgusu.
-                    string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilar;";
+                    string sorgu = @"
+                        SELECT u.UrunAdi, SUM(sd.Adet) as ToplamAdet, MAX(sd.BirimFiyat) as SatisFiyati
+                        FROM Siparisler s
+                        JOIN SiparisDetaylari sd ON s.SiparisID = sd.SiparisID
+                        JOIN Urunler u ON sd.UrunID = u.UrunID
+                        WHERE s.MasaID = @masaID AND s.OdemeDurumu = 'Aktif'
+                        GROUP BY u.UrunAdi;";
 
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     {
+                        komut.Parameters.AddWithValue("@masaID", masaID);
                         using (var reader = await komut.ExecuteReaderAsync())
                         {
-                            // Artık 'dt' tanınıyor.
-                            dt.Load(reader);
+                            while (await reader.ReadAsync())
+                            {
+                                siparisListesi.Add(new SiparisUrunModel
+                                {
+                                    UrunAdi = reader["UrunAdi"].ToString(),
+                                    Adet = Convert.ToInt32(reader["ToplamAdet"]),
+                                    BirimFiyat = Convert.ToDecimal(reader["SatisFiyati"])
+                                });
+                            }
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Kullanıcıları getirirken hata: " + ex.Message);
+                    System.Diagnostics.Debug.WriteLine("Sipariş hatası: " + ex.Message);
                 }
             }
-            // Metodun sonunda, doldurduğumuz 'dt' tablosunu geri döndürüyoruz.
-            return dt;
+            return siparisListesi;
         }
 
         // 6. Siparişler tablosundaki verileri, masa ve kullanıcı adıyla birlikte (JOIN) çeker.
@@ -242,6 +249,31 @@ namespace RestoranOtomasyon
                 catch (Exception ex)
                 {
                     System.Diagnostics.Debug.WriteLine("Tek kullanıcı getirilirken hata: " + ex.Message);
+                }
+            }
+            return dt;
+        }
+
+        public async Task<DataTable> KullanicilariGetirAsync()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    await baglanti.OpenAsync();
+                    string sorgu = "SELECT KullaniciID, AdSoyad, KullaniciAdi, Rol FROM Kullanicilar;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        using (var reader = await komut.ExecuteReaderAsync())
+                        {
+                            dt.Load(reader);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Kullanıcıları getirirken hata: " + ex.Message);
                 }
             }
             return dt;
