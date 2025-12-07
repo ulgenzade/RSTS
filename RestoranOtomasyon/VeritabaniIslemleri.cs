@@ -126,18 +126,22 @@ namespace RestoranOtomasyon
         public async Task<List<SiparisUrunModel>> MasaSiparisleriniGetirAsync(int masaID)
         {
             List<SiparisUrunModel> siparisListesi = new List<SiparisUrunModel>();
+
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
             {
                 try
                 {
                     await baglanti.OpenAsync();
+
+                    // DÜZELTME: Fiyatı 'sd.BirimFiyat' yerine 'u.Fiyat' (Ana Tablo) üzerinden alıyoruz.
+                    // Ayrıca GROUP BY kısmına u.Fiyat'ı da ekliyoruz ki SQL hata vermesin.
                     string sorgu = @"
-                        SELECT u.UrunAdi, SUM(sd.Adet) as ToplamAdet, MAX(sd.BirimFiyat) as SatisFiyati
+                        SELECT u.UrunAdi, SUM(sd.Adet) as ToplamAdet, u.Fiyat as GuncelFiyat
                         FROM Siparisler s
                         JOIN SiparisDetaylari sd ON s.SiparisID = sd.SiparisID
                         JOIN Urunler u ON sd.UrunID = u.UrunID
                         WHERE s.MasaID = @masaID AND s.OdemeDurumu = 'Aktif'
-                        GROUP BY u.UrunAdi;";
+                        GROUP BY u.UrunAdi, u.Fiyat;";
 
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     {
@@ -150,7 +154,8 @@ namespace RestoranOtomasyon
                                 {
                                     UrunAdi = reader["UrunAdi"].ToString(),
                                     Adet = Convert.ToInt32(reader["ToplamAdet"]),
-                                    BirimFiyat = Convert.ToDecimal(reader["SatisFiyati"])
+                                    // Veritabanındaki güncel ana fiyatı kullanıyoruz
+                                    BirimFiyat = Convert.ToDecimal(reader["GuncelFiyat"])
                                 });
                             }
                         }
@@ -158,7 +163,7 @@ namespace RestoranOtomasyon
                 }
                 catch (Exception ex)
                 {
-                    System.Diagnostics.Debug.WriteLine("Sipariş hatası: " + ex.Message);
+                    System.Diagnostics.Debug.WriteLine("Masa siparişleri getirilirken hata: " + ex.Message);
                 }
             }
             return siparisListesi;
