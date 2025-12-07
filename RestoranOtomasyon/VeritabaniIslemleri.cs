@@ -134,10 +134,10 @@ namespace RestoranOtomasyon
                 {
                     await baglanti.OpenAsync();
 
-                    // DÜZELTME: Fiyatı 'sd.BirimFiyat' yerine 'u.Fiyat' (Ana Tablo) üzerinden alıyoruz.
-                    // Ayrıca GROUP BY kısmına u.Fiyat'ı da ekliyoruz ki SQL hata vermesin.
+                    // DÜZELTME: 'u.Fiyat' diyerek fiyatı direkt menüden alıyoruz.
+                    // Böylece sipariş kaydedilirken hata olsa bile ekranda fiyat doğru görünür.
                     string sorgu = @"
-                        SELECT u.UrunAdi, SUM(sd.Adet) as ToplamAdet, u.Fiyat as GuncelFiyat
+                        SELECT u.UrunAdi, SUM(sd.Adet) as ToplamAdet, u.Fiyat as GuncelMenuFiyati
                         FROM Siparisler s
                         JOIN SiparisDetaylari sd ON s.SiparisID = sd.SiparisID
                         JOIN Urunler u ON sd.UrunID = u.UrunID
@@ -155,8 +155,8 @@ namespace RestoranOtomasyon
                                 {
                                     UrunAdi = reader["UrunAdi"].ToString(),
                                     Adet = Convert.ToInt32(reader["ToplamAdet"]),
-                                    // Veritabanındaki güncel ana fiyatı kullanıyoruz
-                                    BirimFiyat = Convert.ToDecimal(reader["GuncelFiyat"])
+                                    // Fiyatı "GuncelMenuFiyati" takma adından alıyoruz
+                                    BirimFiyat = Convert.ToDecimal(reader["GuncelMenuFiyati"])
                                 });
                             }
                         }

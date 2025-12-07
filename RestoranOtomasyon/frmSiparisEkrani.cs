@@ -18,6 +18,7 @@ namespace RestoranOtomasyon
         private int _seciliKategoriID = 0;
 
         private DataTable _tumUrunlerCache = new DataTable();
+        private List<SiparisUrunModel> _eskiSiparisCache = new List<SiparisUrunModel>();
         private List<SepetUrunDto> _yeniSiparisListesi = new List<SepetUrunDto>();
 
         public frmSiparisEkrani()
@@ -31,12 +32,11 @@ namespace RestoranOtomasyon
                 Controls.Find("materialLabel1", true)[0].Text = "Garson: " + AktifKullanici.AdSoyad;
 
             ArayuzAyarlariniYap();
+            OlaylariBagla();
             GridAyarlariniYap();
+
             MasalariYukle();
             KategorileriYukle();
-
-            // Arama kutusunu manuel bağla (Tasarımcı hatasını önlemek için)
-            OlaylariBagla();
 
             _tumUrunlerCache = db.UrunleriGetir();
             UrunleriFiltreleVeGoster();
@@ -44,13 +44,10 @@ namespace RestoranOtomasyon
 
         private void OlaylariBagla()
         {
-            // Arama kutusunu bul ve olayı bağla
             Control[] txtMatches = this.Controls.Find("txtArama", true);
             if (txtMatches.Length > 0)
             {
-                // Önceki event'i kaldır ki üst üste binmesin
-                ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).TextChanged -= txtArama_TextChanged;
-                ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).TextChanged += txtArama_TextChanged;
+                try { ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).TextChanged += txtArama_TextChanged; } catch { }
             }
         }
 
@@ -65,10 +62,10 @@ namespace RestoranOtomasyon
             dgMevcutUrunler.Rows.Clear();
             dgMevcutUrunler.Columns.Clear();
             dgMevcutUrunler.ColumnCount = 4;
-            dgMevcutUrunler.Columns[0].Name = "UrunAdi"; dgMevcutUrunler.Columns[0].HeaderText = "Ürün Adı";
-            dgMevcutUrunler.Columns[1].Name = "Adet"; dgMevcutUrunler.Columns[1].HeaderText = "Adet";
-            dgMevcutUrunler.Columns[2].Name = "Fiyat"; dgMevcutUrunler.Columns[2].HeaderText = "Fiyat";
-            dgMevcutUrunler.Columns[3].Name = "Durum"; dgMevcutUrunler.Columns[3].HeaderText = "Durum";
+            dgMevcutUrunler.Columns[0].Name = "UrunAdi"; dgMevcutUrunler.Columns[0].HeaderText = "Ürün Adı"; dgMevcutUrunler.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgMevcutUrunler.Columns[1].Name = "Adet"; dgMevcutUrunler.Columns[1].HeaderText = "Adet"; dgMevcutUrunler.Columns[1].Width = 50;
+            dgMevcutUrunler.Columns[2].Name = "Fiyat"; dgMevcutUrunler.Columns[2].HeaderText = "Fiyat"; dgMevcutUrunler.Columns[2].Width = 70;
+            dgMevcutUrunler.Columns[3].Name = "Durum"; dgMevcutUrunler.Columns[3].HeaderText = "Durum"; dgMevcutUrunler.Columns[3].Width = 80;
             dgMevcutUrunler.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgMevcutUrunler.AllowUserToAddRows = false;
             dgMevcutUrunler.ReadOnly = true;
@@ -88,6 +85,7 @@ namespace RestoranOtomasyon
                 btn.Tag = row;
                 btn.Size = new Size(110, 80);
                 btn.FlatStyle = FlatStyle.Flat;
+                btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                 btn.ForeColor = Color.White;
                 btn.Margin = new Padding(5);
 
@@ -105,19 +103,29 @@ namespace RestoranOtomasyon
         {
             Button btn = (Button)sender;
             DataRow row = (DataRow)btn.Tag;
+
             _seciliMasaID = Convert.ToInt32(row["MasaID"]);
             _seciliMasaDurumu = row["Durum"].ToString();
 
             _yeniSiparisListesi.Clear();
+            _eskiSiparisCache.Clear();
 
-            // Veritabanı işlemi sürerken UI donmasın diye await kullanıyoruz
-            await SepetiVeGridiGuncelleAsync();
+            if (_seciliMasaDurumu == "Dolu")
+            {
+                // Veritabanından asenkron çek
+                _eskiSiparisCache = await db.MasaSiparisleriniGetirAsync(_seciliMasaID);
+            }
+
+            // Grid güncelle
+            await SepetiVeGridiGuncelle();
         }
 
         // --- KATEGORİLER ---
         private void KategorileriYukle()
         {
+            if (flowKategoriler == null) return;
             flowKategoriler.Controls.Clear();
+
             Button btnTumu = new Button();
             btnTumu.Text = "TÜMÜ";
             btnTumu.Tag = 0;
@@ -148,40 +156,41 @@ namespace RestoranOtomasyon
             Button btn = (Button)sender;
             _seciliKategoriID = (int)btn.Tag;
 
-            // Renkleri güncelle
             foreach (Control c in flowKategoriler.Controls)
                 if (c is Button b) b.BackColor = ((int)b.Tag == _seciliKategoriID) ? Color.DarkOrange : Color.Teal;
 
-            // Arama kutusunu temizle
             Control[] txtMatches = this.Controls.Find("txtArama", true);
             if (txtMatches.Length > 0)
-                ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).Text = "";
-
+            {
+                try { ((ReaLTaiizor.Controls.MaterialTextBoxEdit)txtMatches[0]).Text = ""; } catch { }
+            }
             UrunleriFiltreleVeGoster();
         }
 
 
         private void UrunleriFiltreleVeGoster()
         {
+            if (flowUrunler == null) return;
             flowUrunler.Controls.Clear();
-            string aranan = "";
+            flowUrunler.SuspendLayout();
+
+            string arananKelime = "";
             Control[] matches = this.Controls.Find("txtArama", true);
             if (matches.Length > 0)
-                aranan = ((ReaLTaiizor.Controls.MaterialTextBoxEdit)matches[0]).Text.ToLower();
-
-            // Performans için paneli gizleyip açabiliriz (isteğe bağlı)
-            flowUrunler.SuspendLayout();
+            {
+                try { arananKelime = ((ReaLTaiizor.Controls.MaterialTextBoxEdit)matches[0]).Text.ToLower(); } catch { }
+            }
 
             foreach (DataRow row in _tumUrunlerCache.Rows)
             {
-                bool kategoriUygun = (_seciliKategoriID == 0);
+                bool kategoriUygun = _seciliKategoriID == 0;
                 if (!kategoriUygun && row.Table.Columns.Contains("KategoriID") && row["KategoriID"] != DBNull.Value)
                 {
                     if (Convert.ToInt32(row["KategoriID"]) == _seciliKategoriID) kategoriUygun = true;
                 }
 
                 string urunAdi = row["UrunAdi"].ToString().ToLower();
-                if (!urunAdi.Contains(aranan)) continue;
+                if (!urunAdi.Contains(arananKelime)) continue;
 
                 if (kategoriUygun)
                 {
@@ -198,7 +207,7 @@ namespace RestoranOtomasyon
                         BirimFiyat = Convert.ToDecimal(row["Fiyat"]),
                         Adet = 1
                     };
-                    btn.Click += Urun_Click; // Async olmasa da olur çünkü sadece listeye ekliyor
+                    btn.Click += Urun_Click;
                     flowUrunler.Controls.Add(btn);
                 }
             }
@@ -209,39 +218,42 @@ namespace RestoranOtomasyon
         {
             if (_seciliMasaID == -1)
             {
-                MessageBox.Show("Lütfen önce sol taraftan bir masa seçin!");
+                MessageBox.Show("Lütfen önce sol taraftan bir masa seçin!", "Uyarı");
                 return;
             }
+
             Button btn = (Button)sender;
             SepetUrunDto secilenUrun = (SepetUrunDto)btn.Tag;
 
             var varOlan = _yeniSiparisListesi.Find(x => x.UrunID == secilenUrun.UrunID);
             if (varOlan != null) varOlan.Adet++;
-            else _yeniSiparisListesi.Add(new SepetUrunDto { UrunID = secilenUrun.UrunID, Adet = 1, BirimFiyat = secilenUrun.BirimFiyat });
+            else _yeniSiparisListesi.Add(new SepetUrunDto
+            {
+                UrunID = secilenUrun.UrunID,
+                Adet = 1,
+                BirimFiyat = secilenUrun.BirimFiyat
+            });
 
-            // Ekrana yansıt
-            await SepetiVeGridiGuncelleAsync();
+            await SepetiVeGridiGuncelle();
         }
 
-        private async Task SepetiVeGridiGuncelleAsync()
+        private async Task SepetiVeGridiGuncelle()
         {
             dgMevcutUrunler.Rows.Clear();
 
-            // 1. ESKİ SİPARİŞLERİ GETİR (ASENKRON)
-            if (_seciliMasaDurumu == "Dolu")
+            // 1. ESKİ SİPARİŞLER (Hafızadan)
+            if (_eskiSiparisCache != null && _eskiSiparisCache.Count > 0)
             {
-                // Yeni yazdığımız asenkron metodu çağırıyoruz
-                List<SiparisUrunModel> eskiler = await db.MasaSiparisleriniGetirAsync(_seciliMasaID);
-
-                foreach (var urun in eskiler)
+                foreach (var urun in _eskiSiparisCache)
                 {
-                    // DÜZELTME: Fiyat 0 gelirse diye kontrol ekledik ama SQL düzeldiği için gerek kalmayacak.
-                    int i = dgMevcutUrunler.Rows.Add(urun.UrunAdi, urun.Adet, urun.AraToplam, "Mutfakta");
+                    decimal toplam = urun.Adet * urun.BirimFiyat;
+                    int i = dgMevcutUrunler.Rows.Add(urun.UrunAdi, urun.Adet, toplam, "Mutfakta");
                     dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
+                    dgMevcutUrunler.Rows[i].DefaultCellStyle.ForeColor = Color.DarkGray;
                 }
             }
 
-            // 2. YENİ EKLENENLERİ GÖSTER
+            // 2. YENİ EKLENENLER (Sepet Listesinden)
             foreach (var urun in _yeniSiparisListesi)
             {
                 string ad = "Ürün";
@@ -250,8 +262,12 @@ namespace RestoranOtomasyon
 
                 int i = dgMevcutUrunler.Rows.Add(ad, urun.Adet, (urun.Adet * urun.BirimFiyat), "Yeni");
                 dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                dgMevcutUrunler.Rows[i].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             }
             dgMevcutUrunler.ClearSelection();
+
+            // Asenkron metodun tamamlanmasını sağlar (boş olsa bile)
+            await Task.CompletedTask;
         }
 
         private async void btnOnayla_Click(object sender, EventArgs e)
@@ -261,49 +277,56 @@ namespace RestoranOtomasyon
             bool sonuc = false;
             int garsonID = AktifKullanici.KullaniciID;
 
-            if (_seciliMasaDurumu == "Boş" || _seciliMasaDurumu == "Rezerve")
-                sonuc = db.SiparisOlusturVeOnayla(_seciliMasaID, garsonID, _yeniSiparisListesi);
-            else
-                sonuc = db.EkSiparisEkle(_seciliMasaID, _yeniSiparisListesi);
+            // Butona basıldığında UI'yı dondurmamak için geçici bir 'await' koyabiliriz 
+            // ama metodumuz zaten senkron. Hızlandırmak için asenkron yapılabilir.
+
+            // Veritabanı işlemini arka planda yap
+            await Task.Run(() =>
+            {
+                if (_seciliMasaDurumu == "Boş" || _seciliMasaDurumu == "Rezerve")
+                    sonuc = db.SiparisOlusturVeOnayla(_seciliMasaID, garsonID, _yeniSiparisListesi);
+                else
+                    sonuc = db.EkSiparisEkle(_seciliMasaID, _yeniSiparisListesi);
+            });
 
             if (sonuc)
             {
-                MessageBox.Show("Sipariş mutfağa gönderildi.");
+                MessageBox.Show("Sipariş mutfağa iletildi!", "Başarılı");
                 _yeniSiparisListesi.Clear();
-                MasalariYukle();
+                MasalariYukle(); // Renkleri güncelle
+
+                // Masayı tekrar tıkla ki güncel veriler çekilsin (Burası önemli)
+                // Ama manuel buton click yerine sadece veri çekmeyi çağırabiliriz.
                 _seciliMasaDurumu = "Dolu";
-                await SepetiVeGridiGuncelleAsync();
+
+                // İnternetten güncel hali çekip cache'i güncelle
+                _eskiSiparisCache = await db.MasaSiparisleriniGetirAsync(_seciliMasaID);
+                await SepetiVeGridiGuncelle();
+            }
+            else
+            {
+                MessageBox.Show("Hata oluştu.", "Hata");
             }
         }
 
         private void btnOdeme_Click(object sender, EventArgs e)
         {
-            if (_seciliMasaID == -1)
-            {
-                MessageBox.Show("Lütfen ödeme almak için dolu bir masa seçin.");
-                return;
-            }
-
-            // 1. Ödeme Ekranını "Dialog" olarak açıyoruz.
-            // Bu şu demek: Ödeme ekranı kapanana kadar arka plandaki kodlar DURUR.
+            if (_seciliMasaID == -1) return;
             frmOdemeEkrani odeme = new frmOdemeEkrani(_seciliMasaID);
             odeme.ShowDialog();
 
-            // 2. Ödeme ekranı kapandığı an (Close() tetiklenince) kod buraya düşer.
-            // Şimdi masaları veritabanından tekrar çekip boyuyoruz.
+            // Döndüğünde
             MasalariYukle();
-
-            // Ekranı temizliyoruz
-            _yeniSiparisListesi.Clear();
-            _seciliMasaID = -1;
-            _seciliMasaDurumu = "";
             dgMevcutUrunler.Rows.Clear();
+            _yeniSiparisListesi.Clear();
+            _eskiSiparisCache.Clear(); // Cache temizle
+            _seciliMasaID = -1;
         }
 
         private async void btnVazgec_Click(object sender, EventArgs e)
         {
             _yeniSiparisListesi.Clear();
-             await SepetiVeGridiGuncelleAsync();
+             await SepetiVeGridiGuncelle();
         }
 
         private void btnGeriDon_Click(object sender, EventArgs e)
