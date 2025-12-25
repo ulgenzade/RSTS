@@ -172,6 +172,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AktifKullanici.cs" />
+    <Compile Include="dbDuzenle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="dbDuzenle.Designer.cs">
+      <DependentUpon>dbDuzenle.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmAdminControlPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,12 +189,6 @@
     </Compile>
     <Compile Include="frmGiris.Designer.cs">
       <DependentUpon>frmGiris.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmMasaDurum.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmMasaDurum.Designer.cs">
-      <DependentUpon>frmMasaDurum.cs</DependentUpon>
     </Compile>
     <Compile Include="frmMasaTasi.cs">
       <SubType>Form</SubType>
@@ -213,15 +213,21 @@
     <Compile Include="SepetUrunDto.cs" />
     <Compile Include="SifrelemeYardimcisi.cs" />
     <Compile Include="SiparisUrunModel.cs" />
+    <Compile Include="treeDuzenle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="treeDuzenle.Designer.cs">
+      <DependentUpon>treeDuzenle.cs</DependentUpon>
+    </Compile>
     <Compile Include="VeritabaniIslemleri.cs" />
+    <EmbeddedResource Include="dbDuzenle.resx">
+      <DependentUpon>dbDuzenle.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmAdminControlPanel.resx">
       <DependentUpon>frmAdminControlPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmGiris.resx">
       <DependentUpon>frmGiris.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmMasaDurum.resx">
-      <DependentUpon>frmMasaDurum.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMasaTasi.resx">
       <DependentUpon>frmMasaTasi.cs</DependentUpon>
@@ -242,6 +248,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="treeDuzenle.resx">
+      <DependentUpon>treeDuzenle.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
