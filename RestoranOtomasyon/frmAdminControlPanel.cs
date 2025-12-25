@@ -38,14 +38,12 @@ namespace RestoranOtomasyon
         private async void frmAdminControlPanel_Load_1(object sender, EventArgs e)
         {
             await KullaniciListeleriniDoldurAsync();
-
-<<<<<<< HEAD
             BilgiKutulariniTemizleVeKilitle();
             this.ActiveControl = null;
-=======
+
             BilgiKutulariniTemizleVeKilitle();  
             this.ActiveControl = null; 
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
+
         }
 
 
@@ -161,11 +159,6 @@ namespace RestoranOtomasyon
             seciliHesapID = -1;
 
             BilgiKutulariniTemizleVeAc();
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
             this.ActiveControl = null;
         }
 
@@ -222,11 +215,6 @@ namespace RestoranOtomasyon
             if (e.Node == null || e.Node.Tag == null) return;
             int seciliKullaniciID = Convert.ToInt32(e.Node.Tag);
 
-<<<<<<< HEAD
-
-=======
-           
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
         private void AdminTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -299,20 +287,12 @@ namespace RestoranOtomasyon
         #region Yardımcı Metotlar
         private void BilgiKutulariniKilitle()
         {
-<<<<<<< HEAD
 
-=======
-   
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
 
         private void BilgiKutularininKilidiniAc()
         {
-<<<<<<< HEAD
 
-=======
-    
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
 
         private void BilgiKutulariniTemizleVeAc()
@@ -323,12 +303,8 @@ namespace RestoranOtomasyon
 
         private void BilgiKutulariniTemizleVeKilitle()
         {
-<<<<<<< HEAD
-
-=======
-           
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
+
 
         private void YenileAktifTablo()
         {
@@ -1013,11 +989,5 @@ namespace RestoranOtomasyon
             // Böylece ilk kutuya otomatik tıklamaz ve yazımız silinmez.
             this.ActiveControl = null;
         }
-
-<<<<<<< HEAD
-
-=======
-      
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
     }
 }

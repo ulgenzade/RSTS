@@ -535,10 +535,8 @@
         private ReaLTaiizor.Controls.MaterialButton btnAdisyonYazdir;
         private ReaLTaiizor.Controls.MaterialButton btnTasiBirlestir;
         private ReaLTaiizor.Controls.MaterialLabel labelVergi;
-<<<<<<< HEAD
-=======
         private ReaLTaiizor.Controls.MaterialLabel labelSafTutar;
         private ReaLTaiizor.Controls.MaterialButton btnZrapor;
->>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
+
     }
 }
