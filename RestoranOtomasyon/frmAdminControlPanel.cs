@@ -30,11 +30,6 @@ namespace RestoranOtomasyon
         {
             await KullaniciListeleriniDoldurAsync();
 
-            // ComboBox'ı doğru isimle ('cmbRoller') doldur.
-            cmbRoller.Items.Add("Admin");
-            cmbRoller.Items.Add("Garson");
-            cmbRoller.Items.Add("Kasiyer");
-
             // Yardımcı metodu çağırarak bilgi kutularını başlangıçta kilitle.
             BilgiKutulariniKilitle();
 
@@ -44,27 +39,8 @@ namespace RestoranOtomasyon
         {
             await KullaniciListeleriniDoldurAsync();
 
-            // ComboBox'ı rollerle doldur. (Kontrolün doğru adını kullan: cmbRoller)
-            cmbRoller.Items.Add("Admin");
-            cmbRoller.Items.Add("Garson");
-            cmbRoller.Items.Add("Kasiyer");
-
-            BilgiKutulariniTemizleVeKilitle();
-
-            txtAdSyd.Text = "Ad Soyad";
-            txtAdSyd.ForeColor = Color.Gray;
-
-            txtKullaniciAdi1.Text = "Kullanıcı Adı";
-            txtKullaniciAdi1.ForeColor = Color.Gray;
-
-            txtSifre1.Text = "Şifre";
-            txtSifre1.ForeColor = Color.Gray;
-            txtSifre1.UseSystemPasswordChar = false;
-
-            this.ActiveControl = null;
-
-            cmbRoller.DrawMode = DrawMode.OwnerDrawFixed;
-            cmbRoller.DrawItem += cmbRoller_DrawItem;
+            BilgiKutulariniTemizleVeKilitle();  
+            this.ActiveControl = null; 
         }
 
 
@@ -117,8 +93,6 @@ namespace RestoranOtomasyon
             seciliHesapID = -1; // Sol seçimi sıfırla
             if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
             if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
-
-            dataGridView1.DataSource = db.MasalariGetir();
             aktifVeriTablosu = "Masalar";
 
 
@@ -130,8 +104,6 @@ namespace RestoranOtomasyon
             seciliHesapID = -1;
             if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
             if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
-
-            dataGridView1.DataSource = db.UrunleriGetir();
             aktifVeriTablosu = "Urunler";
         }
 
@@ -143,7 +115,6 @@ namespace RestoranOtomasyon
             if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
             if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
 
-            dataGridView1.DataSource = db.KategorileriGetir();
             aktifVeriTablosu = "Kategoriler";
         }
 
@@ -184,27 +155,8 @@ namespace RestoranOtomasyon
         {
             seciliHesapID = -1;
 
-            // 1. Önce paneli temizle ve görünür yap
             BilgiKutulariniTemizleVeAc();
-            SeciliKullaniciBilgileriGroupBox1.Visible = true;
-
-            // 2. KUTULARI ZORLA SIFIRLA (If kontrolüne gerek yok, taze açıyoruz)
-            // Ad Soyad Ayarı
-            txtAdSyd.Text = "Ad Soyad";
-            txtAdSyd.ForeColor = Color.Gray;
-
-            // Kullanıcı Adı Ayarı
-            txtKullaniciAdi1.Text = "Kullanıcı Adı";
-            txtKullaniciAdi1.ForeColor = Color.Gray;
-
-            // Şifre Ayarı
-            txtSifre1.Text = "Şifre";
-            txtSifre1.ForeColor = Color.Gray;
-            txtSifre1.UseSystemPasswordChar = false; // Yıldız olmasın
-
-            // 3. EN ÖNEMLİ HAMLE:
-            // Focus() komutunu sildim. Onun yerine odağı kaldırıyoruz.
-            // Böylece sen tıklayana kadar "Ad Soyad" yazısı silinmez.
+      
             this.ActiveControl = null;
         }
 
@@ -226,7 +178,6 @@ namespace RestoranOtomasyon
                     MessageBox.Show("Kullanıcı başarıyla silindi.");
                     await KullaniciListeleriniDoldurAsync();
                     BilgiKutulariniTemizleVeKilitle();
-                    dataGridView1.DataSource = null; // Sağdaki tabloyu temizle.
                 }
                 else
                 {
@@ -244,76 +195,14 @@ namespace RestoranOtomasyon
                 return;
             }
 
-            // --- AÇ-KAPA MANTIĞI ---
-            // GroupBox'ın o anki durumunu kontrol et.
-            if (SeciliKullaniciBilgileriGroupBox1.Enabled == false)
-            {
-                // Eğer GroupBox kilitliyse (kapalıysa), kilidini AÇ.
-                BilgiKutularininKilidiniAc();
-
-                // [KRİTİK HAMLE] Kilit açılınca içindeki yazılar net görünsün diye rengi SİYAH yapıyoruz.
-                // Çünkü kutunun arka planı açık renk, beyaz yaparsak okunmaz.
-                txtAdSyd.ForeColor = Color.Black;
-                txtKullaniciAdi1.ForeColor = Color.Black;
-                txtSifre1.ForeColor = Color.Black;
-            }
-            else
-            {
-                // Eğer GroupBox'ın kilidi açıksa, kilitle ve temizle.
-                BilgiKutulariniTemizleVeKilitle();
-            }
-
-            // Şifre kutusunda "Şifre" (Hint) yazmıyorsa, içindeki gerçek şifreyi yıldızla (****)
-            if (txtSifre1.Text != "Şifre")
-            {
-                txtSifre1.UseSystemPasswordChar = true;
-            }
         }
 
         private async void btnHesapKaydet_Click(object sender, EventArgs e)
         {
-            if (!SeciliKullaniciBilgileriGroupBox1.Enabled) return;
-
-            if (string.IsNullOrWhiteSpace(txtAdSyd.Text) || string.IsNullOrWhiteSpace(txtKullaniciAdi1.Text) || cmbRoller.SelectedItem == null)
-            {
-                MessageBox.Show("Ad Soyad, Kullanıcı Adı ve Rol alanları boş bırakılamaz.", "Eksik Bilgi");
-                return;
-            }
-
-            bool sonuc;
-            if (seciliHesapID == -1) // EKLEME MODU
-            {
-                if (string.IsNullOrWhiteSpace(txtSifre1.Text))
-                {
-                    MessageBox.Show("Yeni kullanıcı eklerken şifre alanı boş bırakılamaz.", "Eksik Bilgi");
-                    return;
-                }
-                sonuc = db.KullaniciEkle(txtAdSyd.Text, txtKullaniciAdi1.Text, txtSifre1.Text, cmbRoller.SelectedItem.ToString());
-                if (sonuc) MessageBox.Show("Yeni kullanıcı başarıyla eklendi.");
-            }
-            else // GÜNCELLEME MODU
-            {
-                sonuc = db.KullaniciGuncelle(seciliHesapID, txtAdSyd.Text, txtKullaniciAdi1.Text, txtSifre1.Text, cmbRoller.SelectedItem.ToString());
-                if (sonuc) MessageBox.Show("Kullanıcı bilgileri başarıyla güncellendi.");
-            }
 
             int kaydedilenKullaniciID = seciliHesapID; // ÖNEMLİ: ID'yi işlemden önce hafızaya al.
-
-            if (sonuc)
-            {
-                // İşlem başarılıysa, listeyi yenilemeden önce kimin seçili olduğunu biliyoruz.
-                await KullaniciListeleriniDoldurAsync();
-
-                // Şimdi yenilenmiş listede o kişiyi tekrar bul ve seç.
-                KullaniciyiTreeViewdeSec(kaydedilenKullaniciID);
-
-                BilgiKutulariniTemizleVeKilitle();
-            }
-            else
-            {
-                MessageBox.Show("İşlem sırasında bir veritabanı hatası oluştu.", "Hata");
-            }
         }
+          
 
         #endregion
 
@@ -323,40 +212,7 @@ namespace RestoranOtomasyon
             if (e.Node == null || e.Node.Tag == null) return;
             int seciliKullaniciID = Convert.ToInt32(e.Node.Tag);
 
-            if (seciliKullaniciID == -1)
-            {
-                dataGridView1.DataSource = null;
-                BilgiKutulariniTemizleVeKilitle();
-                return;
-            }
-
-            DataTable kullaniciBilgileri = db.TekKullaniciGetir(seciliKullaniciID);
-            dataGridView1.DataSource = kullaniciBilgileri;
-            aktifVeriTablosu = "Kullanicilar";
-
-            if (kullaniciBilgileri.Rows.Count > 0)
-            {
-                if (e.Node == null || e.Node.Tag == null) return;
-
-                seciliHesapID = Convert.ToInt32(e.Node.Tag);
-                DataTable dt = db.TekKullaniciGetir(seciliHesapID);
-
-                // Sağdaki DataGridView'i SEÇİLEN KULLANICI ile doldur.
-                dataGridView1.DataSource = dt;
-                aktifVeriTablosu = "Kullanicilar"; // Aktif tablonun kullanıcılar olduğunu belirt.
-
-                // Sağdaki düzenleme kutularını doldur.
-                if (dt.Rows.Count > 0)
-                {
-                    DataRow kullanici = dt.Rows[0];
-                    txtAdSyd.Text = kullanici["AdSoyad"].ToString();
-                    txtKullaniciAdi1.Text = kullanici["KullaniciAdi"].ToString();
-                    cmbRoller.SelectedItem = kullanici["Rol"].ToString();
-                    txtSifre1.Text = "";
-
-                    BilgiKutulariniKilitle();
-                }
-            }
+           
         }
         private void AdminTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -429,21 +285,12 @@ namespace RestoranOtomasyon
         #region Yardımcı Metotlar
         private void BilgiKutulariniKilitle()
         {
-            // Önce kontrolü kilitle
-            SeciliKullaniciBilgileriGroupBox1.Enabled = false;
-            // Sonra GÖRÜNMEZ yap
-            SeciliKullaniciBilgileriGroupBox1.Visible = false;
+   
         }
 
         private void BilgiKutularininKilidiniAc()
         {
-            SeciliKullaniciBilgileriGroupBox1.Enabled = true;
-
-            // --- YENİ EKLENEN SATIRLAR ---
-            // Önce kontrolün kendisini görünür yapmayı dene
-            SeciliKullaniciBilgileriGroupBox1.Visible = true;
-            // Sonra, içinde bulunduğu ana paneli yeniden çizmeye zorla.
-            splitContainer1.Panel2.Refresh();
+    
         }
 
         private void BilgiKutulariniTemizleVeAc()
@@ -454,16 +301,7 @@ namespace RestoranOtomasyon
 
         private void BilgiKutulariniTemizleVeKilitle()
         {
-            // '.Clear()' yerine, 'Text' özelliğine boş bir string atıyoruz.
-            txtAdSyd.Text = "";
-            txtKullaniciAdi1.Text = "";
-            txtSifre1.Text = "";
-
-            // ComboBox için bu zaten doğru yöntem.
-            cmbRoller.SelectedItem = null;
-
-            seciliHesapID = -1;
-            BilgiKutulariniKilitle();
+           
         }
 
         private void YenileAktifTablo()
@@ -1143,72 +981,6 @@ namespace RestoranOtomasyon
 
         #endregion
 
-        #region Watermark Textbox Events
-
-        private void txtAdSyd_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtAdSyd_Enter(object sender, EventArgs e)
-        {
-            // Trim() sayesinde boşluk hatası olmaz, kesin siler.
-            if (txtAdSyd.Text.Trim() == "Ad Soyad")
-            {
-                txtAdSyd.Text = "";
-                txtAdSyd.ForeColor = Color.Black; // YAZARKEN SİYAH OLSUN
-            }
-        }
-
-        private void txtAdSyd_Leave(object sender, EventArgs e)
-        {
-            // Kutudan çıkıldığında: Eğer boş bırakıldıysa "Ad Soyad" yaz ve rengi GRİ yap
-            if (string.IsNullOrWhiteSpace(txtAdSyd.Text))
-            {
-                txtAdSyd.Text = "Ad Soyad";
-                txtAdSyd.ForeColor = Color.Gray; // Hint olduğu belli olsun diye Gri
-            }
-        }
-
-        private void txtKullaniciAdi1_Enter(object sender, EventArgs e)
-        {
-            if (txtKullaniciAdi1.Text.Trim() == "Kullanıcı Adı")
-            {
-                txtKullaniciAdi1.Text = "";
-                txtKullaniciAdi1.ForeColor = Color.Black; // YAZARKEN SİYAH OLSUN
-            }
-        }
-
-        private void txtKullaniciAdi1_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtKullaniciAdi1.Text))
-            {
-                txtKullaniciAdi1.Text = "Kullanıcı Adı";
-                txtKullaniciAdi1.ForeColor = Color.Gray; // Hint iken Gri
-            }
-        }
-
-        private void txtSifre1_Enter(object sender, EventArgs e)
-        {
-            if (txtSifre1.Text.Trim() == "Şifre")
-            {
-                txtSifre1.Text = "";
-                txtSifre1.ForeColor = Color.Black; // YAZARKEN SİYAH OLSUN
-                txtSifre1.UseSystemPasswordChar = true;
-            }
-        }
-
-        private void txtSifre1_Leave(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtSifre1.Text))
-            {
-                txtSifre1.Text = "Şifre";
-                txtSifre1.ForeColor = Color.Gray; // Hint iken Gri
-                txtSifre1.UseSystemPasswordChar = false; // "Şifre" yazısı okunsun
-            }
-        }
-        #endregion
-
         private void frmAdminControlPanel_Shown(object sender, EventArgs e)
         {
             // Form tamamen görünür olduktan sonra odağı boşa düşürür.
@@ -1216,42 +988,6 @@ namespace RestoranOtomasyon
             this.ActiveControl = null;
         }
 
-        private void cmbRoller_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cmbRoller_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            if (e.Index < 0) return;
-            ComboBox kutu = (ComboBox)sender; // Hangi combobox olduğu fark etmez
-            e.DrawBackground();
-
-            Brush yaziRengi = Brushes.Black; // SİYAH Rengi çaktık
-            if ((e.State & DrawItemState.Selected) == DrawItemState.Selected) yaziRengi = Brushes.White;
-
-            e.Graphics.DrawString(kutu.Items[e.Index].ToString(), e.Font, yaziRengi, e.Bounds, StringFormat.GenericDefault);
-            e.DrawFocusRectangle();
-        }
-
-        private void lblVeriAd_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void aloneTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnVeriIptal_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnVeriOnayla_Click(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }
