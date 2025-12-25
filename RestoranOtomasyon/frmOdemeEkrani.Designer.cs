@@ -56,7 +56,6 @@
             this.btnHepsiniAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.btnZrapor = new ReaLTaiizor.Controls.MaterialButton();
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
@@ -332,7 +331,6 @@
             // panelOrta
             // 
             this.panelOrta.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.panelOrta.Controls.Add(this.btnZrapor);
             this.panelOrta.Controls.Add(this.btnTasiBirlestir);
             this.panelOrta.Controls.Add(this.btnBitir);
             this.panelOrta.Controls.Add(this.btnHepsiniGeriAl);
@@ -481,27 +479,6 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // btnZrapor
-            // 
-            this.btnZrapor.AutoSize = false;
-            this.btnZrapor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnZrapor.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnZrapor.Depth = 0;
-            this.btnZrapor.HighEmphasis = true;
-            this.btnZrapor.Icon = null;
-            this.btnZrapor.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnZrapor.Location = new System.Drawing.Point(7, 446);
-            this.btnZrapor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnZrapor.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnZrapor.Name = "btnZrapor";
-            this.btnZrapor.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnZrapor.Size = new System.Drawing.Size(218, 52);
-            this.btnZrapor.TabIndex = 8;
-            this.btnZrapor.Text = "Z RAPORU";
-            this.btnZrapor.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnZrapor.UseAccentColor = false;
-            this.btnZrapor.UseVisualStyleBackColor = true;
             // 
             // frmOdemeEkrani
             // 
