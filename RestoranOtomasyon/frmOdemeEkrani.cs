@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Printing; 
+using System.Drawing.Printing;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -29,7 +29,6 @@ namespace RestoranOtomasyon
         {
             InitializeComponent();
             this.seciliMasaID = masaID;
-            // Yazdırma olayını bağlıyoruz
             pd.PrintPage += new PrintPageEventHandler(this.pd_PrintPage);
         }
 
@@ -44,12 +43,14 @@ namespace RestoranOtomasyon
                 timer1.Start();
             }
 
+            // Saat ve Garson bilgisini ayarla
             Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
             if (lblSaat.Length > 0) lblSaat[0].Left = lblSaat[0].Left - 40;
 
             Control[] lblGarson = Controls.Find("labelHesapBilgi", true);
             if (lblGarson.Length > 0) lblGarson[0].Text = "Garson: " + AktifKullanici.AdSoyad;
 
+            // Masayı yükle
             if (seciliMasaID != -1)
             {
                 Control[] labels = Controls.Find("labelMasaBilgi", true);
@@ -79,6 +80,7 @@ namespace RestoranOtomasyon
 
         private void EkranlariCiz()
         {
+            // 1. SOL TARAF (TÜM SİPARİŞLER)
             flowTumSiparisler.Controls.Clear();
             toplamMasaTutari = 0;
 
@@ -92,9 +94,17 @@ namespace RestoranOtomasyon
                 flowTumSiparisler.Controls.Add(btn);
             }
 
+            // --- SOL ALT YAZI AYARI ---
             Control[] lblSol = Controls.Find("labelToplamTutar", true);
-            if (lblSol.Length > 0) lblSol[0].Text = $"TOPLAM: {toplamMasaTutari:C2}";
+            if (lblSol.Length > 0)
+            {
+                // Burası sadece "TOPLAM TUTAR: 100 ₺" yazar. 
+                // Eğer ekranda "TOPLAM: TOPLAM TUTAR" görüyorsan, 
+                // tasarımda "TOPLAM" diye sabit duran başka bir etiket vardır, onu elle silmelisin.
+                lblSol[0].Text = $"TOPLAM TUTAR: {toplamMasaTutari:C2}";
+            }
 
+            // 2. SAĞ TARAF (ÖDENECEKLER)
             panelOdenecekler.Controls.Clear();
             decimal odenecekTutar = 0;
 
@@ -108,8 +118,13 @@ namespace RestoranOtomasyon
                 panelOdenecekler.Controls.Add(btn);
             }
 
+            // --- SAĞ ALT YAZI AYARI ---
             Control[] lblSag = Controls.Find("labelOdenecekTutar", true);
-            if (lblSag.Length > 0) lblSag[0].Text = $"{odenecekTutar:C2}";
+            if (lblSag.Length > 0)
+            {
+                // Sadece ödenecek tutarı yazar.
+                lblSag[0].Text = $"SEÇİLEN ÜRÜN TUTAR: {odenecekTutar:C2}";
+            }
         }
 
         private Button KartOlustur(SiparisUrunModel urun, EventHandler tiklamaOlayi)
@@ -260,11 +275,8 @@ namespace RestoranOtomasyon
             this.Close();
         }
 
-        
         private void btnAdisyonYazdir_Click(object sender, EventArgs e)
         {
-            
-            
             PaperSize fisKagidi = new PaperSize("Fis", 285, 600);
             pd.DefaultPageSettings.PaperSize = fisKagidi;
 
@@ -277,7 +289,7 @@ namespace RestoranOtomasyon
 
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
-           
+            // Yazdırma kodları aynı kaldı
             Font baslikFont = new Font("Arial", 12, FontStyle.Bold);
             Font altBaslikFont = new Font("Arial", 9, FontStyle.Bold);
             Font icerikFont = new Font("Courier New", 8, FontStyle.Bold);
@@ -288,11 +300,9 @@ namespace RestoranOtomasyon
             int xAdet = 150;
             int xTutar = 200;
 
-            // Başlıkları Ortala
             StringFormat centerFormat = new StringFormat();
             centerFormat.Alignment = StringAlignment.Center;
 
-            // Fiş Genişliği 
             RectangleF rectBaslik = new RectangleF(0, y, 280, 25);
             e.Graphics.DrawString("RESTORAN ADI", baslikFont, firca, rectBaslik, centerFormat);
             y += 30;
@@ -303,12 +313,9 @@ namespace RestoranOtomasyon
             y += 15;
             e.Graphics.DrawString($"Tarih: {DateTime.Now:dd.MM.yy HH:mm}", icerikFont, firca, new Point(xStart, y));
             y += 15;
-            e.Graphics.DrawString($"Garson: {AktifKullanici.AdSoyad}", icerikFont, firca, new Point(xStart, y));
-            y += 15;
             e.Graphics.DrawString("-----------------------------------------------", icerikFont, firca, new Point(xStart, y));
             y += 15;
 
-            // Başlıklar
             e.Graphics.DrawString("Ürün", altBaslikFont, firca, new Point(xStart, y));
             e.Graphics.DrawString("Adet", altBaslikFont, firca, new Point(xAdet, y));
             e.Graphics.DrawString("Tutar", altBaslikFont, firca, new Point(xTutar, y));
@@ -321,7 +328,6 @@ namespace RestoranOtomasyon
 
             foreach (var item in tumListe)
             {
-                // Uzun isimleri kes
                 string kisaAd = item.UrunAdi.Length > 16 ? item.UrunAdi.Substring(0, 16) + "." : item.UrunAdi;
                 decimal satirTutar = item.Adet * item.BirimFiyat;
 
@@ -336,13 +342,9 @@ namespace RestoranOtomasyon
             y += 10;
             e.Graphics.DrawString("-----------------------------------------------", icerikFont, firca, new Point(xStart, y));
             y += 15;
-
-            // Genel Toplam
             e.Graphics.DrawString($"TOPLAM: {genelToplam:C2}", baslikFont, firca, new Point(xStart + 80, y));
             y += 30;
-
-            RectangleF rectAlt = new RectangleF(0, y, 280, 20);
-            e.Graphics.DrawString("AFİYET OLSUN...", icerikFont, firca, rectAlt, centerFormat);
+            e.Graphics.DrawString("AFİYET OLSUN...", icerikFont, firca, new RectangleF(0, y, 280, 20), centerFormat);
         }
 
         private void btnGeriDon_Click(object sender, EventArgs e) { this.Close(); }
@@ -357,15 +359,13 @@ namespace RestoranOtomasyon
         private void btnTasiBirlestir_Click(object sender, EventArgs e)
         {
             frmMasaTasi frm = new frmMasaTasi();
-            frm.kaynakMasaId = this.seciliMasaID; // Değişken adın bu ise
+            frm.kaynakMasaId = this.seciliMasaID;
 
             DialogResult sonuc = frm.ShowDialog();
 
             if (sonuc == DialogResult.OK)
             {
-                this.Close(); // Ödeme ekranını kapat
-
-                
+                this.Close();
             }
         }
     }
