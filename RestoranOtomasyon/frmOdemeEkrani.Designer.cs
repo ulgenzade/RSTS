@@ -49,6 +49,7 @@
             this.labelOdemeYontemi = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelOdenecekTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.panelOrta = new System.Windows.Forms.Panel();
+            this.btnZrapor = new ReaLTaiizor.Controls.MaterialButton();
             this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
             this.btnBitir = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHepsiniGeriAl = new ReaLTaiizor.Controls.MaterialButton();
@@ -331,6 +332,7 @@
             // panelOrta
             // 
             this.panelOrta.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panelOrta.Controls.Add(this.btnZrapor);
             this.panelOrta.Controls.Add(this.btnTasiBirlestir);
             this.panelOrta.Controls.Add(this.btnBitir);
             this.panelOrta.Controls.Add(this.btnHepsiniGeriAl);
@@ -344,6 +346,28 @@
             this.panelOrta.TabIndex = 4;
             this.panelOrta.Paint += new System.Windows.Forms.PaintEventHandler(this.panelOrta_Paint);
             // 
+            // btnZrapor
+            // 
+            this.btnZrapor.AutoSize = false;
+            this.btnZrapor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZrapor.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnZrapor.Depth = 0;
+            this.btnZrapor.HighEmphasis = true;
+            this.btnZrapor.Icon = null;
+            this.btnZrapor.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnZrapor.Location = new System.Drawing.Point(7, 448);
+            this.btnZrapor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnZrapor.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnZrapor.Name = "btnZrapor";
+            this.btnZrapor.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnZrapor.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btnZrapor.Size = new System.Drawing.Size(218, 52);
+            this.btnZrapor.TabIndex = 8;
+            this.btnZrapor.Text = "Z RAPOR";
+            this.btnZrapor.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnZrapor.UseAccentColor = false;
+            this.btnZrapor.UseVisualStyleBackColor = true;
+            // 
             // btnTasiBirlestir
             // 
             this.btnTasiBirlestir.AutoSize = false;
@@ -353,7 +377,7 @@
             this.btnTasiBirlestir.HighEmphasis = true;
             this.btnTasiBirlestir.Icon = null;
             this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnTasiBirlestir.Location = new System.Drawing.Point(7, 384);
+            this.btnTasiBirlestir.Location = new System.Drawing.Point(7, 378);
             this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnTasiBirlestir.Name = "btnTasiBirlestir";
@@ -537,6 +561,5 @@
         private ReaLTaiizor.Controls.MaterialLabel labelVergi;
         private ReaLTaiizor.Controls.MaterialLabel labelSafTutar;
         private ReaLTaiizor.Controls.MaterialButton btnZrapor;
-
     }
 }
