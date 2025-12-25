@@ -60,6 +60,7 @@
             this.btnHepsiniAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnSecilenAktar = new ReaLTaiizor.Controls.MaterialButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnZrapor = new ReaLTaiizor.Controls.MaterialButton();
             this.panelUst.SuspendLayout();
             this.panelSol.SuspendLayout();
             this.panelSolAlt.SuspendLayout();
@@ -388,6 +389,7 @@
             // panelOrta
             // 
             this.panelOrta.BackColor = System.Drawing.SystemColors.ScrollBar;
+            this.panelOrta.Controls.Add(this.btnZrapor);
             this.panelOrta.Controls.Add(this.btnTasiBirlestir);
             this.panelOrta.Controls.Add(this.btnBitir);
             this.panelOrta.Controls.Add(this.btnHepsiniGeriAl);
@@ -410,7 +412,7 @@
             this.btnTasiBirlestir.HighEmphasis = true;
             this.btnTasiBirlestir.Icon = null;
             this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnTasiBirlestir.Location = new System.Drawing.Point(7, 483);
+            this.btnTasiBirlestir.Location = new System.Drawing.Point(7, 384);
             this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnTasiBirlestir.Name = "btnTasiBirlestir";
@@ -432,7 +434,7 @@
             this.btnBitir.HighEmphasis = true;
             this.btnBitir.Icon = null;
             this.btnBitir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnBitir.Location = new System.Drawing.Point(62, 553);
+            this.btnBitir.Location = new System.Drawing.Point(62, 517);
             this.btnBitir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnBitir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnBitir.Name = "btnBitir";
@@ -454,7 +456,7 @@
             this.btnHepsiniGeriAl.HighEmphasis = true;
             this.btnHepsiniGeriAl.Icon = null;
             this.btnHepsiniGeriAl.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHepsiniGeriAl.Location = new System.Drawing.Point(7, 366);
+            this.btnHepsiniGeriAl.Location = new System.Drawing.Point(7, 293);
             this.btnHepsiniGeriAl.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnHepsiniGeriAl.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnHepsiniGeriAl.Name = "btnHepsiniGeriAl";
@@ -476,7 +478,7 @@
             this.btnSecilenleriGeriAl.HighEmphasis = true;
             this.btnSecilenleriGeriAl.Icon = null;
             this.btnSecilenleriGeriAl.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnSecilenleriGeriAl.Location = new System.Drawing.Point(7, 289);
+            this.btnSecilenleriGeriAl.Location = new System.Drawing.Point(7, 229);
             this.btnSecilenleriGeriAl.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSecilenleriGeriAl.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnSecilenleriGeriAl.Name = "btnSecilenleriGeriAl";
@@ -498,7 +500,7 @@
             this.btnHepsiniAktar.HighEmphasis = true;
             this.btnHepsiniAktar.Icon = null;
             this.btnHepsiniAktar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHepsiniAktar.Location = new System.Drawing.Point(7, 147);
+            this.btnHepsiniAktar.Location = new System.Drawing.Point(7, 118);
             this.btnHepsiniAktar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnHepsiniAktar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnHepsiniAktar.Name = "btnHepsiniAktar";
@@ -520,7 +522,7 @@
             this.btnSecilenAktar.HighEmphasis = true;
             this.btnSecilenAktar.Icon = null;
             this.btnSecilenAktar.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnSecilenAktar.Location = new System.Drawing.Point(7, 70);
+            this.btnSecilenAktar.Location = new System.Drawing.Point(7, 41);
             this.btnSecilenAktar.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnSecilenAktar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnSecilenAktar.Name = "btnSecilenAktar";
@@ -536,6 +538,27 @@
             // timer1
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // btnZrapor
+            // 
+            this.btnZrapor.AutoSize = false;
+            this.btnZrapor.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnZrapor.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnZrapor.Depth = 0;
+            this.btnZrapor.HighEmphasis = true;
+            this.btnZrapor.Icon = null;
+            this.btnZrapor.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnZrapor.Location = new System.Drawing.Point(7, 446);
+            this.btnZrapor.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnZrapor.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnZrapor.Name = "btnZrapor";
+            this.btnZrapor.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnZrapor.Size = new System.Drawing.Size(218, 52);
+            this.btnZrapor.TabIndex = 8;
+            this.btnZrapor.Text = "Z RAPORU";
+            this.btnZrapor.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnZrapor.UseAccentColor = false;
+            this.btnZrapor.UseVisualStyleBackColor = true;
             // 
             // frmOdemeEkrani
             // 
@@ -596,5 +619,6 @@
         private ReaLTaiizor.Controls.MaterialLabel labelVergiTutar;
         private ReaLTaiizor.Controls.MaterialLabel labelVergi;
         private ReaLTaiizor.Controls.MaterialLabel labelSafTutar;
+        private ReaLTaiizor.Controls.MaterialButton btnZrapor;
     }
 }
