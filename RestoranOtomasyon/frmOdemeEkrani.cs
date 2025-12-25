@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
-using System.Drawing.Printing; // Yazdırma kütüphanesi
+using System.Drawing.Printing; 
 using System.Linq;
 using System.Windows.Forms;
 
@@ -260,13 +260,11 @@ namespace RestoranOtomasyon
             this.Close();
         }
 
-        // =================================================================
-        // 🔥 GÜNCEL: FİŞ BOYUTUNDA (80mm) ADİSYON YAZDIRMA 🔥
-        // =================================================================
+        
         private void btnAdisyonYazdir_Click(object sender, EventArgs e)
         {
-            // 1. KAĞIT BOYUTU AYARLAMA (285 = Yaklaşık 80mm fiş genişliği)
-            // Yüksekliği (600) ürün sayısına göre uzatabiliriz ama şimdilik sabit yeterli.
+            
+            
             PaperSize fisKagidi = new PaperSize("Fis", 285, 600);
             pd.DefaultPageSettings.PaperSize = fisKagidi;
 
@@ -279,7 +277,7 @@ namespace RestoranOtomasyon
 
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
-            // Yazı Tipleri (Biraz küçülttüm ki fişe sığsın)
+           
             Font baslikFont = new Font("Arial", 12, FontStyle.Bold);
             Font altBaslikFont = new Font("Arial", 9, FontStyle.Bold);
             Font icerikFont = new Font("Courier New", 8, FontStyle.Bold);
@@ -294,7 +292,7 @@ namespace RestoranOtomasyon
             StringFormat centerFormat = new StringFormat();
             centerFormat.Alignment = StringAlignment.Center;
 
-            // Fiş Genişliği (Yaklaşık 280)
+            // Fiş Genişliği 
             RectangleF rectBaslik = new RectangleF(0, y, 280, 25);
             e.Graphics.DrawString("RESTORAN ADI", baslikFont, firca, rectBaslik, centerFormat);
             y += 30;
@@ -367,11 +365,7 @@ namespace RestoranOtomasyon
             {
                 this.Close(); // Ödeme ekranını kapat
 
-                // Yeni bir ödeme ekranı açmak istersen:
-                // (Hedef masa doluysa onun ödeme ekranı açılır)
-                // int yeniMasa = frm.hedefMasaId;
-                // frmOdemeEkrani yeni = new frmOdemeEkrani(yeniMasa);
-                // yeni.Show();
+                
             }
         }
     }

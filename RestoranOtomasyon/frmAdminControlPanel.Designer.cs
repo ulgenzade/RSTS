@@ -49,5 +49,15 @@
         private ReaLTaiizor.Controls.AloneTextBox txtAdSyd;
         private ReaLTaiizor.Controls.AloneComboBox cmbRoller;
         private ReaLTaiizor.Controls.MaterialButton btnCikis;
+        private ReaLTaiizor.Controls.MaterialButton btnVeriLoglar;
+        private ReaLTaiizor.Controls.CyberGroupBox gbVeriIslemleri;
+        private ReaLTaiizor.Controls.CrownLabel lblVeriAd;
+        private ReaLTaiizor.Controls.AloneTextBox aloneTextBox1;
+        private ReaLTaiizor.Controls.CrownLabel lblVeriFiyat;
+        private ReaLTaiizor.Controls.AloneTextBox txtVeriFiyat;
+        private ReaLTaiizor.Controls.CrownLabel lblVeriKategori;
+        private ReaLTaiizor.Controls.AloneComboBox aloneComboBox1;
+        private ReaLTaiizor.Controls.MaterialButton btnVeriOnayla;
+        private ReaLTaiizor.Controls.MaterialButton btnVeriIptal;
     }
 }

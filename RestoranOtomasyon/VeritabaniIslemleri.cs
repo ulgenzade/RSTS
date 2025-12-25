@@ -1,9 +1,9 @@
-﻿using MySql.Data.MySqlClient; // MySQL ile konuşmamızı sağlayan ana kütüphane
+﻿using MySql.Data.MySqlClient; 
 using RestoranOtomasyon;
 using System;
 using System.Collections.Generic;
-using System.Configuration;    // App.config dosyasını okumak için
-using System.Data;             // DataTable gibi veri yapılarını kullanmak için
+using System.Configuration;    
+using System.Data;            
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -44,7 +44,7 @@ namespace RestoranOtomasyon
 
         #region GETIR METOTLARI (READ)
 
-        // 2. Kategoriler tablosundaki tüm verileri çeker.
+        
         public DataTable KategorileriGetir()
         {
             DataTable dt = new DataTable();
@@ -67,7 +67,7 @@ namespace RestoranOtomasyon
             return dt;
         }
 
-        // 3. Urunler tablosundaki verileri, kategori adıyla birlikte (JOIN) çeker.
+        
         public DataTable UrunleriGetir()
         {
             DataTable dt = new DataTable();
@@ -100,7 +100,7 @@ namespace RestoranOtomasyon
             return dt;
         }
 
-        // 4. Masalar tablosundaki tüm verileri çeker.
+        
         public DataTable MasalariGetir()
         {
             DataTable dt = new DataTable();
@@ -123,7 +123,7 @@ namespace RestoranOtomasyon
             return dt;
         }
 
-        // 5. Kullanıcılar tablosundaki verileri (şifre hariç) çeker.
+        
         public async Task<List<SiparisUrunModel>> MasaSiparisleriniGetirAsync(int masaID)
         {
             List<SiparisUrunModel> siparisListesi = new List<SiparisUrunModel>();
@@ -134,14 +134,17 @@ namespace RestoranOtomasyon
                 {
                     await baglanti.OpenAsync();
 
-                    // DÜZELTME: 'u.Fiyat' diyerek fiyatı direkt menüden alıyoruz.
-                    // Böylece sipariş kaydedilirken hata olsa bile ekranda fiyat doğru görünür.
+                    // DÜZELTME: İç içe sorgu (Subquery) kullandık.
+                    // "Bana bu masanın aktif olan EN SON siparişinin ID'sini bul, sonra sadece o siparişin detaylarını getir" diyoruz.
                     string sorgu = @"
                         SELECT u.UrunAdi, SUM(sd.Adet) as ToplamAdet, u.Fiyat as GuncelMenuFiyati
-                        FROM Siparisler s
-                        JOIN SiparisDetaylari sd ON s.SiparisID = sd.SiparisID
+                        FROM SiparisDetaylari sd
                         JOIN Urunler u ON sd.UrunID = u.UrunID
-                        WHERE s.MasaID = @masaID AND s.OdemeDurumu = 'Aktif'
+                        WHERE sd.SiparisID = (
+                            SELECT SiparisID FROM Siparisler 
+                            WHERE MasaID = @masaID AND OdemeDurumu = 'Aktif' 
+                            ORDER BY SiparisID DESC LIMIT 1
+                        )
                         GROUP BY u.UrunAdi, u.Fiyat;";
 
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
@@ -155,7 +158,6 @@ namespace RestoranOtomasyon
                                 {
                                     UrunAdi = reader["UrunAdi"].ToString(),
                                     Adet = Convert.ToInt32(reader["ToplamAdet"]),
-                                    // Fiyatı "GuncelMenuFiyati" takma adından alıyoruz
                                     BirimFiyat = Convert.ToDecimal(reader["GuncelMenuFiyati"])
                                 });
                             }
@@ -170,7 +172,7 @@ namespace RestoranOtomasyon
             return siparisListesi;
         }
 
-        // 6. Siparişler tablosundaki verileri, masa ve kullanıcı adıyla birlikte (JOIN) çeker.
+        
         public DataTable SiparisleriGetir()
         {
             DataTable dt = new DataTable();
@@ -200,7 +202,7 @@ namespace RestoranOtomasyon
             return dt;
         }
 
-        // 7. Belli bir siparişe ait detayları, ürün adıyla birlikte (JOIN) çeker.
+        
         public DataTable SiparisDetaylariniGetir(int siparisID)
         {
             DataTable dt = new DataTable();

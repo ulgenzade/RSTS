@@ -225,16 +225,24 @@ namespace RestoranOtomasyon
             Button btn = (Button)sender;
             SepetUrunDto secilenUrun = (SepetUrunDto)btn.Tag;
 
+            // Listede var mı kontrol et (SADECE RAM İŞLEMİ - HIZLI)
             var varOlan = _yeniSiparisListesi.Find(x => x.UrunID == secilenUrun.UrunID);
-            if (varOlan != null) varOlan.Adet++;
-            else _yeniSiparisListesi.Add(new SepetUrunDto
+            if (varOlan != null)
             {
-                UrunID = secilenUrun.UrunID,
-                Adet = 1,
-                BirimFiyat = secilenUrun.BirimFiyat
-            });
+                varOlan.Adet++;
+            }
+            else
+            {
+                _yeniSiparisListesi.Add(new SepetUrunDto
+                {
+                    UrunID = secilenUrun.UrunID,
+                    Adet = 1,
+                    BirimFiyat = secilenUrun.BirimFiyat
+                });
+            }
 
-            await SepetiVeGridiGuncelle();
+            // Ekrana yansıt (SADECE RAM İŞLEMİ - HIZLI)
+            SepetiVeGridiGuncelle();
         }
 
         private async Task SepetiVeGridiGuncelle()
@@ -248,8 +256,12 @@ namespace RestoranOtomasyon
                 {
                     decimal toplam = urun.Adet * urun.BirimFiyat;
                     int i = dgMevcutUrunler.Rows.Add(urun.UrunAdi, urun.Adet, toplam, "Mutfakta");
-                    dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.LightGray;
-                    dgMevcutUrunler.Rows[i].DefaultCellStyle.ForeColor = Color.DarkGray;
+
+                    // RENK AYARLARI
+                    // Arka plan açık gri, yazı siyah ve STANDART (İtalik değil)
+                    dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
+                    dgMevcutUrunler.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
+                    dgMevcutUrunler.Rows[i].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
                 }
             }
 
@@ -261,12 +273,14 @@ namespace RestoranOtomasyon
                 if (rows.Length > 0) ad = rows[0]["UrunAdi"].ToString();
 
                 int i = dgMevcutUrunler.Rows.Add(ad, urun.Adet, (urun.Adet * urun.BirimFiyat), "Yeni");
+
+                // Yeniler Beyaz ve Kalın
                 dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.White;
                 dgMevcutUrunler.Rows[i].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             }
+
             dgMevcutUrunler.ClearSelection();
 
-            // Asenkron metodun tamamlanmasını sağlar (boş olsa bile)
             await Task.CompletedTask;
         }
 
