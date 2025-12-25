@@ -38,13 +38,9 @@
             this.panelSolAlt = new System.Windows.Forms.Panel();
             this.labelHesapBilgi = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelToplamTutar = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelToplam = new ReaLTaiizor.Controls.MaterialLabel();
             this.panelSag = new System.Windows.Forms.Panel();
             this.panelOdenecekler = new System.Windows.Forms.FlowLayoutPanel();
             this.panelSagAlt = new System.Windows.Forms.Panel();
-            this.labelSafTutar = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelÜrünTutar = new ReaLTaiizor.Controls.MaterialLabel();
-            this.labelVergiTutar = new ReaLTaiizor.Controls.MaterialLabel();
             this.labelVergi = new ReaLTaiizor.Controls.MaterialLabel();
             this.btnAdisyonYazdir = new ReaLTaiizor.Controls.MaterialButton();
             this.labelToplamOdenecek = new ReaLTaiizor.Controls.MaterialLabel();
@@ -153,7 +149,6 @@
             this.panelSolAlt.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.panelSolAlt.Controls.Add(this.labelHesapBilgi);
             this.panelSolAlt.Controls.Add(this.labelToplamTutar);
-            this.panelSolAlt.Controls.Add(this.labelToplam);
             this.panelSolAlt.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelSolAlt.Location = new System.Drawing.Point(0, 445);
             this.panelSolAlt.Name = "panelSolAlt";
@@ -177,25 +172,12 @@
             this.labelToplamTutar.AutoSize = true;
             this.labelToplamTutar.Depth = 0;
             this.labelToplamTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamTutar.Location = new System.Drawing.Point(128, 26);
+            this.labelToplamTutar.Location = new System.Drawing.Point(29, 18);
             this.labelToplamTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelToplamTutar.Name = "labelToplamTutar";
             this.labelToplamTutar.Size = new System.Drawing.Size(44, 19);
             this.labelToplamTutar.TabIndex = 1;
             this.labelToplamTutar.Text = "0,00 ₺";
-            // 
-            // labelToplam
-            // 
-            this.labelToplam.AutoSize = true;
-            this.labelToplam.Depth = 0;
-            this.labelToplam.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplam.Location = new System.Drawing.Point(29, 26);
-            this.labelToplam.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelToplam.Name = "labelToplam";
-            this.labelToplam.Size = new System.Drawing.Size(81, 19);
-            this.labelToplam.TabIndex = 0;
-            this.labelToplam.Text = "TOPLAM:   ";
-            this.labelToplam.Click += new System.EventHandler(this.labelToplam_Click);
             // 
             // panelSag
             // 
@@ -219,9 +201,6 @@
             // panelSagAlt
             // 
             this.panelSagAlt.BackColor = System.Drawing.SystemColors.ScrollBar;
-            this.panelSagAlt.Controls.Add(this.labelSafTutar);
-            this.panelSagAlt.Controls.Add(this.labelÜrünTutar);
-            this.panelSagAlt.Controls.Add(this.labelVergiTutar);
             this.panelSagAlt.Controls.Add(this.labelVergi);
             this.panelSagAlt.Controls.Add(this.btnAdisyonYazdir);
             this.panelSagAlt.Controls.Add(this.labelToplamOdenecek);
@@ -235,48 +214,12 @@
             this.panelSagAlt.Size = new System.Drawing.Size(516, 166);
             this.panelSagAlt.TabIndex = 0;
             // 
-            // labelSafTutar
-            // 
-            this.labelSafTutar.AutoSize = true;
-            this.labelSafTutar.Depth = 0;
-            this.labelSafTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelSafTutar.Location = new System.Drawing.Point(201, 17);
-            this.labelSafTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelSafTutar.Name = "labelSafTutar";
-            this.labelSafTutar.Size = new System.Drawing.Size(44, 19);
-            this.labelSafTutar.TabIndex = 10;
-            this.labelSafTutar.Text = "0,00 ₺";
-            // 
-            // labelÜrünTutar
-            // 
-            this.labelÜrünTutar.AutoSize = true;
-            this.labelÜrünTutar.Depth = 0;
-            this.labelÜrünTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelÜrünTutar.Location = new System.Drawing.Point(18, 18);
-            this.labelÜrünTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelÜrünTutar.Name = "labelÜrünTutar";
-            this.labelÜrünTutar.Size = new System.Drawing.Size(156, 19);
-            this.labelÜrünTutar.TabIndex = 9;
-            this.labelÜrünTutar.Text = "ÜRÜN TUTAR:              ";
-            // 
-            // labelVergiTutar
-            // 
-            this.labelVergiTutar.AutoSize = true;
-            this.labelVergiTutar.Depth = 0;
-            this.labelVergiTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelVergiTutar.Location = new System.Drawing.Point(201, 47);
-            this.labelVergiTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelVergiTutar.Name = "labelVergiTutar";
-            this.labelVergiTutar.Size = new System.Drawing.Size(44, 19);
-            this.labelVergiTutar.TabIndex = 8;
-            this.labelVergiTutar.Text = "0,00 ₺";
-            // 
             // labelVergi
             // 
             this.labelVergi.AutoSize = true;
             this.labelVergi.Depth = 0;
             this.labelVergi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelVergi.Location = new System.Drawing.Point(319, 18);
+            this.labelVergi.Location = new System.Drawing.Point(18, 38);
             this.labelVergi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelVergi.Name = "labelVergi";
             this.labelVergi.Size = new System.Drawing.Size(97, 19);
@@ -310,7 +253,7 @@
             this.labelToplamOdenecek.AutoSize = true;
             this.labelToplamOdenecek.Depth = 0;
             this.labelToplamOdenecek.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamOdenecek.Location = new System.Drawing.Point(432, 17);
+            this.labelToplamOdenecek.Location = new System.Drawing.Point(121, 38);
             this.labelToplamOdenecek.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelToplamOdenecek.Name = "labelToplamOdenecek";
             this.labelToplamOdenecek.Size = new System.Drawing.Size(44, 19);
@@ -366,7 +309,7 @@
             this.labelOdemeYontemi.AutoSize = true;
             this.labelOdemeYontemi.Depth = 0;
             this.labelOdemeYontemi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelOdemeYontemi.Location = new System.Drawing.Point(18, 83);
+            this.labelOdemeYontemi.Location = new System.Drawing.Point(18, 71);
             this.labelOdemeYontemi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelOdemeYontemi.Name = "labelOdemeYontemi";
             this.labelOdemeYontemi.Size = new System.Drawing.Size(132, 19);
@@ -379,7 +322,7 @@
             this.labelOdenecekTutar.AutoSize = true;
             this.labelOdenecekTutar.Depth = 0;
             this.labelOdenecekTutar.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelOdenecekTutar.Location = new System.Drawing.Point(18, 47);
+            this.labelOdenecekTutar.Location = new System.Drawing.Point(18, 3);
             this.labelOdenecekTutar.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelOdenecekTutar.Name = "labelOdenecekTutar";
             this.labelOdenecekTutar.Size = new System.Drawing.Size(159, 19);
@@ -602,7 +545,6 @@
         private ReaLTaiizor.Controls.MaterialButton btnHepsiniAktar;
         private ReaLTaiizor.Controls.MaterialButton btnSecilenAktar;
         private System.Windows.Forms.FlowLayoutPanel flowTumSiparisler;
-        private ReaLTaiizor.Controls.MaterialLabel labelToplam;
         private ReaLTaiizor.Controls.MaterialLabel labelOdenecekTutar;
         private ReaLTaiizor.Controls.MaterialButton btnKart;
         private ReaLTaiizor.Controls.MaterialButton btnNakit;
@@ -615,10 +557,11 @@
         private System.Windows.Forms.Timer timer1;
         private ReaLTaiizor.Controls.MaterialButton btnAdisyonYazdir;
         private ReaLTaiizor.Controls.MaterialButton btnTasiBirlestir;
-        private ReaLTaiizor.Controls.MaterialLabel labelÜrünTutar;
-        private ReaLTaiizor.Controls.MaterialLabel labelVergiTutar;
         private ReaLTaiizor.Controls.MaterialLabel labelVergi;
+<<<<<<< HEAD
+=======
         private ReaLTaiizor.Controls.MaterialLabel labelSafTutar;
         private ReaLTaiizor.Controls.MaterialButton btnZrapor;
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
     }
 }

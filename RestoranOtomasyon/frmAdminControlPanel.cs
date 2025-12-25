@@ -19,7 +19,7 @@ namespace RestoranOtomasyon
         // Değişkenler
         private string aktifVeriTablosu = "";
         private int seciliHesapID = -1;
-        private int seciliVeriID = -1;  
+        private int seciliVeriID = -1;
 
         public frmAdminControlPanel()
         {
@@ -39,8 +39,13 @@ namespace RestoranOtomasyon
         {
             await KullaniciListeleriniDoldurAsync();
 
+<<<<<<< HEAD
+            BilgiKutulariniTemizleVeKilitle();
+            this.ActiveControl = null;
+=======
             BilgiKutulariniTemizleVeKilitle();  
             this.ActiveControl = null; 
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
 
 
@@ -64,7 +69,7 @@ namespace RestoranOtomasyon
                     string kullaniciAdi = row["KullaniciAdi"].ToString();
                     string rol = row["Rol"].ToString();
                     int kullaniciID = Convert.ToInt32(row["KullaniciID"]);
-                    
+
 
                     TreeNode node = new TreeNode($"{adSoyad} ({kullaniciAdi})");
                     node.Tag = kullaniciID;
@@ -156,7 +161,11 @@ namespace RestoranOtomasyon
             seciliHesapID = -1;
 
             BilgiKutulariniTemizleVeAc();
+<<<<<<< HEAD
+
+=======
       
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
             this.ActiveControl = null;
         }
 
@@ -204,6 +213,7 @@ namespace RestoranOtomasyon
         }
           
 
+
         #endregion
 
         #region Kullanici Listeleri
@@ -212,7 +222,11 @@ namespace RestoranOtomasyon
             if (e.Node == null || e.Node.Tag == null) return;
             int seciliKullaniciID = Convert.ToInt32(e.Node.Tag);
 
+<<<<<<< HEAD
+
+=======
            
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
         private void AdminTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
@@ -285,12 +299,20 @@ namespace RestoranOtomasyon
         #region Yardımcı Metotlar
         private void BilgiKutulariniKilitle()
         {
+<<<<<<< HEAD
+
+=======
    
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
 
         private void BilgiKutularininKilidiniAc()
         {
+<<<<<<< HEAD
+
+=======
     
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
 
         private void BilgiKutulariniTemizleVeAc()
@@ -301,7 +323,11 @@ namespace RestoranOtomasyon
 
         private void BilgiKutulariniTemizleVeKilitle()
         {
+<<<<<<< HEAD
+
+=======
            
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
         }
 
         private void YenileAktifTablo()
@@ -425,8 +451,8 @@ namespace RestoranOtomasyon
             // 
             // splitContainer1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.Location = new System.Drawing.Point(3, 0);
             this.splitContainer1.Name = "splitContainer1";
@@ -988,6 +1014,10 @@ namespace RestoranOtomasyon
             this.ActiveControl = null;
         }
 
+<<<<<<< HEAD
+
+=======
       
+>>>>>>> ce7fb5be07cf26a527d99088630d70ef59dfc01a
     }
 }
