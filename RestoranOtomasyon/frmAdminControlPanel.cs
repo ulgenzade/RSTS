@@ -20,6 +20,7 @@ namespace RestoranOtomasyon
         private string aktifVeriTablosu = "";
         private int _seciliFlowID = -1;
         private Button _seciliFlowButonu = null;
+        private int seciliHesapID = -1;
 
         public frmAdminControlPanel()
         {
@@ -42,6 +43,8 @@ namespace RestoranOtomasyon
             try
             {
                 DataTable kullanicilar = await db.KullanicilariGetirAsync();
+                if (kullanicilar == null) return;
+
                 foreach (DataRow row in kullanicilar.Rows)
                 {
                     TreeNode node = new TreeNode($"{row["AdSoyad"]} ({row["KullaniciAdi"]})");
@@ -110,55 +113,51 @@ namespace RestoranOtomasyon
 
         private async void btnHesapSil_Click(object sender, EventArgs e)
         {
-            // 1. Hangi TreeView'da seçim var?
-            TreeView aktifTree = null;
-            if (AdminTree.SelectedNode != null) aktifTree = AdminTree;
-            else if (CalisanTree.SelectedNode != null) aktifTree = CalisanTree;
-
-            // 2. Hiçbir şey seçili değilse uyar ve çık
-            if (aktifTree == null)
+            // 1. Seçim var mı?
+            if (seciliHesapID == -1)
             {
-                MessageBox.Show("Lütfen silmek için listeden bir kullanıcı seçin.", "Seçim Yok");
+                MessageBox.Show("Lütfen silmek için bir kullanıcı seçin.", "Seçim Yok");
                 return;
             }
 
-            // 3. Seçilen şeyin geçerli bir ID'si var mı? (Tag kontrolü)
-            if (aktifTree.SelectedNode.Tag == null) return;
+            // 2. Seçilen Node ile Hafızadaki ID tutuyor mu? (Yanlış silmeyi önler)
+            string silinecekIsim = "";
+            bool eslesmeVar = false;
 
-            int silinecekID = Convert.ToInt32(aktifTree.SelectedNode.Tag);
-            string kullaniciAdi = aktifTree.SelectedNode.Text;
-
-            // 4. Onay İste
-            if (MessageBox.Show($"'{kullaniciAdi}' kullanıcısını silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            if (AdminTree.SelectedNode != null && Convert.ToInt32(AdminTree.SelectedNode.Tag) == seciliHesapID)
             {
-                // 5. Silme İşlemi
-                bool sonuc = db.KullaniciSil(silinecekID);
+                silinecekIsim = AdminTree.SelectedNode.Text;
+                eslesmeVar = true;
+            }
+            else if (CalisanTree.SelectedNode != null && Convert.ToInt32(CalisanTree.SelectedNode.Tag) == seciliHesapID)
+            {
+                silinecekIsim = CalisanTree.SelectedNode.Text;
+                eslesmeVar = true;
+            }
 
-                if (sonuc)
+            if (!eslesmeVar) return; // ID ile seçim uyuşmuyorsa işlem yapma
+
+            // 3. Onay ve Silme
+            if (MessageBox.Show($"'{silinecekIsim}' kullanıcısını silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                if (db.KullaniciSil(seciliHesapID))
                 {
                     MessageBox.Show("Kullanıcı başarıyla silindi.");
-
-                    // Listeleri yenile
-                    await KullaniciListeleriniDoldurAsync();
-
-                    // Seçimleri ve sağdaki gridi temizle ki hata olmasın
-                    AdminTree.SelectedNode = null;
-                    CalisanTree.SelectedNode = null;
+                    await KullaniciListeleriniDoldurAsync(); // Listeyi yenile
+                    seciliHesapID = -1; // Seçimi sıfırla
                 }
                 else
                 {
-                    MessageBox.Show("Kullanıcı silinemedi. (Bu kullanıcıya ait sipariş kayıtları olabilir)", "Hata");
+                    MessageBox.Show("Kullanıcı silinemedi.", "Hata");
                 }
             }
         }
 
         private void btnHesapDuzenle_Click(object sender, EventArgs e)
         {
-            TreeView aktifTree = AdminTree.SelectedNode != null ? AdminTree : CalisanTree;
-            if (aktifTree.SelectedNode == null) { MessageBox.Show("Kullanıcı seçin."); return; }
+            if (seciliHesapID == -1) { MessageBox.Show("Lütfen düzenlemek için bir kullanıcı seçin."); return; }
 
-            int id = Convert.ToInt32(aktifTree.SelectedNode.Tag);
-            treeDuzenle form = new treeDuzenle(id);
+            treeDuzenle form = new treeDuzenle(seciliHesapID);
             if (form.ShowDialog() == DialogResult.OK)  KullaniciListeleriniDoldurAsync();
 
         }
@@ -169,17 +168,19 @@ namespace RestoranOtomasyon
         private void KullaniciSecildi(object sender, TreeViewEventArgs e)
         {
             if (e.Node == null || e.Node.Tag == null) return;
-            int seciliKullaniciID = Convert.ToInt32(e.Node.Tag);
+            seciliHesapID = Convert.ToInt32(e.Node.Tag);
 
         }
         private void AdminTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-           
+            if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
+            KullaniciSecildi(sender, e);
         }
 
         private void CalisanTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            
+            if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
+            KullaniciSecildi(sender, e);
         }
 
         private async void TreeView_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
@@ -1008,6 +1009,8 @@ namespace RestoranOtomasyon
 
         private void btnCikis_Click(object sender, EventArgs e)
         {
+            frmGiris g = new frmGiris();
+            g.Show();
             this.Close();
         }
     }
