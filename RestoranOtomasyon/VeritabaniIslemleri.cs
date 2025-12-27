@@ -291,6 +291,63 @@ namespace RestoranOtomasyon
 
         #region EKLEME METOTLARI (CREATE)
 
+        public bool MasaEkle(string masaAdi)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "INSERT INTO Masalar (MasaAdi, Durum) VALUES (@masaAdi, 'Boş');";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@masaAdi", masaAdi);
+                        komut.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa ekleme hatası: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Veritabanına yeni bir kullanıcı ekler. Şifreyi otomatik olarak hash'leyerek kaydeder.
+        public bool KullaniciEkle(string adSoyad, string kullaniciAdi, string sifre, string rol)
+        {
+            // ADIM 1: ARAYÜZDEN GELEN DÜZ ŞİFREYİ (örn: "kadir123") ANINDA HASH'E ÇEVİR.
+            string hashlenmisSifre = SifrelemeYardimcisi.Hashle(sifre);
+
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "INSERT INTO Kullanicilar (AdSoyad, KullaniciAdi, Sifre, Rol) VALUES (@adSoyad, @kullaniciAdi, @sifre, @rol);";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@adSoyad", adSoyad);
+                        komut.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
+
+                        // ADIM 2: VERİTABANINA DÜZ ŞİFREYİ DEĞİL, HASH'LENMİŞ HALİNİ KAYDET.
+                        komut.Parameters.AddWithValue("@sifre", hashlenmisSifre);
+
+                        komut.Parameters.AddWithValue("@rol", rol);
+                        komut.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Kullanıcı eklerken hata: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
         // 8. Kategoriler tablosuna yeni bir kayıt ekler.
         public bool KategoriEkle(string kategoriAdi, string aciklama)
         {
@@ -409,6 +466,29 @@ namespace RestoranOtomasyon
 
         #region GÜNCELLEME METOTLARI (UPDATE)
 
+        public bool MasaGuncelle(int masaID, string yeniAd)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "UPDATE Masalar SET MasaAdi = @yeniAd WHERE MasaID = @masaID;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@yeniAd", yeniAd);
+                        komut.Parameters.AddWithValue("@masaID", masaID);
+                        return komut.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa güncelleme hatası: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
         /// <summary>
         /// Mevcut bir kategorinin bilgilerini günceller.
         /// </summary>
@@ -518,39 +598,7 @@ namespace RestoranOtomasyon
             }
         }
 
-        /// <summary>
-        /// Veritabanına yeni bir kullanıcı ekler. Şifreyi otomatik olarak hash'leyerek kaydeder.
-        public bool KullaniciEkle(string adSoyad, string kullaniciAdi, string sifre, string rol)
-        {
-            // ADIM 1: ARAYÜZDEN GELEN DÜZ ŞİFREYİ (örn: "kadir123") ANINDA HASH'E ÇEVİR.
-            string hashlenmisSifre = SifrelemeYardimcisi.Hashle(sifre);
-
-            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    baglanti.Open();
-                    string sorgu = "INSERT INTO Kullanicilar (AdSoyad, KullaniciAdi, Sifre, Rol) VALUES (@adSoyad, @kullaniciAdi, @sifre, @rol);";
-                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
-                    {
-                        komut.Parameters.AddWithValue("@adSoyad", adSoyad);
-                        komut.Parameters.AddWithValue("@kullaniciAdi", kullaniciAdi);
-
-                        // ADIM 2: VERİTABANINA DÜZ ŞİFREYİ DEĞİL, HASH'LENMİŞ HALİNİ KAYDET.
-                        komut.Parameters.AddWithValue("@sifre", hashlenmisSifre);
-
-                        komut.Parameters.AddWithValue("@rol", rol);
-                        komut.ExecuteNonQuery();
-                        return true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("Kullanıcı eklerken hata: " + ex.Message);
-                    return false;
-                }
-            }
-        }
+        
 
 
         /// <summary>
@@ -603,6 +651,35 @@ namespace RestoranOtomasyon
             }
         }
 
+
+
+
+        #endregion
+
+        #region SİLME METOTLARI (DELETE)
+
+        public bool MasaSil(int masaID)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "DELETE FROM Masalar WHERE MasaID = @masaID;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@masaID", masaID);
+                        return komut.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa silme hatası: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
         /// <summary>
         /// ID'si verilen kullanıcıyı veritabanından siler.
         public bool KullaniciSil(int kullaniciID)
@@ -617,7 +694,7 @@ namespace RestoranOtomasyon
                         // 1. ADIM: "Eski Kayıtlar" (Hayalet) kullanıcısının ID'sini bul
                         int hayaletID = -1;
                         string hayaletBulSorgu = "SELECT KullaniciID FROM Kullanicilar WHERE KullaniciAdi = 'deleted_sys' LIMIT 1;";
-                        
+
                         using (MySqlCommand cmd = new MySqlCommand(hayaletBulSorgu, baglanti, transaction))
                         {
                             object sonuc = cmd.ExecuteScalar();
@@ -651,7 +728,7 @@ namespace RestoranOtomasyon
                         {
                             cmd.Parameters.AddWithValue("@silinecekID", kullaniciID);
                             int etkilenen = cmd.ExecuteNonQuery();
-                            
+
                             if (etkilenen > 0)
                             {
                                 transaction.Commit();
@@ -673,10 +750,6 @@ namespace RestoranOtomasyon
                 }
             }
         }
-
-        #endregion
-
-        #region SİLME METOTLARI (DELETE)
 
         /// <summary>
         /// ID'si verilen kategoriyi siler.
@@ -1095,75 +1168,7 @@ namespace RestoranOtomasyon
         }
         #endregion
 
-        public bool MasaEkle(string masaAdi)
-        {
-            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    baglanti.Open();
-                    string sorgu = "INSERT INTO Masalar (MasaAdi, Durum) VALUES (@masaAdi, 'Boş');";
-                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
-                    {
-                        komut.Parameters.AddWithValue("@masaAdi", masaAdi);
-                        komut.ExecuteNonQuery();
-                        return true;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("Masa ekleme hatası: " + ex.Message);
-                    return false;
-                }
-            }
-        }
-
-        public bool MasaSil(int masaID)
-        {
-            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    baglanti.Open();
-                    string sorgu = "DELETE FROM Masalar WHERE MasaID = @masaID;";
-                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
-                    {
-                        komut.Parameters.AddWithValue("@masaID", masaID);
-                        return komut.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("Masa silme hatası: " + ex.Message);
-                    return false;
-                }
-            }
-        }
-
-        public bool MasaGuncelle(int masaID, string yeniAd)
-        {
-            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    baglanti.Open();
-                    string sorgu = "UPDATE Masalar SET MasaAdi = @yeniAd WHERE MasaID = @masaID;";
-                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
-                    {
-                        komut.Parameters.AddWithValue("@yeniAd", yeniAd);
-                        komut.Parameters.AddWithValue("@masaID", masaID);
-                        return komut.ExecuteNonQuery() > 0;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("Masa güncelleme hatası: " + ex.Message);
-                    return false;
-                }
-            }
-        }
-
-        
+        #region Rapor ve İstatistik Metotları
         public DataTable TumSiparisleriGetir()
         {
             DataTable dt = new DataTable();
@@ -1292,6 +1297,7 @@ namespace RestoranOtomasyon
             }
             return dt;
         }
+        #endregion
 
     }
 }

@@ -35,7 +35,6 @@ namespace RestoranOtomasyon
 
         }
 
-
         private async Task KullaniciListeleriniDoldurAsync()
         {
             AdminTree.Nodes.Clear();
@@ -129,7 +128,18 @@ namespace RestoranOtomasyon
             FlowDb.Controls.Add(IstatistikKartiOlustur("GENEL TOPLAM", veri.ToplamCiro, veri.ToplamSatisAdeti, Color.FromArgb(52, 73, 94), "Tumu"));
         }
 
-       
+        private void btnVeriLoglar_Click(object sender, EventArgs e)
+        {
+            VerileriYukle("Loglar");
+        }
+
+        private void btnVeriEkle_Click_1(object sender, EventArgs e)
+        {
+            if (aktifVeriTablosu == "") return;
+            dbDuzenle form = new dbDuzenle(aktifVeriTablosu, -1);
+            if (form.ShowDialog() == DialogResult.OK) VerileriYukle(aktifVeriTablosu);
+        }
+
 
         #endregion
 
@@ -301,6 +311,98 @@ namespace RestoranOtomasyon
         }
         #endregion
 
+        #region Sağ panel - Veri Yükleme - Flow Butonları
+
+        private Button IstatistikKartiOlustur(string baslik, decimal ciro, int adet, Color renk, string tag)
+        {
+            Button btn = new Button();
+            btn.Size = new Size(280, 160);
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.BackColor = renk;
+            btn.ForeColor = Color.White;
+            btn.Font = new Font("Segoe UI", 11, FontStyle.Regular);
+            btn.Margin = new Padding(15);
+            btn.TextAlign = ContentAlignment.TopLeft;
+
+            // DEĞİŞİKLİK: Tag'i butona işliyoruz
+            btn.Tag = tag;
+
+            decimal ortalama = 0;
+            if (adet > 0) ortalama = ciro / adet;
+
+            btn.Text = $"{baslik}\n" +
+                       "--------------------------\n" +
+                       "(Detaylar için tıklayın)\n\n" +
+                       $"💰 Ciro: {ciro:C2}\n" +
+                       $"🧾 Adisyon: {adet} Adet\n" +
+                       $"📊 Ort. Masa: {ortalama:C2}";
+
+            // DEĞİŞİKLİK: Tıklama olayını bağlıyoruz
+            btn.Click += IstatistikDetay_Click;
+
+            return btn;
+        }
+
+        private void IstatistikDetay_Click(object sender, EventArgs e)
+        {
+            Button tiklananKart = (Button)sender;
+            string periyot = tiklananKart.Tag.ToString();
+
+            FlowDb.Controls.Clear();
+
+            // Geri Dön Butonu
+            Button btnGeri = new Button();
+            btnGeri.Text = "⬅ İSTATİSTİKLERE DÖN";
+            btnGeri.Size = new Size(FlowDb.Width - 40, 40);
+            btnGeri.BackColor = Color.DimGray;
+            btnGeri.ForeColor = Color.White;
+            btnGeri.FlatStyle = FlatStyle.Flat;
+            btnGeri.Click += btnVeriIstatistik_Click; // Tıklayınca ana ekrana dön
+            FlowDb.Controls.Add(btnGeri);
+
+            // Verileri Çek
+            DataTable dt = db.PeriyodikRaporGetir(periyot);
+
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("Bu dönem için kayıt bulunamadı.");
+                return;
+            }
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Button btn = new Button();
+                btn.Size = new Size(FlowDb.Width - 50, 60);
+                btn.BackColor = Color.White;
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.TextAlign = ContentAlignment.MiddleLeft;
+                btn.Padding = new Padding(10, 0, 0, 0);
+                btn.Font = new Font("Consolas", 10);
+
+                string tarih = Convert.ToDateTime(row["AcilisZamani"]).ToString("dd.MM.yyyy HH:mm");
+                string masa = row["MasaAdi"].ToString();
+                string garson = row["AdSoyad"].ToString();
+                string tutar = Convert.ToDecimal(row["ToplamTutar"]).ToString("C2");
+
+                btn.Text = $"{tarih} | {masa} | Garson: {garson} | Tutar: {tutar}";
+                FlowDb.Controls.Add(btn);
+            }
+        }
+
+        private void FlowItem_Click(object sender, EventArgs e)
+        {
+            if (_seciliFlowButonu != null) _seciliFlowButonu.BackColor = Color.White;
+            Button tiklanan = (Button)sender;
+            _seciliFlowID = (int)tiklanan.Tag;
+            _seciliFlowButonu = tiklanan;
+            tiklanan.BackColor = Color.LightSkyBlue;
+        }
+
+        private void FlowDb_Click(object sender, EventArgs e)
+        {
+
+        }
 
         private void VerileriYukle(string tablo)
         {
@@ -385,6 +487,7 @@ namespace RestoranOtomasyon
             }
         }
 
+        #endregion
 
         #region Windows Form Designer generated code
         private void InitializeComponent()
@@ -991,114 +1094,11 @@ namespace RestoranOtomasyon
             this.ActiveControl = null;
         }
 
-        private void FlowItem_Click(object sender, EventArgs e)
-        {
-            if (_seciliFlowButonu != null) _seciliFlowButonu.BackColor = Color.White;
-            Button tiklanan = (Button)sender;
-            _seciliFlowID = (int)tiklanan.Tag;
-            _seciliFlowButonu = tiklanan;
-            tiklanan.BackColor = Color.LightSkyBlue;
-        }
-
-        private void FlowDb_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnVeriLoglar_Click(object sender, EventArgs e)
-        {
-            VerileriYukle("Loglar");
-        }
-
-        private void btnVeriEkle_Click_1(object sender, EventArgs e)
-        {
-            if (aktifVeriTablosu == "") return;
-            dbDuzenle form = new dbDuzenle(aktifVeriTablosu, -1);
-            if (form.ShowDialog() == DialogResult.OK) VerileriYukle(aktifVeriTablosu);
-        }
-
         private void btnCikis_Click(object sender, EventArgs e)
         {
             frmGiris g = new frmGiris();
             g.Show();
             this.Close();
-        }
-
-        private Button IstatistikKartiOlustur(string baslik, decimal ciro, int adet, Color renk, string tag)
-        {
-            Button btn = new Button();
-            btn.Size = new Size(280, 160);
-            btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0;
-            btn.BackColor = renk;
-            btn.ForeColor = Color.White;
-            btn.Font = new Font("Segoe UI", 11, FontStyle.Regular);
-            btn.Margin = new Padding(15);
-            btn.TextAlign = ContentAlignment.TopLeft;
-
-            // DEĞİŞİKLİK: Tag'i butona işliyoruz
-            btn.Tag = tag;
-
-            decimal ortalama = 0;
-            if (adet > 0) ortalama = ciro / adet;
-
-            btn.Text = $"{baslik}\n" +
-                       "--------------------------\n" +
-                       "(Detaylar için tıklayın)\n\n" +
-                       $"💰 Ciro: {ciro:C2}\n" +
-                       $"🧾 Adisyon: {adet} Adet\n" +
-                       $"📊 Ort. Masa: {ortalama:C2}";
-
-            // DEĞİŞİKLİK: Tıklama olayını bağlıyoruz
-            btn.Click += IstatistikDetay_Click;
-
-            return btn;
-        }
-
-        private void IstatistikDetay_Click(object sender, EventArgs e)
-        {
-            Button tiklananKart = (Button)sender;
-            string periyot = tiklananKart.Tag.ToString();
-
-            FlowDb.Controls.Clear();
-
-            // Geri Dön Butonu
-            Button btnGeri = new Button();
-            btnGeri.Text = "⬅ İSTATİSTİKLERE DÖN";
-            btnGeri.Size = new Size(FlowDb.Width - 40, 40);
-            btnGeri.BackColor = Color.DimGray;
-            btnGeri.ForeColor = Color.White;
-            btnGeri.FlatStyle = FlatStyle.Flat;
-            btnGeri.Click += btnVeriIstatistik_Click; // Tıklayınca ana ekrana dön
-            FlowDb.Controls.Add(btnGeri);
-
-            // Verileri Çek
-            DataTable dt = db.PeriyodikRaporGetir(periyot);
-
-            if (dt.Rows.Count == 0)
-            {
-                MessageBox.Show("Bu dönem için kayıt bulunamadı.");
-                return;
-            }
-
-            foreach (DataRow row in dt.Rows)
-            {
-                Button btn = new Button();
-                btn.Size = new Size(FlowDb.Width - 50, 60);
-                btn.BackColor = Color.White;
-                btn.FlatStyle = FlatStyle.Flat;
-                btn.TextAlign = ContentAlignment.MiddleLeft;
-                btn.Padding = new Padding(10, 0, 0, 0);
-                btn.Font = new Font("Consolas", 10);
-
-                string tarih = Convert.ToDateTime(row["AcilisZamani"]).ToString("dd.MM.yyyy HH:mm");
-                string masa = row["MasaAdi"].ToString();
-                string garson = row["AdSoyad"].ToString();
-                string tutar = Convert.ToDecimal(row["ToplamTutar"]).ToString("C2");
-
-                btn.Text = $"{tarih} | {masa} | Garson: {garson} | Tutar: {tutar}";
-                FlowDb.Controls.Add(btn);
-            }
         }
 
     }
