@@ -1202,60 +1202,43 @@ namespace RestoranOtomasyon
         public IstatistikModel DetayliIstatistikGetir()
         {
             IstatistikModel ist = new IstatistikModel();
-
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
             {
                 try
                 {
                     baglanti.Open();
-
-                    // Sadece 'Ödendi' veya 'Kapandı' olanları değil,
-                    // ToplamTutarı 0'dan büyük olan her şeyi ciroya katalım ki veri kaybı olmasın.
+                    // DÜZELTME: Sadece 'ToplamTutar > 0' yetmez, 'Ödendi' veya 'Kapandı' olanları almalıyız.
+                    // Yoksa masada açık olan siparişleri de ciroya katar.
                     string sorgu = @"
                         SELECT 
-                            -- GÜNLÜK (Bugün)
                             COALESCE(SUM(CASE WHEN DATE(AcilisZamani) = CURDATE() THEN ToplamTutar ELSE 0 END), 0) as GunlukCiro,
                             COUNT(CASE WHEN DATE(AcilisZamani) = CURDATE() THEN 1 END) as GunlukAdet,
-
-                            -- AYLIK (Bu Ay)
                             COALESCE(SUM(CASE WHEN MONTH(AcilisZamani) = MONTH(CURRENT_DATE()) AND YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN ToplamTutar ELSE 0 END), 0) as AylikCiro,
                             COUNT(CASE WHEN MONTH(AcilisZamani) = MONTH(CURRENT_DATE()) AND YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN 1 END) as AylikAdet,
-
-                            -- YILLIK (Bu Yıl)
                             COALESCE(SUM(CASE WHEN YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN ToplamTutar ELSE 0 END), 0) as YillikCiro,
                             COUNT(CASE WHEN YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN 1 END) as YillikAdet,
-
-                            -- GENEL TOPLAM (Fiyatı 0 olmayan her şey)
                             COALESCE(SUM(ToplamTutar), 0) as ToplamCiro,
                             COUNT(*) as ToplamAdet
-
                         FROM Siparisler 
-                        WHERE ToplamTutar > 0"; // Sadece parası olan siparişleri say!
+                        WHERE OdemeDurumu IN ('Ödendi', 'Kapandı')"; // DEĞİŞİKLİK BURADA
 
                     using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
                     using (MySqlDataReader reader = komut.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            // Güvenli Dönüştürme (DBNull kontrolü)
                             ist.GunlukCiro = reader["GunlukCiro"] != DBNull.Value ? Convert.ToDecimal(reader["GunlukCiro"]) : 0;
                             ist.GunlukSatisAdeti = reader["GunlukAdet"] != DBNull.Value ? Convert.ToInt32(reader["GunlukAdet"]) : 0;
-
                             ist.AylikCiro = reader["AylikCiro"] != DBNull.Value ? Convert.ToDecimal(reader["AylikCiro"]) : 0;
                             ist.AylikSatisAdeti = reader["AylikAdet"] != DBNull.Value ? Convert.ToInt32(reader["AylikAdet"]) : 0;
-
                             ist.YillikCiro = reader["YillikCiro"] != DBNull.Value ? Convert.ToDecimal(reader["YillikCiro"]) : 0;
                             ist.YillikSatisAdeti = reader["YillikAdet"] != DBNull.Value ? Convert.ToInt32(reader["YillikAdet"]) : 0;
-
                             ist.ToplamCiro = reader["ToplamCiro"] != DBNull.Value ? Convert.ToDecimal(reader["ToplamCiro"]) : 0;
                             ist.ToplamSatisAdeti = reader["ToplamAdet"] != DBNull.Value ? Convert.ToInt32(reader["ToplamAdet"]) : 0;
                         }
                     }
                 }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Debug.WriteLine("İstatistik hatası: " + ex.Message);
-                }
+                catch (Exception ex) { System.Diagnostics.Debug.WriteLine("İstatistik hatası: " + ex.Message); }
             }
             return ist;
         }

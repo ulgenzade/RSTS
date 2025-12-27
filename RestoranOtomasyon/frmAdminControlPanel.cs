@@ -114,21 +114,19 @@ namespace RestoranOtomasyon
 
         private void btnVeriIstatistik_Click(object sender, EventArgs e)
         {
-            aktifVeriTablosu = "Istatistik"; // Durumu güncelle
+            aktifVeriTablosu = "Istatistik";
             _seciliFlowID = -1;
 
             FlowDb.Controls.Clear();
-            // Kartların düzgün görünmesi için AutoScroll açık kalsın
             FlowDb.AutoScroll = true;
 
-            // Verileri çek
             IstatistikModel veri = db.DetayliIstatistikGetir();
 
-            // Kartları oluştur (Renkler daha modern seçildi)
-            FlowDb.Controls.Add(IstatistikKartiOlustur("GÜNLÜK RAPOR", veri.GunlukCiro, veri.GunlukSatisAdeti, Color.FromArgb(218, 158, 32))); // Zümrüt Yeşili
-            FlowDb.Controls.Add(IstatistikKartiOlustur("AYLIK RAPOR", veri.AylikCiro, veri.AylikSatisAdeti, Color.FromArgb(52, 152, 219))); // Peter River Mavisi
-            FlowDb.Controls.Add(IstatistikKartiOlustur("YILLIK RAPOR", veri.YillikCiro, veri.YillikSatisAdeti, Color.FromArgb(155, 89, 182))); // Ametist Moru
-            FlowDb.Controls.Add(IstatistikKartiOlustur("GENEL TOPLAM", veri.ToplamCiro, veri.ToplamSatisAdeti, Color.FromArgb(52, 73, 94))); // Wet Asphalt (Koyu Gri)
+            // DEĞİŞİKLİK: Metoda 5. parametre olarak Tag ("Gunluk" vb.) ekledik.
+            FlowDb.Controls.Add(IstatistikKartiOlustur("GÜNLÜK RAPOR", veri.GunlukCiro, veri.GunlukSatisAdeti, Color.FromArgb(218, 158, 32), "Gunluk"));
+            FlowDb.Controls.Add(IstatistikKartiOlustur("AYLIK RAPOR", veri.AylikCiro, veri.AylikSatisAdeti, Color.FromArgb(52, 152, 219), "Aylik"));
+            FlowDb.Controls.Add(IstatistikKartiOlustur("YILLIK RAPOR", veri.YillikCiro, veri.YillikSatisAdeti, Color.FromArgb(155, 89, 182), "Yillik"));
+            FlowDb.Controls.Add(IstatistikKartiOlustur("GENEL TOPLAM", veri.ToplamCiro, veri.ToplamSatisAdeti, Color.FromArgb(52, 73, 94), "Tumu"));
         }
 
        
@@ -1026,33 +1024,81 @@ namespace RestoranOtomasyon
             this.Close();
         }
 
-        private Button IstatistikKartiOlustur(string baslik, decimal ciro, int adet, Color renk)
+        private Button IstatistikKartiOlustur(string baslik, decimal ciro, int adet, Color renk, string tag)
         {
             Button btn = new Button();
-            btn.Size = new Size(280, 160); // Kart boyutu büyüdü
+            btn.Size = new Size(280, 160);
             btn.FlatStyle = FlatStyle.Flat;
-            btn.FlatAppearance.BorderSize = 0; // Kenarlık yok, daha modern
+            btn.FlatAppearance.BorderSize = 0;
             btn.BackColor = renk;
             btn.ForeColor = Color.White;
             btn.Font = new Font("Segoe UI", 11, FontStyle.Regular);
             btn.Margin = new Padding(15);
-            btn.TextAlign = ContentAlignment.TopLeft; // Yazılar sol üstten başlasın
+            btn.TextAlign = ContentAlignment.TopLeft;
 
-            // Ortalama Sepet Tutarını Hesapla
+            // DEĞİŞİKLİK: Tag'i butona işliyoruz
+            btn.Tag = tag;
+
             decimal ortalama = 0;
             if (adet > 0) ortalama = ciro / adet;
 
-            // Detaylı Metin
-            string metin = $"{baslik}\n" +
-                           "--------------------------\n\n" +
-                           $"💰 Ciro: {ciro:C2}\n" +
-                           $"🧾 Adisyon: {adet} Adet\n" +
-                           $"📊 Ort. Masa: {ortalama:C2}";
+            btn.Text = $"{baslik}\n" +
+                       "--------------------------\n" +
+                       "(Detaylar için tıklayın)\n\n" +
+                       $"💰 Ciro: {ciro:C2}\n" +
+                       $"🧾 Adisyon: {adet} Adet\n" +
+                       $"📊 Ort. Masa: {ortalama:C2}";
 
-            btn.Text = metin;
+            // DEĞİŞİKLİK: Tıklama olayını bağlıyoruz
+            btn.Click += IstatistikDetay_Click;
 
-            // Tıklayınca bir şey yapmasın (Sadece bilgi amaçlı)
             return btn;
+        }
+
+        private void IstatistikDetay_Click(object sender, EventArgs e)
+        {
+            Button tiklananKart = (Button)sender;
+            string periyot = tiklananKart.Tag.ToString();
+
+            FlowDb.Controls.Clear();
+
+            // Geri Dön Butonu
+            Button btnGeri = new Button();
+            btnGeri.Text = "⬅ İSTATİSTİKLERE DÖN";
+            btnGeri.Size = new Size(FlowDb.Width - 40, 40);
+            btnGeri.BackColor = Color.DimGray;
+            btnGeri.ForeColor = Color.White;
+            btnGeri.FlatStyle = FlatStyle.Flat;
+            btnGeri.Click += btnVeriIstatistik_Click; // Tıklayınca ana ekrana dön
+            FlowDb.Controls.Add(btnGeri);
+
+            // Verileri Çek
+            DataTable dt = db.PeriyodikRaporGetir(periyot);
+
+            if (dt.Rows.Count == 0)
+            {
+                MessageBox.Show("Bu dönem için kayıt bulunamadı.");
+                return;
+            }
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Button btn = new Button();
+                btn.Size = new Size(FlowDb.Width - 50, 60);
+                btn.BackColor = Color.White;
+                btn.FlatStyle = FlatStyle.Flat;
+                btn.TextAlign = ContentAlignment.MiddleLeft;
+                btn.Padding = new Padding(10, 0, 0, 0);
+                btn.Font = new Font("Consolas", 10);
+
+                string tarih = Convert.ToDateTime(row["AcilisZamani"]).ToString("dd.MM.yyyy HH:mm");
+                string masa = row["MasaAdi"].ToString();
+                string garson = row["AdSoyad"].ToString();
+                string tutar = Convert.ToDecimal(row["ToplamTutar"]).ToString("C2");
+
+                btn.Text = $"{tarih} | {masa} | Garson: {garson} | Tutar: {tutar}";
+                FlowDb.Controls.Add(btn);
+            }
         }
 
     }
