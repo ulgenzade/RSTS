@@ -77,6 +77,13 @@ namespace RestoranOtomasyon
 
         private async void btnVeriSil_Click(object sender, EventArgs e)
         {
+            // LOGLAR SİLİNEMEZ (Veya sadece admin silebilir, ama şimdilik kapatalım)
+            if (aktifVeriTablosu == "Loglar")
+            {
+                MessageBox.Show("Geçmiş sipariş kayıtları buradan silinemez.", "Güvenlik");
+                return;
+            }
+
             if (_seciliFlowID == -1) return;
             if (MessageBox.Show("Silinsin mi?", "Onay", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
@@ -88,10 +95,18 @@ namespace RestoranOtomasyon
                 if (sonuc) VerileriYukle(aktifVeriTablosu);
                 else MessageBox.Show("Silinemedi.");
             }
+            if (_seciliFlowID == -1) return;
         }
 
         private void btnVeriDuzenle_Click(object sender, EventArgs e)
         {
+            // LOGLAR DÜZENLENEMEZ
+            if (aktifVeriTablosu == "Loglar")
+            {
+                MessageBox.Show("Geçmiş sipariş kayıtları düzenlenemez.", "Güvenlik");
+                return;
+            }
+
             if (_seciliFlowID == -1) { MessageBox.Show("Seçim yapın."); return; }
             dbDuzenle form = new dbDuzenle(aktifVeriTablosu, _seciliFlowID);
             if (form.ShowDialog() == DialogResult.OK) VerileriYukle(aktifVeriTablosu);
@@ -99,8 +114,24 @@ namespace RestoranOtomasyon
 
         private void btnVeriIstatistik_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("İstatistik özelliği henüz aktif değil.");
+            aktifVeriTablosu = "Istatistik"; // Durumu güncelle
+            _seciliFlowID = -1;
+
+            FlowDb.Controls.Clear();
+            // Kartların düzgün görünmesi için AutoScroll açık kalsın
+            FlowDb.AutoScroll = true;
+
+            // Verileri çek
+            IstatistikModel veri = db.DetayliIstatistikGetir();
+
+            // Kartları oluştur (Renkler daha modern seçildi)
+            FlowDb.Controls.Add(IstatistikKartiOlustur("GÜNLÜK RAPOR", veri.GunlukCiro, veri.GunlukSatisAdeti, Color.FromArgb(218, 158, 32))); // Zümrüt Yeşili
+            FlowDb.Controls.Add(IstatistikKartiOlustur("AYLIK RAPOR", veri.AylikCiro, veri.AylikSatisAdeti, Color.FromArgb(52, 152, 219))); // Peter River Mavisi
+            FlowDb.Controls.Add(IstatistikKartiOlustur("YILLIK RAPOR", veri.YillikCiro, veri.YillikSatisAdeti, Color.FromArgb(155, 89, 182))); // Ametist Moru
+            FlowDb.Controls.Add(IstatistikKartiOlustur("GENEL TOPLAM", veri.ToplamCiro, veri.ToplamSatisAdeti, Color.FromArgb(52, 73, 94))); // Wet Asphalt (Koyu Gri)
         }
+
+       
 
         #endregion
 
@@ -120,35 +151,41 @@ namespace RestoranOtomasyon
                 return;
             }
 
-            // 2. Seçilen Node ile Hafızadaki ID tutuyor mu? (Yanlış silmeyi önler)
-            string silinecekIsim = "";
-            bool eslesmeVar = false;
+            string kullaniciAdi = AdminTree.SelectedNode?.Text ?? CalisanTree.SelectedNode?.Text;
 
-            if (AdminTree.SelectedNode != null && Convert.ToInt32(AdminTree.SelectedNode.Tag) == seciliHesapID)
+            if (kullaniciAdi.Contains("deleted_sys") || kullaniciAdi.Contains("Eski Kayıtlar"))
             {
-                silinecekIsim = AdminTree.SelectedNode.Text;
-                eslesmeVar = true;
-            }
-            else if (CalisanTree.SelectedNode != null && Convert.ToInt32(CalisanTree.SelectedNode.Tag) == seciliHesapID)
-            {
-                silinecekIsim = CalisanTree.SelectedNode.Text;
-                eslesmeVar = true;
-            }
+                MessageBox.Show("Bu, sistemin yedekleme hesabıdır. Silinemez!", "Güvenlik Uyarısı", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                // 2. Seçilen Node ile Hafızadaki ID tutuyor mu? (Yanlış silmeyi önler)
+                string silinecekIsim = "";
+                bool eslesmeVar = false;
 
-            if (!eslesmeVar) return; // ID ile seçim uyuşmuyorsa işlem yapma
-
-            // 3. Onay ve Silme
-            if (MessageBox.Show($"'{silinecekIsim}' kullanıcısını silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
-                if (db.KullaniciSil(seciliHesapID))
+                if (AdminTree.SelectedNode != null && Convert.ToInt32(AdminTree.SelectedNode.Tag) == seciliHesapID)
                 {
-                    MessageBox.Show("Kullanıcı başarıyla silindi.");
-                    await KullaniciListeleriniDoldurAsync(); // Listeyi yenile
-                    seciliHesapID = -1; // Seçimi sıfırla
+                    silinecekIsim = AdminTree.SelectedNode.Text;
+                    eslesmeVar = true;
                 }
-                else
+                else if (CalisanTree.SelectedNode != null && Convert.ToInt32(CalisanTree.SelectedNode.Tag) == seciliHesapID)
                 {
-                    MessageBox.Show("Kullanıcı silinemedi.", "Hata");
+                    silinecekIsim = CalisanTree.SelectedNode.Text;
+                    eslesmeVar = true;
+                }
+
+                if (!eslesmeVar) return; // ID ile seçim uyuşmuyorsa işlem yapma
+
+                // 3. Onay ve Silme
+                if (MessageBox.Show($"'{silinecekIsim}' kullanıcısını silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    if (db.KullaniciSil(seciliHesapID))
+                    {
+                        MessageBox.Show("Kullanıcı başarıyla silindi.");
+                        await KullaniciListeleriniDoldurAsync(); // Listeyi yenile
+                        seciliHesapID = -1; // Seçimi sıfırla
+                    }
+                    else
+                    {
+                        MessageBox.Show("Kullanıcı silinemedi.", "Hata");
+                    }
                 }
             }
         }
@@ -239,83 +276,8 @@ namespace RestoranOtomasyon
         }
         #endregion
 
-        #region Yardımcı Metotlar
-        private void BilgiKutulariniKilitle()
-        {
-
-        }
-
-        private void BilgiKutularininKilidiniAc()
-        {
-
-        }
-
-        private void BilgiKutulariniTemizleVeAc()
-        {
-            BilgiKutulariniTemizleVeKilitle();
-            BilgiKutularininKilidiniAc();
-        }
-
-        private void BilgiKutulariniTemizleVeKilitle()
-        {
-        }
-
-
-        private void YenileAktifTablo()
-        {
-            switch (aktifVeriTablosu)
-            {
-                case "Masalar": btnVeriMasalar_Click(null, null); break;
-                case "Urunler": btnVeriUrunler_Click(null, null); break;
-                case "Kategoriler": btnVeriKategoriler_Click(null, null); break;
-            }
-        }
-
-        private void KullaniciyiTreeViewdeSec(int kullaniciID)
-        {
-            // Önce AdminTree'nin düğümlerini (Nodes) kontrol et
-            foreach (TreeNode node in AdminTree.Nodes)
-            {
-                if (node.Tag != null && (int)node.Tag == kullaniciID)
-                {
-                    AdminTree.SelectedNode = node;
-                    // Bulunca, TreeView'in seçilen node'a odaklanmasını sağla.
-                    node.EnsureVisible();
-                    return; // Kullanıcıyı bulduk, daha fazla aramaya gerek yok.
-                }
-            }
-
-            // Eğer AdminTree'de bulamadıysak, CalisanTree'yi kontrol et
-            foreach (TreeNode node in CalisanTree.Nodes)
-            {
-                if (node.Tag != null && (int)node.Tag == kullaniciID)
-                {
-                    CalisanTree.SelectedNode = node;
-                    node.EnsureVisible();
-                    return;
-                }
-            }
-        }
-
-        #endregion
-
         #region Diğer Olaylar
         private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void guna2DataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void listCalisanlar_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gbUrunler_Click(object sender, EventArgs e)
         {
 
         }
@@ -347,29 +309,79 @@ namespace RestoranOtomasyon
             aktifVeriTablosu = tablo;
             _seciliFlowID = -1;
             _seciliFlowButonu = null;
+
             FlowDb.Controls.Clear();
             FlowDb.AutoScroll = true;
 
             DataTable dt = new DataTable();
+
+            // Verileri Çek
             if (tablo == "Urunler") dt = db.UrunleriGetir();
             else if (tablo == "Kategoriler") dt = db.KategorileriGetir();
             else if (tablo == "Masalar") dt = db.MasalariGetir();
+            else if (tablo == "Loglar") dt = db.TumSiparisleriGetir(); // Logları çekiyoruz
 
             foreach (DataRow row in dt.Rows)
             {
                 Button btn = new Button();
-                btn.Size = new Size(200, 80);
                 btn.FlatStyle = FlatStyle.Flat;
                 btn.BackColor = Color.White;
                 btn.ForeColor = Color.Black;
                 btn.Font = new Font("Segoe UI", 10, FontStyle.Bold);
                 btn.Margin = new Padding(10);
-                btn.Tag = Convert.ToInt32(row[0]);
 
-                if (tablo == "Urunler") btn.Text = $"{row["UrunAdi"]}\n{row["Fiyat"]} TL\n({row["KategoriAdi"]})";
-                else if (tablo == "Kategoriler") btn.Text = row["KategoriAdi"].ToString();
-                else if (tablo == "Masalar") btn.Text = row["MasaAdi"].ToString();
+                // ID'yi her zaman ilk sütundan alıyoruz (SiparisID, UrunID vs.)
+                int id = Convert.ToInt32(row[0]);
+                btn.Tag = id;
 
+                // --- TABLOYA GÖRE BUTON TASARIMI ---
+
+                if (tablo == "Urunler")
+                {
+                    btn.Size = new Size(200, 80);
+                    btn.Text = $"{row["UrunAdi"]}\n{row["Fiyat"]} TL\n({row["KategoriAdi"]})";
+                }
+                else if (tablo == "Kategoriler")
+                {
+                    btn.Size = new Size(200, 80);
+                    btn.Text = row["KategoriAdi"].ToString();
+                }
+                else if (tablo == "Masalar")
+                {
+                    btn.Size = new Size(200, 80);
+                    string durum = row["Durum"].ToString();
+                    btn.Text = $"{row["MasaAdi"]}\n({durum})";
+                    // Masa durumuna göre renk (Görsel Güzellik)
+                    if (durum == "Dolu") btn.BackColor = Color.MistyRose;
+                }
+                else if (tablo == "Loglar")
+                {
+                    // LOGLAR İÇİN ÖZEL TASARIM
+                    // Log kartları daha büyük olsun ki bilgiler sığsın
+                    btn.Size = new Size(260, 120);
+
+                    string masa = row["MasaAdi"].ToString();
+                    string garson = row["AdSoyad"].ToString();
+                    string tarih = Convert.ToDateTime(row["AcilisZamani"]).ToString("dd.MM HH:mm");
+                    string tutar = row["ToplamTutar"].ToString();
+                    string durum = row["OdemeDurumu"].ToString();
+
+                    btn.Text = $"Sipariş #{id}\n{masa} - {garson}\n{tarih}\n{tutar} TL\n[{durum}]";
+
+                    // Ödenmişse Yeşilimsi/Gri, Aktifse Turuncu yapalım ki dikkat çeksin
+                    if (durum == "Ödendi")
+                    {
+                        btn.BackColor = Color.WhiteSmoke;
+                        btn.ForeColor = Color.DimGray;
+                    }
+                    else
+                    {
+                        btn.BackColor = Color.LightYellow;
+                        btn.ForeColor = Color.DarkRed;
+                    }
+                }
+
+                // Tıklama olayını bağla
                 btn.Click += FlowItem_Click;
                 FlowDb.Controls.Add(btn);
             }
@@ -997,7 +1009,7 @@ namespace RestoranOtomasyon
 
         private void btnVeriLoglar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Loglar yakında eklenecek.");
+            VerileriYukle("Loglar");
         }
 
         private void btnVeriEkle_Click_1(object sender, EventArgs e)
@@ -1013,5 +1025,35 @@ namespace RestoranOtomasyon
             g.Show();
             this.Close();
         }
+
+        private Button IstatistikKartiOlustur(string baslik, decimal ciro, int adet, Color renk)
+        {
+            Button btn = new Button();
+            btn.Size = new Size(280, 160); // Kart boyutu büyüdü
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0; // Kenarlık yok, daha modern
+            btn.BackColor = renk;
+            btn.ForeColor = Color.White;
+            btn.Font = new Font("Segoe UI", 11, FontStyle.Regular);
+            btn.Margin = new Padding(15);
+            btn.TextAlign = ContentAlignment.TopLeft; // Yazılar sol üstten başlasın
+
+            // Ortalama Sepet Tutarını Hesapla
+            decimal ortalama = 0;
+            if (adet > 0) ortalama = ciro / adet;
+
+            // Detaylı Metin
+            string metin = $"{baslik}\n" +
+                           "--------------------------\n\n" +
+                           $"💰 Ciro: {ciro:C2}\n" +
+                           $"🧾 Adisyon: {adet} Adet\n" +
+                           $"📊 Ort. Masa: {ortalama:C2}";
+
+            btn.Text = metin;
+
+            // Tıklayınca bir şey yapmasın (Sadece bilgi amaçlı)
+            return btn;
+        }
+
     }
 }

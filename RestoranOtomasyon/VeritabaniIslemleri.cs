@@ -609,22 +609,67 @@ namespace RestoranOtomasyon
         {
             using (MySqlConnection baglanti = new MySqlConnection(connectionString))
             {
-                try
+                baglanti.Open();
+                using (MySqlTransaction transaction = baglanti.BeginTransaction())
                 {
-                    baglanti.Open();
-                    string sorgu = "DELETE FROM Kullanicilar WHERE KullaniciID = @kullaniciID;";
-                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    try
                     {
-                        komut.Parameters.AddWithValue("@kullaniciID", kullaniciID);
-                        return komut.ExecuteNonQuery() > 0;
+                        // 1. ADIM: "Eski Kayıtlar" (Hayalet) kullanıcısının ID'sini bul
+                        int hayaletID = -1;
+                        string hayaletBulSorgu = "SELECT KullaniciID FROM Kullanicilar WHERE KullaniciAdi = 'deleted_sys' LIMIT 1;";
+                        
+                        using (MySqlCommand cmd = new MySqlCommand(hayaletBulSorgu, baglanti, transaction))
+                        {
+                            object sonuc = cmd.ExecuteScalar();
+                            if (sonuc != null) hayaletID = Convert.ToInt32(sonuc);
+                        }
+
+                        if (hayaletID == -1)
+                        {
+                            // Eğer hayalet kullanıcı yoksa manuel oluşturmayı deneyebiliriz veya hata verebiliriz.
+                            // Şimdilik hata fırlatıyoruz ki SQL'i çalıştırdığından emin olalım.
+                            throw new Exception("'deleted_sys' kullanıcısı veritabanında bulunamadı.");
+                        }
+
+                        if (kullaniciID == hayaletID)
+                        {
+                            throw new Exception("Sistem yedekleme hesabı silinemez!");
+                        }
+
+                        // 2. ADIM: Silinecek kişinin siparişlerini Hayalet kullanıcıya devret
+                        string devretSorgu = "UPDATE Siparisler SET KullaniciID = @hayaletID WHERE KullaniciID = @silinecekID;";
+                        using (MySqlCommand cmd = new MySqlCommand(devretSorgu, baglanti, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@hayaletID", hayaletID);
+                            cmd.Parameters.AddWithValue("@silinecekID", kullaniciID);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // 3. ADIM: Artık kullanıcının bağı kalmadı, güvenle SİL.
+                        string silSorgu = "DELETE FROM Kullanicilar WHERE KullaniciID = @silinecekID;";
+                        using (MySqlCommand cmd = new MySqlCommand(silSorgu, baglanti, transaction))
+                        {
+                            cmd.Parameters.AddWithValue("@silinecekID", kullaniciID);
+                            int etkilenen = cmd.ExecuteNonQuery();
+                            
+                            if (etkilenen > 0)
+                            {
+                                transaction.Commit();
+                                return true;
+                            }
+                            else
+                            {
+                                transaction.Rollback();
+                                return false;
+                            }
+                        }
                     }
-                }
-                catch (Exception ex)
-                {
-                    // Eğer bu kullanıcıya bağlı siparişler varsa, veritabanı Foreign Key kısıtlaması nedeniyle
-                    // bu silme işlemini engelleyecektir. Bu bir hata değil, veri bütünlüğünün korunmasıdır.
-                    System.Diagnostics.Debug.WriteLine("Kullanıcı silinirken hata (ilişkili siparişler olabilir): " + ex.Message);
-                    return false;
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        System.Diagnostics.Debug.WriteLine("Kullanıcı silme hatası: " + ex.Message);
+                        return false;
+                    }
                 }
             }
         }
@@ -1116,6 +1161,153 @@ namespace RestoranOtomasyon
                     return false;
                 }
             }
+        }
+
+        
+        public DataTable TumSiparisleriGetir()
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    // JOIN işlemi ile ID'leri İsimlere çeviriyoruz
+                    string sorgu = @"
+                        SELECT 
+                            S.SiparisID, 
+                            M.MasaAdi, 
+                            K.AdSoyad, 
+                            S.AcilisZamani, 
+                            S.ToplamTutar, 
+                            S.OdemeDurumu 
+                        FROM Siparisler S
+                        JOIN Masalar M ON S.MasaID = M.MasaID
+                        JOIN Kullanicilar K ON S.KullaniciID = K.KullaniciID
+                        ORDER BY S.SiparisID DESC"; // En son sipariş en üstte görünsün
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(sorgu, baglanti))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Loglar getirilirken hata: " + ex.Message);
+                }
+            }
+            return dt;
+        }
+
+        public IstatistikModel DetayliIstatistikGetir()
+        {
+            IstatistikModel ist = new IstatistikModel();
+
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+
+                    // Sadece 'Ödendi' veya 'Kapandı' olanları değil,
+                    // ToplamTutarı 0'dan büyük olan her şeyi ciroya katalım ki veri kaybı olmasın.
+                    string sorgu = @"
+                        SELECT 
+                            -- GÜNLÜK (Bugün)
+                            COALESCE(SUM(CASE WHEN DATE(AcilisZamani) = CURDATE() THEN ToplamTutar ELSE 0 END), 0) as GunlukCiro,
+                            COUNT(CASE WHEN DATE(AcilisZamani) = CURDATE() THEN 1 END) as GunlukAdet,
+
+                            -- AYLIK (Bu Ay)
+                            COALESCE(SUM(CASE WHEN MONTH(AcilisZamani) = MONTH(CURRENT_DATE()) AND YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN ToplamTutar ELSE 0 END), 0) as AylikCiro,
+                            COUNT(CASE WHEN MONTH(AcilisZamani) = MONTH(CURRENT_DATE()) AND YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN 1 END) as AylikAdet,
+
+                            -- YILLIK (Bu Yıl)
+                            COALESCE(SUM(CASE WHEN YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN ToplamTutar ELSE 0 END), 0) as YillikCiro,
+                            COUNT(CASE WHEN YEAR(AcilisZamani) = YEAR(CURRENT_DATE()) THEN 1 END) as YillikAdet,
+
+                            -- GENEL TOPLAM (Fiyatı 0 olmayan her şey)
+                            COALESCE(SUM(ToplamTutar), 0) as ToplamCiro,
+                            COUNT(*) as ToplamAdet
+
+                        FROM Siparisler 
+                        WHERE ToplamTutar > 0"; // Sadece parası olan siparişleri say!
+
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    using (MySqlDataReader reader = komut.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Güvenli Dönüştürme (DBNull kontrolü)
+                            ist.GunlukCiro = reader["GunlukCiro"] != DBNull.Value ? Convert.ToDecimal(reader["GunlukCiro"]) : 0;
+                            ist.GunlukSatisAdeti = reader["GunlukAdet"] != DBNull.Value ? Convert.ToInt32(reader["GunlukAdet"]) : 0;
+
+                            ist.AylikCiro = reader["AylikCiro"] != DBNull.Value ? Convert.ToDecimal(reader["AylikCiro"]) : 0;
+                            ist.AylikSatisAdeti = reader["AylikAdet"] != DBNull.Value ? Convert.ToInt32(reader["AylikAdet"]) : 0;
+
+                            ist.YillikCiro = reader["YillikCiro"] != DBNull.Value ? Convert.ToDecimal(reader["YillikCiro"]) : 0;
+                            ist.YillikSatisAdeti = reader["YillikAdet"] != DBNull.Value ? Convert.ToInt32(reader["YillikAdet"]) : 0;
+
+                            ist.ToplamCiro = reader["ToplamCiro"] != DBNull.Value ? Convert.ToDecimal(reader["ToplamCiro"]) : 0;
+                            ist.ToplamSatisAdeti = reader["ToplamAdet"] != DBNull.Value ? Convert.ToInt32(reader["ToplamAdet"]) : 0;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("İstatistik hatası: " + ex.Message);
+                }
+            }
+            return ist;
+        }
+
+        public DataTable PeriyodikRaporGetir(string periyot)
+        {
+            DataTable dt = new DataTable();
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string kosul = "";
+
+                    // Hangi butona basıldıysa ona göre filtre
+                    switch (periyot)
+                    {
+                        case "Gunluk":
+                            kosul = "WHERE DATE(S.AcilisZamani) = CURDATE()";
+                            break;
+                        case "Aylik":
+                            kosul = "WHERE MONTH(S.AcilisZamani) = MONTH(CURRENT_DATE()) AND YEAR(S.AcilisZamani) = YEAR(CURRENT_DATE())";
+                            break;
+                        case "Yillik":
+                            kosul = "WHERE YEAR(S.AcilisZamani) = YEAR(CURRENT_DATE())";
+                            break;
+                        case "Tumu":
+                            kosul = ""; // Filtre yok, hepsi gelsin
+                            break;
+                    }
+
+                    // Sadece ödenmiş ve kapanmış siparişleri getiriyoruz
+                    if (kosul != "") kosul += " AND S.OdemeDurumu IN ('Ödendi', 'Kapandı')";
+                    else kosul = "WHERE S.OdemeDurumu IN ('Ödendi', 'Kapandı')";
+
+                    string sorgu = $@"
+                        SELECT 
+                            S.SiparisID, M.MasaAdi, K.AdSoyad, S.ToplamTutar, S.AcilisZamani
+                        FROM Siparisler S
+                        JOIN Masalar M ON S.MasaID = M.MasaID
+                        JOIN Kullanicilar K ON S.KullaniciID = K.KullaniciID
+                        {kosul}
+                        ORDER BY S.AcilisZamani DESC"; // En yeniden eskiye
+
+                    using (MySqlDataAdapter adapter = new MySqlDataAdapter(sorgu, baglanti))
+                    {
+                        adapter.Fill(dt);
+                    }
+                }
+                catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex.Message); }
+            }
+            return dt;
         }
 
     }

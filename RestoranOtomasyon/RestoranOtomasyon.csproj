@@ -214,6 +214,7 @@
     <Compile Include="frmSiparisEkrani.Designer.cs">
       <DependentUpon>frmSiparisEkrani.cs</DependentUpon>
     </Compile>
+    <Compile Include="IstatistikModel.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SepetUrunDto.cs" />
