@@ -1049,5 +1049,74 @@ namespace RestoranOtomasyon
             }
         }
         #endregion
+
+        public bool MasaEkle(string masaAdi)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "INSERT INTO Masalar (MasaAdi, Durum) VALUES (@masaAdi, 'Boş');";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@masaAdi", masaAdi);
+                        komut.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa ekleme hatası: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool MasaSil(int masaID)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "DELETE FROM Masalar WHERE MasaID = @masaID;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@masaID", masaID);
+                        return komut.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa silme hatası: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        public bool MasaGuncelle(int masaID, string yeniAd)
+        {
+            using (MySqlConnection baglanti = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    baglanti.Open();
+                    string sorgu = "UPDATE Masalar SET MasaAdi = @yeniAd WHERE MasaID = @masaID;";
+                    using (MySqlCommand komut = new MySqlCommand(sorgu, baglanti))
+                    {
+                        komut.Parameters.AddWithValue("@yeniAd", yeniAd);
+                        komut.Parameters.AddWithValue("@masaID", masaID);
+                        return komut.ExecuteNonQuery() > 0;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine("Masa güncelleme hatası: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
     }
 }
