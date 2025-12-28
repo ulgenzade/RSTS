@@ -148,48 +148,51 @@ namespace RestoranOtomasyon
 
         private async void btnHesapSil_Click(object sender, EventArgs e)
         {
-            // 1. Seçim var mı?
+            // 1. Önce kesin bir seçim yapılmış mı ID üzerinden kontrol et.
             if (seciliHesapID == -1)
             {
-                MessageBox.Show("Lütfen silmek için bir kullanıcı seçin.", "Seçim Yok");
+                MessageBox.Show("Lütfen silmek için listeden bir kullanıcı seçin.", "Seçim Yok");
                 return;
             }
 
-            string kullaniciAdi = AdminTree.SelectedNode?.Text ?? CalisanTree.SelectedNode?.Text;
+            // 2. Seçili kişinin adını bulalım
+            string kullaniciAdi = "";
+            if (AdminTree.SelectedNode != null && Convert.ToInt32(AdminTree.SelectedNode.Tag) == seciliHesapID)
+                kullaniciAdi = AdminTree.SelectedNode.Text;
+            else if (CalisanTree.SelectedNode != null && Convert.ToInt32(CalisanTree.SelectedNode.Tag) == seciliHesapID)
+                kullaniciAdi = CalisanTree.SelectedNode.Text;
+            else
+                kullaniciAdi = "Seçili Kullanıcı";
 
+            // 3. GÜVENLİK KONTROLÜ
             if (kullaniciAdi.Contains("deleted_sys") || kullaniciAdi.Contains("Eski Kayıtlar"))
             {
                 MessageBox.Show("Bu, sistemin yedekleme hesabıdır. Silinemez!", "Güvenlik Uyarısı", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                // 2. Seçilen Node ile Hafızadaki ID tutuyor mu? (Yanlış silmeyi önler)
-                string silinecekIsim = "";
-                bool eslesmeVar = false;
+                return;
+            }
 
-                if (AdminTree.SelectedNode != null && Convert.ToInt32(AdminTree.SelectedNode.Tag) == seciliHesapID)
+            // 4. Onay İste
+            if (MessageBox.Show($"'{kullaniciAdi}' adlı kullanıcıyı silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                // 5. Silme İşlemi
+                bool sonuc = db.KullaniciSil(seciliHesapID);
+
+                if (sonuc)
                 {
-                    silinecekIsim = AdminTree.SelectedNode.Text;
-                    eslesmeVar = true;
+                    MessageBox.Show("Kullanıcı başarıyla silindi.");
+
+                    // Listeleri yenile
+                    await KullaniciListeleriniDoldurAsync();
+
+                    // Seçimleri temizle
+                    BilgiKutulariniTemizleVeKilitle();
+
+                    // DİKKAT: Burada eskiden dataGridView1.DataSource = null; vardı.
+                    // Artık Grid kullanmadığımız için o satırı SİLDİK.
                 }
-                else if (CalisanTree.SelectedNode != null && Convert.ToInt32(CalisanTree.SelectedNode.Tag) == seciliHesapID)
+                else
                 {
-                    silinecekIsim = CalisanTree.SelectedNode.Text;
-                    eslesmeVar = true;
-                }
-
-                if (!eslesmeVar) return; // ID ile seçim uyuşmuyorsa işlem yapma
-
-                // 3. Onay ve Silme
-                if (MessageBox.Show($"'{silinecekIsim}' kullanıcısını silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-                {
-                    if (db.KullaniciSil(seciliHesapID))
-                    {
-                        MessageBox.Show("Kullanıcı başarıyla silindi.");
-                        await KullaniciListeleriniDoldurAsync(); // Listeyi yenile
-                        seciliHesapID = -1; // Seçimi sıfırla
-                    }
-                    else
-                    {
-                        MessageBox.Show("Kullanıcı silinemedi.", "Hata");
-                    }
+                    MessageBox.Show("Kullanıcı silinemedi.", "Hata");
                 }
             }
         }
@@ -202,7 +205,19 @@ namespace RestoranOtomasyon
             if (form.ShowDialog() == DialogResult.OK)  KullaniciListeleriniDoldurAsync();
 
         }
-          
+
+        private void BilgiKutulariniTemizleVeKilitle()
+        {
+            // Artık form üzerinde TextBox'lar olmadığı için onları temizlemeye gerek yok.
+            // Sadece hafızadaki seçimi sıfırlıyoruz.
+
+            seciliHesapID = -1;
+
+            // İsteğe bağlı: Ağaçlardaki (Tree) görsel seçimi de kaldırabiliriz.
+            if (AdminTree.SelectedNode != null) AdminTree.SelectedNode = null;
+            if (CalisanTree.SelectedNode != null) CalisanTree.SelectedNode = null;
+        }
+
         #endregion
 
         #region Kullanici Listeleri
