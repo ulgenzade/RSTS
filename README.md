@@ -44,10 +44,6 @@ Projenin altyapısında güncel ve güçlü teknolojiler tercih edilmiştir:
 - **Versiyon Kontrol:** Git & GitHub
 - **Teknik Asistan:** **Google Gemini 3 Pro** (Kod optimizasyonu ve algoritma desteği için)
 
-## 📸 Ekran Görüntüleri
-
-*(Buraya projenin çalışan ekranlarından birkaç görsel ekleyebilirsiniz)*
-
 ## 🤝 Katkıda Bulunanlar
 
 | Üye | Rolü | GitHub Profili |
