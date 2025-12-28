@@ -28,18 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMasaTasi));
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnİptal = new ReaLTaiizor.Controls.MaterialButton();
             this.btnTasiBirlestir = new ReaLTaiizor.Controls.MaterialButton();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblTutarFinal = new System.Windows.Forms.Label();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.lstListeFinal = new System.Windows.Forms.ListBox();
             this.lblBaslikFinal = new System.Windows.Forms.Label();
+            this.lblTutarFinal = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel1
@@ -59,11 +60,12 @@
             this.btnİptal.HighEmphasis = true;
             this.btnİptal.Icon = null;
             this.btnİptal.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnİptal.Location = new System.Drawing.Point(3, 267);
+            this.btnİptal.Location = new System.Drawing.Point(4, 270);
+            this.btnİptal.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnİptal.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnİptal.Name = "btnİptal";
             this.btnİptal.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnİptal.Size = new System.Drawing.Size(148, 82);
+            this.btnİptal.Size = new System.Drawing.Size(146, 76);
             this.btnİptal.TabIndex = 5;
             this.btnİptal.Text = "İPTAL";
             this.btnİptal.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -81,11 +83,12 @@
             this.btnTasiBirlestir.HighEmphasis = true;
             this.btnTasiBirlestir.Icon = null;
             this.btnTasiBirlestir.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnTasiBirlestir.Location = new System.Drawing.Point(3, 91);
+            this.btnTasiBirlestir.Location = new System.Drawing.Point(4, 94);
+            this.btnTasiBirlestir.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
             this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnTasiBirlestir.Name = "btnTasiBirlestir";
             this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnTasiBirlestir.Size = new System.Drawing.Size(148, 82);
+            this.btnTasiBirlestir.Size = new System.Drawing.Size(146, 76);
             this.btnTasiBirlestir.TabIndex = 3;
             this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR  ";
             this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -110,17 +113,22 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // lblTutarFinal
+            // tableLayoutPanel3
             // 
-            this.lblTutarFinal.AutoSize = true;
-            this.lblTutarFinal.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblTutarFinal.Location = new System.Drawing.Point(3, 385);
-            this.lblTutarFinal.Margin = new System.Windows.Forms.Padding(3);
-            this.lblTutarFinal.Name = "lblTutarFinal";
-            this.lblTutarFinal.Size = new System.Drawing.Size(308, 56);
-            this.lblTutarFinal.TabIndex = 2;
-            this.lblTutarFinal.Text = "TUTAR";
-            this.lblTutarFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.tableLayoutPanel3.ColumnCount = 1;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Controls.Add(this.lstListeFinal, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.lblBaslikFinal, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.lblTutarFinal, 0, 2);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 3;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.76577F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.72072F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.73874F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(314, 444);
+            this.tableLayoutPanel3.TabIndex = 0;
             // 
             // lstListeFinal
             // 
@@ -145,6 +153,18 @@
             this.lblBaslikFinal.Text = "MASA";
             this.lblBaslikFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblTutarFinal
+            // 
+            this.lblTutarFinal.AutoSize = true;
+            this.lblTutarFinal.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTutarFinal.Location = new System.Drawing.Point(3, 385);
+            this.lblTutarFinal.Margin = new System.Windows.Forms.Padding(3);
+            this.lblTutarFinal.Name = "lblTutarFinal";
+            this.lblTutarFinal.Size = new System.Drawing.Size(308, 56);
+            this.lblTutarFinal.TabIndex = 2;
+            this.lblTutarFinal.Text = "TUTAR";
+            this.lblTutarFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 1;
@@ -164,23 +184,6 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(154, 444);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 1;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Controls.Add(this.lstListeFinal, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.lblBaslikFinal, 0, 0);
-            this.tableLayoutPanel3.Controls.Add(this.lblTutarFinal, 0, 2);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 3;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.76577F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.72072F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.73874F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(314, 444);
-            this.tableLayoutPanel3.TabIndex = 0;
-            // 
             // frmMasaTasi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -188,13 +191,14 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmMasaTasi";
             this.Text = "MASA TAŞI";
             this.Load += new System.EventHandler(this.frmMasaTasi_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

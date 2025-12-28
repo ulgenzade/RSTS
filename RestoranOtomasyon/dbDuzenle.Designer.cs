@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dbDuzenle));
             this.panel1 = new System.Windows.Forms.Panel();
             this.dbIptal = new ReaLTaiizor.Controls.MaterialButton();
             this.dbKaydet = new ReaLTaiizor.Controls.MaterialButton();
@@ -219,6 +220,7 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "dbDuzenle";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VERİ BİLGİLERİ";

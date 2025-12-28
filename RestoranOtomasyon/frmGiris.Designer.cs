@@ -30,6 +30,7 @@ namespace RestoranOtomasyon
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGiris));
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtSifre = new ReaLTaiizor.Controls.MaterialTextBoxEdit();
             this.txtSecim = new ReaLTaiizor.Controls.MaterialComboBox();
@@ -144,6 +145,7 @@ namespace RestoranOtomasyon
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmGiris";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

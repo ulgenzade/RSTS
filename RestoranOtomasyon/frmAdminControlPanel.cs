@@ -503,49 +503,50 @@ namespace RestoranOtomasyon
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode41 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
-            System.Windows.Forms.TreeNode treeNode42 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAdminControlPanel));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
-            this.CalisanLabel = new ReaLTaiizor.Controls.MetroLabel();
+            this.HesaplarLayout = new System.Windows.Forms.TableLayoutPanel();
             this.CalisanTree = new ReaLTaiizor.Controls.ForeverTreeView();
+            this.CalisanLabel = new ReaLTaiizor.Controls.MetroLabel();
             this.AdminLabel = new ReaLTaiizor.Controls.MetroLabel();
             this.AdminTree = new ReaLTaiizor.Controls.ForeverTreeView();
+            this.HesapBaslikPanel = new System.Windows.Forms.Panel();
+            this.HesapPanel = new System.Windows.Forms.Panel();
+            this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
+            this.HesapButonPanel = new System.Windows.Forms.Panel();
+            this.HesapButonLayout = new System.Windows.Forms.TableLayoutPanel();
+            this.btnHesapSil = new ReaLTaiizor.Controls.MaterialButton();
             this.btnCikis = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHesapDuzenle = new ReaLTaiizor.Controls.MaterialButton();
-            this.btnHesapSil = new ReaLTaiizor.Controls.MaterialButton();
             this.btnHesapEkle = new ReaLTaiizor.Controls.MaterialButton();
             this.FlowDb = new System.Windows.Forms.FlowLayoutPanel();
+            this.VeriKategoriButonPanel = new System.Windows.Forms.Panel();
+            this.VeriKategoriLayout = new System.Windows.Forms.TableLayoutPanel();
             this.btnVeriLoglar = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriKategoriler = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriUrunler = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriMasalar = new ReaLTaiizor.Controls.MaterialButton();
+            this.VeriButonPanel = new System.Windows.Forms.Panel();
+            this.VeriButonLayout = new System.Windows.Forms.TableLayoutPanel();
             this.btnVeriIstatistik = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriDuzenle = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriSil = new ReaLTaiizor.Controls.MaterialButton();
             this.btnVeriEkle = new ReaLTaiizor.Controls.MaterialButton();
-            this.VeriKategoriButonPanel = new System.Windows.Forms.Panel();
-            this.VeriKategoriLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.VeriButonPanel = new System.Windows.Forms.Panel();
-            this.VeriButonLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.HesapButonPanel = new System.Windows.Forms.Panel();
-            this.HesapButonLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.HesapBaslikPanel = new System.Windows.Forms.Panel();
-            this.HesapPanel = new System.Windows.Forms.Panel();
-            this.HesaplarLayout = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.HesaplarLayout.SuspendLayout();
+            this.HesapBaslikPanel.SuspendLayout();
+            this.HesapPanel.SuspendLayout();
+            this.HesapButonPanel.SuspendLayout();
+            this.HesapButonLayout.SuspendLayout();
             this.VeriKategoriButonPanel.SuspendLayout();
             this.VeriKategoriLayout.SuspendLayout();
             this.VeriButonPanel.SuspendLayout();
             this.VeriButonLayout.SuspendLayout();
-            this.HesapButonPanel.SuspendLayout();
-            this.HesapButonLayout.SuspendLayout();
-            this.HesapBaslikPanel.SuspendLayout();
-            this.HesapPanel.SuspendLayout();
-            this.HesaplarLayout.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -573,22 +574,43 @@ namespace RestoranOtomasyon
             this.splitContainer1.SplitterDistance = 424;
             this.splitContainer1.TabIndex = 0;
             // 
-            // HesapLabel
+            // HesaplarLayout
             // 
-            this.HesapLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HesapLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.HesapLabel.IsDerivedStyle = true;
-            this.HesapLabel.Location = new System.Drawing.Point(0, 0);
-            this.HesapLabel.Name = "HesapLabel";
-            this.HesapLabel.Size = new System.Drawing.Size(418, 54);
-            this.HesapLabel.Style = ReaLTaiizor.Enum.Metro.Style.Light;
-            this.HesapLabel.StyleManager = null;
-            this.HesapLabel.TabIndex = 0;
-            this.HesapLabel.Text = "HESAPLAR";
-            this.HesapLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.HesapLabel.ThemeAuthor = "Taiizor";
-            this.HesapLabel.ThemeName = "MetroLight";
-            this.HesapLabel.Click += new System.EventHandler(this.HesapLabel_Click);
+            this.HesaplarLayout.ColumnCount = 1;
+            this.HesaplarLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.HesaplarLayout.Controls.Add(this.CalisanTree, 0, 3);
+            this.HesaplarLayout.Controls.Add(this.CalisanLabel, 0, 2);
+            this.HesaplarLayout.Controls.Add(this.AdminLabel, 0, 0);
+            this.HesaplarLayout.Controls.Add(this.AdminTree, 0, 1);
+            this.HesaplarLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HesaplarLayout.Location = new System.Drawing.Point(0, 60);
+            this.HesaplarLayout.Name = "HesaplarLayout";
+            this.HesaplarLayout.RowCount = 4;
+            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.66666F));
+            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
+            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.66667F));
+            this.HesaplarLayout.Size = new System.Drawing.Size(424, 553);
+            this.HesaplarLayout.TabIndex = 14;
+            // 
+            // CalisanTree
+            // 
+            this.CalisanTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
+            this.CalisanTree.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CalisanTree.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.CalisanTree.ForeColor = System.Drawing.Color.White;
+            this.CalisanTree.LabelEdit = true;
+            this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
+            this.CalisanTree.Location = new System.Drawing.Point(3, 325);
+            this.CalisanTree.Name = "CalisanTree";
+            treeNode1.Name = "CalisanNodes";
+            treeNode1.Text = "Çalışan Hesaplar";
+            this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.CalisanTree.Size = new System.Drawing.Size(418, 225);
+            this.CalisanTree.TabIndex = 11;
+            this.CalisanTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
+            this.CalisanTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CalisanTree_AfterSelect);
             // 
             // CalisanLabel
             // 
@@ -605,25 +627,6 @@ namespace RestoranOtomasyon
             this.CalisanLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.CalisanLabel.ThemeAuthor = "Taiizor";
             this.CalisanLabel.ThemeName = "MetroLight";
-            // 
-            // CalisanTree
-            // 
-            this.CalisanTree.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(47)))), ((int)(((byte)(49)))));
-            this.CalisanTree.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CalisanTree.Font = new System.Drawing.Font("Segoe UI", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.CalisanTree.ForeColor = System.Drawing.Color.White;
-            this.CalisanTree.LabelEdit = true;
-            this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
-            this.CalisanTree.Location = new System.Drawing.Point(3, 325);
-            this.CalisanTree.Name = "CalisanTree";
-            treeNode41.Name = "CalisanNodes";
-            treeNode41.Text = "Çalışan Hesaplar";
-            this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode41});
-            this.CalisanTree.Size = new System.Drawing.Size(418, 225);
-            this.CalisanTree.TabIndex = 11;
-            this.CalisanTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
-            this.CalisanTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.CalisanTree_AfterSelect);
             // 
             // AdminLabel
             // 
@@ -651,14 +654,111 @@ namespace RestoranOtomasyon
             this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.AdminTree.Location = new System.Drawing.Point(3, 49);
             this.AdminTree.Name = "AdminTree";
-            treeNode42.Name = "AdminNodes";
-            treeNode42.Text = "Yetkili Hesaplar";
+            treeNode2.Name = "AdminNodes";
+            treeNode2.Text = "Yetkili Hesaplar";
             this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode42});
+            treeNode2});
             this.AdminTree.Size = new System.Drawing.Size(418, 224);
             this.AdminTree.TabIndex = 10;
             this.AdminTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
             this.AdminTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.AdminTree_AfterSelect);
+            // 
+            // HesapBaslikPanel
+            // 
+            this.HesapBaslikPanel.BackColor = System.Drawing.Color.Blue;
+            this.HesapBaslikPanel.Controls.Add(this.HesapPanel);
+            this.HesapBaslikPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.HesapBaslikPanel.Location = new System.Drawing.Point(0, 0);
+            this.HesapBaslikPanel.Name = "HesapBaslikPanel";
+            this.HesapBaslikPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.HesapBaslikPanel.Size = new System.Drawing.Size(424, 60);
+            this.HesapBaslikPanel.TabIndex = 13;
+            // 
+            // HesapPanel
+            // 
+            this.HesapPanel.BackColor = System.Drawing.Color.White;
+            this.HesapPanel.Controls.Add(this.HesapLabel);
+            this.HesapPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HesapPanel.Location = new System.Drawing.Point(3, 3);
+            this.HesapPanel.Name = "HesapPanel";
+            this.HesapPanel.Size = new System.Drawing.Size(418, 54);
+            this.HesapPanel.TabIndex = 0;
+            // 
+            // HesapLabel
+            // 
+            this.HesapLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HesapLabel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.HesapLabel.IsDerivedStyle = true;
+            this.HesapLabel.Location = new System.Drawing.Point(0, 0);
+            this.HesapLabel.Name = "HesapLabel";
+            this.HesapLabel.Size = new System.Drawing.Size(418, 54);
+            this.HesapLabel.Style = ReaLTaiizor.Enum.Metro.Style.Light;
+            this.HesapLabel.StyleManager = null;
+            this.HesapLabel.TabIndex = 0;
+            this.HesapLabel.Text = "HESAPLAR";
+            this.HesapLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.HesapLabel.ThemeAuthor = "Taiizor";
+            this.HesapLabel.ThemeName = "MetroLight";
+            this.HesapLabel.Click += new System.EventHandler(this.HesapLabel_Click);
+            // 
+            // HesapButonPanel
+            // 
+            this.HesapButonPanel.BackColor = System.Drawing.Color.Blue;
+            this.HesapButonPanel.Controls.Add(this.HesapButonLayout);
+            this.HesapButonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.HesapButonPanel.Location = new System.Drawing.Point(0, 613);
+            this.HesapButonPanel.Name = "HesapButonPanel";
+            this.HesapButonPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.HesapButonPanel.Size = new System.Drawing.Size(424, 60);
+            this.HesapButonPanel.TabIndex = 12;
+            // 
+            // HesapButonLayout
+            // 
+            this.HesapButonLayout.BackColor = System.Drawing.Color.White;
+            this.HesapButonLayout.ColumnCount = 9;
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.710034F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.160556F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.160556F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.160556F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
+            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.710033F));
+            this.HesapButonLayout.Controls.Add(this.btnHesapSil, 5, 0);
+            this.HesapButonLayout.Controls.Add(this.btnCikis, 1, 0);
+            this.HesapButonLayout.Controls.Add(this.btnHesapDuzenle, 7, 0);
+            this.HesapButonLayout.Controls.Add(this.btnHesapEkle, 3, 0);
+            this.HesapButonLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.HesapButonLayout.Location = new System.Drawing.Point(3, 3);
+            this.HesapButonLayout.Name = "HesapButonLayout";
+            this.HesapButonLayout.RowCount = 1;
+            this.HesapButonLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.HesapButonLayout.Size = new System.Drawing.Size(418, 54);
+            this.HesapButonLayout.TabIndex = 0;
+            // 
+            // btnHesapSil
+            // 
+            this.btnHesapSil.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnHesapSil.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
+            this.btnHesapSil.Depth = 0;
+            this.btnHesapSil.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnHesapSil.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHesapSil.HighEmphasis = true;
+            this.btnHesapSil.Icon = null;
+            this.btnHesapSil.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
+            this.btnHesapSil.Location = new System.Drawing.Point(215, 6);
+            this.btnHesapSil.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.btnHesapSil.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
+            this.btnHesapSil.Name = "btnHesapSil";
+            this.btnHesapSil.NoAccentTextColor = System.Drawing.Color.Empty;
+            this.btnHesapSil.Size = new System.Drawing.Size(79, 42);
+            this.btnHesapSil.TabIndex = 3;
+            this.btnHesapSil.Text = "SİL";
+            this.btnHesapSil.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
+            this.btnHesapSil.UseAccentColor = false;
+            this.btnHesapSil.UseVisualStyleBackColor = true;
+            this.btnHesapSil.Click += new System.EventHandler(this.btnHesapSil_Click);
             // 
             // btnCikis
             // 
@@ -705,29 +805,6 @@ namespace RestoranOtomasyon
             this.btnHesapDuzenle.UseVisualStyleBackColor = true;
             this.btnHesapDuzenle.Click += new System.EventHandler(this.btnHesapDuzenle_Click);
             // 
-            // btnHesapSil
-            // 
-            this.btnHesapSil.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHesapSil.Density = ReaLTaiizor.Controls.MaterialButton.MaterialButtonDensity.Default;
-            this.btnHesapSil.Depth = 0;
-            this.btnHesapSil.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnHesapSil.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHesapSil.HighEmphasis = true;
-            this.btnHesapSil.Icon = null;
-            this.btnHesapSil.IconType = ReaLTaiizor.Controls.MaterialButton.MaterialIconType.Rebase;
-            this.btnHesapSil.Location = new System.Drawing.Point(215, 6);
-            this.btnHesapSil.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
-            this.btnHesapSil.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.btnHesapSil.Name = "btnHesapSil";
-            this.btnHesapSil.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnHesapSil.Size = new System.Drawing.Size(79, 42);
-            this.btnHesapSil.TabIndex = 3;
-            this.btnHesapSil.Text = "SİL";
-            this.btnHesapSil.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
-            this.btnHesapSil.UseAccentColor = false;
-            this.btnHesapSil.UseVisualStyleBackColor = true;
-            this.btnHesapSil.Click += new System.EventHandler(this.btnHesapSil_Click);
-            // 
             // btnHesapEkle
             // 
             this.btnHesapEkle.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
@@ -760,6 +837,42 @@ namespace RestoranOtomasyon
             this.FlowDb.Size = new System.Drawing.Size(854, 553);
             this.FlowDb.TabIndex = 11;
             this.FlowDb.Click += new System.EventHandler(this.FlowDb_Click);
+            // 
+            // VeriKategoriButonPanel
+            // 
+            this.VeriKategoriButonPanel.BackColor = System.Drawing.Color.Blue;
+            this.VeriKategoriButonPanel.Controls.Add(this.VeriKategoriLayout);
+            this.VeriKategoriButonPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.VeriKategoriButonPanel.Location = new System.Drawing.Point(0, 0);
+            this.VeriKategoriButonPanel.Name = "VeriKategoriButonPanel";
+            this.VeriKategoriButonPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.VeriKategoriButonPanel.Size = new System.Drawing.Size(854, 60);
+            this.VeriKategoriButonPanel.TabIndex = 12;
+            // 
+            // VeriKategoriLayout
+            // 
+            this.VeriKategoriLayout.BackColor = System.Drawing.Color.White;
+            this.VeriKategoriLayout.ColumnCount = 9;
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.695652F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.347826F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.347826F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.347826F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
+            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.695652F));
+            this.VeriKategoriLayout.Controls.Add(this.btnVeriLoglar, 7, 0);
+            this.VeriKategoriLayout.Controls.Add(this.btnVeriKategoriler, 5, 0);
+            this.VeriKategoriLayout.Controls.Add(this.btnVeriUrunler, 3, 0);
+            this.VeriKategoriLayout.Controls.Add(this.btnVeriMasalar, 1, 0);
+            this.VeriKategoriLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VeriKategoriLayout.Location = new System.Drawing.Point(3, 3);
+            this.VeriKategoriLayout.Name = "VeriKategoriLayout";
+            this.VeriKategoriLayout.RowCount = 1;
+            this.VeriKategoriLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.VeriKategoriLayout.Size = new System.Drawing.Size(848, 54);
+            this.VeriKategoriLayout.TabIndex = 0;
             // 
             // btnVeriLoglar
             // 
@@ -857,6 +970,42 @@ namespace RestoranOtomasyon
             this.btnVeriMasalar.UseVisualStyleBackColor = true;
             this.btnVeriMasalar.Click += new System.EventHandler(this.btnVeriMasalar_Click);
             // 
+            // VeriButonPanel
+            // 
+            this.VeriButonPanel.BackColor = System.Drawing.Color.Blue;
+            this.VeriButonPanel.Controls.Add(this.VeriButonLayout);
+            this.VeriButonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.VeriButonPanel.Location = new System.Drawing.Point(0, 613);
+            this.VeriButonPanel.Name = "VeriButonPanel";
+            this.VeriButonPanel.Padding = new System.Windows.Forms.Padding(3);
+            this.VeriButonPanel.Size = new System.Drawing.Size(854, 60);
+            this.VeriButonPanel.TabIndex = 13;
+            // 
+            // VeriButonLayout
+            // 
+            this.VeriButonLayout.BackColor = System.Drawing.Color.White;
+            this.VeriButonLayout.ColumnCount = 9;
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.699131F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.349566F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.349566F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.349566F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
+            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.699131F));
+            this.VeriButonLayout.Controls.Add(this.btnVeriIstatistik, 7, 0);
+            this.VeriButonLayout.Controls.Add(this.btnVeriDuzenle, 5, 0);
+            this.VeriButonLayout.Controls.Add(this.btnVeriSil, 3, 0);
+            this.VeriButonLayout.Controls.Add(this.btnVeriEkle, 1, 0);
+            this.VeriButonLayout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.VeriButonLayout.Location = new System.Drawing.Point(3, 3);
+            this.VeriButonLayout.Name = "VeriButonLayout";
+            this.VeriButonLayout.RowCount = 1;
+            this.VeriButonLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.VeriButonLayout.Size = new System.Drawing.Size(848, 54);
+            this.VeriButonLayout.TabIndex = 0;
+            // 
             // btnVeriIstatistik
             // 
             this.btnVeriIstatistik.AutoSize = false;
@@ -951,160 +1100,13 @@ namespace RestoranOtomasyon
             this.btnVeriEkle.UseAccentColor = false;
             this.btnVeriEkle.Click += new System.EventHandler(this.btnVeriEkle_Click_1);
             // 
-            // VeriKategoriButonPanel
-            // 
-            this.VeriKategoriButonPanel.BackColor = System.Drawing.Color.Blue;
-            this.VeriKategoriButonPanel.Controls.Add(this.VeriKategoriLayout);
-            this.VeriKategoriButonPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.VeriKategoriButonPanel.Location = new System.Drawing.Point(0, 0);
-            this.VeriKategoriButonPanel.Name = "VeriKategoriButonPanel";
-            this.VeriKategoriButonPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.VeriKategoriButonPanel.Size = new System.Drawing.Size(854, 60);
-            this.VeriKategoriButonPanel.TabIndex = 12;
-            // 
-            // VeriKategoriLayout
-            // 
-            this.VeriKategoriLayout.BackColor = System.Drawing.Color.White;
-            this.VeriKategoriLayout.ColumnCount = 9;
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.695652F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.347826F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.347826F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.347826F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.3913F));
-            this.VeriKategoriLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.695652F));
-            this.VeriKategoriLayout.Controls.Add(this.btnVeriLoglar, 7, 0);
-            this.VeriKategoriLayout.Controls.Add(this.btnVeriKategoriler, 5, 0);
-            this.VeriKategoriLayout.Controls.Add(this.btnVeriUrunler, 3, 0);
-            this.VeriKategoriLayout.Controls.Add(this.btnVeriMasalar, 1, 0);
-            this.VeriKategoriLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.VeriKategoriLayout.Location = new System.Drawing.Point(3, 3);
-            this.VeriKategoriLayout.Name = "VeriKategoriLayout";
-            this.VeriKategoriLayout.RowCount = 1;
-            this.VeriKategoriLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VeriKategoriLayout.Size = new System.Drawing.Size(848, 54);
-            this.VeriKategoriLayout.TabIndex = 0;
-            // 
-            // VeriButonPanel
-            // 
-            this.VeriButonPanel.BackColor = System.Drawing.Color.Blue;
-            this.VeriButonPanel.Controls.Add(this.VeriButonLayout);
-            this.VeriButonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.VeriButonPanel.Location = new System.Drawing.Point(0, 613);
-            this.VeriButonPanel.Name = "VeriButonPanel";
-            this.VeriButonPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.VeriButonPanel.Size = new System.Drawing.Size(854, 60);
-            this.VeriButonPanel.TabIndex = 13;
-            // 
-            // VeriButonLayout
-            // 
-            this.VeriButonLayout.BackColor = System.Drawing.Color.White;
-            this.VeriButonLayout.ColumnCount = 9;
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.699131F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.349566F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.349566F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.349566F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.38826F));
-            this.VeriButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.699131F));
-            this.VeriButonLayout.Controls.Add(this.btnVeriIstatistik, 7, 0);
-            this.VeriButonLayout.Controls.Add(this.btnVeriDuzenle, 5, 0);
-            this.VeriButonLayout.Controls.Add(this.btnVeriSil, 3, 0);
-            this.VeriButonLayout.Controls.Add(this.btnVeriEkle, 1, 0);
-            this.VeriButonLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.VeriButonLayout.Location = new System.Drawing.Point(3, 3);
-            this.VeriButonLayout.Name = "VeriButonLayout";
-            this.VeriButonLayout.RowCount = 1;
-            this.VeriButonLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.VeriButonLayout.Size = new System.Drawing.Size(848, 54);
-            this.VeriButonLayout.TabIndex = 0;
-            // 
-            // HesapButonPanel
-            // 
-            this.HesapButonPanel.BackColor = System.Drawing.Color.Blue;
-            this.HesapButonPanel.Controls.Add(this.HesapButonLayout);
-            this.HesapButonPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.HesapButonPanel.Location = new System.Drawing.Point(0, 613);
-            this.HesapButonPanel.Name = "HesapButonPanel";
-            this.HesapButonPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.HesapButonPanel.Size = new System.Drawing.Size(424, 60);
-            this.HesapButonPanel.TabIndex = 12;
-            // 
-            // HesapButonLayout
-            // 
-            this.HesapButonLayout.BackColor = System.Drawing.Color.White;
-            this.HesapButonLayout.ColumnCount = 9;
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.710034F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.160556F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.160556F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 2.160556F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.02457F));
-            this.HesapButonLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.710033F));
-            this.HesapButonLayout.Controls.Add(this.btnHesapSil, 5, 0);
-            this.HesapButonLayout.Controls.Add(this.btnCikis, 1, 0);
-            this.HesapButonLayout.Controls.Add(this.btnHesapDuzenle, 7, 0);
-            this.HesapButonLayout.Controls.Add(this.btnHesapEkle, 3, 0);
-            this.HesapButonLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HesapButonLayout.Location = new System.Drawing.Point(3, 3);
-            this.HesapButonLayout.Name = "HesapButonLayout";
-            this.HesapButonLayout.RowCount = 1;
-            this.HesapButonLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.HesapButonLayout.Size = new System.Drawing.Size(418, 54);
-            this.HesapButonLayout.TabIndex = 0;
-            // 
-            // HesapBaslikPanel
-            // 
-            this.HesapBaslikPanel.BackColor = System.Drawing.Color.Blue;
-            this.HesapBaslikPanel.Controls.Add(this.HesapPanel);
-            this.HesapBaslikPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.HesapBaslikPanel.Location = new System.Drawing.Point(0, 0);
-            this.HesapBaslikPanel.Name = "HesapBaslikPanel";
-            this.HesapBaslikPanel.Padding = new System.Windows.Forms.Padding(3);
-            this.HesapBaslikPanel.Size = new System.Drawing.Size(424, 60);
-            this.HesapBaslikPanel.TabIndex = 13;
-            // 
-            // HesapPanel
-            // 
-            this.HesapPanel.BackColor = System.Drawing.Color.White;
-            this.HesapPanel.Controls.Add(this.HesapLabel);
-            this.HesapPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HesapPanel.Location = new System.Drawing.Point(3, 3);
-            this.HesapPanel.Name = "HesapPanel";
-            this.HesapPanel.Size = new System.Drawing.Size(418, 54);
-            this.HesapPanel.TabIndex = 0;
-            // 
-            // HesaplarLayout
-            // 
-            this.HesaplarLayout.ColumnCount = 1;
-            this.HesaplarLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.HesaplarLayout.Controls.Add(this.CalisanTree, 0, 3);
-            this.HesaplarLayout.Controls.Add(this.CalisanLabel, 0, 2);
-            this.HesaplarLayout.Controls.Add(this.AdminLabel, 0, 0);
-            this.HesaplarLayout.Controls.Add(this.AdminTree, 0, 1);
-            this.HesaplarLayout.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.HesaplarLayout.Location = new System.Drawing.Point(0, 60);
-            this.HesaplarLayout.Name = "HesaplarLayout";
-            this.HesaplarLayout.RowCount = 4;
-            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
-            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.66666F));
-            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333333F));
-            this.HesaplarLayout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.66667F));
-            this.HesaplarLayout.Size = new System.Drawing.Size(424, 553);
-            this.HesaplarLayout.TabIndex = 14;
-            // 
             // frmAdminControlPanel
             // 
             this.ClientSize = new System.Drawing.Size(1282, 673);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmAdminControlPanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "YETKİLİ EKRANI";
@@ -1114,16 +1116,16 @@ namespace RestoranOtomasyon
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.HesaplarLayout.ResumeLayout(false);
+            this.HesapBaslikPanel.ResumeLayout(false);
+            this.HesapPanel.ResumeLayout(false);
+            this.HesapButonPanel.ResumeLayout(false);
+            this.HesapButonLayout.ResumeLayout(false);
+            this.HesapButonLayout.PerformLayout();
             this.VeriKategoriButonPanel.ResumeLayout(false);
             this.VeriKategoriLayout.ResumeLayout(false);
             this.VeriButonPanel.ResumeLayout(false);
             this.VeriButonLayout.ResumeLayout(false);
-            this.HesapButonPanel.ResumeLayout(false);
-            this.HesapButonLayout.ResumeLayout(false);
-            this.HesapButonLayout.PerformLayout();
-            this.HesapBaslikPanel.ResumeLayout(false);
-            this.HesapPanel.ResumeLayout(false);
-            this.HesaplarLayout.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

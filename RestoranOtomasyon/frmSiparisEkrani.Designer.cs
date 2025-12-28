@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSiparisEkrani));
             this.flowMasalar = new System.Windows.Forms.FlowLayoutPanel();
             this.dgMevcutUrunler = new System.Windows.Forms.DataGridView();
             this.flowKategoriler = new System.Windows.Forms.FlowLayoutPanel();
@@ -358,6 +359,7 @@
             this.ClientSize = new System.Drawing.Size(1277, 697);
             this.Controls.Add(this.tableLayoutPanel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmSiparisEkrani";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SİPARİŞ EKRANI";
