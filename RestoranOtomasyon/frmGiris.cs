@@ -14,8 +14,7 @@ namespace RestoranOtomasyon
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-           
-            // Şifre girerken karakterler '*' olarak görünsün.
+          
             txtSifre.PasswordChar = '*';
         }
         private void dataGridViewKategoriler_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -60,22 +59,16 @@ namespace RestoranOtomasyon
 
             VeritabaniIslemleri db = new VeritabaniIslemleri();
 
-            // Ekranda yazan rolü alıyoruz
             string ekrandakiRol = txtSecim.Text;
-            string veritabaniRolu = ekrandakiRol; // Varsayılan olarak aynısı olsun
+            string veritabaniRolu = ekrandakiRol;
 
-            // --- MANTIK DEĞİŞİMİ BURADA ---
-            // Eğer ekranda "Yetkili" yazıyorsa, veritabanına "Admin" diye soracağız.
             if (ekrandakiRol == "Yetkili" || ekrandakiRol == "yetkili")
             {
                 veritabaniRolu = "Admin";
             }
-            // Garson için bir değişiklik yok, olduğu gibi gidecek.
-            // -----------------------------
 
             string girilenSifre = txtSifre.Text;
 
-            // Backend metoduna artık 'ekrandakiRol'ü değil, çevirdiğimiz 'veritabaniRolu'nu gönderiyoruz.
             DataRow kullanici = db.KullaniciGirisKontrol(veritabaniRolu, girilenSifre);
 
             if (kullanici != null)
@@ -109,10 +102,10 @@ namespace RestoranOtomasyon
 
         private void txtSifre_KeyDown(object sender, KeyEventArgs e)
         {
-            // Eğer basılan tuş Enter tuşu ise...
+
             if (e.KeyCode == Keys.Enter)
             {
-                // ...Giriş butonuna tıkla.
+
                 btnGiris.PerformClick();
             }
         }

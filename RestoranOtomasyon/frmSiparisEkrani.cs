@@ -72,7 +72,6 @@ namespace RestoranOtomasyon
             dgMevcutUrunler.RowHeadersVisible = false;
         }
 
-        // --- MASALARI YÜKLE ---
         private void MasalariYukle()
         {
             flowMasalar.Controls.Clear();
@@ -112,15 +111,13 @@ namespace RestoranOtomasyon
 
             if (_seciliMasaDurumu == "Dolu")
             {
-                // Veritabanından asenkron çek
+
                 _eskiSiparisCache = await db.MasaSiparisleriniGetirAsync(_seciliMasaID);
             }
 
-            // Grid güncelle
             await SepetiVeGridiGuncelle();
         }
 
-        // --- KATEGORİLER ---
         private void KategorileriYukle()
         {
             if (flowKategoriler == null) return;
@@ -225,7 +222,6 @@ namespace RestoranOtomasyon
             Button btn = (Button)sender;
             SepetUrunDto secilenUrun = (SepetUrunDto)btn.Tag;
 
-            // Listede var mı kontrol et (SADECE RAM İŞLEMİ - HIZLI)
             var varOlan = _yeniSiparisListesi.Find(x => x.UrunID == secilenUrun.UrunID);
             if (varOlan != null)
             {
@@ -241,7 +237,6 @@ namespace RestoranOtomasyon
                 });
             }
 
-            // Ekrana yansıt (SADECE RAM İŞLEMİ - HIZLI)
             SepetiVeGridiGuncelle();
         }
 
@@ -249,7 +244,7 @@ namespace RestoranOtomasyon
         {
             dgMevcutUrunler.Rows.Clear();
 
-            // 1. ESKİ SİPARİŞLER (Hafızadan)
+
             if (_eskiSiparisCache != null && _eskiSiparisCache.Count > 0)
             {
                 foreach (var urun in _eskiSiparisCache)
@@ -257,15 +252,14 @@ namespace RestoranOtomasyon
                     decimal toplam = urun.Adet * urun.BirimFiyat;
                     int i = dgMevcutUrunler.Rows.Add(urun.UrunAdi, urun.Adet, toplam, "Mutfakta");
 
-                    // RENK AYARLARI
-                    // Arka plan açık gri, yazı siyah ve STANDART (İtalik değil)
+
                     dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(240, 240, 240);
                     dgMevcutUrunler.Rows[i].DefaultCellStyle.ForeColor = Color.Black;
                     dgMevcutUrunler.Rows[i].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
                 }
             }
 
-            // 2. YENİ EKLENENLER (Sepet Listesinden)
+
             foreach (var urun in _yeniSiparisListesi)
             {
                 string ad = "Ürün";
@@ -274,7 +268,7 @@ namespace RestoranOtomasyon
 
                 int i = dgMevcutUrunler.Rows.Add(ad, urun.Adet, (urun.Adet * urun.BirimFiyat), "Yeni");
 
-                // Yeniler Beyaz ve Kalın
+
                 dgMevcutUrunler.Rows[i].DefaultCellStyle.BackColor = Color.White;
                 dgMevcutUrunler.Rows[i].DefaultCellStyle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             }
@@ -291,10 +285,6 @@ namespace RestoranOtomasyon
             bool sonuc = false;
             int garsonID = AktifKullanici.KullaniciID;
 
-            // Butona basıldığında UI'yı dondurmamak için geçici bir 'await' koyabiliriz 
-            // ama metodumuz zaten senkron. Hızlandırmak için asenkron yapılabilir.
-
-            // Veritabanı işlemini arka planda yap
             await Task.Run(() =>
             {
                 if (_seciliMasaDurumu == "Boş" || _seciliMasaDurumu == "Rezerve")
@@ -307,13 +297,11 @@ namespace RestoranOtomasyon
             {
                 MessageBox.Show("Sipariş mutfağa iletildi!", "Başarılı");
                 _yeniSiparisListesi.Clear();
-                MasalariYukle(); // Renkleri güncelle
+                MasalariYukle();
 
-                // Masayı tekrar tıkla ki güncel veriler çekilsin (Burası önemli)
-                // Ama manuel buton click yerine sadece veri çekmeyi çağırabiliriz.
                 _seciliMasaDurumu = "Dolu";
 
-                // İnternetten güncel hali çekip cache'i güncelle
+
                 _eskiSiparisCache = await db.MasaSiparisleriniGetirAsync(_seciliMasaID);
                 await SepetiVeGridiGuncelle();
             }
@@ -329,11 +317,10 @@ namespace RestoranOtomasyon
             frmOdemeEkrani odeme = new frmOdemeEkrani(_seciliMasaID);
             odeme.ShowDialog();
 
-            // Döndüğünde
             MasalariYukle();
             dgMevcutUrunler.Rows.Clear();
             _yeniSiparisListesi.Clear();
-            _eskiSiparisCache.Clear(); // Cache temizle
+            _eskiSiparisCache.Clear(); 
             _seciliMasaID = -1;
         }
 
@@ -382,22 +369,21 @@ namespace RestoranOtomasyon
         private void btnTasiBirlestir_Click(object sender, EventArgs e)
         {
             frmMasaTasi frm = new frmMasaTasi();
-            frm.kaynakMasaId = this._seciliMasaID; // Değişken adın _seciliMasaID ise
+            frm.kaynakMasaId = this._seciliMasaID; 
 
             DialogResult sonuc = frm.ShowDialog();
 
-            // EĞER İŞLEM BAŞARILIYSA
+            
             if (sonuc == DialogResult.OK)
             {
-                // 1. Bu ekranı kapat
+                
                 this.Close();
 
-                // 2. Yeni bir Sipariş Ekranı aç (Böylece sipariş ekranına dönmüş olursun)
-                // Eğer direkt yeni masayı açmak istersen parametre göndermen gerekir
-                // Ama en temizi yeniden açmaktır.
                 frmSiparisEkrani yeni = new frmSiparisEkrani();
                 yeni.Show();
             }
         }
+
+        
     }
 }

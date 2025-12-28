@@ -116,7 +116,6 @@ namespace RestoranOtomasyon
                     }
                     else
                     {
-                        // GÜNCELLEME (ARTIK ÇALIŞIYOR!)
                         sonuc = db.MasaGuncelle(_id, dbUrunAdi.Text);
                     }
                 }

@@ -14,7 +14,6 @@ namespace RestoranOtomasyon
         VeritabaniIslemleri db = new VeritabaniIslemleri();
         PrintDocument pd = new PrintDocument();
 
-        // DEĞİŞKENLER
         int seciliMasaID = -1;
         int aktifSiparisID = -1;
         decimal toplamMasaTutari = 0;
@@ -43,14 +42,12 @@ namespace RestoranOtomasyon
                 timer1.Start();
             }
 
-            // Saat ve Garson bilgisini ayarla
             Control[] lblSaat = Controls.Find("labelSaatBilgi", true);
             if (lblSaat.Length > 0) lblSaat[0].Left = lblSaat[0].Left - 40;
 
             Control[] lblGarson = Controls.Find("labelHesapBilgi", true);
             if (lblGarson.Length > 0) lblGarson[0].Text = "Garson: " + AktifKullanici.AdSoyad;
 
-            // Masayı yükle
             if (seciliMasaID != -1)
             {
                 Control[] labels = Controls.Find("labelMasaBilgi", true);
@@ -80,7 +77,6 @@ namespace RestoranOtomasyon
 
         private void EkranlariCiz()
         {
-            // 1. SOL TARAF (TÜM SİPARİŞLER)
             flowTumSiparisler.Controls.Clear();
             toplamMasaTutari = 0;
 
@@ -94,17 +90,13 @@ namespace RestoranOtomasyon
                 flowTumSiparisler.Controls.Add(btn);
             }
 
-            // --- SOL ALT YAZI AYARI ---
             Control[] lblSol = Controls.Find("labelToplamTutar", true);
             if (lblSol.Length > 0)
             {
-                // Burası sadece "TOPLAM TUTAR: 100 ₺" yazar. 
-                // Eğer ekranda "TOPLAM: TOPLAM TUTAR" görüyorsan, 
-                // tasarımda "TOPLAM" diye sabit duran başka bir etiket vardır, onu elle silmelisin.
+                
                 lblSol[0].Text = $"TOPLAM TUTAR: {toplamMasaTutari:C2}";
             }
 
-            // 2. SAĞ TARAF (ÖDENECEKLER)
             panelOdenecekler.Controls.Clear();
             decimal odenecekTutar = 0;
 
@@ -118,11 +110,9 @@ namespace RestoranOtomasyon
                 panelOdenecekler.Controls.Add(btn);
             }
 
-            // --- SAĞ ALT YAZI AYARI ---
             Control[] lblSag = Controls.Find("labelOdenecekTutar", true);
             if (lblSag.Length > 0)
             {
-                // Sadece ödenecek tutarı yazar.
                 lblSag[0].Text = $"SEÇİLEN ÜRÜN TUTAR: {odenecekTutar:C2}";
             }
         }
@@ -289,7 +279,7 @@ namespace RestoranOtomasyon
 
         private void pd_PrintPage(object sender, PrintPageEventArgs e)
         {
-            // Yazdırma kodları aynı kaldı
+
             Font baslikFont = new Font("Arial", 12, FontStyle.Bold);
             Font altBaslikFont = new Font("Arial", 9, FontStyle.Bold);
             Font icerikFont = new Font("Courier New", 8, FontStyle.Bold);
@@ -349,7 +339,6 @@ namespace RestoranOtomasyon
 
         private void btnGeriDon_Click(object sender, EventArgs e) { this.Close(); }
 
-        // BOŞ EVENTLER
         private void btnOde_Click(object sender, EventArgs e) { }
         private void panelOdenecekler_Paint(object sender, PaintEventArgs e) { }
         private void panelOrta_Paint(object sender, PaintEventArgs e) { }
@@ -367,6 +356,16 @@ namespace RestoranOtomasyon
             {
                 this.Close();
             }
+        }
+
+        private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void labelMasaBilgi_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -11,7 +11,7 @@ namespace RestoranOtomasyon
     {
         public int kaynakMasaId = 0;
         public int hedefMasaId = 0;
-        public bool islemBasarili = false; // Diğer forma haber vermek için
+        public bool islemBasarili = false; 
 
         VeritabaniIslemleri db = new VeritabaniIslemleri();
 
@@ -22,15 +22,12 @@ namespace RestoranOtomasyon
 
         private async void frmMasaTasi_Load(object sender, EventArgs e)
         {
-            // --- 1. GÖRÜNÜM AYARLARI ---
-
-            // Sol Paneli Bul
+           
             Panel solPanel = this.Controls.OfType<Panel>().FirstOrDefault(p => p.Name == "pnlSol")
                              ?? this.Controls.OfType<Panel>().FirstOrDefault();
 
-            if (solPanel != null) solPanel.BackColor = Color.White; // Arka plan BEYAZ
+            if (solPanel != null) solPanel.BackColor = Color.White; 
 
-            // Sağ Paneli Bul
             FlowLayoutPanel sagPanel = this.Controls.OfType<FlowLayoutPanel>().FirstOrDefault();
             if (sagPanel == null)
             {
@@ -41,13 +38,12 @@ namespace RestoranOtomasyon
             if (sagPanel != null)
             {
                 sagPanel.AutoScroll = true;
-                sagPanel.FlowDirection = FlowDirection.TopDown; // Listeyi aşağı doğru diz
+                sagPanel.FlowDirection = FlowDirection.TopDown; 
                 sagPanel.WrapContents = true;
                 sagPanel.BackColor = Color.WhiteSmoke;
                 sagPanel.Padding = new Padding(10);
             }
 
-            // --- 2. VERİLERİ DOLDUR ---
             if (kaynakMasaId != 0) await SolTarafiDoldur();
             if (sagPanel != null) SagTarafiDoldur(sagPanel);
         }
@@ -56,7 +52,6 @@ namespace RestoranOtomasyon
         {
             try
             {
-                // Masa Adı
                 DataTable dt = db.MasalariGetir();
                 string masaAdi = "Masa ?";
                 foreach (DataRow row in dt.Rows)
@@ -68,20 +63,16 @@ namespace RestoranOtomasyon
                     }
                 }
 
-                // --- BURADA YENİ İSİMLERİ KULLANIYORUZ ---
-
-                // 1. BAŞLIK
                 if (lblBaslikFinal != null)
                 {
                     lblBaslikFinal.Text = masaAdi;
-                    lblBaslikFinal.ForeColor = Color.Black; // SİYAH YAZI (Görünmesi için)
+                    lblBaslikFinal.ForeColor = Color.Black; 
                 }
 
-                // 2. LİSTE KUTUSU
                 if (lstListeFinal != null)
                 {
                     lstListeFinal.Items.Clear();
-                    lstListeFinal.ForeColor = Color.Black; // SİYAH YAZI
+                    lstListeFinal.ForeColor = Color.Black; 
                     lstListeFinal.Font = new Font("Segoe UI", 11, FontStyle.Regular);
 
                     var siparisler = await db.MasaSiparisleriniGetirAsync(kaynakMasaId);
@@ -94,11 +85,10 @@ namespace RestoranOtomasyon
                         toplam += (s.Adet * s.BirimFiyat);
                     }
 
-                    // 3. TUTAR
                     if (lblTutarFinal != null)
                     {
                         lblTutarFinal.Text = "TOPLAM: " + toplam.ToString("C2");
-                        lblTutarFinal.ForeColor = Color.Red; // KIRMIZI YAZI
+                        lblTutarFinal.ForeColor = Color.Red; 
                     }
                 }
             }
@@ -153,7 +143,6 @@ namespace RestoranOtomasyon
             {
                 MessageBox.Show("İşlem Başarılı!", "Tamam", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // BU KISIM DİĞER EKRANIN ANLAMASINI SAĞLAR
                 this.islemBasarili = true;
                 this.DialogResult = DialogResult.OK;
                 this.Close();
