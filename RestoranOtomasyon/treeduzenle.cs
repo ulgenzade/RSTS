@@ -25,7 +25,7 @@ namespace RestoranOtomasyon
         {
             try
             {
-                treeRoller.Items.AddRange(new object[] { "Admin", "Garson", "Kasiyer" });
+               treeRoller.Items.AddRange(new object[] { "Yetkili", "Garson" });
             }
             catch { }
 
@@ -37,7 +37,13 @@ namespace RestoranOtomasyon
                     DataRow row = dt.Rows[0];
                     treeAdSoyad.Text = row["AdSoyad"].ToString();
                     treeKullaniciAdi.Text = row["KullaniciAdi"].ToString();
-                    treeRoller.SelectedItem = row["Rol"].ToString();
+
+                    string gelenRol = row["Rol"].ToString();
+                    if (gelenRol == "Admin")
+                        treeRoller.SelectedItem = "Yetkili";
+                    else
+                        treeRoller.SelectedItem = gelenRol;
+
                     treeSifre.Text = "";
                 }
             }
@@ -45,14 +51,22 @@ namespace RestoranOtomasyon
 
         private void treeKaydet_Click_1(object sender, EventArgs e)
         {
+            
+            string secilenRol = treeRoller.Text;
+
+            if (secilenRol == "Yetkili")
+            {
+              secilenRol = "Admin";
+            }
+           
             bool sonuc = false;
             if (_kullaniciID == -1)
             {
-                sonuc = db.KullaniciEkle(treeAdSoyad.Text, treeKullaniciAdi.Text, treeSifre.Text, treeRoller.Text);
+              sonuc = db.KullaniciEkle(treeAdSoyad.Text, treeKullaniciAdi.Text, treeSifre.Text, secilenRol);
             }
             else
             {
-                sonuc = db.KullaniciGuncelle(_kullaniciID, treeAdSoyad.Text, treeKullaniciAdi.Text, treeSifre.Text, treeRoller.Text);
+               sonuc = db.KullaniciGuncelle(_kullaniciID, treeAdSoyad.Text, treeKullaniciAdi.Text, treeSifre.Text, secilenRol);
             }
 
             if (sonuc) { this.DialogResult = DialogResult.OK; this.Close(); }
