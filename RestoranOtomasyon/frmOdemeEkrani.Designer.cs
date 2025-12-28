@@ -43,7 +43,6 @@
             this.panelSagAlt = new System.Windows.Forms.Panel();
             this.labelVergi = new ReaLTaiizor.Controls.MaterialLabel();
             this.btnAdisyonYazdir = new ReaLTaiizor.Controls.MaterialButton();
-            this.labelToplamOdenecek = new ReaLTaiizor.Controls.MaterialLabel();
             this.btnKart = new ReaLTaiizor.Controls.MaterialButton();
             this.btnNakit = new ReaLTaiizor.Controls.MaterialButton();
             this.labelOdemeYontemi = new ReaLTaiizor.Controls.MaterialLabel();
@@ -142,6 +141,7 @@
             // 
             this.panelSol.Controls.Add(this.flowTumSiparisler);
             this.panelSol.Controls.Add(this.panelSolAlt);
+            this.panelSol.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSol.Location = new System.Drawing.Point(3, 3);
             this.panelSol.Name = "panelSol";
             this.panelSol.Size = new System.Drawing.Size(476, 605);
@@ -199,6 +199,7 @@
             // 
             this.panelSag.Controls.Add(this.panelOdenecekler);
             this.panelSag.Controls.Add(this.panelSagAlt);
+            this.panelSag.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelSag.Location = new System.Drawing.Point(726, 3);
             this.panelSag.Name = "panelSag";
             this.panelSag.Size = new System.Drawing.Size(477, 605);
@@ -226,13 +227,14 @@
             // labelVergi
             // 
             this.labelVergi.AutoSize = true;
+            this.tableLayoutPanel3.SetColumnSpan(this.labelVergi, 3);
             this.labelVergi.Depth = 0;
             this.labelVergi.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelVergi.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.labelVergi.Location = new System.Drawing.Point(3, 23);
             this.labelVergi.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.labelVergi.Name = "labelVergi";
-            this.labelVergi.Size = new System.Drawing.Size(152, 28);
+            this.labelVergi.Size = new System.Drawing.Size(471, 28);
             this.labelVergi.TabIndex = 7;
             this.labelVergi.Text = "VERGİ:            ";
             this.labelVergi.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -258,20 +260,6 @@
             this.btnAdisyonYazdir.UseAccentColor = false;
             this.btnAdisyonYazdir.UseVisualStyleBackColor = true;
             this.btnAdisyonYazdir.Click += new System.EventHandler(this.btnAdisyonYazdir_Click);
-            // 
-            // labelToplamOdenecek
-            // 
-            this.labelToplamOdenecek.AutoSize = true;
-            this.labelToplamOdenecek.Depth = 0;
-            this.labelToplamOdenecek.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelToplamOdenecek.Font = new System.Drawing.Font("Roboto", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
-            this.labelToplamOdenecek.Location = new System.Drawing.Point(161, 23);
-            this.labelToplamOdenecek.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
-            this.labelToplamOdenecek.Name = "labelToplamOdenecek";
-            this.labelToplamOdenecek.Size = new System.Drawing.Size(152, 28);
-            this.labelToplamOdenecek.TabIndex = 5;
-            this.labelToplamOdenecek.Text = "        ₺0,00 ";
-            this.labelToplamOdenecek.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnKart
             // 
@@ -546,12 +534,11 @@
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel3.Controls.Add(this.btnKart, 0, 3);
-            this.tableLayoutPanel3.Controls.Add(this.labelVergi, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.btnNakit, 1, 3);
             this.tableLayoutPanel3.Controls.Add(this.btnAdisyonYazdir, 2, 3);
             this.tableLayoutPanel3.Controls.Add(this.labelOdemeYontemi, 0, 2);
-            this.tableLayoutPanel3.Controls.Add(this.labelToplamOdenecek, 1, 1);
             this.tableLayoutPanel3.Controls.Add(this.labelOdenecekTutar, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.labelVergi, 0, 1);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
@@ -647,7 +634,6 @@
         private ReaLTaiizor.Controls.MaterialButton btnNakit;
         private ReaLTaiizor.Controls.MaterialLabel labelOdemeYontemi;
         private ReaLTaiizor.Controls.MaterialLabel labelToplamTutar;
-        private ReaLTaiizor.Controls.MaterialLabel labelToplamOdenecek;
         private System.Windows.Forms.FlowLayoutPanel panelOdenecekler;
         private ReaLTaiizor.Controls.MaterialLabel labelHesapBilgi;
         private ReaLTaiizor.Controls.MaterialButton btnBitir;

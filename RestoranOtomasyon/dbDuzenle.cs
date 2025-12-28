@@ -45,20 +45,20 @@ namespace RestoranOtomasyon
             {
                 case "Urunler":
                     this.Text = (_id == -1) ? "Ürün Ekle" : "Ürün Düzenle";
-                    dbUrunAdi.Hint = "Ürün Adı";
+                    dbUrunAdi.Hint = "ÜRÜN ADI";
                     dbUrunFiyati.Visible = true;
                     materialComboBox1.Visible = true;
                     break;
                 case "Kategoriler":
                     this.Text = (_id == -1) ? "Kategori Ekle" : "Kategori Düzenle";
-                    dbUrunAdi.Hint = "Kategori Adı";
+                    dbUrunAdi.Hint = "KATEGORİ ADI";
                     dbUrunFiyati.Visible = true;
-                    dbUrunFiyati.Hint = "Açıklama";
+                    dbUrunFiyati.Hint = "AÇIKLAMA";
                     materialComboBox1.Visible = false;
                     break;
                 case "Masalar":
                     this.Text = (_id == -1) ? "Masa Ekle" : "Masa Düzenle";
-                    dbUrunAdi.Hint = "Masa Adı";
+                    dbUrunAdi.Hint = "MASA ADI";
                     dbUrunFiyati.Visible = false;
                     materialComboBox1.Visible = false;
                     break;

@@ -488,8 +488,8 @@ namespace RestoranOtomasyon
         #region Windows Form Designer generated code
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
-            System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
+            System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Çalışan Hesaplar");
+            System.Windows.Forms.TreeNode treeNode40 = new System.Windows.Forms.TreeNode("Yetkili Hesaplar");
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.HesapLabel = new ReaLTaiizor.Controls.MetroLabel();
             this.CalisanLabel = new ReaLTaiizor.Controls.MetroLabel();
@@ -601,10 +601,10 @@ namespace RestoranOtomasyon
             this.CalisanTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.CalisanTree.Location = new System.Drawing.Point(3, 325);
             this.CalisanTree.Name = "CalisanTree";
-            treeNode37.Name = "CalisanNodes";
-            treeNode37.Text = "Çalışan Hesaplar";
+            treeNode39.Name = "CalisanNodes";
+            treeNode39.Text = "Çalışan Hesaplar";
             this.CalisanTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode37});
+            treeNode39});
             this.CalisanTree.Size = new System.Drawing.Size(418, 225);
             this.CalisanTree.TabIndex = 11;
             this.CalisanTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
@@ -636,10 +636,10 @@ namespace RestoranOtomasyon
             this.AdminTree.LineColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(27)))), ((int)(((byte)(29)))));
             this.AdminTree.Location = new System.Drawing.Point(3, 49);
             this.AdminTree.Name = "AdminTree";
-            treeNode38.Name = "AdminNodes";
-            treeNode38.Text = "Yetkili Hesaplar";
+            treeNode40.Name = "AdminNodes";
+            treeNode40.Text = "Yetkili Hesaplar";
             this.AdminTree.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode38});
+            treeNode40});
             this.AdminTree.Size = new System.Drawing.Size(418, 224);
             this.AdminTree.TabIndex = 10;
             this.AdminTree.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.TreeView_AfterLabelEdit);
@@ -1092,7 +1092,7 @@ namespace RestoranOtomasyon
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmAdminControlPanel";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "YETKİLİ PANELİ";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.frmAdminControlPanel_Load_1);
             this.Shown += new System.EventHandler(this.frmAdminControlPanel_Shown);
             this.splitContainer1.Panel1.ResumeLayout(false);

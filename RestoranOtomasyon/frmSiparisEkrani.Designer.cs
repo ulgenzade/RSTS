@@ -59,18 +59,18 @@
             this.flowMasalar.Location = new System.Drawing.Point(0, 0);
             this.flowMasalar.Name = "flowMasalar";
             this.flowMasalar.Padding = new System.Windows.Forms.Padding(70, 3, 0, 3);
-            this.flowMasalar.Size = new System.Drawing.Size(632, 423);
+            this.flowMasalar.Size = new System.Drawing.Size(632, 374);
             this.flowMasalar.TabIndex = 0;
             // 
             // dgMevcutUrunler
             // 
             this.dgMevcutUrunler.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgMevcutUrunler.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgMevcutUrunler.Location = new System.Drawing.Point(0, 429);
+            this.dgMevcutUrunler.Location = new System.Drawing.Point(0, 380);
             this.dgMevcutUrunler.Name = "dgMevcutUrunler";
             this.dgMevcutUrunler.RowHeadersWidth = 51;
             this.dgMevcutUrunler.RowTemplate.Height = 24;
-            this.dgMevcutUrunler.Size = new System.Drawing.Size(632, 262);
+            this.dgMevcutUrunler.Size = new System.Drawing.Size(632, 311);
             this.dgMevcutUrunler.TabIndex = 1;
             // 
             // flowKategoriler

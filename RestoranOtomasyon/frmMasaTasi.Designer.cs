@@ -44,9 +44,9 @@
             // 
             // flowLayoutPanel1
             // 
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(474, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(483, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(322, 444);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(314, 444);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnİptal
@@ -63,7 +63,7 @@
             this.btnİptal.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnİptal.Name = "btnİptal";
             this.btnİptal.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnİptal.Size = new System.Drawing.Size(119, 82);
+            this.btnİptal.Size = new System.Drawing.Size(148, 82);
             this.btnİptal.TabIndex = 5;
             this.btnİptal.Text = "İPTAL";
             this.btnİptal.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -85,7 +85,7 @@
             this.btnTasiBirlestir.MouseState = ReaLTaiizor.Helper.MaterialDrawHelper.MaterialMouseState.HOVER;
             this.btnTasiBirlestir.Name = "btnTasiBirlestir";
             this.btnTasiBirlestir.NoAccentTextColor = System.Drawing.Color.Empty;
-            this.btnTasiBirlestir.Size = new System.Drawing.Size(119, 82);
+            this.btnTasiBirlestir.Size = new System.Drawing.Size(148, 82);
             this.btnTasiBirlestir.TabIndex = 3;
             this.btnTasiBirlestir.Text = "TAŞI / BİRLEŞTİR  ";
             this.btnTasiBirlestir.Type = ReaLTaiizor.Controls.MaterialButton.MaterialButtonType.Contained;
@@ -96,9 +96,9 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.23529F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.76471F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 328F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 1, 0);
@@ -106,8 +106,7 @@
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 450F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -118,7 +117,7 @@
             this.lblTutarFinal.Location = new System.Drawing.Point(3, 385);
             this.lblTutarFinal.Margin = new System.Windows.Forms.Padding(3);
             this.lblTutarFinal.Name = "lblTutarFinal";
-            this.lblTutarFinal.Size = new System.Drawing.Size(328, 56);
+            this.lblTutarFinal.Size = new System.Drawing.Size(308, 56);
             this.lblTutarFinal.TabIndex = 2;
             this.lblTutarFinal.Text = "TUTAR";
             this.lblTutarFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -130,7 +129,7 @@
             this.lstListeFinal.ItemHeight = 16;
             this.lstListeFinal.Location = new System.Drawing.Point(3, 72);
             this.lstListeFinal.Name = "lstListeFinal";
-            this.lstListeFinal.Size = new System.Drawing.Size(328, 307);
+            this.lstListeFinal.Size = new System.Drawing.Size(308, 307);
             this.lstListeFinal.TabIndex = 1;
             // 
             // lblBaslikFinal
@@ -141,7 +140,7 @@
             this.lblBaslikFinal.Location = new System.Drawing.Point(3, 3);
             this.lblBaslikFinal.Margin = new System.Windows.Forms.Padding(3);
             this.lblBaslikFinal.Name = "lblBaslikFinal";
-            this.lblBaslikFinal.Size = new System.Drawing.Size(328, 63);
+            this.lblBaslikFinal.Size = new System.Drawing.Size(308, 63);
             this.lblBaslikFinal.TabIndex = 0;
             this.lblBaslikFinal.Text = "MASA";
             this.lblBaslikFinal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -154,7 +153,7 @@
             this.tableLayoutPanel2.Controls.Add(this.btnİptal, 0, 3);
             this.tableLayoutPanel2.Controls.Add(this.btnTasiBirlestir, 0, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(343, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(323, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
@@ -162,7 +161,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(125, 444);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(154, 444);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -179,7 +178,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.76577F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.72072F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.73874F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(334, 444);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(314, 444);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // frmMasaTasi
